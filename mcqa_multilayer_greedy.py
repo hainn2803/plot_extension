@@ -18,7 +18,7 @@ ANSWER_LETTERS = tuple(string.ascii_uppercase)
 
 
 def answer_label_ids(tokenizer):
-    """Return tokenizer ids for A-Z answer labels."""
+    """Get token ids for the A-Z answer labels."""
     ids = []
     for letter in ANSWER_LETTERS:
         ids.append(letter_token_id(tokenizer, letter))
@@ -26,7 +26,7 @@ def answer_label_ids(tokenizer):
 
 
 def get_solver(name):
-    """Return the OT or UOT solver selected by name."""
+    """Choose the OT solver to use."""
     if name == "ot":
         return solve_ot
     if name == "uot":
@@ -35,7 +35,7 @@ def get_solver(name):
 
 
 def make_signature(X, method="family_mean", pair_source_families=None, family_order=FAMILY_ORDER, eps=1e-8):
-    """Build one signature from per-example features [N, D]."""
+    """Turn per-example features into one signature vector."""
     X = torch.as_tensor(X, dtype=torch.float32)
     if X.ndim != 2:
         raise ValueError("X must have shape [N, D]")
@@ -72,7 +72,7 @@ def make_signature(X, method="family_mean", pair_source_families=None, family_or
 
 
 def variable_signature(bank, num_labels=26, signature_method="family_mean", family_order=FAMILY_ORDER):
-    """Build causal-variable signatures from label deltas on D_ft."""
+    """Build one signature for each causal variable."""
     base = torch.as_tensor(bank["base_answer_label_ids"], dtype=torch.long)
     base_onehot = F.one_hot(base, num_classes=num_labels).float()
     signatures, names = [], []
@@ -87,7 +87,7 @@ def variable_signature(bank, num_labels=26, signature_method="family_mean", fami
 
 
 def basis_dim(mode, n_rows, hidden_size, k=None, max_fit_states=4096):
-    """Return the usable native/PCA dimension for site construction."""
+    """Get the number of dimensions used to define sites."""
     if mode == "neuron":
         return int(hidden_size)
     if mode != "pca":
@@ -101,7 +101,7 @@ def basis_dim(mode, n_rows, hidden_size, k=None, max_fit_states=4096):
 
 
 def fit_bases(sites, base_states, source_states, mode="neuron", k=None, max_fit_states=4096):
-    """Fit one PCA basis per layer/token key, or mark keys for native-neuron patching."""
+    """Prepare the neuron or PCA basis for each layer and token."""
     keys = []
     for L, token_id, _, _ in sites:
         key = (int(L), token_id)
@@ -128,7 +128,7 @@ def fit_bases(sites, base_states, source_states, mode="neuron", k=None, max_fit_
 
 
 def last_token_logits(model, outputs, attention_mask, label_ids):
-    """Return raw logits over selected answer labels at the last real token."""
+    """Get answer-label logits at the last real token."""
     device = next(model.parameters()).device
     rows = torch.arange(attention_mask.shape[0], device=device)
     cols = torch.arange(attention_mask.shape[1], device=device)
@@ -150,7 +150,7 @@ def last_token_logits(model, outputs, attention_mask, label_ids):
 
 @torch.no_grad()
 def collect_site_activations(model, input_ids, attention_mask, position_by_id, sites, batch_size=32, return_logits=False, label_ids=None):
-    """Collect full hidden vectors at all layer/token keys needed by sites; optionally also return answer logits."""
+    """Collect activations at the layers and token positions used by the sites."""
     device = next(model.parameters()).device
     layer_ids, token_ids, keys = [], [], []
     states, logits = {}, []
@@ -184,7 +184,9 @@ def collect_site_activations(model, input_ids, attention_mask, position_by_id, s
         handles = []
 
         def make_hook(layer_id):
+            """Create a hook that records activations from one layer."""
             def hook(_module, _inputs, output):
+                """Save the requested token activations."""
                 hidden = output[0] if isinstance(output, tuple) else output
                 for key in keys:
                     L_key, token_id = key
@@ -214,7 +216,7 @@ def collect_site_activations(model, input_ids, attention_mask, position_by_id, s
 
 @torch.no_grad()
 def run_intervention(model, bank, sites, site_weights, source_states, bases, strength, label_ids, batch_size=32, return_logits=False):
-    """Patch selected native dimensions or PCA directions and return answer logits/probabilities."""
+    """Patch the selected sites and return the model outputs."""
     device = next(model.parameters()).device
     weights = torch.as_tensor(site_weights, dtype=torch.float32, device=device).flatten()
     if weights.numel() != len(sites):
@@ -249,7 +251,9 @@ def run_intervention(model, bank, sites, site_weights, source_states, bases, str
         handles = []
 
         def make_hook(layer_id):
+            """Create a hook that applies interventions at one layer."""
             def hook(_module, _inputs, output):
+                """Patch the selected sites in this layer."""
                 hidden = output[0] if isinstance(output, tuple) else output
                 hidden_new = hidden
                 changed = False
@@ -304,7 +308,7 @@ def run_intervention(model, bank, sites, site_weights, source_states, bases, str
 
 
 def make_sites(layer_id, token_id, total_dim, resolution):
-    """Split native-neuron or PCA coordinates into contiguous candidate sites."""
+    """Split one layer into contiguous candidate sites."""
     sites = []
     for start in range(0, int(total_dim), int(resolution)):
         end = min(start + int(resolution), int(total_dim))
@@ -313,7 +317,7 @@ def make_sites(layer_id, token_id, total_dim, resolution):
 
 
 def site_signature(model, bank, sites, label_ids, mode="neuron", k=None, batch_size=32, strength=1.0, max_fit_states=4096, signature_method="family_mean", family_order=FAMILY_ORDER):
-    """Build neural-site signatures from intervention logit deltas on D_ft."""
+    """Build a signature for each neural site from its intervention effect."""
     base_states, base_logits = collect_site_activations(model, bank["base_input_ids"], bank["base_attention_mask"], bank["base_position_by_id"], sites, batch_size=batch_size, return_logits=True, label_ids=label_ids)
     source_states = collect_site_activations(model, bank["source_input_ids"], bank["source_attention_mask"], bank["source_position_by_id"], sites, batch_size=batch_size)
     bases = fit_bases(sites, base_states, source_states, mode=mode, k=k, max_fit_states=max_fit_states)
@@ -328,7 +332,7 @@ def site_signature(model, bank, sites, label_ids, mode="neuron", k=None, batch_s
 
 
 def top_sites_from_T(T, sites, var_id, top_k, min_mass=1e-8):
-    """Select the top-k finite positive-mass sites from one OT coupling row."""
+    """Pick the top-k sites with the largest transport mass."""
     valid_indices = []
     for i in range(len(sites)):
         value = T[var_id, i]
@@ -353,7 +357,7 @@ def top_sites_from_T(T, sites, var_id, top_k, min_mass=1e-8):
 
 
 def compute_iia(outputs, labels, var_name, pointer_num_labels=4):
-    """Return IIA and the exact number of correct predictions."""
+    """Compute IIA and count the number of correct predictions."""
     scores = torch.as_tensor(outputs)
     labels = torch.as_tensor(labels, dtype=torch.long)
 
@@ -370,13 +374,13 @@ def compute_iia(outputs, labels, var_name, pointer_num_labels=4):
 
 
 def eval_intervention(model, bank, var_name, sites, weights, source_states, bases, strength, label_ids, batch_size=32):
-    """Run one native/PCA intervention and return IIA plus exact correct count."""
+    """Run an intervention and evaluate its IIA."""
     outputs = run_intervention(model, bank, sites, weights, source_states, bases, strength, label_ids, batch_size=batch_size)
     return compute_iia(outputs, bank["counterfactual_label_ids"][var_name], var_name)
 
 
 def greedy_select_sites_on_cal(model, var_id, var_name, sites, T, bases, cal_bank, source_states, strength, max_k, candidate_pool_size, label_ids, batch_size=32, min_mass=1e-8):
-    """Build one forward-greedy site path on D_cal for a fixed strength."""
+    """Add sites one at a time using calibration IIA."""
     scores = T[var_id]
     valid_indices = []
 
@@ -448,7 +452,7 @@ def greedy_select_sites_on_cal(model, var_id, var_name, sites, T, bases, cal_ban
 
 
 def choose_stage_A_layers(model, names, cal_banks, coarse_sites, coarse_bases, T_coarse, label_ids, strength_values, top_k, keep_layers, threshold, batch_size=32):
-    """Calibrate top coarse layers on D_cal and return validated Stage-A layers per variable."""
+    """Evaluate the top Stage-A candidates and keep the best layers."""
     top_layers, top_info, all_results = {}, {}, []
 
     for var_id, var_name in enumerate(names):
@@ -493,6 +497,7 @@ def choose_stage_A_layers(model, names, cal_banks, coarse_sites, coarse_bases, T
 
 
 def run_plot_progressive(model, tokenizer, layers, ft_size=128, cal_size=128, te_size=256, dataset_size=None, dataset_split="train", stage_A_signature_method="concat", stage_B_signature_method="family_mean", stage_A_mode="neuron", stage_B_mode="neuron", stage_A_k=None, stage_B_k=None, stage_A_eps=0.001, stage_B_eps=0.001, stage_A_top_layers=6, stage_A_keep_layers=1, stage_A_iia_threshold=0.7, stage_B_candidate_pool_size=12, resolutions=(128, 144, 192, 256, 288, 384, 576, 768), top_k_values=(1, 2, 3, 4, 5), strength_values=(1, 2, 4, 8, 16, 32, 64), stage_A_strength_values=None, stage_A_method="uot", stage_B_method="ot", chosen_token_position_id="last_token", device="cuda", seed=0, batch_size=32, max_fit_states=4096):
+    """Run the full Stage-A and Stage-B PLOT pipeline."""
     set_seed(seed)
     if stage_A_strength_values is None:
         stage_A_strength_values = strength_values

@@ -12,14 +12,12 @@ TARGETS = ('answer_pointer', 'answer_token')
 ANSWER_LETTERS = tuple(string.ascii_uppercase)
 
 def answer_label_ids(tokenizer):
-    """Return tokenizer ids for A-Z answer labels."""
     ids = []
     for letter in ANSWER_LETTERS:
         ids.append(letter_token_id(tokenizer, letter))
     return ids
 
 def get_solver(name):
-    """Return the OT or UOT solver selected by name."""
     if name == 'ot':
         return solve_ot
     if name == 'uot':
@@ -27,7 +25,6 @@ def get_solver(name):
     raise ValueError(f'unknown solver={name!r}')
 
 def make_signature(X, method='family_mean', pair_source_families=None, family_order=FAMILY_ORDER, eps=1e-08):
-    """Build one signature from per-example features [N, D]."""
     X = torch.as_tensor(X, dtype=torch.float32)
     if X.ndim != 2:
         raise ValueError('X must have shape [N, D]')
@@ -53,7 +50,6 @@ def make_signature(X, method='family_mean', pair_source_families=None, family_or
     raise ValueError(f'unknown signature method={method!r}')
 
 def variable_signature(bank, num_labels=26, signature_method='family_mean', family_order=FAMILY_ORDER):
-    """Build causal-variable signatures from label deltas on D_ft."""
     base = torch.as_tensor(bank['base_answer_label_ids'], dtype=torch.long)
     base_onehot = F.one_hot(base, num_classes=num_labels).float()
     signatures, names = ([], [])
@@ -65,7 +61,6 @@ def variable_signature(bank, num_labels=26, signature_method='family_mean', fami
     return (torch.stack(signatures, dim=0), names)
 
 def basis_dim(mode, n_rows, hidden_size, k=None, max_fit_states=4096):
-    """Return the usable native/PCA dimension for site construction."""
     if mode == 'neuron':
         return int(hidden_size)
     if mode != 'pca':
@@ -78,7 +73,6 @@ def basis_dim(mode, n_rows, hidden_size, k=None, max_fit_states=4096):
     return min(n_fit, int(hidden_size))
 
 def fit_bases(sites, base_states, source_states, mode='neuron', k=None, max_fit_states=4096):
-    """Fit one PCA basis per layer/token key, or mark keys for native-neuron patching."""
     keys = []
     for L, token_id, _, _ in sites:
         key = (int(L), token_id)
@@ -102,7 +96,6 @@ def fit_bases(sites, base_states, source_states, mode='neuron', k=None, max_fit_
     return bases
 
 def last_token_logits(model, outputs, attention_mask, label_ids):
-    """Return raw logits over selected answer labels at the last real token."""
     device = next(model.parameters()).device
     rows = torch.arange(attention_mask.shape[0], device=device)
     cols = torch.arange(attention_mask.shape[1], device=device)
@@ -120,7 +113,6 @@ def last_token_logits(model, outputs, attention_mask, label_ids):
 
 @torch.no_grad()
 def collect_site_activations(model, input_ids, attention_mask, position_by_id, sites, batch_size=32, return_logits=False, label_ids=None):
-    """Collect full hidden vectors at all layer/token keys needed by sites; optionally also return answer logits."""
     device = next(model.parameters()).device
     layer_ids, token_ids, keys = ([], [], [])
     states, logits = ({}, [])
@@ -175,7 +167,6 @@ def collect_site_activations(model, input_ids, attention_mask, position_by_id, s
 
 @torch.no_grad()
 def run_intervention(model, bank, sites, site_weights, source_states, bases, strength, label_ids, batch_size=32, return_logits=False):
-    """Patch selected native dimensions or PCA directions and return answer logits/probabilities."""
     device = next(model.parameters()).device
     weights = torch.as_tensor(site_weights, dtype=torch.float32, device=device).flatten()
     if weights.numel() != len(sites):
@@ -252,7 +243,6 @@ def run_intervention(model, bank, sites, site_weights, source_states, bases, str
     return torch.cat(outputs_all, dim=0)
 
 def site_signature(model, bank, sites, label_ids, mode='neuron', k=None, batch_size=32, strength=1.0, max_fit_states=4096, signature_method='family_mean', family_order=FAMILY_ORDER):
-    """Build neural-site signatures from intervention logit deltas on D_ft."""
     base_states, base_logits = collect_site_activations(model, bank['base_input_ids'], bank['base_attention_mask'], bank['base_position_by_id'], sites, batch_size=batch_size, return_logits=True, label_ids=label_ids)
     source_states = collect_site_activations(model, bank['source_input_ids'], bank['source_attention_mask'], bank['source_position_by_id'], sites, batch_size=batch_size)
     bases = fit_bases(sites, base_states, source_states, mode=mode, k=k, max_fit_states=max_fit_states)
@@ -264,7 +254,6 @@ def site_signature(model, bank, sites, label_ids, mode='neuron', k=None, batch_s
     return {'sites': sites, 'intervention_diff': torch.stack(signatures, dim=0), 'bases': bases}
 
 def top_sites_from_T(T, sites, var_id, top_k, min_mass=1e-08):
-    """Select the top-k finite positive-mass sites from one OT coupling row."""
     valid_indices = []
     for i in range(len(sites)):
         value = T[var_id, i]
@@ -286,7 +275,6 @@ def top_sites_from_T(T, sites, var_id, top_k, min_mass=1e-08):
     return (selected_sites, selected_indices)
 
 def compute_iia(outputs, labels, var_name, pointer_num_labels=4):
-    """Return IIA and the exact number of correct predictions."""
     scores = torch.as_tensor(outputs)
     labels = torch.as_tensor(labels, dtype=torch.long)
     if var_name == 'answer_pointer':
@@ -300,12 +288,10 @@ def compute_iia(outputs, labels, var_name, pointer_num_labels=4):
     return (correct / total, correct)
 
 def eval_intervention(model, bank, var_name, sites, weights, source_states, bases, strength, label_ids, batch_size=32):
-    """Run one native/PCA intervention and return IIA plus exact correct count."""
     outputs = run_intervention(model, bank, sites, weights, source_states, bases, strength, label_ids, batch_size=batch_size)
     return compute_iia(outputs, bank['counterfactual_label_ids'][var_name], var_name)
 
 def choose_stage_A_layers(model, names, cal_banks, coarse_sites, coarse_bases, T_coarse, label_ids, strength_values, top_k, keep_layers, threshold, batch_size=32):
-    """Calibrate top coarse layers on D_cal and return validated Stage-A layers per variable."""
     top_layers, top_info, all_results = ({}, {}, [])
     for var_id, var_name in enumerate(names):
         cal_bank = cal_banks[var_name]
