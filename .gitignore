@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+hf_cache/
+results/
+.DS_Store
