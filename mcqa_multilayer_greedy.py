@@ -695,7 +695,7 @@ if __name__ == "__main__":
         stage_A_method="uot",
         stage_B_method="ot",
         stage_A_top_layers=6,
-        stage_A_keep_layers=2,
+        stage_A_keep_layers=1,
         stage_A_iia_threshold=0.7,
         stage_B_candidate_pool_size=6,
         resolutions=(128, 144, 192, 256, 288, 384, 576, 768),
@@ -703,7 +703,7 @@ if __name__ == "__main__":
         strength_values=(0.5, 1, 2, 4),
         chosen_token_position_id="last_token",
         device=device,
-        seed=0,
+        seed=1,
         batch_size=32,
     )
 

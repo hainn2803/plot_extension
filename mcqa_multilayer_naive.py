@@ -599,7 +599,7 @@ if __name__ == "__main__":
         stage_A_method="uot",
         stage_B_method="ot",
         stage_A_top_layers=6,
-        stage_A_keep_layers=2,
+        stage_A_keep_layers=1,
         stage_A_iia_threshold=0.7,
         resolutions=(128, 144, 192, 256, 288, 384, 576, 768),
         top_k_values=(1, 2, 3, 4),

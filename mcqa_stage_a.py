@@ -373,8 +373,157 @@ def run_stage_a(model, tokenizer, layers, ft_size=200, cal_size=100, te_size=100
     print('saved Stage A to:', save_path)
     print('selected layers:', top_layers)
     return results
-if __name__ == '__main__':
+
+
+def plot_mass_iia_from_log(log_path, out_dir, method, eps, signature_method):
+    import re
+    import csv
+    import matplotlib.pyplot as plt
+    from scipy.stats import pearsonr, spearmanr
+
+    os.makedirs(out_dir, exist_ok=True)
+
+    rows = []
+    var_name = None
+
+    pattern = re.compile(
+        r"layer=\s*(\d+)\s+"
+        r"strength=\s*([0-9.eE+-]+)\s+"
+        r"iia=([0-9.eE+-]+)\s+"
+        r"correct=(\d+)/(\d+)\s+"
+        r"uot_rank=\s*(\d+)\s+"
+        r"mass=([0-9.eE+-]+)"
+    )
+
+    with open(log_path, "r") as f:
+        for line in f:
+            if line.startswith("====="):
+                var_name = line.strip().strip("=").strip()
+                continue
+
+            match = pattern.search(line)
+            if match is None:
+                continue
+
+            rows.append({
+                "var_name": var_name,
+                "layer": int(match.group(1)),
+                "strength": float(match.group(2)),
+                "iia": float(match.group(3)),
+                "correct": int(match.group(4)),
+                "total": int(match.group(5)),
+                "rank": int(match.group(6)),
+                "mass": float(match.group(7)),
+            })
+
+    csv_path = os.path.join(out_dir, "mass_iia_rows.csv")
+    with open(csv_path, "w", newline="") as f:
+        fieldnames = ["var_name", "layer", "strength", "iia", "correct", "total", "rank", "mass"]
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        for row in rows:
+            writer.writerow(row)
+
+    summary_path = os.path.join(out_dir, "mass_iia_correlation.txt")
+
+    with open(summary_path, "w") as f:
+        var_names = sorted(set(row["var_name"] for row in rows))
+        strengths = sorted(set(row["strength"] for row in rows))
+
+        for var_name in var_names:
+            for strength in strengths:
+                current = []
+                for row in rows:
+                    if row["var_name"] == var_name and row["strength"] == strength:
+                        current.append(row)
+
+                if len(current) < 2:
+                    continue
+
+                masses = [row["mass"] for row in current]
+                iias = [row["iia"] for row in current]
+                layers = [row["layer"] for row in current]
+
+                if len(set(masses)) < 2 or len(set(iias)) < 2:
+                    pearson = float("nan")
+                    spearman = float("nan")
+                else:
+                    pearson = float(pearsonr(masses, iias).statistic)
+                    spearman = float(spearmanr(masses, iias).statistic)
+
+                line = (
+                    f"var={var_name} strength={strength} "
+                    f"pearson={pearson:.4f} spearman={spearman:.4f} "
+                    f"n={len(current)}\n"
+                )
+                print(line, end="")
+                f.write(line)
+
+                plt.figure(figsize=(8, 4))
+                plt.scatter(masses, iias)
+
+                for mass, iia, layer in zip(masses, iias, layers):
+                    plt.annotate(str(layer), (mass, iia), fontsize=8)
+
+                info = f"{var_name} | {method.upper()} | eps={eps} | strength={strength} | sig={signature_method}"
+                plt.xlabel("OT mass")
+                plt.ylabel("Calibration IIA")
+                plt.title(f"{info}\nPearson={pearson:.3f}, Spearman={spearman:.3f}")
+                plt.tight_layout()
+
+                name = f"mass_iia_{var_name}_{method}_eps_{eps}_strength_{strength}_sig_{signature_method}"
+                name = name.replace(".", "p")
+                plt.savefig(os.path.join(out_dir, name + ".png"), dpi=200)
+                plt.close()
+
+
+
+if __name__ == "__main__":
     model, tokenizer = load_gemma_model()
     device = next(model.parameters()).device
     layers = list(range(model.config.num_hidden_layers))
-    run_stage_a(model=model, tokenizer=tokenizer, layers=layers, ft_size=200, cal_size=100, te_size=100, dataset_size=None, dataset_split='train', signature_method='concat', mode='neuron', k=None, eps=1.0, method='uot', top_k=6, keep_layers=2, iia_threshold=0.6, strength_values=(0.5, 1, 2, 4), token_position='last_token', device=device, seed=0, batch_size=32, save_path='results/stage_a.pt', log_path='results/stage_a_all_layers.txt')
+
+    list_seed_id = [0, 1]
+    list_eps = [8.0, 16.0, 32.0]
+    list_sig_method = ["concat", "family_mean"]
+
+    for seed_id in list_seed_id:
+        for eps in list_eps:
+            for sig_method in list_sig_method:
+
+                eps_name = str(eps).replace(".", "p")
+                result_dir = f"results/{seed_id}/{sig_method}/eps_{eps_name}"
+
+                run_stage_a(
+                    model=model,
+                    tokenizer=tokenizer,
+                    layers=layers,
+                    ft_size=200,
+                    cal_size=100,
+                    te_size=100,
+                    dataset_size=None,
+                    dataset_split="train",
+                    signature_method=sig_method,
+                    mode="neuron",
+                    k=None,
+                    eps=eps,
+                    method="uot",
+                    top_k=6,
+                    keep_layers=2,
+                    iia_threshold=0.6,
+                    strength_values=(0.5, 1, 2, 4),
+                    token_position="last_token",
+                    device=device,
+                    seed=seed_id,
+                    batch_size=32,
+                    save_path=f"{result_dir}/stage_a.pt",
+                    log_path=f"{result_dir}/stage_a_all_layers.txt",
+                )
+
+                plot_mass_iia_from_log(
+                    log_path=f"{result_dir}/stage_a_all_layers.txt",
+                    out_dir=f"{result_dir}/stage_a_mass_iia_plots",
+                    method="uot",
+                    eps=eps,
+                    signature_method=sig_method,
+                )
