@@ -3,3 +3,4 @@ __pycache__/
 hf_cache/
 results/
 .DS_Store
+mcqa_constants.py
