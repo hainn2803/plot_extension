@@ -9,7 +9,7 @@ from mcqa_data_load_all import build_mcqa_banks, letter_token_id
 
 from mcqa_neural_net import load_gemma_model
 from mcqa_ot import solve_ot, solve_uot
-from mcqa_utils import set_seed, normalize_rows
+from mcqa_utils import set_seed, normalize_rows, make_site_combination_candidates
 
 
 FAMILY_ORDER = ("answer_pointer", "answer_token", "both")
@@ -215,7 +215,7 @@ def collect_site_activations(model, input_ids, attention_mask, position_by_id, s
 
 
 @torch.no_grad()
-def run_intervention(model, bank, sites, site_weights, source_states, bases, strength, label_ids, batch_size=32, return_logits=False):
+def run_intervention(model, bank, sites, site_weights, source_states, bases, strength, label_ids, batch_size=32, return_logits=False, normalize_weights=True):
     """Patch the selected sites and return the model outputs."""
     device = next(model.parameters()).device
     weights = torch.as_tensor(site_weights, dtype=torch.float32, device=device).flatten()
@@ -223,7 +223,9 @@ def run_intervention(model, bank, sites, site_weights, source_states, bases, str
         raise ValueError("site_weights must have one value per site")
     if not torch.isfinite(weights).all() or float(weights.sum().abs().item()) == 0.0:
         raise ValueError("site_weights must be finite with nonzero sum")
-    weights = weights / weights.sum()
+
+    if normalize_weights:
+        weights = weights / weights.sum()
 
     input_ids = bank["base_input_ids"]
     attention_mask = bank["base_attention_mask"]
@@ -315,7 +317,6 @@ def make_sites(layer_id, token_id, total_dim, resolution):
         sites.append((int(layer_id), token_id, int(start), int(end)))
     return sites
 
-
 def site_signature(model, bank, sites, label_ids, mode="neuron", k=None, batch_size=32, strength=1.0, max_fit_states=4096, signature_method="family_mean", family_order=FAMILY_ORDER):
     """Build a signature for each neural site from its intervention effect."""
     base_states, base_logits = collect_site_activations(model, bank["base_input_ids"], bank["base_attention_mask"], bank["base_position_by_id"], sites, batch_size=batch_size, return_logits=True, label_ids=label_ids)
@@ -329,6 +330,20 @@ def site_signature(model, bank, sites, label_ids, mode="neuron", k=None, batch_s
         signatures.append(make_signature(diff, method=signature_method, pair_source_families=bank["pair_source_families"], family_order=family_order))
 
     return {"sites": sites, "intervention_diff": torch.stack(signatures, dim=0), "bases": bases}
+
+
+def combination_signature(model, bank, site_combinations, filtered_sites, bases, label_ids, batch_size=32, strength=1.0, signature_method="family_mean", family_order=FAMILY_ORDER):
+    """Compute one joint intervention signature for each site combination."""
+    _, base_logits = collect_site_activations(model, bank["base_input_ids"], bank["base_attention_mask"], bank["base_position_by_id"], filtered_sites, batch_size=batch_size, return_logits=True, label_ids=label_ids)
+    source_states = collect_site_activations(model, bank["source_input_ids"], bank["source_attention_mask"], bank["source_position_by_id"], filtered_sites, batch_size=batch_size)
+
+    signatures = []
+    for sites in site_combinations:
+        patched_logits = run_intervention(model, bank, sites, [1.0] * len(sites), source_states, bases, strength, label_ids, batch_size=batch_size, return_logits=True, normalize_weights=False)
+        diff = patched_logits.float() - base_logits.float()
+        signatures.append(make_signature(diff, method=signature_method, pair_source_families=bank["pair_source_families"], family_order=family_order))
+
+    return torch.stack(signatures, dim=0)
 
 
 def top_sites_from_T(T, sites, var_id, top_k, min_mass=1e-8):
@@ -373,68 +388,11 @@ def compute_iia(outputs, labels, var_name, pointer_num_labels=4):
     return correct / total, correct
 
 
-def eval_intervention(model, bank, var_name, sites, weights, source_states, bases, strength, label_ids, batch_size=32):
+def eval_intervention(model, bank, var_name, sites, weights, source_states, bases, strength, label_ids, batch_size=32, normalize_weights=True):
     """Run an intervention and evaluate its IIA."""
-    outputs = run_intervention(model, bank, sites, weights, source_states, bases, strength, label_ids, batch_size=batch_size)
+    outputs = run_intervention(model, bank, sites, weights, source_states, bases, strength, label_ids, batch_size=batch_size, normalize_weights=normalize_weights)
     return compute_iia(outputs, bank["counterfactual_label_ids"][var_name], var_name)
 
-
-def greedy_select_sites_on_cal(model, var_id, var_name, sites, T, bases, cal_bank, source_states, strength, max_k, candidate_pool_size, label_ids, batch_size=32, min_mass=1e-8):
-    """Greedily add sites based on calibration IIA."""
-
-    pool_size = max(int(candidate_pool_size), int(max_k))
-    _, pool_indices = top_sites_from_T(T, sites, var_id, pool_size, min_mass)
-
-    max_k = min(int(max_k), len(pool_indices))
-    selected_indices = []
-    remaining_indices = pool_indices.copy()
-    path = []
-
-    for step in range(max_k):
-        best_trial = None
-
-        for candidate_index in remaining_indices:
-            trial_indices = selected_indices.copy()
-            trial_indices.append(candidate_index)
-
-            trial_sites = []
-            for index in trial_indices:
-                trial_sites.append(sites[index])
-
-            trial_weights = T[var_id, trial_indices].detach().float().cpu()
-            iia, correct = eval_intervention(model, cal_bank, var_name, trial_sites, trial_weights, source_states, bases, float(strength), label_ids, batch_size=batch_size)
-
-            trial = {
-                "added_index": candidate_index,
-                "selected_indices": trial_indices,
-                "selected_sites": trial_sites,
-                "selected_weights": trial_weights,
-                "cal_iia": float(iia),
-                "cal_correct": int(correct),
-            }
-
-            if best_trial is None or trial["cal_correct"] > best_trial["cal_correct"]:
-                best_trial = trial
-            elif trial["cal_correct"] == best_trial["cal_correct"]:
-                candidate_mass = float(T[var_id, candidate_index].detach().cpu().item())
-                best_mass = float(T[var_id, best_trial["added_index"]].detach().cpu().item())
-
-                if candidate_mass > best_mass:
-                    best_trial = trial
-
-        if best_trial is None:
-            break
-
-        selected_indices = best_trial["selected_indices"].copy()
-        remaining_indices.remove(best_trial["added_index"])
-        path.append(best_trial)
-
-        print(f"[Stage B GREEDY] var={var_name} strength={strength} step={step + 1} added_site={sites[best_trial['added_index']]} correct={best_trial['cal_correct']}/{len(cal_bank['base_input_ids'])} iia={best_trial['cal_iia']:.4f}")
-
-        if not remaining_indices:
-            break
-
-    return path
 
 def choose_stage_A_layers(model, names, cal_banks, coarse_sites, coarse_bases, T_coarse, label_ids, strength_values, top_k, keep_layers, threshold, batch_size=32):
     """Evaluate the top Stage-A candidates and keep the best layers."""
@@ -481,9 +439,10 @@ def choose_stage_A_layers(model, names, cal_banks, coarse_sites, coarse_bases, T
     return top_layers, top_info, all_results
 
 
-def run_plot_progressive(model, tokenizer, layers, ft_size=128, cal_size=128, te_size=256, dataset_size=None, dataset_split="train", stage_A_signature_method="concat", stage_B_signature_method="family_mean", stage_A_mode="neuron", stage_B_mode="neuron", stage_A_k=None, stage_B_k=None, stage_A_eps=0.001, stage_B_eps=0.001, stage_A_top_layers=6, stage_A_keep_layers=1, stage_A_iia_threshold=0.7, stage_B_candidate_pool_size=12, resolutions=(128, 144, 192, 256, 288, 384, 576, 768), top_k_values=(1, 2, 3, 4, 5), strength_values=(1, 2, 4, 8, 16, 32, 64), stage_A_strength_values=None, stage_A_method="uot", stage_B_method="ot", chosen_token_position_id="last_token", device="cuda", seed=0, batch_size=32, max_fit_states=4096):
-    """Run the full Stage-A and Stage-B PLOT pipeline."""
+def run_plot_progressive(model, tokenizer, layers, ft_size=128, cal_size=128, te_size=256, dataset_size=None, dataset_split="train", stage_A_signature_method="concat", stage_B_signature_method="family_mean", stage_A_mode="neuron", stage_B_mode="neuron", stage_A_k=None, stage_B_k=None, stage_A_eps=0.001, stage_B_eps=0.001, stage_B_second_eps=0.001, stage_A_top_layers=6, stage_A_keep_layers=1, stage_A_iia_threshold=0.7, stage_B_candidate_pool_size=12, stage_B_config_size=2, stage_B_config_cal_pool_size=12, stage_B_config_signature_strength=1.0, resolutions=(128, 144, 192, 256, 288, 384, 576, 768), strength_values=(1, 2, 4, 8, 16, 32, 64), stage_A_strength_values=None, stage_A_method="uot", stage_B_method="ot", stage_B_second_method="ot", chosen_token_position_id="last_token", device="cuda", seed=0, batch_size=32, max_fit_states=4096):
+    """Run coarse Stage A followed by two-stage fine-site matching."""
     set_seed(seed)
+
     if stage_A_strength_values is None:
         stage_A_strength_values = strength_values
 
@@ -492,25 +451,16 @@ def run_plot_progressive(model, tokenizer, layers, ft_size=128, cal_size=128, te
     layers = list(layers)
     stage_A_solver = get_solver(stage_A_method)
     stage_B_solver = get_solver(stage_B_method)
+    stage_B_second_solver = get_solver(stage_B_second_method)
 
     ft_bank, cal_banks, te_banks = build_mcqa_banks(model=model, tokenizer=tokenizer, train_pool_size=ft_size, cal_size=cal_size, te_size=te_size, dataset_size=dataset_size, split=dataset_split, device=device, batch_size=batch_size, seed=seed)
 
-    G_stage_A, names = variable_signature(
-        ft_bank,
-        num_labels=len(ANSWER_LETTERS),
-        signature_method=stage_A_signature_method,
-        family_order=FAMILY_ORDER,
-    )
+    G_stage_A, names = variable_signature(ft_bank, num_labels=len(ANSWER_LETTERS), signature_method=stage_A_signature_method, family_order=FAMILY_ORDER)
 
     if stage_B_signature_method == stage_A_signature_method:
         G_stage_B = G_stage_A
     else:
-        G_stage_B, _ = variable_signature(
-            ft_bank,
-            num_labels=len(ANSWER_LETTERS),
-            signature_method=stage_B_signature_method,
-            family_order=FAMILY_ORDER,
-        )
+        G_stage_B, _ = variable_signature(ft_bank, num_labels=len(ANSWER_LETTERS), signature_method=stage_B_signature_method, family_order=FAMILY_ORDER)
 
     print("[G Stage A]", G_stage_A.shape, stage_A_signature_method)
     print("[G Stage B]", G_stage_B.shape, stage_B_signature_method)
@@ -518,102 +468,124 @@ def run_plot_progressive(model, tokenizer, layers, ft_size=128, cal_size=128, te
     n_ft = ft_bank["base_input_ids"].shape[0]
     coarse_dim = basis_dim(stage_A_mode, n_ft, hidden_size, stage_A_k, max_fit_states)
     coarse_sites = []
-    for L in layers:
-        coarse_sites.append((int(L), chosen_token_position_id, 0, coarse_dim))
+
+    for layer in layers:
+        coarse_sites.append((int(layer), chosen_token_position_id, 0, coarse_dim))
 
     coarse_sig = site_signature(model, ft_bank, coarse_sites, label_ids, mode=stage_A_mode, k=stage_A_k, batch_size=batch_size, max_fit_states=max_fit_states, signature_method=stage_A_signature_method, family_order=FAMILY_ORDER)
     S_coarse = coarse_sig["intervention_diff"]
     T_coarse = stage_A_solver(G_stage_A, S_coarse, eps=stage_A_eps)
     coarse_bases = coarse_sig["bases"]
+
     print("[Stage A]", "mode=", stage_A_mode, "dim=", coarse_dim, "shapes=", G_stage_A.shape, S_coarse.shape, T_coarse.shape)
     print(T_coarse)
 
     top_layers, top_coarse, stage_A_results = choose_stage_A_layers(model, names, cal_banks, coarse_sites, coarse_bases, T_coarse, label_ids, stage_A_strength_values, stage_A_top_layers, stage_A_keep_layers, stage_A_iia_threshold, batch_size=batch_size)
-            
     print(top_layers)
 
-    # top_layers = {
-    #     0: [17, 18], 1: [24, 25]
-    # }
-
     fine_dim = basis_dim(stage_B_mode, n_ft, hidden_size, stage_B_k, max_fit_states)
-    best_by_var, stage_B_results, fine_cache, cal_source_cache = {}, [], {}, {}
-
-    top_k_list = []
-    for top_k in top_k_values:
-        top_k_list.append(int(top_k))
-    if not top_k_list:
-        raise ValueError("top_k_values must not be empty")
-    max_greedy_k = max(top_k_list)
+    best_by_var = {}
+    stage_B_results = []
+    fine_cache = {}
+    combination_cache = {}
+    cal_source_cache = {}
 
     for var_id, var_name in enumerate(names):
         cal_bank = cal_banks[var_name]
         stage_A_layers = top_layers[var_id]
+        layer_key = tuple(stage_A_layers)
         best = []
         best_correct = -1
+
         print(f"\n[Stage B variable] {var_id} {var_name} layers={stage_A_layers} mode={stage_B_mode} dim={fine_dim}")
 
         for resolution in resolutions:
-            layer_key = tuple(stage_A_layers)
             cache_key = (layer_key, int(resolution))
 
             if cache_key not in fine_cache:
                 sites = []
-                for L in stage_A_layers:
-                    for site in make_sites(L, chosen_token_position_id, fine_dim, resolution):
+
+                for layer in stage_A_layers:
+                    for site in make_sites(layer, chosen_token_position_id, fine_dim, resolution):
                         sites.append(site)
 
-                sig = site_signature(model, ft_bank, sites, label_ids, mode=stage_B_mode, k=stage_B_k, batch_size=batch_size, max_fit_states=max_fit_states, signature_method=stage_B_signature_method, family_order=FAMILY_ORDER)
-                S_fine = sig["intervention_diff"]
-                T_fine = stage_B_solver(G_stage_B, S_fine, eps=stage_B_eps)
-                fine_cache[cache_key] = {"sites": sites, "S": S_fine, "T": T_fine, "bases": sig["bases"]}
+                single_sig = site_signature(model, ft_bank, sites, label_ids, mode=stage_B_mode, k=stage_B_k, batch_size=batch_size, max_fit_states=max_fit_states, signature_method=stage_B_signature_method, family_order=FAMILY_ORDER)
+                S_single = single_sig["intervention_diff"]
+                T_single = stage_B_solver(G_stage_B, S_single, eps=stage_B_eps)
+                fine_cache[cache_key] = {"sites": sites, "S": S_single, "T": T_single, "bases": single_sig["bases"]}
 
             cached = fine_cache[cache_key]
-            sites, T_fine, bases = cached["sites"], cached["T"], cached["bases"]
+            sites = cached["sites"]
+            T_single = cached["T"]
+            bases = cached["bases"]
 
-            cal_cache_key = (var_name, cache_key)
+            filtered_sites, filtered_indices = top_sites_from_T(T_single, sites, var_id, stage_B_candidate_pool_size, min_mass=1e-8)
+
+            if len(filtered_sites) < stage_B_config_size:
+                print(f"[Stage B skip] var={var_name} resolution={resolution}: only {len(filtered_sites)} sites for config_size={stage_B_config_size}")
+                continue
+
+            combination_key = (var_id, cache_key, tuple(filtered_indices), int(stage_B_config_size))
+
+            if combination_key not in combination_cache:
+                site_combinations, combination_original_indices = make_config_candidates(sites, filtered_indices, stage_B_config_size)
+                S_combinations = combination_signature(model, ft_bank, site_combinations, filtered_sites, bases, label_ids, batch_size=batch_size, strength=stage_B_config_signature_strength, signature_method=stage_B_signature_method, family_order=FAMILY_ORDER)
+                T_combinations = stage_B_second_solver(G_stage_B, S_combinations, eps=stage_B_second_eps)
+
+                combination_cache[combination_key] = {
+                    "site_combinations": site_combinations,
+                    "combination_original_indices": combination_original_indices,
+                    "S": S_combinations,
+                    "T": T_combinations,
+                }
+
+            combination_cached = combination_cache[combination_key]
+            site_combinations = combination_cached["site_combinations"]
+            combination_original_indices = combination_cached["combination_original_indices"]
+            S_combinations = combination_cached["S"]
+            T_combinations = combination_cached["T"]
+
+            print(f"[Stage B second matching] var={var_name} resolution={resolution} single_pool={len(filtered_sites)} config_size={stage_B_config_size} configurations={len(site_combinations)} S={tuple(S_combinations.shape)} T={tuple(T_combinations.shape)}")
+
+            _, top_combination_indices = top_sites_from_T(T_combinations, site_combinations, var_id, stage_B_config_cal_pool_size, min_mass=1e-8)
+
+            cal_cache_key = (var_name, cache_key, tuple(filtered_indices))
+
             if cal_cache_key not in cal_source_cache:
-                cal_source_cache[cal_cache_key] = collect_site_activations(model, cal_bank["source_input_ids"], cal_bank["source_attention_mask"], cal_bank["source_position_by_id"], sites, batch_size=batch_size)
+                cal_source_cache[cal_cache_key] = collect_site_activations(model, cal_bank["source_input_ids"], cal_bank["source_attention_mask"], cal_bank["source_position_by_id"], filtered_sites, batch_size=batch_size)
+
             source_states = cal_source_cache[cal_cache_key]
 
             for strength in strength_values:
-                greedy_path = greedy_select_sites_on_cal(
-                    model=model,
-                    var_id=var_id,
-                    var_name=var_name,
-                    sites=sites,
-                    T=T_fine,
-                    bases=bases,
-                    cal_bank=cal_bank,
-                    source_states=source_states,
-                    strength=float(strength),
-                    max_k=max_greedy_k,
-                    candidate_pool_size=stage_B_candidate_pool_size,
-                    label_ids=label_ids,
-                    batch_size=batch_size,
-                )
+                for config_rank, config_index in enumerate(top_combination_indices, start=1):
+                    selected_sites = site_combinations[config_index]
+                    selected_indices = combination_original_indices[config_index]
+                    selected_weights = [1.0] * len(selected_sites)
 
-                for top_k in top_k_list:
-                    if top_k > len(greedy_path):
-                        continue
+                    cal_iia, cal_correct = eval_intervention(model, cal_bank, var_name, selected_sites, selected_weights, source_states, bases, float(strength), label_ids, batch_size=batch_size)
+                    config_mass = float(T_combinations[var_id, config_index].detach().cpu().item())
 
-                    greedy_result = greedy_path[top_k - 1]
                     result = {
                         "var_id": var_id,
                         "var_name": var_name,
                         "stage_A_layers": layer_key,
                         "resolution": int(resolution),
-                        "top_k": int(top_k),
+                        "top_k": len(selected_sites),
+                        "config_size": len(selected_sites),
                         "strength": float(strength),
-                        "cal_iia": greedy_result["cal_iia"],
-                        "cal_correct": greedy_result["cal_correct"],
-                        "selected_indices": greedy_result["selected_indices"],
-                        "selected_sites": greedy_result["selected_sites"],
-                        "selected_weights": greedy_result["selected_weights"],
+                        "cal_iia": float(cal_iia),
+                        "cal_correct": int(cal_correct),
+                        "selected_indices": tuple(selected_indices),
+                        "selected_sites": selected_sites,
+                        "selected_weights": selected_weights,
+                        "config_rank": int(config_rank),
+                        "config_mass": config_mass,
+                        "filtered_indices": list(filtered_indices),
                         "cache_key": cache_key,
-                        "selection_method": "greedy",
-                        "candidate_pool_size": int(min(max(int(stage_B_candidate_pool_size), max_greedy_k), len(sites))),
+                        "combination_key": combination_key,
+                        "selection_method": "two_stage",
                     }
+
                     stage_B_results.append(result)
 
                     if result["cal_correct"] > best_correct:
@@ -622,10 +594,12 @@ def run_plot_progressive(model, tokenizer, layers, ft_size=128, cal_size=128, te
                     elif result["cal_correct"] == best_correct:
                         best.append(result)
 
-                    print(f"[Stage B CAL GREEDY] var={var_name} layers={layer_key} resolution={resolution} top_k={top_k} strength={strength} correct={result['cal_correct']}/{len(cal_bank['base_input_ids'])} iia={result['cal_iia']:.4f}")
+                    print(f"[Stage B CAL] var={var_name} resolution={resolution} config={selected_indices} mass={config_mass:.8f} strength={strength} correct={cal_correct}/{len(cal_bank['base_input_ids'])} iia={cal_iia:.4f}")
 
         best_by_var[var_id] = best
-        print(f"\n[Stage B BEST GREEDY] var={var_name} correct={best_correct}/{len(cal_bank['base_input_ids'])} ties={len(best)}")
+
+        print(f"\n[Stage B BEST TWO-STAGE] var={var_name} correct={best_correct}/{len(cal_bank['base_input_ids'])} ties={len(best)}")
+
         for candidate in best:
             print(candidate)
 
@@ -638,6 +612,7 @@ def run_plot_progressive(model, tokenizer, layers, ft_size=128, cal_size=128, te
             var_name = best["var_name"]
             te_bank = te_banks[var_name]
             cached = fine_cache[best["cache_key"]]
+
             source_states = collect_site_activations(model, te_bank["source_input_ids"], te_bank["source_attention_mask"], te_bank["source_position_by_id"], best["selected_sites"], batch_size=batch_size)
             test_iia, test_correct = eval_intervention(model, te_bank, var_name, best["selected_sites"], best["selected_weights"], source_states, cached["bases"], best["strength"], label_ids, batch_size=batch_size)
 
@@ -646,16 +621,42 @@ def run_plot_progressive(model, tokenizer, layers, ft_size=128, cal_size=128, te
             result["test_correct"] = int(test_correct)
             var_results.append(result)
 
-            print(f"\n[TEST] var={var_name} layers={best['stage_A_layers']} resolution={best['resolution']} top_k={best['top_k']} strength={best['strength']} cal_correct={best['cal_correct']}/{len(cal_banks[var_name]['base_input_ids'])} test_correct={test_correct}/{len(te_bank['base_input_ids'])} test_iia={test_iia:.4f}")
+            print(f"\n[TEST] var={var_name} layers={best['stage_A_layers']} resolution={best['resolution']} config_size={best['config_size']} config={best['selected_indices']} strength={best['strength']} cal_correct={best['cal_correct']}/{len(cal_banks[var_name]['base_input_ids'])} test_correct={test_correct}/{len(te_bank['base_input_ids'])} test_iia={test_iia:.4f}")
 
         test_results[var_id] = var_results
 
-    return {"names": names, "G_stage_A": G_stage_A, "G_stage_B": G_stage_B, "S_coarse": S_coarse, "T_coarse": T_coarse, "top_layers_var": top_layers, "top_coarse_by_var": top_coarse, "stage_A_cal_results": stage_A_results, "best_by_var": best_by_var, "stage_B_cal_results": stage_B_results, "test_results": test_results, "fine_cache": fine_cache, "stage_A_signature_method": stage_A_signature_method, "stage_B_signature_method": stage_B_signature_method, "stage_A_mode": stage_A_mode, "stage_B_mode": stage_B_mode, "stage_B_selection": "greedy", "stage_B_candidate_pool_size": stage_B_candidate_pool_size}
+    return {
+        "names": names,
+        "G_stage_A": G_stage_A,
+        "G_stage_B": G_stage_B,
+        "S_coarse": S_coarse,
+        "T_coarse": T_coarse,
+        "top_layers_var": top_layers,
+        "top_coarse_by_var": top_coarse,
+        "stage_A_cal_results": stage_A_results,
+        "best_by_var": best_by_var,
+        "stage_B_cal_results": stage_B_results,
+        "test_results": test_results,
+        "fine_cache": fine_cache,
+        "combination_cache": combination_cache,
+        "stage_A_signature_method": stage_A_signature_method,
+        "stage_B_signature_method": stage_B_signature_method,
+        "stage_A_mode": stage_A_mode,
+        "stage_B_mode": stage_B_mode,
+        "stage_B_selection": "two_stage",
+        "stage_B_candidate_pool_size": stage_B_candidate_pool_size,
+        "stage_B_config_size": stage_B_config_size,
+        "stage_B_config_cal_pool_size": stage_B_config_cal_pool_size,
+        "stage_B_second_eps": stage_B_second_eps,
+        "stage_B_second_method": stage_B_second_method,
+    }
+
 
 
 if __name__ == "__main__":
     model, tokenizer = load_gemma_model()
     device = next(model.parameters()).device
+
     layers = []
     for L in range(model.config.num_hidden_layers):
         layers.append(L)
@@ -677,14 +678,18 @@ if __name__ == "__main__":
         stage_B_k=None,
         stage_A_eps=2,
         stage_B_eps=1,
+        stage_B_second_eps=1,
         stage_A_method="uot",
         stage_B_method="ot",
+        stage_B_second_method="ot",
         stage_A_top_layers=6,
         stage_A_keep_layers=2,
         stage_A_iia_threshold=0.7,
         stage_B_candidate_pool_size=6,
+        stage_B_config_size=2,
+        stage_B_config_cal_pool_size=12,
+        stage_B_config_signature_strength=1.0,
         resolutions=(128, 144, 192, 256, 288, 384, 576, 768),
-        top_k_values=(1, 2, 3, 4),
         strength_values=(0.5, 1, 2, 4),
         chosen_token_position_id="last_token",
         device=device,
@@ -693,11 +698,26 @@ if __name__ == "__main__":
     )
 
     os.makedirs("results", exist_ok=True)
-    save_path = "results/plot_progressive_last_token.pt"
+    save_path = "results/plot_progressive_two_stage.pt"
     torch.save(results, save_path)
+
     print("saved to:", save_path)
     print("\n===== FINAL TEST RESULTS =====")
 
     for var_id in results["test_results"]:
         for tie_id, r in enumerate(results["test_results"][var_id]):
-            print("var_id=", var_id, "tie_id=", tie_id, "var_name=", r["var_name"], "stage_A_layers=", r["stage_A_layers"], "resolution=", r["resolution"], "top_k=", r["top_k"], "strength=", r["strength"], "cal_correct=", r["cal_correct"], "cal_iia=", r["cal_iia"], "test_correct=", r["test_correct"], "test_iia=", r["test_iia"])
+            print(
+                "var_id=", var_id,
+                "tie_id=", tie_id,
+                "var_name=", r["var_name"],
+                "stage_A_layers=", r["stage_A_layers"],
+                "resolution=", r["resolution"],
+                "config_size=", r["config_size"],
+                "selected_indices=", r["selected_indices"],
+                "config_mass=", r["config_mass"],
+                "strength=", r["strength"],
+                "cal_correct=", r["cal_correct"],
+                "cal_iia=", r["cal_iia"],
+                "test_correct=", r["test_correct"],
+                "test_iia=", r["test_iia"],
+            )

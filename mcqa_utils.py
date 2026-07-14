@@ -1,6 +1,7 @@
 import torch
 import random
 import numpy as np
+from itertools import combinations
 
 
 def set_seed(seed):
@@ -29,3 +30,20 @@ def normalize_rows(X, eps=1e-8):
     return X / row_norms.clamp_min(
         float(eps)
     )
+
+
+def make_site_combination_candidates(sites, selected_indices, config_size):
+    """Create all site configurations with config_size sites."""
+    config_sites = []
+    config_indices = []
+
+    for indices in combinations(selected_indices, config_size):
+        current_sites = []
+
+        for i in indices:
+            current_sites.append(sites[i])
+
+        config_sites.append(current_sites)
+        config_indices.append(indices)
+
+    return config_sites, config_indices
