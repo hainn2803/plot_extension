@@ -1,0 +1,28 @@
+# Find AT:
+python3 mcqa_gradual_das_at.py
+
+# Find AP by AT and output:
+# Standard
+python3 mcqa_gradual_das_ap_from_at.py --lambda-med 0.0
+
+# Gradual
+python3 mcqa_gradual_das_ap_from_at.py --lambda-med 1.0
+
+# Recovery test and Restoration test:
+# Gradual
+python mcqa_gradual_das_edge_eval.py --at-checkpoint results/gradual_das_at_layer_selected.pt --ap-checkpoint results/gradual_das_ap.pt
+
+# Standard
+python mcqa_gradual_das_edge_eval.py --at-checkpoint results/gradual_das_at_layer_selected.pt --ap-checkpoint results/standard_das_ap.pt
+
+
+
+
+python mcqa_das_conflict_test.py \
+  --at-checkpoint results/gradual_das_at_layer_selected.pt \
+  --ap-checkpoint results/standard_das_ap.pt
+
+
+python mcqa_das_conflict_test.py --at-checkpoint results/gradual_das_at_layer_selected.pt --ap-checkpoint results/gradual_das_ap.pt
+
+

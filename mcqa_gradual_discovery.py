@@ -426,32 +426,23 @@ def choose_stage_A_layers(model, names, cal_banks, coarse_sites, coarse_bases, T
 
 
 
-def run_plot_vanilla_multilayer(model, tokenizer, layers, ft_size=128, cal_size=128, te_size=256, dataset_size=None, dataset_split="train", stage_A_signature_method="concat", stage_B_signature_method="family_mean", stage_A_mode="neuron", stage_B_mode="neuron", stage_A_k=None, stage_B_k=None, stage_A_eps=0.001, stage_B_eps=0.001, stage_A_top_layers=6, stage_A_keep_layers=1, stage_A_iia_threshold=0.7, resolutions=(128, 144, 192, 256, 288, 384, 576, 768), top_k_values=(1, 2, 3, 4, 5), strength_values=(1, 2, 4, 8, 16, 32, 64), stage_A_strength_values=None, stage_A_method="uot", stage_B_method="ot", chosen_token_position_id="last_token", device="cuda", seed=0, batch_size=32, max_fit_states=4096):
+def run_plot_vanilla_multilayer(model, tokenizer, layers, ft_size=128, cal_size=128, te_size=256, dataset_size=None, dataset_split="train", device="cuda", seed=0, batch_size=32):
     """Run multilayer PLOT with direct top-k site selection."""
     set_seed(seed)
-    if stage_A_strength_values is None:
-        stage_A_strength_values = strength_values
 
     label_ids = answer_label_ids(tokenizer)
     hidden_size = model.config.hidden_size
     layers = list(layers)
-    stage_A_solver = get_solver(stage_A_method)
-    stage_B_solver = get_solver(stage_B_method)
 
     ft_bank, cal_banks, te_banks = build_mcqa_banks(model=model, tokenizer=tokenizer, train_pool_size=ft_size, cal_size=cal_size, te_size=te_size, dataset_size=dataset_size, split=dataset_split, device=device, batch_size=batch_size, seed=seed)
 
     G_stage_A, names = variable_signature(ft_bank, num_labels=len(ANSWER_LETTERS), signature_method=stage_A_signature_method, family_order=FAMILY_ORDER)
-    if stage_B_signature_method == stage_A_signature_method:
-        G_stage_B = G_stage_A
-    else:
-        G_stage_B, _ = variable_signature(ft_bank, num_labels=len(ANSWER_LETTERS), signature_method=stage_B_signature_method, family_order=FAMILY_ORDER)
-
-    print("[G Stage A]", G_stage_A.shape, stage_A_signature_method)
-    print("[G Stage B]", G_stage_B.shape, stage_B_signature_method)
 
     n_ft = ft_bank["base_input_ids"].shape[0]
     coarse_dim = basis_dim(stage_A_mode, n_ft, hidden_size, stage_A_k, max_fit_states)
-    coarse_sites = [(int(L), chosen_token_position_id, 0, coarse_dim) for L in layers]
+
+    for L in selected_layers:
+        sites.extend(make_sites(L, chosen_token_position_id, fine_dim, resolution))
 
     coarse_sig = site_signature(model, ft_bank, coarse_sites, label_ids, mode=stage_A_mode, k=stage_A_k, batch_size=batch_size, max_fit_states=max_fit_states, signature_method=stage_A_signature_method, family_order=FAMILY_ORDER)
     S_coarse = coarse_sig["intervention_diff"]
@@ -599,7 +590,7 @@ if __name__ == "__main__":
         stage_A_method="uot",
         stage_B_method="ot",
         stage_A_top_layers=6,
-        stage_A_keep_layers=1,
+        stage_A_keep_layers=2,
         stage_A_iia_threshold=0.7,
         resolutions=(128, 144, 192, 256, 288, 384, 576, 768),
         top_k_values=(1, 2, 3, 4),
