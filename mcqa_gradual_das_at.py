@@ -374,9 +374,7 @@ def train_phase1_at(
 
     print(f"[banks] FT={len(fit_bank['base_input_ids'])} CAL={len(cal_bank['base_input_ids'])} TEST={len(te_bank['base_input_ids'])}")
 
-    # ------------------------------------------------------------
     # Stage 0: select the AT layer by full-layer interchange.
-    # ------------------------------------------------------------
     if layers is None:
         layers = list(range(model.config.num_hidden_layers))
     else:
