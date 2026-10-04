@@ -26,3 +26,5 @@ python mcqa_das_conflict_test.py \
 python mcqa_das_conflict_test.py --at-checkpoint results/gradual_das_at_layer_selected.pt --ap-checkpoint results/gradual_das_ap.pt
 
 
+python3 arc_gradual_tests.py --oanswer-checkpoint results_arc/oanswer.pt --xorder-checkpoint results_arc/gradual_das_ap_lambda_med_0.0_lambda_readout_1.0/xorder.pt --oanswer-readout-checkpoint results_arc/oanswer_readout.pt --batch-size 8 --save-path results_arc/gradual_all_tests.pt
+

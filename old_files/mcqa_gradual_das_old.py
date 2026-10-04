@@ -41,37 +41,6 @@ def full_vocab_iia(logits, target_class, tokenizer):
     return sum(p == e for p, e in zip(predicted, expected)) / len(expected)
 
 
-def output_label_ids(label_ids, output_space):
-    """Select the model's output classes independently of the tokenizer argument."""
-    if output_space == "full":
-        return None
-    if output_space == "az":
-        return label_ids
-    raise ValueError(f"Unknown output_space: {output_space!r}; expected 'full' or 'az'")
-
-
-def output_targets(target_class, label_ids, output_space, device):
-    """Map A-Z class indices to token IDs only for full-vocabulary logits."""
-    output_label_ids(label_ids, output_space)
-    target_class = target_class.to(device=device, dtype=torch.long)
-    if output_space == "full":
-        return torch.as_tensor(label_ids, device=device, dtype=torch.long)[target_class]
-    return target_class
-
-
-def output_iia(logits, target_class, tokenizer, output_space):
-    """Score full-vocabulary or A-Z predictions against A-Z class indices."""
-    output_label_ids(None, output_space)
-    if output_space == "full":
-        if tokenizer is None:
-            raise ValueError("tokenizer is required when output_space='full'")
-        return full_vocab_iia(logits, target_class, tokenizer)
-    if target_class.numel() == 0:
-        return 0.0
-    predicted = logits.argmax(dim=-1).detach().cpu()
-    return float((predicted == target_class.detach().cpu()).float().mean())
-
-
 
 def answer_logits(model, outputs, attention_mask, label_ids=None):
     device = outputs.last_hidden_state.device

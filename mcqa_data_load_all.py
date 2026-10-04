@@ -74,20 +74,24 @@ def load_mcqa_pairs(dataset_size=None, split="train"):
     if dataset_size is not None:
         dataset = dataset.select(range(min(int(dataset_size), len(dataset))))
 
-    pairs_by_family = {}
-    for family in FAMILIES:
-        pairs_by_family[family] = []
+    pairs_by_family = {family: [] for family in FAMILIES}
 
     for row in dataset:
         base_prompt = row["prompt"]
         base_letter = find_answer_letter(base_prompt, row["choices"])
         base_pointer = find_answer_relative_position(base_prompt, base_letter)
+        base_choice_labels = choice_labels_from_prompt(base_prompt)
 
         for family, key in FAMILIES.items():
             source = row[key]
             source_prompt = source["prompt"]
             source_letter = find_answer_letter(source_prompt, source["choices"])
             source_pointer = find_answer_relative_position(source_prompt, source_letter)
+
+            # Pure AP intervention:
+            # take AP from source, but dereference it using the base label mapping.
+            answer_token_after_pointer = base_choice_labels[source_pointer]
+
             pairs_by_family[family].append({
                 "base_prompt": base_prompt,
                 "base_answer_letter": base_letter,
@@ -95,8 +99,10 @@ def load_mcqa_pairs(dataset_size=None, split="train"):
                 "source_prompt": source_prompt,
                 "source_answer_letter": source_letter,
                 "source_answer_pointer": source_pointer,
+                "answer_token_after_pointer_interchange": answer_token_after_pointer,
                 "source_family": family,
             })
+
     return pairs_by_family
 
 
@@ -146,7 +152,9 @@ def build_bank(tokenizer, rows):
     base_prompts, source_prompts = [], []
     base_letters, source_letters = [], []
     base_pointers, source_pointers = [], []
+    answer_tokens_after_pointer_interchange = []
     source_families = []
+
     for row in rows:
         base_prompts.append(row["base_prompt"])
         source_prompts.append(row["source_prompt"])
@@ -154,6 +162,7 @@ def build_bank(tokenizer, rows):
         source_letters.append(row["source_answer_letter"])
         base_pointers.append(row["base_answer_pointer"])
         source_pointers.append(row["source_answer_pointer"])
+        answer_tokens_after_pointer_interchange.append(row["answer_token_after_pointer_interchange"])
         source_families.append(row["source_family"])
 
     base_encoding = tokenizer(base_prompts, padding=True, return_tensors="pt")
@@ -170,12 +179,17 @@ def build_bank(tokenizer, rows):
         letter_to_label[letter] = i
         label_space.append(letter_token_id(tokenizer, letter))
 
-    base_labels, pointer_labels, token_labels = [], [], []
+    base_labels, pointer_labels, token_labels, token_after_pointer_interchange_labels = [], [], [], []
     changed_pointer, changed_token = [], []
+
     for i in range(len(rows)):
         base_labels.append(letter_to_label[base_letters[i]])
         pointer_labels.append(source_pointers[i])
         token_labels.append(letter_to_label[source_letters[i]])
+        token_after_pointer_interchange_labels.append(
+            letter_to_label[answer_tokens_after_pointer_interchange[i]]
+        )
+
         changed_pointer.append(base_pointers[i] != source_pointers[i])
         changed_token.append(base_letters[i] != source_letters[i])
 
@@ -207,6 +221,10 @@ def build_bank(tokenizer, rows):
         "counterfactual_label_ids": {
             "answer_pointer": torch.tensor(pointer_labels, dtype=torch.long),
             "answer_token": torch.tensor(token_labels, dtype=torch.long),
+            "answer_token_after_pointer_interchange": torch.tensor(
+                token_after_pointer_interchange_labels,
+                dtype=torch.long,
+            ),
         },
         "base_answer_pointer_ids": torch.tensor(base_pointers, dtype=torch.long),
         "source_answer_pointer_ids": torch.tensor(source_pointers, dtype=torch.long),

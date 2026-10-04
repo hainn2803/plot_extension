@@ -4,9 +4,10 @@ import os
 import torch
 import torch.nn.functional as F
 
+from mcqa_data_load_all import build_mcqa_banks
 from mcqa_neural_net import load_gemma_model
 from mcqa_gradual_das import set_seed, answer_label_ids, answer_logits, collect_layer_states, collect_all_layer_states, LearnedSubspace, run_full_layer_intervention
-from mcqa_gradual_das import output_label_ids, output_targets, output_iia
+from mcqa_gradual_das import full_vocab_iia
 
 def run_ap_intervention_and_capture_at(model, bank, source_ap_states, Q_ap, ap_layer, at_layer, label_ids, token_position="last_token", batch_size=8, require_grad=True):
     device = next(model.parameters()).device
@@ -97,8 +98,8 @@ def run_frozen_at_mediator(model, bank, generated_at_states, Q_at, at_layer, lab
 @torch.no_grad()
 def evaluate_ap(model, bank, source_ap_states, Q_ap, ap_layer, at_layer,
                 Q_at, W_at, b_at, label_ids, token_position, batch_size,
-                tokenizer=None, output_space="az"):
-    output_ids = output_label_ids(label_ids, output_space)
+                tokenizer=None):
+    output_ids = None if tokenizer is not None else label_ids
 
     direct_logits, generated_at = run_ap_intervention_and_capture_at(
         model, bank, source_ap_states, Q_ap, ap_layer, at_layer,
@@ -113,8 +114,12 @@ def evaluate_ap(model, bank, source_ap_states, Q_ap, ap_layer, at_layer,
         "answer_token_after_pointer_interchange"
     ].cpu()
 
-    direct_iia = output_iia(direct_logits, target, tokenizer, output_space)
-    mediator_iia = output_iia(mediator_logits, target, tokenizer, output_space)
+    if tokenizer is None:  # Giữ cách đo cũ cho file ARC đang import hàm này
+        direct_iia = float((direct_logits.argmax(-1) == target).float().mean())
+        mediator_iia = float((mediator_logits.argmax(-1) == target).float().mean())
+    else:
+        direct_iia = full_vocab_iia(direct_logits, target, tokenizer)
+        mediator_iia = full_vocab_iia(mediator_logits, target, tokenizer)
 
     generated_at = generated_at.to(Q_at.device)
     readout_logits = (generated_at @ Q_at) @ W_at.T + b_at
@@ -125,7 +130,7 @@ def evaluate_ap(model, bank, source_ap_states, Q_ap, ap_layer, at_layer,
     return direct_iia, mediator_iia, readout_accuracy
 
 
-def train_ap(model, tokenizer, at_checkpoint, at_readout_checkpoint, layers=None, subspace_dim=128, ft_size=None, cal_size=None, te_size=None, epochs=50, lr=1e-2, lambda_med=1.0, lambda_readout=1.0, train_batch_size=32, eval_batch_size=32, token_position=None, seed=0, save_path="results/gradual_das_ap_readout.pt", banks=None, output_space="full"):
+def train_ap(model, tokenizer, at_checkpoint, at_readout_checkpoint, layers=None, subspace_dim=128, ft_size=None, cal_size=None, te_size=None, epochs=50, lr=1e-2, lambda_med=1.0, lambda_readout=1.0, train_batch_size=32, eval_batch_size=32, token_position=None, seed=0, save_path="results/gradual_das_ap_readout.pt", banks=None):
     set_seed(seed)
     device = next(model.parameters()).device
 
@@ -134,7 +139,6 @@ def train_ap(model, tokenizer, at_checkpoint, at_readout_checkpoint, layers=None
         p.requires_grad_(False)
 
     labels = answer_label_ids(tokenizer)
-    output_ids = output_label_ids(labels, output_space)
 
     at_result = torch.load(at_checkpoint, map_location="cpu")
     at_layer = int(at_result["layer"])
@@ -166,9 +170,10 @@ def train_ap(model, tokenizer, at_checkpoint, at_readout_checkpoint, layers=None
 
     layer_results = []
     for layer in layers:
-        logits = run_full_layer_intervention(model, cal_bank, cal_source_by_layer[layer], layer, output_ids, token_position, eval_batch_size)
+        logits = run_full_layer_intervention(model, cal_bank, cal_source_by_layer[layer], layer, labels, token_position, eval_batch_size)
+        pred = logits.argmax(dim=-1)
         target = cal_bank["counterfactual_label_ids"]["answer_token_after_pointer_interchange"].cpu()
-        iia = output_iia(logits, target, tokenizer, output_space)
+        iia = float((pred == target).float().mean())
 
         layer_results.append({"layer": int(layer), "cal_iia": iia})
         print(f"[AP layer] layer={layer} iia={iia:.4f}")
@@ -218,13 +223,12 @@ def train_ap(model, tokenizer, at_checkpoint, at_readout_checkpoint, layers=None
             optimizer.zero_grad()
             Q_ap = alignment.basis()
 
-            direct_logits, generated_at = run_ap_intervention_and_capture_at(model, mini_bank, ft_source_ap[idx], Q_ap, ap_layer, at_layer, output_ids, token_position, len(idx), require_grad=True)
-            mediator_logits = run_frozen_at_mediator(model, mini_bank, generated_at, Q_at, at_layer, output_ids, token_position, len(idx), require_grad=True)
+            direct_logits, generated_at = run_ap_intervention_and_capture_at(model, mini_bank, ft_source_ap[idx], Q_ap, ap_layer, at_layer, labels, token_position, len(idx), require_grad=True)
+            mediator_logits = run_frozen_at_mediator(model, mini_bank, generated_at, Q_at, at_layer, labels, token_position, len(idx), require_grad=True)
 
             target = target_ft[idx].to(device)
-            output_target = output_targets(target, labels, output_space, device)
-            direct_loss = F.cross_entropy(direct_logits, output_target)
-            mediator_loss = F.cross_entropy(mediator_logits, output_target)
+            direct_loss = F.cross_entropy(direct_logits, target)
+            mediator_loss = F.cross_entropy(mediator_logits, target)
 
             readout_logits = (generated_at @ Q_at) @ W_at.T + b_at
             readout_loss = F.cross_entropy(readout_logits, target)
@@ -241,7 +245,7 @@ def train_ap(model, tokenizer, at_checkpoint, at_readout_checkpoint, layers=None
 
         with torch.no_grad():
             Q_eval = alignment.basis()
-            direct_cal, mediator_cal, readout_cal = evaluate_ap(model, cal_bank, cal_source_ap, Q_eval, ap_layer, at_layer, Q_at, W_at, b_at, labels, token_position, eval_batch_size, tokenizer=tokenizer, output_space=output_space)
+            direct_cal, mediator_cal, readout_cal = evaluate_ap(model, cal_bank, cal_source_ap, Q_eval, ap_layer, at_layer, Q_at, W_at, b_at, labels, token_position, eval_batch_size)
 
         score = direct_cal
         if lambda_med > 0:
@@ -251,7 +255,7 @@ def train_ap(model, tokenizer, at_checkpoint, at_readout_checkpoint, layers=None
 
         print(f"[epoch {epoch:02d}] direct_loss={total_direct_loss / total_count:.4f} med_loss={total_med_loss / total_count:.4f} readout_loss={total_readout_loss / total_count:.4f} direct_cal={direct_cal:.4f} mediator_cal={mediator_cal:.4f} readout_cal={readout_cal:.4f} score={score:.4f}")
 
-        if score >= best_score:
+        if score > best_score:
             best_score = score
             best_basis = Q_eval.detach().cpu().clone()
             best_epoch = epoch
@@ -260,7 +264,7 @@ def train_ap(model, tokenizer, at_checkpoint, at_readout_checkpoint, layers=None
             best_readout_cal = readout_cal
 
     Q_ap = best_basis.to(device)
-    direct_test, mediator_test, readout_test = evaluate_ap(model, te_bank, te_source_ap, Q_ap, ap_layer, at_layer, Q_at, W_at, b_at, labels, token_position, eval_batch_size, tokenizer=tokenizer, output_space=output_space)
+    direct_test, mediator_test, readout_test = evaluate_ap(model, te_bank, te_source_ap, Q_ap, ap_layer, at_layer, Q_at, W_at, b_at, labels, token_position, eval_batch_size)
 
     result = {
         "variable": "answer_pointer",
@@ -269,7 +273,6 @@ def train_ap(model, tokenizer, at_checkpoint, at_readout_checkpoint, layers=None
         "subspace_dim": subspace_dim,
         "basis": best_basis,
         "token_position": token_position,
-        "output_space": output_space,
         "layer_selection": {
             "method": "full_layer_interchange_cal_iia",
             "selected_full_layer_cal_iia": float(best_layer_row["cal_iia"]),
@@ -297,8 +300,7 @@ def train_ap(model, tokenizer, at_checkpoint, at_readout_checkpoint, layers=None
             "lambda_readout": lambda_readout,
             "train_batch_size": train_batch_size,
             "eval_batch_size": eval_batch_size,
-            "seed": seed,
-            "output_space": output_space
+            "seed": seed
         },
         "mediator": {
             "variable": "answer_token",
@@ -328,19 +330,18 @@ def main():
     parser.add_argument("--te-size", type=int, default=None)
     parser.add_argument("--epochs", type=int, default=50)
     parser.add_argument("--lr", type=float, default=1e-2)
-    parser.add_argument("--lambda-med", type=float, default=0.0)
-    parser.add_argument("--lambda-readout", type=float, default=0.0)
+    parser.add_argument("--lambda-med", type=float, default=1.0)
+    parser.add_argument("--lambda-readout", type=float, default=1.0)
     parser.add_argument("--train-batch-size", type=int, default=128)
     parser.add_argument("--eval-batch-size", type=int, default=128)
     parser.add_argument("--token-position", default=None)
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--save-path", default="results/gradual_das_ap_readout.pt")
-    parser.add_argument("--output-space", choices=("full", "az"), default="full")
     args = parser.parse_args()
 
     model, tokenizer = load_gemma_model()
     layers = None if args.layers == "all" else [int(x) for x in args.layers.split(",") if x.strip()]
-    train_ap(model, tokenizer, args.at_checkpoint, args.at_readout_checkpoint, layers, args.subspace_dim, args.ft_size, args.cal_size, args.te_size, args.epochs, args.lr, args.lambda_med, args.lambda_readout, args.train_batch_size, args.eval_batch_size, args.token_position, args.seed, args.save_path, output_space=args.output_space)
+    train_ap(model, tokenizer, args.at_checkpoint, args.at_readout_checkpoint, layers, args.subspace_dim, args.ft_size, args.cal_size, args.te_size, args.epochs, args.lr, args.lambda_med, args.lambda_readout, args.train_batch_size, args.eval_batch_size, args.token_position, args.seed, args.save_path)
 
 
 if __name__ == "__main__":
