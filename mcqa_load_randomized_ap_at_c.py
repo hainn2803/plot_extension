@@ -291,9 +291,12 @@ def build_all_banks(model, tokenizer, data_path="randomized_copycolors", ft_size
             filtered = predict_correct(model, tokenizer, candidates, batch_size, correct_cache)
 
             all_pairs.extend(filtered)
-            ap_pairs.extend(p for p in filtered if p["base_AP"] != p["source_AP"])
-            at_pairs.extend(p for p in filtered if p["base_AT"] != p["source_AT"])
-            c_pairs.extend(p for p in filtered if p["base_color"] != p["source_color"])
+            # ap_pairs.extend(p for p in filtered if p["base_AP"] != p["source_AP"])
+            # at_pairs.extend(p for p in filtered if p["base_AT"] != p["source_AT"])
+            # c_pairs.extend(p for p in filtered if p["base_color"] != p["source_color"])
+            ap_pairs.extend(p for p in filtered if p["pair_type"] == "AP_only")
+            at_pairs.extend(p for p in filtered if p["pair_type"] == "AT_only")
+            c_pairs.extend(p for p in filtered if p["pair_type"] == "C_only")
 
             if split == "train" and len(all_pairs) >= wanted:
                 break
