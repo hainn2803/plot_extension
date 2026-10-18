@@ -153,6 +153,8 @@ def train_at(model, tokenizer, layers=None, subspace_dim=128, ft_size=400, cal_s
     print(f"[AT BEST] layer={layer} k={subspace_dim} epoch={best_epoch} cal_iia={best_cal:.4f} test_iia={test_iia:.4f}")
     print(f"saved to: {save_path}")
 
+    return result
+
 
 def main():
     parser = argparse.ArgumentParser()

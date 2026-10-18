@@ -7,3 +7,7 @@ mcqa_constants.py
 
 results*/
 test_results*/
+randomized_copycolors/
+jacobian-lens/
+aa_results_scan_all_layers/
+.venv/

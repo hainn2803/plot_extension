@@ -6,24 +6,95 @@ from datasets import load_dataset
 from collections import defaultdict
 from mcqa_constants import HF_TOKEN, DATASET_ORIGINAL_PATH, DATASET_ORIGINAL_NAME, LETTER_TO_CLASS, CF_FAMILIES
 from mcqa_neural_net import load_gemma_model
+import re
+
 # The only place to add or remove pairs. Each entry maps a pair name to
 # (base row field, source row field); "original" means the row itself.
 # Keep the three original keys for consumers that inspect source families.
 PAIR_SPECS = {
-    "answerPosition_counterfactual": (
-        "original", "answerPosition_counterfactual"
-    ),
-    "randomLetter_counterfactual": (
-        "original", "randomLetter_counterfactual"
-    ),
-    "answerPosition_randomLetter_counterfactual": (
-        "original", "answerPosition_randomLetter_counterfactual"
+    # "answerPosition_counterfactual": (
+    #     "original", "answerPosition_counterfactual"
+    # ),
+    # "randomLetter_counterfactual": (
+    #     "original", "randomLetter_counterfactual"
+    # ),
+    # "answerPosition_randomLetter_counterfactual": (
+    #     "original", "answerPosition_randomLetter_counterfactual"
+    "answerColor_counterfactual": (
+        "original", "color_counterfactual"
     ),
 }
+COLOR_IN_QUESTION = re.compile(
+    r"\b(?:is|are)\s+(.+?)\.\s*What color\b",
+    re.IGNORECASE,
+)
+
+COLORS = [
+    "black",
+    "blue",
+    "brown",
+    "gray",
+    "green",
+    "orange",
+    "pink",
+    "purple",
+    "red",
+    "white",
+    "yellow",
+]
+
+COLOR_TO_CLASS = {
+    color: i
+    for i, color in enumerate(COLORS)
+}
+
+
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 CACHE_DIR = os.path.join(SCRIPT_DIR, "hf_cache")
 os.makedirs(CACHE_DIR, exist_ok=True)
 os.environ["HF_TOKEN"] = HF_TOKEN
+
+
+# create functions to find position of specific tokens: "?", color
+
+def extract_color(prompt):
+    first_line = prompt.splitlines()[0]
+    match = COLOR_IN_QUESTION.search(first_line)
+    if match is None:
+        raise ValueError(f"Cannot find color in prompt: {first_line!r}")
+    return match.group(1).strip().lower()
+
+def ap_after_color_interchange(pair):
+    source_color = pair["source_C"]
+    base_choice_texts = [str(x).strip().lower() for x in pair["base_choices"]["text"]]
+    if source_color not in base_choice_texts:
+        raise ValueError(f"Source color {source_color!r} not found in base choices")
+    return base_choice_texts.index(source_color)
+
+def color_position(prompt, tokenizer):
+    first_line = prompt.splitlines()[0]
+    match = COLOR_IN_QUESTION.search(first_line)
+    if match is None:
+        raise ValueError(f"Cannot find color in prompt: {first_line!r}")
+    prefix = first_line[:match.end(1)]
+    return len(tokenizer(prefix, add_special_tokens=True)["input_ids"]) - 1
+
+def symbol_position(prompt, letter, tokenizer):
+    match = re.search(rf"(?m)^[ \t]*{re.escape(letter)}\.", prompt)
+    if match is None:
+        raise ValueError(f"Cannot find choice {letter!r} in prompt")
+    prefix = prompt[:match.end() - 1]
+    unpadded_position = len(tokenizer(prefix, add_special_tokens=True)["input_ids"]) - 1
+    # collect_layer_states adds the left-padding offset at run time.
+    return unpadded_position
+
+def question_mark_position(prompt, tokenizer):
+    first_line = prompt.splitlines()[0]
+    q_idx = first_line.rfind("?")
+    if q_idx == -1:
+        raise ValueError(f"Cannot find '?' in prompt: {first_line!r}")
+    prefix = first_line[:q_idx + 1]
+    return len(tokenizer(prefix, add_special_tokens=True)["input_ids"]) - 1
 
 
 def check_disjoint_questions_within_dataset(dataset):
@@ -69,6 +140,9 @@ def load_mcqa_datasets(split):
             base_AT = str(base["choices"]["label"][base_AP])
             source_AP = int(source["answerKey"])
             source_AT = str(source["choices"]["label"][source_AP])
+            base_C = extract_color(base["prompt"])
+            source_C = extract_color(source["prompt"])
+
             pairs_by_cf_family[pair_family].append({
                 "split": split,
                 "base_row_id": f"{split}:{row_idx}",
@@ -86,6 +160,8 @@ def load_mcqa_datasets(split):
                 "source_AP": source_AP,
                 "source_AT": source_AT,
                 "source_Y": source_AT,
+                "base_C": base_C,
+                "source_C": source_C,
             })
     return pairs_by_cf_family, dataset
 
@@ -148,6 +224,8 @@ def create_bank(filtered_pairs, target, tokenizer, size=None, seed=0):
         pairs = [p for p in pairs if p["base_AP"] != p["source_AP"]]
     elif target == "AT":
         pairs = [p for p in pairs if p["base_AT"] != p["source_AT"]]
+    elif target == "C":
+        pairs = [p for p in pairs if p["base_C"] != p["source_C"]]
     else:
         raise ValueError(f"Unknown target: {target}")
     rng = random.Random(seed)
@@ -161,10 +239,24 @@ def create_bank(filtered_pairs, target, tokenizer, size=None, seed=0):
                 f"Family {p['source_family']} has a label outside A–Z. "
                 "The current AT readout cannot use numeric answer labels."
             )
+
+
+    # metric for readout
     after_ap = [
         str(p["base_choices"]["label"][p["source_AP"]])
         for p in pairs
     ]
+    # after_c_ap = [
+    #     ap_after_color_interchange(p)
+    #     for p in pairs
+    # ]
+    # after_c_at = [
+    #     str(p["base_choices"]["label"][ap])
+    #     for p, ap in zip(pairs, after_c_ap)
+    # ]
+
+
+
     tokenizer.padding_side = "left"
     base_tokens = tokenizer(
         [p["base_prompt"] for p in pairs],
@@ -178,28 +270,39 @@ def create_bank(filtered_pairs, target, tokenizer, size=None, seed=0):
     )
     base_mask = base_tokens["attention_mask"].long()
     source_mask = source_tokens["attention_mask"].long()
-    def symbol_position(prompt, letter):
-        match = re.search(
-            rf"(?m)^[ \t]*{re.escape(letter)}\.",
-            prompt,
-        )
-        if match is None:
-            raise ValueError(f"Cannot find choice {letter!r} in prompt")
-        # Prefix kết thúc ngay sau chữ cái, trước dấu chấm.
-        prefix = prompt[:match.end() - 1]
-        unpadded_position = len(
-            tokenizer(prefix, add_special_tokens=True)["input_ids"]
-        ) - 1
-        # collect_layer_states adds the left-padding offset at run time.
-        return unpadded_position
+    
+    # symbol answer position
     base_symbol = torch.tensor([
-        symbol_position(p["base_prompt"], p["base_AT"])
+        symbol_position(p["base_prompt"], p["base_AT"], tokenizer)
         for p in pairs
     ], dtype=torch.long)
     source_symbol = torch.tensor([
-        symbol_position(p["source_prompt"], p["source_AT"])
+        symbol_position(p["source_prompt"], p["source_AT"], tokenizer)
         for p in pairs
     ], dtype=torch.long)
+
+    # color token position
+    base_color = torch.tensor([
+        color_position(p["base_prompt"], tokenizer)
+        for p in pairs
+    ], dtype=torch.long)
+
+    source_color = torch.tensor([
+        color_position(p["source_prompt"], tokenizer)
+        for p in pairs
+    ], dtype=torch.long)
+
+    # question mark position
+    base_question_mark = torch.tensor([
+        question_mark_position(p["base_prompt"], tokenizer)
+        for p in pairs
+    ], dtype=torch.long)
+
+    source_question_mark = torch.tensor([
+        question_mark_position(p["source_prompt"], tokenizer)
+        for p in pairs
+    ], dtype=torch.long)
+
     return {
         "pairs": pairs,
         "pair_source_families": [p["source_family"] for p in pairs],
@@ -211,14 +314,17 @@ def create_bank(filtered_pairs, target, tokenizer, size=None, seed=0):
         "base_position_by_id": {
             "correct_symbol": base_symbol,
             "correct_symbol_period": base_symbol + 1,
+            "color": base_color,
+            "question_mark": base_question_mark,
             "last_token": base_tokens["attention_mask"].sum(dim=1).long() - 1
         },
         "source_position_by_id": {
             "correct_symbol": source_symbol,
             "correct_symbol_period": source_symbol + 1,
+            "color": source_color,
+            "question_mark": source_question_mark,
             "last_token": source_tokens["attention_mask"].sum(dim=1).long() - 1
         },
-        # Đây là class index, KHÔNG phải Gemma vocabulary token ID.
         "base_answer_label_ids": torch.tensor([
             LETTER_TO_CLASS[p["base_AT"]] for p in pairs
         ], dtype=torch.long),
@@ -228,16 +334,45 @@ def create_bank(filtered_pairs, target, tokenizer, size=None, seed=0):
         "source_answer_pointer_ids": torch.tensor([
             p["source_AP"] for p in pairs
         ], dtype=torch.long),
+        "base_color_ids": torch.tensor([
+            COLOR_TO_CLASS[p["base_C"]]
+            for p in pairs
+        ], dtype=torch.long),
+
+        "source_color_ids": torch.tensor([
+            COLOR_TO_CLASS[p["source_C"]]
+            for p in pairs
+        ], dtype=torch.long),
         "counterfactual_label_ids": {
-            "answer_pointer": torch.tensor([
-                p["source_AP"] for p in pairs
-            ], dtype=torch.long),
+
             "answer_token": torch.tensor([
                 LETTER_TO_CLASS[p["source_AT"]] for p in pairs
+            ], dtype=torch.long),
+
+            # when intervene on AP
+            "answer_pointer": torch.tensor([
+                p["source_AP"] for p in pairs
             ], dtype=torch.long),
             "answer_token_after_pointer_interchange": torch.tensor([
                 LETTER_TO_CLASS[letter] for letter in after_ap
             ], dtype=torch.long),
+
+            # when intervene on C
+            "color": torch.tensor([
+                COLOR_TO_CLASS[p["source_C"]]
+                for p in pairs
+            ], dtype=torch.long),
+
+            # "answer_pointer_after_color_interchange": torch.tensor(
+            #     after_c_ap,
+            #     dtype=torch.long,
+            # ),
+
+            # "answer_token_after_color_interchange": torch.tensor([
+            #     LETTER_TO_CLASS[letter]
+            #     for letter in after_c_at
+            # ], dtype=torch.long),
+
         },
         "changed_mask": {
             "answer_pointer": torch.tensor([
@@ -245,6 +380,10 @@ def create_bank(filtered_pairs, target, tokenizer, size=None, seed=0):
             ], dtype=torch.bool),
             "answer_token": torch.tensor([
                 p["base_AT"] != p["source_AT"] for p in pairs
+            ], dtype=torch.bool),
+            "color": torch.tensor([
+                p["base_C"] != p["source_C"]
+                for p in pairs
             ], dtype=torch.bool),
         },
     }
@@ -274,7 +413,8 @@ def build_all_mcqa_banks(
                 filtered_pairs, target, tokenizer,
                 size=size, seed=seed,
             )
-            for target in ("AP", "AT")
+            # for target in ("AP", "AT", "C")
+            for target in ("C")
         }
         for target, bank in banks[split].items():
             print(f"[bank] {split} {target}: {len(bank['base_input_ids'])} pairs")
@@ -289,12 +429,84 @@ def build_all_mcqa_banks(
             {"answer_token": banks["validation"]["AT"]},
             {"answer_token": banks["test"]["AT"]},
         ),
+        "C": (
+        banks["train"]["C"],
+        {"color": banks["validation"]["C"]},
+        {"color": banks["test"]["C"]},
+    ),
     }
 
 
 if __name__ == "__main__":
     model, tokenizer = load_gemma_model()
     tokenizer.padding_side = "left"
-    device = next(model.parameters()).device
-    pairs_by_family, _ = load_mcqa_datasets(split="train")
-    filtered = predict_correct(model, tokenizer, pairs_by_family)
+
+    data = build_all_mcqa_banks(
+        model=model,
+        tokenizer=tokenizer,
+        ft_size=5,
+        cal_size=5,
+        te_size=5,
+        batch_size=2,
+        seed=0,
+    )
+
+    # Lấy C train bank
+    c_train_bank = data["C"][0]
+
+    pair = c_train_bank["pairs"][0]
+
+    print("\n===== PAIR =====")
+    print("Base prompt:")
+    print(pair["base_prompt"])
+
+    print("\nSource prompt:")
+    print(pair["source_prompt"])
+
+    print("\n===== VARIABLES =====")
+    print("base_C:", pair["base_C"])
+    print("source_C:", pair["source_C"])
+
+    print("base_AP:", pair["base_AP"])
+    print("source_AP:", pair["source_AP"])
+
+    print("base_AT:", pair["base_AT"])
+    print("source_AT:", pair["source_AT"])
+
+    print("\n===== C TARGETS =====")
+    print(
+        "color class:",
+        c_train_bank["counterfactual_label_ids"]["color"][0].item()
+    )
+
+    print(
+        "AP after C:",
+        c_train_bank["counterfactual_label_ids"][
+            "answer_pointer_after_color_interchange"
+        ][0].item()
+    )
+
+    at_after_c_id = c_train_bank["counterfactual_label_ids"][
+        "answer_token_after_color_interchange"
+    ][0].item()
+
+    print("AT after C class:", at_after_c_id)
+    print("AT after C letter:", list(LETTER_TO_CLASS.keys())[at_after_c_id])
+
+    print("\n===== POSITIONS =====")
+    print(
+        "base color pos:",
+        c_train_bank["base_position_by_id"]["color"][0].item()
+    )
+    print(
+        "source color pos:",
+        c_train_bank["source_position_by_id"]["color"][0].item()
+    )
+    print(
+        "base question mark pos:",
+        c_train_bank["base_position_by_id"]["question_mark"][0].item()
+    )
+    print(
+        "source question mark pos:",
+        c_train_bank["source_position_by_id"]["question_mark"][0].item()
+    )

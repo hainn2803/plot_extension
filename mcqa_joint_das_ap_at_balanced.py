@@ -109,8 +109,8 @@ def fit_readout(model, checkpoint_path, output_path, args, target, readout_banks
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--at-save-path", default="results_joint_5000/das_at.pt")
-    parser.add_argument("--ap-save-path", default="results_joint_5000/das_ap.pt")
+    parser.add_argument("--at-save-path", default="results_joint_gradual_L17/das_at.pt")
+    parser.add_argument("--ap-save-path", default="results_joint_gradual_L17/das_ap.pt")
     parser.add_argument("--at-layers", default="all")
     parser.add_argument("--ap-layers", default="all")
     parser.add_argument("--at-dim", type=int, default=128)
@@ -126,8 +126,8 @@ def main():
     parser.add_argument("--train-batch-size", type=int, default=32)
     parser.add_argument("--eval-batch-size", type=int, default=32)
     parser.add_argument("--token-position", default="last_token")
-    parser.add_argument("--seed", type=int, default=1)
-    parser.add_argument("--output-space", choices=("full", "az"), default="full")
+    parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--output-space", choices=("full", "az"), default="az")
     parser.add_argument("--at-readout-per-class", type=int, default=50)
     parser.add_argument("--ap-readout-per-class", type=int, default=50)
     parser.add_argument("--readout-max-attempts", type=int, default=500)

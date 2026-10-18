@@ -316,6 +316,8 @@ def train_ap(model, tokenizer, at_checkpoint, at_readout_checkpoint, layers=None
     print(f"[AP TEST] direct_iia={direct_test:.4f} mediator_iia={mediator_test:.4f} readout_accuracy={readout_test:.4f}")
     print(f"saved to: {save_path}")
 
+    return result
+
 
 def main():
     parser = argparse.ArgumentParser()
