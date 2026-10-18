@@ -6,13 +6,10 @@ Each generated row gives four intervention pairs:
     C_only  : C changes, AP/AT stay fixed
     C_AP_AT : C, AP, and AT all change
 
-Training:
-    use all factual-correct pair types in one shared bank.
-
-Validation/test:
-    AP -> only pairs where AP changes
-    AT -> only pairs where AT changes
-    C  -> only pairs where C changes
+Training/validation/test:
+    AP -> only AP_only pairs
+    AT -> only AT_only pairs
+    C  -> only C_only pairs
 """
 
 import random
@@ -271,7 +268,7 @@ def create_bank(pairs, tokenizer, size=None, seed=0):
 
 def build_all_banks(model, tokenizer, data_path="randomized_copycolors", ft_size=800,
                     cal_size=400, te_size=400, batch_size=32, seed=0, rows_per_chunk=64):
-    """Build one shared train bank and variable-specific validation/test banks."""
+    """Build variable-specific train/validation/test banks for AP, AT, and C."""
     ds = load_generated_dataset(data_path)
     sizes = {"train": ft_size, "validation": cal_size, "test": te_size}
     split_seed = {"train": seed, "validation": seed + 1, "test": seed + 2}
@@ -283,48 +280,48 @@ def build_all_banks(model, tokenizer, data_path="randomized_copycolors", ft_size
         row_indices = list(range(len(ds[split])))
         random.Random(split_seed[split]).shuffle(row_indices)
 
-        all_pairs, ap_pairs, at_pairs, c_pairs = [], [], [], []
+        ap_pairs, at_pairs, c_pairs = [], [], []
 
         for start in range(0, len(row_indices), rows_per_chunk):
             indices = row_indices[start:start + rows_per_chunk]
             candidates = rows_to_pairs(ds[split], indices, split)
             filtered = predict_correct(model, tokenizer, candidates, batch_size, correct_cache)
 
-            all_pairs.extend(filtered)
-            # ap_pairs.extend(p for p in filtered if p["base_AP"] != p["source_AP"])
-            # at_pairs.extend(p for p in filtered if p["base_AT"] != p["source_AT"])
-            # c_pairs.extend(p for p in filtered if p["base_color"] != p["source_color"])
             ap_pairs.extend(p for p in filtered if p["pair_type"] == "AP_only")
             at_pairs.extend(p for p in filtered if p["pair_type"] == "AT_only")
             c_pairs.extend(p for p in filtered if p["pair_type"] == "C_only")
 
-            if split == "train" and len(all_pairs) >= wanted:
-                break
-            if split != "train" and min(len(ap_pairs), len(at_pairs), len(c_pairs)) >= wanted:
+            if min(len(ap_pairs), len(at_pairs), len(c_pairs)) >= wanted:
                 break
 
         print(
-            f"\n[{split}] model-correct candidates: all={len(all_pairs)} "
-            f"AP_change={len(ap_pairs)} AT_change={len(at_pairs)} C_change={len(c_pairs)}"
+            f"\n[{split}] model-correct candidates: "
+            f"AP_only={len(ap_pairs)} AT_only={len(at_pairs)} C_only={len(c_pairs)}"
         )
 
-        if split == "train":
-            shared = create_bank(all_pairs, tokenizer, wanted, split_seed[split])
-            banks[split] = {"AP": shared, "AT": shared, "C": shared}
-            print(f"[bank] train shared={len(shared['pairs'])}")
-        else:
-            banks[split] = {
-                "AP": create_bank(ap_pairs, tokenizer, wanted, split_seed[split]),
-                "AT": create_bank(at_pairs, tokenizer, wanted, split_seed[split]),
-                "C": create_bank(c_pairs, tokenizer, wanted, split_seed[split]),
-            }
-            print(f"[bank] {split}: AP={wanted} AT={wanted} C={wanted}")
+        banks[split] = {
+            "AP": create_bank(ap_pairs, tokenizer, wanted, split_seed[split]),
+            "AT": create_bank(at_pairs, tokenizer, wanted, split_seed[split]),
+            "C": create_bank(c_pairs, tokenizer, wanted, split_seed[split]),
+        }
+        print(f"[bank] {split}: AP={wanted} AT={wanted} C={wanted}")
 
-    train_bank = banks["train"]["AP"]
     return {
-        "AP": (train_bank, {"answer_pointer": banks["validation"]["AP"]}, {"answer_pointer": banks["test"]["AP"]}),
-        "AT": (train_bank, {"answer_token": banks["validation"]["AT"]}, {"answer_token": banks["test"]["AT"]}),
-        "C": (train_bank, {"color": banks["validation"]["C"]}, {"color": banks["test"]["C"]}),
+        "AP": (
+            banks["train"]["AP"],
+            {"answer_pointer": banks["validation"]["AP"]},
+            {"answer_pointer": banks["test"]["AP"]},
+        ),
+        "AT": (
+            banks["train"]["AT"],
+            {"answer_token": banks["validation"]["AT"]},
+            {"answer_token": banks["test"]["AT"]},
+        ),
+        "C": (
+            banks["train"]["C"],
+            {"color": banks["validation"]["C"]},
+            {"color": banks["test"]["C"]},
+        ),
     }
 
 
