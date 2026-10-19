@@ -79,7 +79,7 @@ def main():
     fit_readout(model, ap_path, ap_ro, build_ap_readout_datasets(shared_readout), "AP", a.token_position, a.eval_batch_size, a.seed, 4)
 
     print("\n=== TRAIN C ===")
-    train_c(model, tokenizer, str(ap_path), str(ap_ro), str(at_path), str(at_ro), parse_layers(a.c_layers), a.c_dim, a.ft_size, a.cal_size, a.te_size, a.c_epochs, a.lr, a.c_lambda_ap_med, a.c_lambda_ap_readout, a.c_lambda_at_med, a.c_lambda_at_readout, a.train_batch_size, a.eval_batch_size, a.c_token_position, a.seed, str(c_path), c_chain_banks(model, tokenizer, a), a.output_space)
+    train_c(model, tokenizer, str(ap_path), str(ap_ro), str(at_path), str(at_ro), parse_layers(a.c_layers), a.c_dim, a.ft_size, a.cal_size, a.te_size, a.c_epochs, a.lr, a.c_lambda_ap_med, a.c_lambda_ap_readout, a.c_lambda_at_med, a.c_lambda_at_readout, a.train_batch_size, a.eval_batch_size, a.c_token_position, a.seed, str(c_path), das_banks["C"], a.output_space)
     colors = shared_readout[0]["color_to_class"]
     fit_readout(model, c_path, c_ro, build_c_readout_datasets(shared_readout), "C", a.c_token_position, a.eval_batch_size, a.seed, len(colors), {"color_to_class": colors})
 
