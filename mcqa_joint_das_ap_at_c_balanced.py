@@ -42,7 +42,6 @@ def fit_readout(model, checkpoint, save_path, bank_pair, target, token_position,
 
 
 def c_chain_banks(model, tokenizer, args):
-    """C training uses C_AP_AT pairs; Ziv's C_only check is done later in evaluation."""
     train = build_pair_bank(model, tokenizer, args.data_path, "train", "C_AP_AT", args.ft_size, args.eval_batch_size, args.seed)
     val = build_pair_bank(model, tokenizer, args.data_path, "validation", "C_AP_AT", args.cal_size, args.eval_batch_size, args.seed + 1)
     test = build_pair_bank(model, tokenizer, args.data_path, "test", "C_AP_AT", args.te_size, args.eval_batch_size, args.seed + 2)
