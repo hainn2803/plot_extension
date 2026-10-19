@@ -41,13 +41,6 @@ def fit_readout(model, checkpoint, save_path, bank_pair, target, token_position,
     Path(save_path).parent.mkdir(parents=True, exist_ok=True); torch.save(best, save_path); print(f"[{target} readout] val_acc={best_acc:.4f}")
 
 
-def c_chain_banks(model, tokenizer, args):
-    train = build_pair_bank(model, tokenizer, args.data_path, "train", "C_AP_AT", args.ft_size, args.eval_batch_size, args.seed)
-    val = build_pair_bank(model, tokenizer, args.data_path, "validation", "C_AP_AT", args.cal_size, args.eval_batch_size, args.seed + 1)
-    test = build_pair_bank(model, tokenizer, args.data_path, "test", "C_AP_AT", args.te_size, args.eval_batch_size, args.seed + 2)
-    return train, {"C": val}, {"C": test}
-
-
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--data-path", default="randomized_copycolors"); p.add_argument("--result-dir", default="results_joint_randomized")
