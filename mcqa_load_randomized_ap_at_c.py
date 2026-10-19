@@ -325,12 +325,114 @@ def build_all_banks(model, tokenizer, data_path="randomized_copycolors", ft_size
     }
 
 
+# ----------------------------- Shared factual readout bank -----------------------------
+
+def _color_to_class(ds):
+    """Stable color mapping covering factual and counterfactual colors used by C."""
+    colors = set()
+    for split in ("train", "validation", "test"):
+        for row in ds[split]:
+            colors.add(str(row["color"]).strip().casefold())
+            colors.add(str(row["color_counterfactual"]["color"]).strip().casefold())
+            colors.add(str(row["color_all_counterfactual"]["color"]).strip().casefold())
+    return {color: i for i, color in enumerate(sorted(colors))}
+
+
+@torch.no_grad()
+def _correct_factual_rows(model, tokenizer, rows, batch_size):
+    """Keep original factual rows that Gemma answers correctly."""
+    model.eval(); tokenizer.padding_side = "left"
+    if tokenizer.pad_token_id is None: tokenizer.pad_token = tokenizer.eos_token
+    device = next(model.parameters()).device
+    kept = []
+
+    for start in range(0, len(rows), batch_size):
+        batch = rows[start:start + batch_size]
+        inputs = tokenizer([row["prompt"] for row in batch], padding=True, return_tensors="pt").to(device)
+        position_ids = (inputs["attention_mask"].long().cumsum(-1) - 1).clamp(min=0)
+        try: outputs = model(**inputs, position_ids=position_ids, use_cache=False, logits_to_keep=1)
+        except TypeError: outputs = model(**inputs, position_ids=position_ids, use_cache=False)
+
+        for row, token_id in zip(batch, outputs.logits[:, -1].argmax(-1).tolist()):
+            gold = str(row["answer"])
+            token_ids = {int(ids[0]) for text in (" " + gold, gold) if len(ids := tokenizer(text, add_special_tokens=False)["input_ids"]) == 1}
+            if int(token_id) in token_ids or tokenizer.decode([int(token_id)]).strip() == gold: kept.append(row)
+    return kept
+
+
+def _tokenize_factual_readout(rows, tokenizer, color_to_class):
+    """One bank stores the same prompts plus AP, AT, and C labels."""
+    tokenizer.padding_side = "left"
+    if tokenizer.pad_token_id is None: tokenizer.pad_token = tokenizer.eos_token
+    prompts = [row["prompt"] for row in rows]
+    tokens = tokenizer(prompts, padding=True, return_tensors="pt")
+    answers = [str(row["answer"]) for row in rows]
+
+    bank = {
+        "prompts": prompts,
+        "questions": [row["question_key"] for row in rows],
+        "input_ids": tokens["input_ids"].long(),
+        "attention_mask": tokens["attention_mask"].long(),
+        "AP_target_ids": torch.tensor([int(row["answer_position"]) for row in rows]),
+        "AT_target_ids": torch.tensor([LETTER_TO_CLASS[answer] for answer in answers]),
+        "C_target_ids": torch.tensor([color_to_class[str(row["color"]).strip().casefold()] for row in rows]),
+        "position_by_id": {
+            "last_token": tokens["attention_mask"].sum(1).long() - 1,
+            "correct_symbol": torch.tensor([symbol_position(prompt, answer, tokenizer) for prompt, answer in zip(prompts, answers)]),
+            "color": torch.tensor([color_position(prompt, tokenizer) for prompt in prompts]),
+            "question_mark": torch.tensor([question_mark_position(prompt, tokenizer) for prompt in prompts]),
+        },
+        "color_to_class": color_to_class,
+    }
+    bank["position_by_id"]["correct_symbol_period"] = bank["position_by_id"]["correct_symbol"] + 1
+    return bank
+
+
+@torch.no_grad()
+def build_shared_readout_banks(model, tokenizer, data_path="randomized_copycolors", train_size=1300, val_size=520, batch_size=32, seed=0):
+    """Build ONE factual train bank and ONE factual validation bank shared by AP/AT/C readouts."""
+    ds = load_generated_dataset(data_path); color_to_class = _color_to_class(ds)
+
+    def build(split, size, split_seed):
+        rows = [ds[split][i] for i in range(len(ds[split]))]
+        random.Random(split_seed).shuffle(rows)
+        rows = _correct_factual_rows(model, tokenizer, rows, batch_size)
+        if size is not None:
+            if len(rows) < size: raise RuntimeError(f"readout {split}: requested {size} model-correct rows, found {len(rows)}")
+            rows = rows[:size]
+        print(f"[shared readout] {split}: {len(rows)} factual model-correct prompts")
+        return _tokenize_factual_readout(rows, tokenizer, color_to_class)
+
+    train = build("train", train_size, seed); val = build("validation", val_size, seed + 1)
+    assert set(train["questions"]).isdisjoint(val["questions"])
+    return train, val
+
+
+def _target_view(shared_banks, target):
+    """Reuse the exact same bank; expose only the requested labels as target_ids."""
+    out = []
+    for bank in shared_banks:
+        view = dict(bank); view["target_ids"] = bank[f"{target}_target_ids"]
+        out.append(view)
+    return tuple(out)
+
+
+def build_ap_readout_datasets(shared_banks):
+    """AP labels on the shared factual readout prompts."""
+    return _target_view(shared_banks, "AP")
+
+
+def build_at_readout_datasets(shared_banks):
+    """AT labels on the shared factual readout prompts."""
+    return _target_view(shared_banks, "AT")
+
+
+def build_c_readout_datasets(shared_banks):
+    """C labels on the shared factual readout prompts."""
+    return _target_view(shared_banks, "C")
+
+
 if __name__ == "__main__":
     ds = load_generated_dataset("randomized_copycolors")
     for pair in row_to_pairs(ds["train"][0], "train"):
-        print(
-            f"{pair['pair_type']:8s} | "
-            f"C {pair['base_color']} -> {pair['source_color']} | "
-            f"AP {pair['base_AP']} -> {pair['source_AP']} | "
-            f"AT {pair['base_AT']} -> {pair['source_AT']}"
-        )
+        print(f"{pair['pair_type']:8s} | C {pair['base_color']} -> {pair['source_color']} | AP {pair['base_AP']} -> {pair['source_AP']} | AT {pair['base_AT']} -> {pair['source_AT']}")
