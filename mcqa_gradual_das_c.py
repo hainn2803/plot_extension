@@ -80,12 +80,15 @@ def evaluate_c(model, tokenizer, bank, source_c, Q_c, c_layer, Q_ap, ap_layer, a
 
 def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoint, at_readout_checkpoint, layers=None, subspace_dim=128, ft_size=400, cal_size=200, te_size=200, epochs=50, lr=1e-2, lambda_ap_med=0.0, lambda_ap_readout=0.0, lambda_at_med=0.0, lambda_at_readout=0.0, train_batch_size=32, eval_batch_size=32, token_position="color", seed=0, save_path="results/das_c.pt", banks=None, output_space="full"):
     set_seed(seed); device = next(model.parameters()).device; model.eval()
-    for p in model.parameters(): p.requires_grad_(False)
+    for p in model.parameters(): 
+        p.requires_grad_(False)
 
     ap = torch.load(ap_checkpoint, map_location="cpu", weights_only=False); Q_ap = ap["basis"].float().to(device); ap_layer = int(ap["layer"]); ap_pos = ap.get("token_position", "last_token")
     at = torch.load(at_checkpoint, map_location="cpu", weights_only=False); Q_at = at["basis"].float().to(device); at_layer = int(at["layer"]); at_pos = at.get("token_position", "last_token")
+
     ap_ro = torch.load(ap_readout_checkpoint, map_location="cpu", weights_only=False); W_ap = ap_ro["W_AP"].float().to(device); b_ap = ap_ro["b_AP"].float().to(device)
     at_ro = torch.load(at_readout_checkpoint, map_location="cpu", weights_only=False); W_at = at_ro["W_AT"].float().to(device); b_at = at_ro["b_AT"].float().to(device)
+    
     train_bank, cal_banks, test_banks = banks; cal_bank = cal_banks["C"]; test_bank = test_banks["C"]
     labels = answer_label_ids(tokenizer); output_ids = output_label_ids(labels, output_space); max_layer = min(ap_layer, at_layer); layers = list(range(max_layer)) if layers is None else [x for x in layers if x < max_layer]
 
@@ -104,17 +107,26 @@ def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoin
     best_score, best_basis, best_epoch, best_metrics = -1.0, None, None, None
 
     for epoch in range(1, epochs + 1):
-        perm = torch.randperm(len(train_bank["base_input_ids"])); totals = [0.0] * 5
+        perm = torch.randperm(len(train_bank["base_input_ids"]))
+        totals = [0.0] * 5
         for start in range(0, len(perm), train_batch_size):
             idx = perm[start:start + train_batch_size]
             mini = {"base_input_ids": train_bank["base_input_ids"][idx], "base_attention_mask": train_bank["base_attention_mask"][idx], "base_position_by_id": {k: v[idx] for k, v in train_bank["base_position_by_id"].items()}}
-            optimizer.zero_grad(); Q_c = alignment.basis()
+
+            optimizer.zero_grad()
+            Q_c = alignment.basis()
+
             direct_y, generated_ap, generated_at = run_c_intervention_and_capture(model, mini, train_source[idx], Q_c, c_layer, ap_layer, at_layer, output_ids, token_position, ap_pos, at_pos, len(idx), True)
             ap_mediator_y = run_frozen_mediator(model, mini, generated_ap, Q_ap, ap_layer, output_ids, ap_pos, len(idx), True); at_mediator_y = run_frozen_mediator(model, mini, generated_at, Q_at, at_layer, output_ids, at_pos, len(idx), True)
             y = output_targets(t[Y_TARGET][idx], labels, output_space, device); ap_target = t[AP_TARGET][idx].to(device); at_target = t[AT_TARGET][idx].to(device)
+
             losses = [F.cross_entropy(direct_y, y), F.cross_entropy(ap_mediator_y, y), F.cross_entropy((generated_ap @ Q_ap) @ W_ap.T + b_ap, ap_target), F.cross_entropy(at_mediator_y, y), F.cross_entropy((generated_at @ Q_at) @ W_at.T + b_at, at_target)]
-            loss = losses[0] + lambda_ap_med * losses[1] + lambda_ap_readout * losses[2] + lambda_at_med * losses[3] + lambda_at_readout * losses[4]; loss.backward(); optimizer.step()
-            for i, value in enumerate(losses): totals[i] += value.item() * len(idx)
+            loss = losses[0] + lambda_ap_med * losses[1] + lambda_ap_readout * losses[2] + lambda_at_med * losses[3] + lambda_at_readout * losses[4]
+            loss.backward()
+            optimizer.step()
+
+            for i, value in enumerate(losses): 
+                totals[i] += value.item() * len(idx)
 
         metrics = evaluate_c(model, tokenizer, cal_bank, cal_source, alignment.basis(), c_layer, Q_ap, ap_layer, ap_pos, W_ap, b_ap, Q_at, at_layer, at_pos, W_at, b_at, token_position, eval_batch_size, output_space)
         direct, ap_med, ap_ro_acc, at_med, at_ro_acc = metrics; active = [direct] + ([ap_med] if lambda_ap_med > 0 else []) + ([ap_ro_acc] if lambda_ap_readout > 0 else []) + ([at_med] if lambda_at_med > 0 else []) + ([at_ro_acc] if lambda_at_readout > 0 else []); score = min(active)

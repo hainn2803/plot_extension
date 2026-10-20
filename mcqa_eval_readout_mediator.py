@@ -67,6 +67,29 @@ def main():
     c_only = build_pair_bank(model, tokenizer, a.data_path, "test", "C_only", a.test_size, a.batch_size, a.seed + 3)
     c_joint = build_pair_bank(model, tokenizer, a.data_path, "test", "C_AP_AT", a.test_size, a.batch_size, a.seed + 4)
 
+    # DEBUG AT SOURCE STATE
+    h = collect_layer_states(
+        model,
+        at["source_input_ids"],
+        at["source_attention_mask"],
+        at["source_position_by_id"],
+        L_at,
+        pos_at,
+        a.batch_size,
+    )
+
+    logits = (h.to(Q_at.device) @ Q_at) @ W_at.T + b_at
+    pred = logits.argmax(-1).cpu()
+
+    base_at = at["base_answer_label_ids"]
+    source_at = at["source_answer_label_ids"]
+
+    print("source state -> source AT:",
+        (pred == source_at).float().mean().item())
+
+    print("source state -> base AT:",
+        (pred == base_at).float().mean().item())
+
     print("\n=== CLEAN READOUT ===")
     print(f"AP base/source: {readout_accuracy(model, ap, Q_ap, L_ap, pos_ap, W_ap, b_ap, ap['base_answer_pointer_ids'], a.batch_size, 'base'):.4f} / {readout_accuracy(model, ap, Q_ap, L_ap, pos_ap, W_ap, b_ap, ap['source_answer_pointer_ids'], a.batch_size, 'source'):.4f}")
     print(f"AT base/source: {readout_accuracy(model, at, Q_at, L_at, pos_at, W_at, b_at, at['base_answer_label_ids'], a.batch_size, 'base'):.4f} / {readout_accuracy(model, at, Q_at, L_at, pos_at, W_at, b_at, at['source_answer_label_ids'], a.batch_size, 'source'):.4f}")

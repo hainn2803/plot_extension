@@ -5,7 +5,6 @@ hf_cache/
 .DS_Store
 mcqa_constants.py
 
-results*/
 test_results*/
 randomized_copycolors/
 jacobian-lens/

@@ -127,8 +127,8 @@ def make_state(prompt, labels, texts):
 
 def make_randomized_base(row, rng):
     texts = [str(x).strip() for x in row["choices"]["text"]]
-    # labels = rng.sample(list(LETTERS), 4)
-    labels = rng.sample(list("ABCD"), 4)
+    labels = rng.sample(list(LETTERS), 4)
+    # labels = rng.sample(list("ABCD"), 4)
 
     prompt = rewrite_choices(
         row["prompt"],
@@ -418,6 +418,6 @@ if __name__ == "__main__":
         repeats_per_row=2,
     )
 
-    print(ds)
-    print("\nExample row:")
-    print(ds["train"][0])
+    # print(ds)
+    # print("\nExample row:")
+    # print(ds["train"][0])
