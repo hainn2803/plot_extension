@@ -258,7 +258,7 @@ def generate_rows_for_jchang_row(row, row_idx, split, repeats_per_row=2, seed=0)
             "answerPosition_counterfactual": ap_cf,
             "randomLetter_counterfactual": at_cf,
             "color_counterfactual": c_cf,
-            "color_all_counterfactual": c_all_cf,
+            "color_position_letter_counterfactual": c_all_cf,
         })
 
     return generated
@@ -307,3 +307,31 @@ def push_to_hub(repo_id, seed=0, repeats_per_row=2, private=False):
 
 if __name__ == "__main__":
     save_to_disk()
+    from datasets import load_from_disk
+
+    ds = load_from_disk("randomized_copycolors")
+
+    for i in range(3):
+        row = ds["train"][i]
+
+        print(f"\n===== EXAMPLE {i} =====")
+
+        print("\nBASE")
+        print(row["prompt"])
+        print("C :", row["color"])
+        print("AP:", row["answer_position"])
+        print("AT:", row["answer"])
+
+        for name in [
+            "answerPosition_counterfactual",
+            "randomLetter_counterfactual",
+            "color_counterfactual",
+            "color_position_letter_counterfactual",
+        ]:
+            cf = row[name]
+
+            print(f"\n{name}")
+            print(cf["prompt"])
+            print("C :", cf["color"])
+            print("AP:", cf["answer_position"])
+            print("AT:", cf["answer"])

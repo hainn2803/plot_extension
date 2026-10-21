@@ -57,7 +57,7 @@ def eval_c(model, tokenizer, bank, Q_c, L_c, pos_c, Q_ap, L_ap, pos_ap, W_ap, b_
 
 
 def main():
-    p = argparse.ArgumentParser(); p.add_argument("--data-path", default="randomized_copycolors"); p.add_argument("--result-dir", default="results_joint_randomized"); p.add_argument("--test-size", type=int, default=400); p.add_argument("--batch-size", type=int, default=32); p.add_argument("--seed", type=int, default=0); p.add_argument("--output-space", choices=("full", "az"), default="full"); a = p.parse_args(); set_seed(a.seed)
+    p = argparse.ArgumentParser(); p.add_argument("--data-path", default="randomized_copycolors"); p.add_argument("--result-dir", default="results_joint_randomized_gradual2.0"); p.add_argument("--test-size", type=int, default=400); p.add_argument("--batch-size", type=int, default=32); p.add_argument("--seed", type=int, default=0); p.add_argument("--output-space", choices=("full", "az"), default="full"); a = p.parse_args(); set_seed(a.seed)
     model, tokenizer = load_gemma_model(); device = next(model.parameters()).device; result = a.result_dir
     Q_at, L_at, pos_at = load_ckpt(f"{result}/das_at.pt", device); Q_ap, L_ap, pos_ap = load_ckpt(f"{result}/das_ap.pt", device); Q_c, L_c, pos_c = load_ckpt(f"{result}/das_c.pt", device)
     W_at, b_at, _ = load_readout(f"{result}/at_readout_LogisticRegression.pt", "AT", device); W_ap, b_ap, _ = load_readout(f"{result}/ap_readout_LogisticRegression.pt", "AP", device); W_c, b_c, c_info = load_readout(f"{result}/c_readout_LogisticRegression.pt", "C", device)
@@ -103,4 +103,5 @@ def main():
         print(f"\n=== C -> AP -> AT -> Y [{name}] ==="); print(" | ".join(f"{k}: {v:.4f}" for k, v in m.items()))
 
 
-if __name__ == "__main__": main()
+if __name__ == "__main__": 
+    main()

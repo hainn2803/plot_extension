@@ -4,8 +4,7 @@ import string
 import numpy as np
 import torch
 import torch.nn as nn
-
-from mcqa_data_load_all import letter_token_id
+from functools import lru_cache
 import unicodedata
 
 
@@ -18,6 +17,15 @@ def set_seed(seed):
     torch.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
 
+
+@lru_cache(maxsize=None)
+def letter_token_id(tokenizer, letter):
+    """Return a single-token id for one answer letter."""
+    for text in (" " + letter, letter):
+        ids = tokenizer(text, add_special_tokens=False)["input_ids"]
+        if len(ids) == 1:
+            return ids[0]
+    raise ValueError(f"letter {letter!r} is not a single token")
 
 def answer_label_ids(tokenizer):
     return [letter_token_id(tokenizer, letter) for letter in ANSWER_LETTERS]

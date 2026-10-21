@@ -13,7 +13,8 @@ from mcqa_gradual_das_c import train_c
 from mcqa_load_randomized_ap_at_c import build_all_banks, build_pair_bank, build_shared_readout_banks, build_ap_readout_datasets, build_at_readout_datasets, build_c_readout_datasets
 
 
-def parse_layers(x): return None if x == "all" else [int(v) for v in x.split(",")]
+def parse_layers(x): 
+    return None if x == "all" else [int(v) for v in x.split(",")]
 
 
 def fit_readout(model, checkpoint, save_path, bank_pair, target, token_position, batch_size, seed, num_classes, extra=None):
@@ -43,13 +44,13 @@ def fit_readout(model, checkpoint, save_path, bank_pair, target, token_position,
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--data-path", default="randomized_copycolors"); p.add_argument("--result-dir", default="results_joint_randomized")
+    p.add_argument("--data-path", default="randomized_copycolors"); p.add_argument("--result-dir", default="results_joint_randomized_gradual2.0")
     p.add_argument("--ft-size", type=int, default=800); p.add_argument("--cal-size", type=int, default=400); p.add_argument("--te-size", type=int, default=400)
     p.add_argument("--at-dim", type=int, default=128); p.add_argument("--ap-dim", type=int, default=128); p.add_argument("--c-dim", type=int, default=128)
     p.add_argument("--at-layers", default="all"); p.add_argument("--ap-layers", default="all"); p.add_argument("--c-layers", default="all")
     p.add_argument("--at-epochs", type=int, default=20); p.add_argument("--ap-epochs", type=int, default=20); p.add_argument("--c-epochs", type=int, default=20); p.add_argument("--lr", type=float, default=1e-2)
     p.add_argument("--ap-lambda-med", type=float, default=0.0); p.add_argument("--ap-lambda-readout", type=float, default=0.0)
-    p.add_argument("--c-lambda-ap-med", type=float, default=0.0); p.add_argument("--c-lambda-ap-readout", type=float, default=0.0); p.add_argument("--c-lambda-at-med", type=float, default=0.0); p.add_argument("--c-lambda-at-readout", type=float, default=0.0)
+    p.add_argument("--c-lambda-ap-med", type=float, default=0.0); p.add_argument("--c-lambda-ap-readout", type=float, default=0.0); p.add_argument("--c-lambda-at-med", type=float, default=2.0); p.add_argument("--c-lambda-at-readout", type=float, default=2.0)
     p.add_argument("--train-batch-size", type=int, default=32); p.add_argument("--eval-batch-size", type=int, default=32); p.add_argument("--readout-train-size", type=int, default=1300); p.add_argument("--readout-val-size", type=int, default=520)
     p.add_argument("--token-position", default="last_token"); p.add_argument("--c-token-position", default="color"); p.add_argument("--output-space", choices=("full", "az"), default="full"); p.add_argument("--seed", type=int, default=0)
     a = p.parse_args(); set_seed(a.seed)

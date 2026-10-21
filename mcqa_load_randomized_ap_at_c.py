@@ -11,7 +11,7 @@ PAIR_FIELDS = {
     "AP_only": "answerPosition_counterfactual",
     "AT_only": "randomLetter_counterfactual",
     "C_only": "color_counterfactual",
-    "C_AP_AT": "color_all_counterfactual",
+    "C_AP_AT": "color_position_letter_counterfactual",
 }
 COLOR_PATTERN = re.compile(r"\b(?:is|are)\s+(.+?)\.\s*What color\b", re.IGNORECASE)
 
@@ -231,7 +231,47 @@ def readout_view(shared_banks, target):
 
 def build_ap_readout_datasets(shared_banks): 
     return readout_view(shared_banks, "AP")
+
 def build_at_readout_datasets(shared_banks): 
     return readout_view(shared_banks, "AT")
+
 def build_c_readout_datasets(shared_banks): 
     return readout_view(shared_banks, "C")
+
+if __name__ == "__main__":
+
+    ds = load_generated_dataset("randomized_copycolors")
+
+    for i in range(3):
+        row = ds["train"][i]
+        pairs = row_to_pairs(row, "train")
+
+        print(f"\n================ ROW {i} ================")
+
+        for pair in pairs:
+            print(f"\n---------- {pair['pair_type']} ----------")
+
+            print("\nBASE")
+            print(pair["base_prompt"])
+            print(f"C={pair['base_color']} AP={pair['base_AP']} AT={pair['base_AT']} Y={pair['base_Y']}")
+
+            print("\nSOURCE")
+            print(pair["source_prompt"])
+            print(f"C={pair['source_color']} AP={pair['source_AP']} AT={pair['source_AT']} Y={pair['source_Y']}")
+
+            print("\nINTERVENTION TARGETS")
+
+            if pair["pair_type"] == "AP_only":
+                print(f"AP_after_AP = {pair['AP_after_AP_intervene']}")
+                print(f"AT_after_AP = {pair['AT_after_AP_intervene']}")
+                print(f"Y_after_AP  = {pair['Y_after_AP_intervene']}")
+
+            elif pair["pair_type"] == "AT_only":
+                print(f"AT_after_AT = {pair['AT_after_AT_intervene']}")
+                print(f"Y_after_AT  = {pair['Y_after_AT_intervene']}")
+
+            elif pair["pair_type"] in ("C_only", "C_AP_AT"):
+                print(f"C_after_C   = {pair['C_after_C_intervene']}")
+                print(f"AP_after_C  = {pair['AP_after_C_intervene']}")
+                print(f"AT_after_C  = {pair['AT_after_C_intervene']}")
+                print(f"Y_after_C   = {pair['Y_after_C_intervene']}")
