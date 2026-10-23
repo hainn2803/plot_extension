@@ -1,0 +1,83 @@
+{
+  "atol": 0.0002,
+  "attention": "sdpa",
+  "checkpoint_files": {
+    "results_joint_randomized_gradual2.0/das_at.pt": "dedf31fcdc0245b1277e7595cd17bf635e45ef6495d5481983c1de442d1ab4bb",
+    "results_joint_randomized_gradual2.0/das_c.pt": "058ff76d450d22ee81bfa11e0fd11f3f5e901ecf72f5f37199552e97453cedb4",
+    "results_joint_randomized_standard/at_readout_LogisticRegression.pt": "eb1fda72ab06dd322030ada3f0d91860041afe3a31be7dac88d522d9839b2d08",
+    "results_joint_randomized_standard/das_ap.pt": "89d01b0e1442cdb53f5c424928f43b1c217e428b6d93e79bff8590c4697359a6",
+    "results_joint_randomized_standard/das_at.pt": "dedf31fcdc0245b1277e7595cd17bf635e45ef6495d5481983c1de442d1ab4bb",
+    "results_joint_randomized_standard/das_c.pt": "ad701efa6afbd1f204cd52ac22c72efa2372542b9d56d74ca6a424621db2097b"
+  },
+  "dataset_id": "jchang153/copycolors_mcqa",
+  "dataset_revision": "a3773cf9293d794c7cef643dd1df883848b6a993",
+  "frozen_backbone": "BF16",
+  "hai_commit": "399c2ca74837fc464c830aa8ab7af14b4d2327be",
+  "label_token_ids": [
+    586,
+    599,
+    585,
+    608,
+    637,
+    633,
+    653,
+    640,
+    590,
+    713,
+    747,
+    629,
+    595,
+    646,
+    687,
+    596,
+    1274,
+    625,
+    570,
+    584,
+    752,
+    744,
+    647,
+    1576,
+    890,
+    1271
+  ],
+  "model_files": {
+    "config.json": "56ee4e528fedfe70b2fabb0704eec9f2ef94461de936928220a3d6e7fac5ef98",
+    "model-00001-of-00003.safetensors": "1425aa066ec77e3eb79aac14a5bdea3ebcec46aa5c96cd40608c5c1fd70d193d",
+    "model-00002-of-00003.safetensors": "96c111d3dcdbde9271595e463b5d9f7fc4810ad8b79e736309c0a1833e6c0d35",
+    "model-00003-of-00003.safetensors": "4e08abc64d1767fdacd2c94da7f2ec4b8c65b25b19a53e87d19dc432901b5f02",
+    "model.safetensors.index.json": "e5c6f26fbe40fc3712f4df57da9b89c58b033714316a4547d052b37f43217e8e",
+    "special_tokens_map.json": "baec30ea10906f16adb8c18af7a34023002c1746542612b8b41c9f09e1351351",
+    "tokenizer.json": "3f289bc05132635a8bc7aca7aa21255efd5e18f3710f43e3cdb96bcd41be4922",
+    "tokenizer.model": "61a7b147390c64585d6c3543dd6fc636906c9af3865a5548f27f31aee1d4c8e2",
+    "tokenizer_config.json": "bb8245b8d39a065fdf869ee4fce48db9cc491473eb7ff1b41d321fb4caf540d1"
+  },
+  "model_id": "google/gemma-2-2b",
+  "model_revision": "c5ebcd40d208330abc697524c919956e692655cf",
+  "numpy": "2.4.6",
+  "projectors": "FP32",
+  "python": "3.11.17",
+  "rtol": 0.0002,
+  "scope": "Exact export of our reconstructed historical bank; not claimed to be Hai exact retained evaluation bank",
+  "sites": {
+    "AP": {
+      "layer": 17,
+      "rank": 128,
+      "token": "last_token"
+    },
+    "AT": {
+      "layer": 25,
+      "rank": 128,
+      "token": "last_token"
+    },
+    "C": {
+      "layer": 0,
+      "rank": 128,
+      "token": "first factual-color subtoken"
+    }
+  },
+  "tf32": false,
+  "tokenizer_revision": "c5ebcd40d208330abc697524c919956e692655cf",
+  "torch": "2.9.1",
+  "transformers": "5.9.0"
+}

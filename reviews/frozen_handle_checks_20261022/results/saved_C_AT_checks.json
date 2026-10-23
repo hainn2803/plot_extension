@@ -1,0 +1,827 @@
+{
+  "clean_donor_count": 2,
+  "conditioning": "Control-success subsets describe errors; primary population unchanged",
+  "controls_qualification": {
+    "all": {
+      "accuracy": 0.8751715420729506,
+      "correct": 48467,
+      "count": 55380,
+      "hai_accuracy": 0.8824124232574937,
+      "other_tokens": 87,
+      "ties": 779
+    },
+    "changing": {
+      "accuracy": 0.8870422535211268,
+      "correct": 47235,
+      "count": 53250,
+      "hai_accuracy": 0.8938028169014085,
+      "other_tokens": 75,
+      "ties": 694
+    },
+    "in_options": {
+      "accuracy": 0.6927230046948357,
+      "correct": 5902,
+      "count": 8520,
+      "hai_accuracy": 0.7046948356807512,
+      "other_tokens": 31,
+      "ties": 261
+    },
+    "outside_options": {
+      "accuracy": 0.908344003414426,
+      "correct": 42565,
+      "count": 46860,
+      "hai_accuracy": 0.9147247119078105,
+      "other_tokens": 56,
+      "ties": 518
+    },
+    "preservation": {
+      "accuracy": 0.5784037558685446,
+      "correct": 1232,
+      "count": 2130,
+      "hai_accuracy": 0.5976525821596245,
+      "other_tokens": 12,
+      "ties": 85
+    }
+  },
+  "methods": {
+    "gradual": {
+      "AP_only": {
+        "both_clean_donors": {
+          "accuracy": 0.38315217391304346,
+          "correct": 141,
+          "count": 368
+        },
+        "clean_donor_each": {
+          "accuracy": 0.5652173913043478,
+          "correct": 416,
+          "count": 736
+        },
+        "conditional_joint_given_both_clean_donors": {
+          "accuracy": 1.0,
+          "correct": 141,
+          "count": 141
+        },
+        "conditional_replay_given_both_clean_donors": {
+          "accuracy": 1.0,
+          "correct": 141,
+          "count": 141
+        },
+        "direct": {
+          "accuracy": 1.0,
+          "correct": 368,
+          "count": 368
+        },
+        "direct_success_replay_fail_despite_both_clean_donors": 0,
+        "joint": {
+          "accuracy": 1.0,
+          "correct": 368,
+          "count": 368
+        },
+        "matched_clean": {
+          "accuracy": 1.0,
+          "correct": 368,
+          "count": 368
+        },
+        "paired_outcomes": {
+          "clean_both_pass_replay_fail": 0,
+          "clean_both_pass_replay_pass": 141,
+          "clean_not_both_pass_replay_fail": 0,
+          "clean_not_both_pass_replay_pass": 227
+        },
+        "replay": {
+          "accuracy": 1.0,
+          "correct": 368,
+          "count": 368
+        }
+      },
+      "AT_only": {
+        "both_clean_donors": {
+          "accuracy": 0.39622641509433965,
+          "correct": 147,
+          "count": 371
+        },
+        "clean_donor_each": {
+          "accuracy": 0.5606469002695418,
+          "correct": 416,
+          "count": 742
+        },
+        "conditional_joint_given_both_clean_donors": {
+          "accuracy": 1.0,
+          "correct": 147,
+          "count": 147
+        },
+        "conditional_replay_given_both_clean_donors": {
+          "accuracy": 1.0,
+          "correct": 147,
+          "count": 147
+        },
+        "direct": {
+          "accuracy": 1.0,
+          "correct": 371,
+          "count": 371
+        },
+        "direct_success_replay_fail_despite_both_clean_donors": 0,
+        "joint": {
+          "accuracy": 1.0,
+          "correct": 371,
+          "count": 371
+        },
+        "matched_clean": {
+          "accuracy": 1.0,
+          "correct": 371,
+          "count": 371
+        },
+        "paired_outcomes": {
+          "clean_both_pass_replay_fail": 0,
+          "clean_both_pass_replay_pass": 147,
+          "clean_not_both_pass_replay_fail": 0,
+          "clean_not_both_pass_replay_pass": 224
+        },
+        "replay": {
+          "accuracy": 1.0,
+          "correct": 371,
+          "count": 371
+        }
+      },
+      "C_AP_AT": {
+        "both_clean_donors": {
+          "accuracy": 0.547486033519553,
+          "correct": 196,
+          "count": 358
+        },
+        "clean_donor_each": {
+          "accuracy": 0.7011173184357542,
+          "correct": 502,
+          "count": 716
+        },
+        "conditional_joint_given_both_clean_donors": {
+          "accuracy": 0.9336734693877551,
+          "correct": 183,
+          "count": 196
+        },
+        "conditional_replay_given_both_clean_donors": {
+          "accuracy": 0.9642857142857143,
+          "correct": 189,
+          "count": 196
+        },
+        "direct": {
+          "accuracy": 0.9581005586592178,
+          "correct": 343,
+          "count": 358
+        },
+        "direct_success_replay_fail_despite_both_clean_donors": 5,
+        "joint": {
+          "accuracy": 0.8994413407821229,
+          "correct": 322,
+          "count": 358
+        },
+        "matched_clean": {
+          "accuracy": 1.0,
+          "correct": 358,
+          "count": 358
+        },
+        "paired_outcomes": {
+          "clean_both_pass_replay_fail": 7,
+          "clean_both_pass_replay_pass": 189,
+          "clean_not_both_pass_replay_fail": 19,
+          "clean_not_both_pass_replay_pass": 143
+        },
+        "replay": {
+          "accuracy": 0.9273743016759777,
+          "correct": 332,
+          "count": 358
+        }
+      },
+      "C_changing": {
+        "both_clean_donors": {
+          "accuracy": 0.5753052917232022,
+          "correct": 424,
+          "count": 737
+        },
+        "clean_donor_each": {
+          "accuracy": 0.7177747625508819,
+          "correct": 1058,
+          "count": 1474
+        },
+        "conditional_joint_given_both_clean_donors": {
+          "accuracy": 0.8726415094339622,
+          "correct": 370,
+          "count": 424
+        },
+        "conditional_replay_given_both_clean_donors": {
+          "accuracy": 0.9033018867924528,
+          "correct": 383,
+          "count": 424
+        },
+        "direct": {
+          "accuracy": 0.8914518317503393,
+          "correct": 657,
+          "count": 737
+        },
+        "direct_success_replay_fail_despite_both_clean_donors": 13,
+        "joint": {
+          "accuracy": 0.8398914518317503,
+          "correct": 619,
+          "count": 737
+        },
+        "matched_clean": {
+          "accuracy": 1.0,
+          "correct": 737,
+          "count": 737
+        },
+        "paired_outcomes": {
+          "clean_both_pass_replay_fail": 41,
+          "clean_both_pass_replay_pass": 383,
+          "clean_not_both_pass_replay_fail": 50,
+          "clean_not_both_pass_replay_pass": 263
+        },
+        "replay": {
+          "accuracy": 0.8765264586160109,
+          "correct": 646,
+          "count": 737
+        }
+      },
+      "C_only": {
+        "both_clean_donors": {
+          "accuracy": 0.6015831134564644,
+          "correct": 228,
+          "count": 379
+        },
+        "clean_donor_each": {
+          "accuracy": 0.7335092348284961,
+          "correct": 556,
+          "count": 758
+        },
+        "conditional_joint_given_both_clean_donors": {
+          "accuracy": 0.8201754385964912,
+          "correct": 187,
+          "count": 228
+        },
+        "conditional_replay_given_both_clean_donors": {
+          "accuracy": 0.8508771929824561,
+          "correct": 194,
+          "count": 228
+        },
+        "direct": {
+          "accuracy": 0.8284960422163589,
+          "correct": 314,
+          "count": 379
+        },
+        "direct_success_replay_fail_despite_both_clean_donors": 8,
+        "joint": {
+          "accuracy": 0.783641160949868,
+          "correct": 297,
+          "count": 379
+        },
+        "matched_clean": {
+          "accuracy": 1.0,
+          "correct": 379,
+          "count": 379
+        },
+        "paired_outcomes": {
+          "clean_both_pass_replay_fail": 34,
+          "clean_both_pass_replay_pass": 194,
+          "clean_not_both_pass_replay_fail": 31,
+          "clean_not_both_pass_replay_pass": 120
+        },
+        "replay": {
+          "accuracy": 0.8284960422163589,
+          "correct": 314,
+          "count": 379
+        }
+      },
+      "C_preservation": {
+        "both_clean_donors": {
+          "accuracy": 0.38971583220568334,
+          "correct": 288,
+          "count": 739
+        },
+        "clean_donor_each": {
+          "accuracy": 0.5629228687415426,
+          "correct": 832,
+          "count": 1478
+        },
+        "conditional_joint_given_both_clean_donors": {
+          "accuracy": 1.0,
+          "correct": 288,
+          "count": 288
+        },
+        "conditional_replay_given_both_clean_donors": {
+          "accuracy": 1.0,
+          "correct": 288,
+          "count": 288
+        },
+        "direct": {
+          "accuracy": 1.0,
+          "correct": 739,
+          "count": 739
+        },
+        "direct_success_replay_fail_despite_both_clean_donors": 0,
+        "joint": {
+          "accuracy": 1.0,
+          "correct": 739,
+          "count": 739
+        },
+        "matched_clean": {
+          "accuracy": 1.0,
+          "correct": 739,
+          "count": 739
+        },
+        "paired_outcomes": {
+          "clean_both_pass_replay_fail": 0,
+          "clean_both_pass_replay_pass": 288,
+          "clean_not_both_pass_replay_fail": 0,
+          "clean_not_both_pass_replay_pass": 451
+        },
+        "replay": {
+          "accuracy": 1.0,
+          "correct": 739,
+          "count": 739
+        }
+      },
+      "all": {
+        "both_clean_donors": {
+          "accuracy": 0.4823848238482385,
+          "correct": 712,
+          "count": 1476
+        },
+        "clean_donor_each": {
+          "accuracy": 0.6402439024390244,
+          "correct": 1890,
+          "count": 2952
+        },
+        "conditional_joint_given_both_clean_donors": {
+          "accuracy": 0.9241573033707865,
+          "correct": 658,
+          "count": 712
+        },
+        "conditional_replay_given_both_clean_donors": {
+          "accuracy": 0.9424157303370787,
+          "correct": 671,
+          "count": 712
+        },
+        "direct": {
+          "accuracy": 0.94579945799458,
+          "correct": 1396,
+          "count": 1476
+        },
+        "direct_success_replay_fail_despite_both_clean_donors": 13,
+        "joint": {
+          "accuracy": 0.9200542005420054,
+          "correct": 1358,
+          "count": 1476
+        },
+        "matched_clean": {
+          "accuracy": 1.0,
+          "correct": 1476,
+          "count": 1476
+        },
+        "paired_outcomes": {
+          "clean_both_pass_replay_fail": 41,
+          "clean_both_pass_replay_pass": 671,
+          "clean_not_both_pass_replay_fail": 50,
+          "clean_not_both_pass_replay_pass": 714
+        },
+        "replay": {
+          "accuracy": 0.9383468834688347,
+          "correct": 1385,
+          "count": 1476
+        }
+      }
+    },
+    "standard": {
+      "AP_only": {
+        "both_clean_donors": {
+          "accuracy": 0.38315217391304346,
+          "correct": 141,
+          "count": 368
+        },
+        "clean_donor_each": {
+          "accuracy": 0.5652173913043478,
+          "correct": 416,
+          "count": 736
+        },
+        "conditional_joint_given_both_clean_donors": {
+          "accuracy": 1.0,
+          "correct": 141,
+          "count": 141
+        },
+        "conditional_replay_given_both_clean_donors": {
+          "accuracy": 1.0,
+          "correct": 141,
+          "count": 141
+        },
+        "direct": {
+          "accuracy": 1.0,
+          "correct": 368,
+          "count": 368
+        },
+        "direct_success_replay_fail_despite_both_clean_donors": 0,
+        "joint": {
+          "accuracy": 1.0,
+          "correct": 368,
+          "count": 368
+        },
+        "matched_clean": {
+          "accuracy": 1.0,
+          "correct": 368,
+          "count": 368
+        },
+        "paired_outcomes": {
+          "clean_both_pass_replay_fail": 0,
+          "clean_both_pass_replay_pass": 141,
+          "clean_not_both_pass_replay_fail": 0,
+          "clean_not_both_pass_replay_pass": 227
+        },
+        "replay": {
+          "accuracy": 1.0,
+          "correct": 368,
+          "count": 368
+        }
+      },
+      "AT_only": {
+        "both_clean_donors": {
+          "accuracy": 0.39622641509433965,
+          "correct": 147,
+          "count": 371
+        },
+        "clean_donor_each": {
+          "accuracy": 0.5606469002695418,
+          "correct": 416,
+          "count": 742
+        },
+        "conditional_joint_given_both_clean_donors": {
+          "accuracy": 1.0,
+          "correct": 147,
+          "count": 147
+        },
+        "conditional_replay_given_both_clean_donors": {
+          "accuracy": 1.0,
+          "correct": 147,
+          "count": 147
+        },
+        "direct": {
+          "accuracy": 1.0,
+          "correct": 371,
+          "count": 371
+        },
+        "direct_success_replay_fail_despite_both_clean_donors": 0,
+        "joint": {
+          "accuracy": 1.0,
+          "correct": 371,
+          "count": 371
+        },
+        "matched_clean": {
+          "accuracy": 1.0,
+          "correct": 371,
+          "count": 371
+        },
+        "paired_outcomes": {
+          "clean_both_pass_replay_fail": 0,
+          "clean_both_pass_replay_pass": 147,
+          "clean_not_both_pass_replay_fail": 0,
+          "clean_not_both_pass_replay_pass": 224
+        },
+        "replay": {
+          "accuracy": 1.0,
+          "correct": 371,
+          "count": 371
+        }
+      },
+      "C_AP_AT": {
+        "both_clean_donors": {
+          "accuracy": 0.547486033519553,
+          "correct": 196,
+          "count": 358
+        },
+        "clean_donor_each": {
+          "accuracy": 0.7011173184357542,
+          "correct": 502,
+          "count": 716
+        },
+        "conditional_joint_given_both_clean_donors": {
+          "accuracy": 0.8214285714285714,
+          "correct": 161,
+          "count": 196
+        },
+        "conditional_replay_given_both_clean_donors": {
+          "accuracy": 0.8571428571428571,
+          "correct": 168,
+          "count": 196
+        },
+        "direct": {
+          "accuracy": 0.9357541899441341,
+          "correct": 335,
+          "count": 358
+        },
+        "direct_success_replay_fail_despite_both_clean_donors": 20,
+        "joint": {
+          "accuracy": 0.7877094972067039,
+          "correct": 282,
+          "count": 358
+        },
+        "matched_clean": {
+          "accuracy": 1.0,
+          "correct": 358,
+          "count": 358
+        },
+        "paired_outcomes": {
+          "clean_both_pass_replay_fail": 28,
+          "clean_both_pass_replay_pass": 168,
+          "clean_not_both_pass_replay_fail": 39,
+          "clean_not_both_pass_replay_pass": 123
+        },
+        "replay": {
+          "accuracy": 0.8128491620111732,
+          "correct": 291,
+          "count": 358
+        }
+      },
+      "C_changing": {
+        "both_clean_donors": {
+          "accuracy": 0.5753052917232022,
+          "correct": 424,
+          "count": 737
+        },
+        "clean_donor_each": {
+          "accuracy": 0.7177747625508819,
+          "correct": 1058,
+          "count": 1474
+        },
+        "conditional_joint_given_both_clean_donors": {
+          "accuracy": 0.7665094339622641,
+          "correct": 325,
+          "count": 424
+        },
+        "conditional_replay_given_both_clean_donors": {
+          "accuracy": 0.8018867924528302,
+          "correct": 340,
+          "count": 424
+        },
+        "direct": {
+          "accuracy": 0.8751696065128901,
+          "correct": 645,
+          "count": 737
+        },
+        "direct_success_replay_fail_despite_both_clean_donors": 46,
+        "joint": {
+          "accuracy": 0.7259158751696065,
+          "correct": 535,
+          "count": 737
+        },
+        "matched_clean": {
+          "accuracy": 1.0,
+          "correct": 737,
+          "count": 737
+        },
+        "paired_outcomes": {
+          "clean_both_pass_replay_fail": 84,
+          "clean_both_pass_replay_pass": 340,
+          "clean_not_both_pass_replay_fail": 96,
+          "clean_not_both_pass_replay_pass": 217
+        },
+        "replay": {
+          "accuracy": 0.7557666214382632,
+          "correct": 557,
+          "count": 737
+        }
+      },
+      "C_only": {
+        "both_clean_donors": {
+          "accuracy": 0.6015831134564644,
+          "correct": 228,
+          "count": 379
+        },
+        "clean_donor_each": {
+          "accuracy": 0.7335092348284961,
+          "correct": 556,
+          "count": 758
+        },
+        "conditional_joint_given_both_clean_donors": {
+          "accuracy": 0.7192982456140351,
+          "correct": 164,
+          "count": 228
+        },
+        "conditional_replay_given_both_clean_donors": {
+          "accuracy": 0.7543859649122807,
+          "correct": 172,
+          "count": 228
+        },
+        "direct": {
+          "accuracy": 0.8179419525065963,
+          "correct": 310,
+          "count": 379
+        },
+        "direct_success_replay_fail_despite_both_clean_donors": 26,
+        "joint": {
+          "accuracy": 0.6675461741424802,
+          "correct": 253,
+          "count": 379
+        },
+        "matched_clean": {
+          "accuracy": 1.0,
+          "correct": 379,
+          "count": 379
+        },
+        "paired_outcomes": {
+          "clean_both_pass_replay_fail": 56,
+          "clean_both_pass_replay_pass": 172,
+          "clean_not_both_pass_replay_fail": 57,
+          "clean_not_both_pass_replay_pass": 94
+        },
+        "replay": {
+          "accuracy": 0.7018469656992085,
+          "correct": 266,
+          "count": 379
+        }
+      },
+      "C_preservation": {
+        "both_clean_donors": {
+          "accuracy": 0.38971583220568334,
+          "correct": 288,
+          "count": 739
+        },
+        "clean_donor_each": {
+          "accuracy": 0.5629228687415426,
+          "correct": 832,
+          "count": 1478
+        },
+        "conditional_joint_given_both_clean_donors": {
+          "accuracy": 1.0,
+          "correct": 288,
+          "count": 288
+        },
+        "conditional_replay_given_both_clean_donors": {
+          "accuracy": 1.0,
+          "correct": 288,
+          "count": 288
+        },
+        "direct": {
+          "accuracy": 1.0,
+          "correct": 739,
+          "count": 739
+        },
+        "direct_success_replay_fail_despite_both_clean_donors": 0,
+        "joint": {
+          "accuracy": 1.0,
+          "correct": 739,
+          "count": 739
+        },
+        "matched_clean": {
+          "accuracy": 1.0,
+          "correct": 739,
+          "count": 739
+        },
+        "paired_outcomes": {
+          "clean_both_pass_replay_fail": 0,
+          "clean_both_pass_replay_pass": 288,
+          "clean_not_both_pass_replay_fail": 0,
+          "clean_not_both_pass_replay_pass": 451
+        },
+        "replay": {
+          "accuracy": 1.0,
+          "correct": 739,
+          "count": 739
+        }
+      },
+      "all": {
+        "both_clean_donors": {
+          "accuracy": 0.4823848238482385,
+          "correct": 712,
+          "count": 1476
+        },
+        "clean_donor_each": {
+          "accuracy": 0.6402439024390244,
+          "correct": 1890,
+          "count": 2952
+        },
+        "conditional_joint_given_both_clean_donors": {
+          "accuracy": 0.8609550561797753,
+          "correct": 613,
+          "count": 712
+        },
+        "conditional_replay_given_both_clean_donors": {
+          "accuracy": 0.8820224719101124,
+          "correct": 628,
+          "count": 712
+        },
+        "direct": {
+          "accuracy": 0.9376693766937669,
+          "correct": 1384,
+          "count": 1476
+        },
+        "direct_success_replay_fail_despite_both_clean_donors": 46,
+        "joint": {
+          "accuracy": 0.8631436314363143,
+          "correct": 1274,
+          "count": 1476
+        },
+        "matched_clean": {
+          "accuracy": 1.0,
+          "correct": 1476,
+          "count": 1476
+        },
+        "paired_outcomes": {
+          "clean_both_pass_replay_fail": 84,
+          "clean_both_pass_replay_pass": 628,
+          "clean_not_both_pass_replay_fail": 96,
+          "clean_not_both_pass_replay_pass": 668
+        },
+        "replay": {
+          "accuracy": 0.8780487804878049,
+          "correct": 1296,
+          "count": 1476
+        }
+      }
+    }
+  },
+  "no_training": true,
+  "pair_bank": "Locked reconstructed historical bank; not Hai exact retained evaluation selection",
+  "pairs": 1476,
+  "source": "eval\\hai_new_checkpoints_20261021_v1",
+  "source_hashes": {
+    "eval\\hai_new_checkpoints_20261021_v1\\identity.json": "cbb170335966f9afdbb467bbba41a23f7c23b93f77965b1e9a9170d9e680df2f",
+    "eval\\hai_new_checkpoints_20261021_v1\\independent_audit.json": "94a34193a5e6384b1c2d0048427ef1d878f3e40ac6ea105a3e6ce4b92e4d0766",
+    "eval\\hai_new_checkpoints_20261021_v1\\plan.json": "979d05cd7d6577291dc2265cc7af218aaca02bb5d2bd009e22d4c95c306db3d4",
+    "eval\\hai_new_checkpoints_20261021_v1\\results.json": "b1b539eb9944fbd39f3a25a0fcec51d34fc2207ee42c2d7287d7d862769ce2e5"
+  },
+  "targets_verified": true,
+  "toy": {
+    "compatible": {
+      "direct_changing": {
+        "accuracy": 1.0,
+        "ce": 0.053490449705933585,
+        "correct": 6912,
+        "count": 6912,
+        "margin_mean": 3.999999999999997,
+        "margin_min": 3.9999999999999862,
+        "ties": 0
+      },
+      "joint_assignments": {
+        "accuracy": 1.0,
+        "ce": 0.05349044970593355,
+        "correct": 1536,
+        "count": 1536,
+        "margin_mean": 3.999999999999998,
+        "margin_min": 3.999999999999985,
+        "ties": 0
+      },
+      "replay_changing": {
+        "accuracy": 1.0,
+        "ce": 0.05349044970593361,
+        "correct": 6912,
+        "count": 6912,
+        "margin_mean": 3.999999999999996,
+        "margin_min": 3.9999999999999853,
+        "ties": 0
+      },
+      "restoration_changing": {
+        "accuracy": 1.0,
+        "ce": 0.05349044970593356,
+        "correct": 6912,
+        "count": 6912,
+        "margin_mean": 3.999999999999998,
+        "margin_min": 3.999999999999989,
+        "ties": 0
+      }
+    },
+    "incompatible": {
+      "direct_changing": {
+        "accuracy": 1.0,
+        "ce": 0.05349044970593345,
+        "correct": 6912,
+        "count": 6912,
+        "margin_mean": 4.0,
+        "margin_min": 3.999999999999991,
+        "ties": 0
+      },
+      "joint_assignments": {
+        "accuracy": 0.4375,
+        "ce": 1.0369400481243465,
+        "correct": 672,
+        "count": 1536,
+        "margin_mean": 1.749999999999999,
+        "margin_min": -4.000000000000012,
+        "ties": 576
+      },
+      "replay_changing": {
+        "accuracy": 0.0,
+        "ce": 4.053490449705933,
+        "correct": 0,
+        "count": 6912,
+        "margin_mean": -4.0,
+        "margin_min": -4.000000000000008,
+        "ties": 0
+      },
+      "restoration_changing": {
+        "accuracy": 0.0,
+        "ce": 4.053490449705935,
+        "correct": 0,
+        "count": 6912,
+        "margin_mean": -4.000000000000001,
+        "margin_min": -4.000000000000012,
+        "ties": 0
+      }
+    }
+  }
+}
