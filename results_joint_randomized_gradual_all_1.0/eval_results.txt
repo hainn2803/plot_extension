@@ -1,17 +1,20 @@
-=== DEBUG AT SOURCE STATE ===
-source state -> source AT: 0.8400
-source state -> base AT: 0.0000
-
 === CLEAN READOUT ===
 AP base/source: 0.9750 / 0.9725
 AT base/source: 0.8500 / 0.8400
 C base/source : 1.0000 / 1.0000
 
-=== AP -> AT -> Y ===
-Y after AP: 0.5050 | AT readout: 0.5100 | Y via AT replay: 0.5825
+=== AP -> AT -> Y [AP_only] ===
+Y_after_AP: 0.5050 | AT_after_AP: 0.5100 | Joint_AT_Y: 0.4300
+Y_via_AT_replay: 0.5825
+
+=== AP -> AT -> Y [AP_AT] ===
+Y_after_AP: 0.7800 | AT_after_AP: 0.7250 | Joint_AT_Y: 0.6750
+Y_via_AT_replay: 0.8050
 
 === C -> AP -> AT -> Y [C_only] ===
-AP_after_C: 0.8675 | AT_after_C: 0.7825 | Y_after_C: 0.8475 | Y_via_AP_replay: 0.6025 | Y_via_AT_replay: 0.8625
+Y_after_C: 0.8475 | AP_after_C: 0.8675 | AT_after_C: 0.7825 | Joint_AP_AT_Y: 0.6675
+AT_via_AP_replay: 0.5850 | Y_via_AP_replay: 0.6025 | Joint_AT_Y_via_AP_replay: 0.5250 | Y_via_AT_replay: 0.8625
 
 === C -> AP -> AT -> Y [C_AP_AT] ===
-AP_after_C: 0.9250 | AT_after_C: 0.8975 | Y_after_C: 0.9400 | Y_via_AP_replay: 0.7625 | Y_via_AT_replay: 0.9375
+Y_after_C: 0.9400 | AP_after_C: 0.9250 | AT_after_C: 0.8975 | Joint_AP_AT_Y: 0.8300
+AT_via_AP_replay: 0.7500 | Y_via_AP_replay: 0.7625 | Joint_AT_Y_via_AP_replay: 0.7125 | Y_via_AT_replay: 0.9375
