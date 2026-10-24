@@ -6,7 +6,7 @@ from mcqa_gradual_das import answer_label_ids, collect_layer_states, output_iia,
 from mcqa_gradual_das_ap import run_ap_intervention_and_capture_at, run_frozen_at_mediator
 from mcqa_gradual_das_c import run_c_intervention_and_capture, run_frozen_mediator
 from mcqa_load_randomized_ap_at_c import build_pair_bank
-
+from pathlib import Path
 
 def load_ckpt(path, device):
     x = torch.load(path, map_location="cpu", weights_only=False); return x["basis"].float().to(device), int(x["layer"]), x.get("token_position", "last_token")
@@ -57,7 +57,7 @@ def eval_c(model, tokenizer, bank, Q_c, L_c, pos_c, Q_ap, L_ap, pos_ap, W_ap, b_
 
 
 def main():
-    p = argparse.ArgumentParser(); p.add_argument("--data-path", default="randomized_copycolors"); p.add_argument("--result-dir", default="results_joint_randomized_gradual2.0"); p.add_argument("--test-size", type=int, default=400); p.add_argument("--batch-size", type=int, default=32); p.add_argument("--seed", type=int, default=0); p.add_argument("--output-space", choices=("full", "az"), default="full"); a = p.parse_args(); set_seed(a.seed)
+    p = argparse.ArgumentParser(); p.add_argument("--data-path", default="randomized_copycolors"); p.add_argument("--result-dir", default="results_joint_randomized_gradual_all_2.0"); p.add_argument("--test-size", type=int, default=400); p.add_argument("--batch-size", type=int, default=32); p.add_argument("--seed", type=int, default=0); p.add_argument("--output-space", choices=("full", "az"), default="full"); a = p.parse_args(); set_seed(a.seed)
     model, tokenizer = load_gemma_model(); device = next(model.parameters()).device; result = a.result_dir
     Q_at, L_at, pos_at = load_ckpt(f"{result}/das_at.pt", device); Q_ap, L_ap, pos_ap = load_ckpt(f"{result}/das_ap.pt", device); Q_c, L_c, pos_c = load_ckpt(f"{result}/das_c.pt", device)
     W_at, b_at, _ = load_readout(f"{result}/at_readout_LogisticRegression.pt", "AT", device); W_ap, b_ap, _ = load_readout(f"{result}/ap_readout_LogisticRegression.pt", "AP", device); W_c, b_c, c_info = load_readout(f"{result}/c_readout_LogisticRegression.pt", "C", device)
@@ -67,40 +67,44 @@ def main():
     c_only = build_pair_bank(model, tokenizer, a.data_path, "test", "C_only", a.test_size, a.batch_size, a.seed + 3)
     c_joint = build_pair_bank(model, tokenizer, a.data_path, "test", "C_AP_AT", a.test_size, a.batch_size, a.seed + 4)
 
-    # DEBUG AT SOURCE STATE
-    h = collect_layer_states(
-        model,
-        at["source_input_ids"],
-        at["source_attention_mask"],
-        at["source_position_by_id"],
-        L_at,
-        pos_at,
-        a.batch_size,
-    )
-
-    logits = (h.to(Q_at.device) @ Q_at) @ W_at.T + b_at
-    pred = logits.argmax(-1).cpu()
-
-    base_at = at["base_answer_label_ids"]
-    source_at = at["source_answer_label_ids"]
-
-    print("source state -> source AT:",
-        (pred == source_at).float().mean().item())
-
-    print("source state -> base AT:",
-        (pred == base_at).float().mean().item())
-
     print("\n=== CLEAN READOUT ===")
-    print(f"AP base/source: {readout_accuracy(model, ap, Q_ap, L_ap, pos_ap, W_ap, b_ap, ap['base_answer_pointer_ids'], a.batch_size, 'base'):.4f} / {readout_accuracy(model, ap, Q_ap, L_ap, pos_ap, W_ap, b_ap, ap['source_answer_pointer_ids'], a.batch_size, 'source'):.4f}")
-    print(f"AT base/source: {readout_accuracy(model, at, Q_at, L_at, pos_at, W_at, b_at, at['base_answer_label_ids'], a.batch_size, 'base'):.4f} / {readout_accuracy(model, at, Q_at, L_at, pos_at, W_at, b_at, at['source_answer_label_ids'], a.batch_size, 'source'):.4f}")
-    colors = c_info["color_to_class"]; print(f"C base/source : {readout_accuracy(model, c_only, Q_c, L_c, pos_c, W_c, b_c, color_labels(c_only, colors, 'base'), a.batch_size, 'base'):.4f} / {readout_accuracy(model, c_only, Q_c, L_c, pos_c, W_c, b_c, color_labels(c_only, colors, 'source'), a.batch_size, 'source'):.4f}")
+
+    ap_base = readout_accuracy(model, ap, Q_ap, L_ap, pos_ap, W_ap, b_ap, ap["base_answer_pointer_ids"], a.batch_size, "base")
+    ap_source = readout_accuracy(model, ap, Q_ap, L_ap, pos_ap, W_ap, b_ap, ap["source_answer_pointer_ids"], a.batch_size, "source")
+    at_base = readout_accuracy(model, at, Q_at, L_at, pos_at, W_at, b_at, at["base_answer_label_ids"], a.batch_size, "base")
+    at_source = readout_accuracy(model, at, Q_at, L_at, pos_at, W_at, b_at, at["source_answer_label_ids"], a.batch_size, "source")
+
+    colors = c_info["color_to_class"]
+    c_base = readout_accuracy(model, c_only, Q_c, L_c, pos_c, W_c, b_c, color_labels(c_only, colors, "base"), a.batch_size, "base")
+    c_source = readout_accuracy(model, c_only, Q_c, L_c, pos_c, W_c, b_c, color_labels(c_only, colors, "source"), a.batch_size, "source")
 
     direct, at_ro, med = eval_ap(model, tokenizer, ap, Q_ap, L_ap, pos_ap, Q_at, L_at, pos_at, W_at, b_at, a.batch_size, a.output_space)
-    print("\n=== AP -> AT -> Y ==="); print(f"Y after AP: {direct:.4f} | AT readout: {at_ro:.4f} | Y via AT replay: {med:.4f}")
 
+    c_results = {}
     for name, bank in (("C_only", c_only), ("C_AP_AT", c_joint)):
-        m = eval_c(model, tokenizer, bank, Q_c, L_c, pos_c, Q_ap, L_ap, pos_ap, W_ap, b_ap, Q_at, L_at, pos_at, W_at, b_at, a.batch_size, a.output_space)
-        print(f"\n=== C -> AP -> AT -> Y [{name}] ==="); print(" | ".join(f"{k}: {v:.4f}" for k, v in m.items()))
+        c_results[name] = eval_c(model, tokenizer, bank, Q_c, L_c, pos_c, Q_ap, L_ap, pos_ap, W_ap, b_ap, Q_at, L_at, pos_at, W_at, b_at, a.batch_size, a.output_space)
+
+    lines = []
+
+    lines.append("\n=== CLEAN READOUT ===")
+    lines.append(f"AP base/source: {ap_base:.4f} / {ap_source:.4f}")
+    lines.append(f"AT base/source: {at_base:.4f} / {at_source:.4f}")
+    lines.append(f"C base/source : {c_base:.4f} / {c_source:.4f}")
+
+    lines.append("\n=== AP -> AT -> Y ===")
+    lines.append(f"Y after AP: {direct:.4f} | AT readout: {at_ro:.4f} | Y via AT replay: {med:.4f}")
+
+    for name in ("C_only", "C_AP_AT"):
+        lines.append(f"\n=== C -> AP -> AT -> Y [{name}] ===")
+        lines.append(" | ".join(f"{k}: {v:.4f}" for k, v in c_results[name].items()))
+
+    text = "\n".join(lines)
+
+    print("\n" + text)
+
+    output_path = Path(result) / "eval_results.txt"
+    output_path.write_text(text + "\n")
+    print(f"\nsaved results = {output_path}")
 
 
 if __name__ == "__main__": 

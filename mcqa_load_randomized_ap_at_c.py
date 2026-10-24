@@ -11,6 +11,7 @@ PAIR_FIELDS = {
     "AP_only": "answerPosition_counterfactual",
     "AT_only": "randomLetter_counterfactual",
     "C_only": "color_counterfactual",
+    "AP_AT": "answerPosition_letter_counterfactual",
     "C_AP_AT": "color_position_letter_counterfactual",
 }
 COLOR_PATTERN = re.compile(r"\b(?:is|are)\s+(.+?)\.\s*What color\b", re.IGNORECASE)
@@ -116,16 +117,36 @@ def color_position(prompt, tokenizer):
     raise ValueError("Cannot map color to token")
 
 
+def ap_slot_label_position(pair, side, tokenizer):
+    """Find the label token at the slot selected by source_AP, in either the base or source prompt."""
+    ap = pair["source_AP"]
+    letter = pair[f"{side}_choices"]["label"][ap]
+    return symbol_position(pair[f"{side}_prompt"], letter, tokenizer)
+
+
 def create_bank(pairs, tokenizer, size=None, seed=0):
-    pairs = list(pairs); random.Random(seed).shuffle(pairs)
+    pairs = list(pairs)
+    random.Random(seed).shuffle(pairs)
+
     if size is not None:
-        if len(pairs) < size: raise ValueError(f"Requested {size} pairs, only {len(pairs)} available")
+        if len(pairs) < size:
+            raise ValueError(f"Requested {size} pairs, only {len(pairs)} available")
         pairs = pairs[:size]
-    if not pairs: raise ValueError("No pairs available")
+
+    if not pairs:
+        raise ValueError("No pairs available")
 
     tokenizer.padding_side = "left"
     base = tokenizer([p["base_prompt"] for p in pairs], padding=True, return_tensors="pt")
     source = tokenizer([p["source_prompt"] for p in pairs], padding=True, return_tensors="pt")
+
+    base_golden_letter_positions = []
+    source_golden_letter_positions = []
+
+    for p in pairs:
+        base_golden_letter_positions.append(symbol_position(p["base_prompt"], p["base_AT"], tokenizer))
+        source_golden_letter_positions.append(symbol_position(p["source_prompt"], p["source_AT"], tokenizer))
+
     targets = {
         "C_after_C_intervene": [p["C_after_C_intervene"] for p in pairs],
         "AP_after_AP_intervene": torch.tensor([p["AP_after_AP_intervene"] for p in pairs]),
@@ -137,12 +158,26 @@ def create_bank(pairs, tokenizer, size=None, seed=0):
         "AT_after_C_intervene": torch.tensor([LETTER_TO_CLASS[p["AT_after_C_intervene"]] for p in pairs]),
         "Y_after_C_intervene": torch.tensor([LETTER_TO_CLASS[p["Y_after_C_intervene"]] for p in pairs]),
     }
+
     return {
-        "pairs": pairs, "pair_types": [p["pair_type"] for p in pairs],
-        "base_input_ids": base["input_ids"].long(), "base_attention_mask": base["attention_mask"].long(),
-        "source_input_ids": source["input_ids"].long(), "source_attention_mask": source["attention_mask"].long(),
-        "base_position_by_id": {"last_token": base["attention_mask"].sum(1).long() - 1, "color": torch.tensor([color_position(p["base_prompt"], tokenizer) for p in pairs])},
-        "source_position_by_id": {"last_token": source["attention_mask"].sum(1).long() - 1, "color": torch.tensor([color_position(p["source_prompt"], tokenizer) for p in pairs])},
+        "pairs": pairs,
+        "pair_types": [p["pair_type"] for p in pairs],
+        "base_input_ids": base["input_ids"].long(),
+        "base_attention_mask": base["attention_mask"].long(),
+        "source_input_ids": source["input_ids"].long(),
+        "source_attention_mask": source["attention_mask"].long(),
+        "base_position_by_id": {
+            "last_token": base["attention_mask"].sum(1).long() - 1,
+            "color": torch.tensor([color_position(p["base_prompt"], tokenizer) for p in pairs]),
+            "golden_letter": torch.tensor(base_golden_letter_positions),
+            "source_ap_slot_label": torch.tensor([ap_slot_label_position(p, "base", tokenizer) for p in pairs]),
+        },
+        "source_position_by_id": {
+            "last_token": source["attention_mask"].sum(1).long() - 1,
+            "color": torch.tensor([color_position(p["source_prompt"], tokenizer) for p in pairs]),
+            "golden_letter": torch.tensor(source_golden_letter_positions),
+            "source_ap_slot_label": torch.tensor([ap_slot_label_position(p, "source", tokenizer) for p in pairs]),
+        },
         "base_answer_label_ids": torch.tensor([LETTER_TO_CLASS[p["base_AT"]] for p in pairs]),
         "source_answer_label_ids": torch.tensor([LETTER_TO_CLASS[p["source_AT"]] for p in pairs]),
         "base_answer_pointer_ids": torch.tensor([p["base_AP"] for p in pairs]),
@@ -238,40 +273,97 @@ def build_at_readout_datasets(shared_banks):
 def build_c_readout_datasets(shared_banks): 
     return readout_view(shared_banks, "C")
 
-if __name__ == "__main__":
 
-    ds = load_generated_dataset("randomized_copycolors")
 
-    for i in range(3):
-        row = ds["train"][i]
-        pairs = row_to_pairs(row, "train")
+# if __name__ == "__main__":
+#     from mcqa_neural_net import load_gemma_model
 
-        print(f"\n================ ROW {i} ================")
 
-        for pair in pairs:
-            print(f"\n---------- {pair['pair_type']} ----------")
+#     ds = load_generated_dataset("randomized_copycolors")
+#     model, tokenizer = load_gemma_model()
+#     row = ds["train"][0]
+#     pairs = row_to_pairs(row, "train")
 
-            print("\nBASE")
-            print(pair["base_prompt"])
-            print(f"C={pair['base_color']} AP={pair['base_AP']} AT={pair['base_AT']} Y={pair['base_Y']}")
+#     for pair in pairs:
+#         if pair["pair_type"] != "AP_only":
+#             continue
 
-            print("\nSOURCE")
-            print(pair["source_prompt"])
-            print(f"C={pair['source_color']} AP={pair['source_AP']} AT={pair['source_AT']} Y={pair['source_Y']}")
+#         ap = pair["source_AP"]
 
-            print("\nINTERVENTION TARGETS")
+#         base_letter = pair["base_choices"]["label"][ap]
+#         source_letter = pair["source_choices"]["label"][ap]
 
-            if pair["pair_type"] == "AP_only":
-                print(f"AP_after_AP = {pair['AP_after_AP_intervene']}")
-                print(f"AT_after_AP = {pair['AT_after_AP_intervene']}")
-                print(f"Y_after_AP  = {pair['Y_after_AP_intervene']}")
+#         base_pos = ap_slot_label_position(pair, "base", tokenizer)
+#         source_pos = ap_slot_label_position(pair, "source", tokenizer)
 
-            elif pair["pair_type"] == "AT_only":
-                print(f"AT_after_AT = {pair['AT_after_AT_intervene']}")
-                print(f"Y_after_AT  = {pair['Y_after_AT_intervene']}")
+#         base_ids = tokenizer(pair["base_prompt"], add_special_tokens=True)["input_ids"]
+#         source_ids = tokenizer(pair["source_prompt"], add_special_tokens=True)["input_ids"]
 
-            elif pair["pair_type"] in ("C_only", "C_AP_AT"):
-                print(f"C_after_C   = {pair['C_after_C_intervene']}")
-                print(f"AP_after_C  = {pair['AP_after_C_intervene']}")
-                print(f"AT_after_C  = {pair['AT_after_C_intervene']}")
-                print(f"Y_after_C   = {pair['Y_after_C_intervene']}")
+#         base_token = tokenizer.decode([base_ids[base_pos]]).strip()
+#         source_token = tokenizer.decode([source_ids[source_pos]]).strip()
+
+#         print("\n================ AP SLOT SANITY CHECK ================")
+
+#         print("\nBASE")
+#         print(pair["base_prompt"])
+#         print(f"base_AP={pair['base_AP']}")
+#         print(f"source_AP={pair['source_AP']}")
+#         print(f"label at source_AP slot={base_letter}")
+#         print(f"token position={base_pos}")
+#         print(f"decoded token={base_token!r}")
+
+#         print("\nSOURCE")
+#         print(pair["source_prompt"])
+#         print(f"source_AP={pair['source_AP']}")
+#         print(f"label at source_AP slot={source_letter}")
+#         print(f"token position={source_pos}")
+#         print(f"decoded token={source_token!r}")
+
+#         print("\nEXPECTED")
+#         print(f"source_AT={pair['source_AT']}")
+#         print(f"Y_after_AP={pair['Y_after_AP_intervene']}")
+
+#         assert base_token == base_letter
+#         assert source_token == source_letter
+#         assert source_letter == pair["source_AT"]
+#         assert base_letter == pair["Y_after_AP_intervene"]
+
+#         print("\nSanity check passed.")
+
+# if __name__ == "__main__":
+
+#     ds = load_generated_dataset("randomized_copycolors")
+
+#     for i in range(3):
+#         row = ds["train"][i]
+#         pairs = row_to_pairs(row, "train")
+
+#         print(f"\n================ ROW {i} ================")
+
+#         for pair in pairs:
+#             print(f"\n---------- {pair['pair_type']} ----------")
+
+#             print("\nBASE")
+#             print(pair["base_prompt"])
+#             print(f"C={pair['base_color']} AP={pair['base_AP']} AT={pair['base_AT']} Y={pair['base_Y']}")
+
+#             print("\nSOURCE")
+#             print(pair["source_prompt"])
+#             print(f"C={pair['source_color']} AP={pair['source_AP']} AT={pair['source_AT']} Y={pair['source_Y']}")
+
+#             print("\nINTERVENTION TARGETS")
+
+#             if pair["pair_type"] == "AP_only":
+#                 print(f"AP_after_AP = {pair['AP_after_AP_intervene']}")
+#                 print(f"AT_after_AP = {pair['AT_after_AP_intervene']}")
+#                 print(f"Y_after_AP  = {pair['Y_after_AP_intervene']}")
+
+#             elif pair["pair_type"] == "AT_only":
+#                 print(f"AT_after_AT = {pair['AT_after_AT_intervene']}")
+#                 print(f"Y_after_AT  = {pair['Y_after_AT_intervene']}")
+
+#             elif pair["pair_type"] in ("C_only", "C_AP_AT"):
+#                 print(f"C_after_C   = {pair['C_after_C_intervene']}")
+#                 print(f"AP_after_C  = {pair['AP_after_C_intervene']}")
+#                 print(f"AT_after_C  = {pair['AT_after_C_intervene']}")
+#                 print(f"Y_after_C   = {pair['Y_after_C_intervene']}")

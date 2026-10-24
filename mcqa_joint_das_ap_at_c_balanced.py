@@ -44,15 +44,15 @@ def fit_readout(model, checkpoint, save_path, bank_pair, target, token_position,
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--data-path", default="randomized_copycolors"); p.add_argument("--result-dir", default="results_joint_randomized_gradual2.0")
+    p.add_argument("--data-path", default="randomized_copycolors"); p.add_argument("--result-dir", default="results_joint_randomized_gradual_all_ap1.0_at4.0_newrun")
     p.add_argument("--ft-size", type=int, default=800); p.add_argument("--cal-size", type=int, default=400); p.add_argument("--te-size", type=int, default=400)
-    p.add_argument("--at-dim", type=int, default=128); p.add_argument("--ap-dim", type=int, default=128); p.add_argument("--c-dim", type=int, default=128)
+    p.add_argument("--at-dim", type=int, default=128); p.add_argument("--ap-dim", type=int, default=256); p.add_argument("--c-dim", type=int, default=128)
     p.add_argument("--at-layers", default="all"); p.add_argument("--ap-layers", default="all"); p.add_argument("--c-layers", default="all")
     p.add_argument("--at-epochs", type=int, default=20); p.add_argument("--ap-epochs", type=int, default=20); p.add_argument("--c-epochs", type=int, default=20); p.add_argument("--lr", type=float, default=1e-2)
-    p.add_argument("--ap-lambda-med", type=float, default=0.0); p.add_argument("--ap-lambda-readout", type=float, default=0.0)
-    p.add_argument("--c-lambda-ap-med", type=float, default=0.0); p.add_argument("--c-lambda-ap-readout", type=float, default=0.0); p.add_argument("--c-lambda-at-med", type=float, default=2.0); p.add_argument("--c-lambda-at-readout", type=float, default=2.0)
+    p.add_argument("--ap-lambda-med", type=float, default=1.0); p.add_argument("--ap-lambda-readout", type=float, default=1.0)
+    p.add_argument("--c-lambda-ap-med", type=float, default=1.0); p.add_argument("--c-lambda-ap-readout", type=float, default=1.0); p.add_argument("--c-lambda-at-med", type=float, default=4.0); p.add_argument("--c-lambda-at-readout", type=float, default=4.0)
     p.add_argument("--train-batch-size", type=int, default=32); p.add_argument("--eval-batch-size", type=int, default=32); p.add_argument("--readout-train-size", type=int, default=1300); p.add_argument("--readout-val-size", type=int, default=520)
-    p.add_argument("--token-position", default="last_token"); p.add_argument("--c-token-position", default="color"); p.add_argument("--output-space", choices=("full", "az"), default="full"); p.add_argument("--seed", type=int, default=0)
+    p.add_argument("--at-token-position", default="last_token"); p.add_argument("--ap-token-position", default="last_token"); p.add_argument("--c-token-position", default="color"); p.add_argument("--output-space", choices=("full", "az"), default="full"); p.add_argument("--seed", type=int, default=0)
     a = p.parse_args(); set_seed(a.seed)
 
     result = Path(a.result_dir); result.mkdir(parents=True, exist_ok=True)
@@ -64,12 +64,12 @@ def main():
     shared_readout = build_shared_readout_banks(model, tokenizer, a.data_path, a.readout_train_size, a.readout_val_size, a.eval_batch_size, a.seed)
 
     print("\n=== TRAIN AT ===")
-    train_at(model, tokenizer, parse_layers(a.at_layers), a.at_dim, a.ft_size, a.cal_size, a.te_size, a.at_epochs, a.lr, a.train_batch_size, a.eval_batch_size, a.token_position, a.seed, str(at_path), das_banks["AT"], a.output_space)
-    fit_readout(model, at_path, at_ro, build_at_readout_datasets(shared_readout), "AT", a.token_position, a.eval_batch_size, a.seed, 26)
+    train_at(model, tokenizer, parse_layers(a.at_layers), a.at_dim, a.ft_size, a.cal_size, a.te_size, a.at_epochs, a.lr, a.train_batch_size, a.eval_batch_size, a.at_token_position, a.seed, str(at_path), das_banks["AT"], a.output_space)
+    fit_readout(model, at_path, at_ro, build_at_readout_datasets(shared_readout), "AT", a.at_token_position, a.eval_batch_size, a.seed, 26)
 
     print("\n=== TRAIN AP ===")
-    train_ap(model, tokenizer, str(at_path), str(at_ro), parse_layers(a.ap_layers), a.ap_dim, a.ft_size, a.cal_size, a.te_size, a.ap_epochs, a.lr, a.ap_lambda_med, a.ap_lambda_readout, a.train_batch_size, a.eval_batch_size, a.token_position, a.seed, str(ap_path), das_banks["AP"], a.output_space)
-    fit_readout(model, ap_path, ap_ro, build_ap_readout_datasets(shared_readout), "AP", a.token_position, a.eval_batch_size, a.seed, 4)
+    train_ap(model, tokenizer, str(at_path), str(at_ro), parse_layers(a.ap_layers), a.ap_dim, a.ft_size, a.cal_size, a.te_size, a.ap_epochs, a.lr, a.ap_lambda_med, a.ap_lambda_readout, a.train_batch_size, a.eval_batch_size, a.ap_token_position, a.seed, str(ap_path), das_banks["AP"], a.output_space)
+    fit_readout(model, ap_path, ap_ro, build_ap_readout_datasets(shared_readout), "AP", a.ap_token_position, a.eval_batch_size, a.seed, 4)
 
     print("\n=== TRAIN C ===")
     train_c(model, tokenizer, str(ap_path), str(ap_ro), str(at_path), str(at_ro), parse_layers(a.c_layers), a.c_dim, a.ft_size, a.cal_size, a.te_size, a.c_epochs, a.lr, a.c_lambda_ap_med, a.c_lambda_ap_readout, a.c_lambda_at_med, a.c_lambda_at_readout, a.train_batch_size, a.eval_batch_size, a.c_token_position, a.seed, str(c_path), das_banks["C"], a.output_space)

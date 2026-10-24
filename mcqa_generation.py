@@ -220,6 +220,27 @@ def make_c_all_counterfactual(base, new_color):
     return cf
 
 
+def make_ap_at_counterfactual(base, new_ap):
+    """Change AP and let AT change naturally, while keeping C fixed."""
+    labels = list(base["choices"]["label"])
+    texts = list(base["choices"]["text"])
+    old_ap = base["answer_position"]
+
+    # Move the correct color to the new position.
+    # Labels stay fixed, so AT changes naturally.
+    texts[old_ap], texts[new_ap] = texts[new_ap], texts[old_ap]
+
+    prompt = rewrite_choices(base["prompt"], labels, texts)
+    cf = make_state(prompt, labels, texts)
+
+    assert cf["color"] == base["color"]
+    assert cf["answer_position"] == new_ap
+    assert cf["answer"] != base["answer"]
+
+    return cf
+
+
+
 def generate_rows_for_jchang_row(row, row_idx, split, repeats_per_row=2, seed=0):
     rng = random.Random(seed * 1_000_003 + int(row_idx))
     generated = []
@@ -241,9 +262,11 @@ def generate_rows_for_jchang_row(row, row_idx, split, repeats_per_row=2, seed=0)
         new_color = sample_new_color(base, rng)
 
         ap_cf = make_ap_counterfactual(base, new_ap)
+        ap_at_cf = make_ap_at_counterfactual(base, new_ap)
         at_cf = make_at_counterfactual(base, new_at)
         c_cf = make_c_counterfactual(base, new_color)
         c_all_cf = make_c_all_counterfactual(base, new_color)
+
 
         generated.append({
             "base_row_id": f"jchang:train:{row_idx}",
@@ -259,6 +282,7 @@ def generate_rows_for_jchang_row(row, row_idx, split, repeats_per_row=2, seed=0)
             "randomLetter_counterfactual": at_cf,
             "color_counterfactual": c_cf,
             "color_position_letter_counterfactual": c_all_cf,
+            "answerPosition_letter_counterfactual": ap_at_cf,
         })
 
     return generated
@@ -306,10 +330,10 @@ def push_to_hub(repo_id, seed=0, repeats_per_row=2, private=False):
 
 
 if __name__ == "__main__":
-    save_to_disk()
+    save_to_disk(output_dir="randomized_copycolors_include_ap_at", seed=0, repeats_per_row=2)
     from datasets import load_from_disk
 
-    ds = load_from_disk("randomized_copycolors")
+    ds = load_from_disk("randomized_copycolors_include_ap_at")
 
     for i in range(3):
         row = ds["train"][i]
