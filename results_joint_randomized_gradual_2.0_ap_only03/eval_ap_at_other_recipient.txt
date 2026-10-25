@@ -1,0 +1,27 @@
+=== C-INDUCED AP/AT TRANSFER [C_only] ===
+BASE REPLAY
+AT_via_AP_replay_base: 0.9175
+Y_via_AP_replay_base: 0.9400
+Y_via_AT_replay_base: 0.9400
+AP-INDUCED -> RECIPIENT
+AT_via_AP_replay_recipient_same: 0.7475
+Y_via_AP_replay_recipient_same: 0.7850
+AT_via_AP_replay_recipient_different: 0.8725
+Y_via_AP_replay_recipient_different: 0.9100
+AT-INDUCED -> RECIPIENT
+Y_via_AT_replay_recipient_same: 0.7600
+Y_via_AT_replay_recipient_different: 0.8525
+
+=== C-INDUCED AP/AT TRANSFER [C_AP_AT] ===
+BASE REPLAY
+AT_via_AP_replay_base: 0.9850
+Y_via_AP_replay_base: 0.9925
+Y_via_AT_replay_base: 0.9750
+AP-INDUCED -> RECIPIENT
+AT_via_AP_replay_recipient_same: 0.8150
+Y_via_AP_replay_recipient_same: 0.8450
+AT_via_AP_replay_recipient_different: 0.9000
+Y_via_AP_replay_recipient_different: 0.9150
+AT-INDUCED -> RECIPIENT
+Y_via_AT_replay_recipient_same: 0.8825
+Y_via_AT_replay_recipient_different: 0.9075

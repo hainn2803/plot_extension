@@ -1,0 +1,226 @@
+{
+  "citation": "",
+  "description": "",
+  "features": {
+    "base_row_id": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "repeat_idx": {
+      "dtype": "int64",
+      "_type": "Value"
+    },
+    "split": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "question_key": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "prompt": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "choices": {
+      "label": {
+        "feature": {
+          "dtype": "string",
+          "_type": "Value"
+        },
+        "_type": "List"
+      },
+      "text": {
+        "feature": {
+          "dtype": "string",
+          "_type": "Value"
+        },
+        "_type": "List"
+      }
+    },
+    "color": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "answer_position": {
+      "dtype": "int64",
+      "_type": "Value"
+    },
+    "answer": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "answerPosition_counterfactual": {
+      "prompt": {
+        "dtype": "string",
+        "_type": "Value"
+      },
+      "choices": {
+        "label": {
+          "feature": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "_type": "List"
+        },
+        "text": {
+          "feature": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "_type": "List"
+        }
+      },
+      "color": {
+        "dtype": "string",
+        "_type": "Value"
+      },
+      "answer_position": {
+        "dtype": "int64",
+        "_type": "Value"
+      },
+      "answer": {
+        "dtype": "string",
+        "_type": "Value"
+      }
+    },
+    "randomLetter_counterfactual": {
+      "prompt": {
+        "dtype": "string",
+        "_type": "Value"
+      },
+      "choices": {
+        "label": {
+          "feature": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "_type": "List"
+        },
+        "text": {
+          "feature": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "_type": "List"
+        }
+      },
+      "color": {
+        "dtype": "string",
+        "_type": "Value"
+      },
+      "answer_position": {
+        "dtype": "int64",
+        "_type": "Value"
+      },
+      "answer": {
+        "dtype": "string",
+        "_type": "Value"
+      }
+    },
+    "color_counterfactual": {
+      "prompt": {
+        "dtype": "string",
+        "_type": "Value"
+      },
+      "choices": {
+        "label": {
+          "feature": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "_type": "List"
+        },
+        "text": {
+          "feature": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "_type": "List"
+        }
+      },
+      "color": {
+        "dtype": "string",
+        "_type": "Value"
+      },
+      "answer_position": {
+        "dtype": "int64",
+        "_type": "Value"
+      },
+      "answer": {
+        "dtype": "string",
+        "_type": "Value"
+      }
+    },
+    "color_position_letter_counterfactual": {
+      "prompt": {
+        "dtype": "string",
+        "_type": "Value"
+      },
+      "choices": {
+        "label": {
+          "feature": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "_type": "List"
+        },
+        "text": {
+          "feature": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "_type": "List"
+        }
+      },
+      "color": {
+        "dtype": "string",
+        "_type": "Value"
+      },
+      "answer_position": {
+        "dtype": "int64",
+        "_type": "Value"
+      },
+      "answer": {
+        "dtype": "string",
+        "_type": "Value"
+      }
+    },
+    "answerPosition_letter_counterfactual": {
+      "prompt": {
+        "dtype": "string",
+        "_type": "Value"
+      },
+      "choices": {
+        "label": {
+          "feature": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "_type": "List"
+        },
+        "text": {
+          "feature": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "_type": "List"
+        }
+      },
+      "color": {
+        "dtype": "string",
+        "_type": "Value"
+      },
+      "answer_position": {
+        "dtype": "int64",
+        "_type": "Value"
+      },
+      "answer": {
+        "dtype": "string",
+        "_type": "Value"
+      }
+    }
+  },
+  "homepage": "",
+  "license": ""
+}

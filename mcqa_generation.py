@@ -21,7 +21,7 @@ import random
 import re
 import string
 from pathlib import Path
-
+from mcqa_constants import LETTER_TO_CLASS
 from datasets import Dataset, DatasetDict
 
 import mcqa_data_load_jchang_disjoint as jchang
@@ -30,7 +30,7 @@ import mcqa_data_load_jchang_disjoint as jchang
 LETTERS = string.ascii_uppercase
 COLOR_PATTERN = re.compile(r"\b(?:is|are)\s+(.+?)\.\s*What color\b", re.IGNORECASE)
 CHOICE_PATTERN = re.compile(r"(?m)^([ \t]*)([A-Z])\.[ \t]+([^\r\n]+)$")
-
+NUM_CHOICES = 4
 
 def normalize(text):
     return str(text).strip().casefold()
@@ -58,12 +58,12 @@ def replace_question_color(prompt, new_color):
 
 def rewrite_choices(prompt, labels, texts):
     matches = list(CHOICE_PATTERN.finditer(prompt))
-    if len(matches) != 4:
-        raise ValueError(f"Expected 4 choice lines, got {len(matches)}")
+    if len(matches) != NUM_CHOICES:
+        raise ValueError(f"Expected {NUM_CHOICES} choice lines, got {len(matches)}")
 
     result = prompt
 
-    for i in range(3, -1, -1):
+    for i in range(NUM_CHOICES - 1, -1, -1):
         match = matches[i]
         indent = match.group(1)
         new_line = f"{indent}{labels[i]}. {texts[i]}"
@@ -106,7 +106,7 @@ def make_base(row, rng):
     for text in row["choices"]["text"]:
         texts.append(str(text).strip())
 
-    labels = rng.sample(list(LETTERS), 4)
+    labels = rng.sample(list(LETTERS), NUM_CHOICES)
     prompt = rewrite_choices(row["prompt"], labels, texts)
     return make_state(prompt, labels, texts)
 
@@ -115,12 +115,12 @@ def sample_new_ap(base, rng):
     candidates = []
     base_ap = base["answer_position"]
 
-    for position in range(4):
+    for position in range(NUM_CHOICES):
         if position != base_ap:
             candidates.append(position)
 
     return rng.choice(candidates)
-
+    
 
 def sample_new_at(base, rng):
     candidates = []
@@ -141,8 +141,8 @@ def sample_new_color(base, rng):
         if color != base["color"]:
             candidates.append(color)
 
-    if len(candidates) != 3:
-        raise ValueError(f"Expected 3 alternative colors, got {candidates}")
+    if len(candidates) != NUM_CHOICES - 1:
+        raise ValueError(f"Expected {NUM_CHOICES - 1} alternative colors, got {candidates}")
 
     return rng.choice(candidates)
 
@@ -330,10 +330,10 @@ def push_to_hub(repo_id, seed=0, repeats_per_row=2, private=False):
 
 
 if __name__ == "__main__":
-    save_to_disk(output_dir="randomized_copycolors_include_ap_at", seed=0, repeats_per_row=2)
+    save_to_disk(output_dir="randomized_copycolors_numchoice3", seed=0, repeats_per_row=2)
     from datasets import load_from_disk
 
-    ds = load_from_disk("randomized_copycolors_include_ap_at")
+    ds = load_from_disk("randomized_copycolors_numchoice3")
 
     for i in range(3):
         row = ds["train"][i]
