@@ -1,0 +1,41 @@
+=== C INTERVENTION CLEAN-DONOR CONTROL [C_only] ===
+Direct C: 0.8725
+AP mediator
+C-induced AP replay: 0.5925
+Clean AP replay: 0.5400
+C-induced AP GIVEN clean AP succeeds: 0.8565
+AT mediator
+C-induced AT replay: 0.7550
+Clean AT replay: 0.7350
+C-induced AT GIVEN clean AT succeeds: 0.7755
+
+=== C INTERVENTION CLEAN-DONOR CONTROL [C_AP_AT] ===
+Direct C: 0.9350
+AP mediator
+C-induced AP replay: 0.6950
+Clean AP replay: 0.6275
+C-induced AP GIVEN clean AP succeeds: 0.8685
+AT mediator
+C-induced AT replay: 0.7950
+Clean AT replay: 0.6275
+C-induced AT GIVEN clean AT succeeds: 0.8127
+
+=== AP INTERVENTION CLEAN-DONOR CONTROL [AP_only] ===
+Direct AP: 0.5175
+AP donor
+Clean AP replay: 0.5250
+Direct AP GIVEN clean AP succeeds: 0.8476
+AT mediator
+AP-induced AT replay: 0.5800
+Clean AT replay: 0.7025
+AP-induced AT GIVEN clean AT succeeds: 0.5907
+
+=== AP INTERVENTION CLEAN-DONOR CONTROL [AP_AT] ===
+Direct AP: 0.8350
+AP donor
+Clean AP replay: 0.6125
+Direct AP GIVEN clean AP succeeds: 0.9714
+AT mediator
+AP-induced AT replay: 0.8700
+Clean AT replay: 0.5750
+AP-induced AT GIVEN clean AT succeeds: 0.9000

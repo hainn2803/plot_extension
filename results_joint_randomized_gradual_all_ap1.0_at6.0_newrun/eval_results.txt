@@ -5,16 +5,22 @@ C base/source : 1.0000 / 1.0000
 
 === AP -> AT -> Y [AP_only] ===
 Y_after_AP: 0.5075 | AT_after_AP: 0.5000 | Joint_AT_Y: 0.4300
+P(Y correct | AT correct): 0.8600 | P(AT correct | Y correct): 0.8473
 Y_via_AT_replay: 0.5825
 
 === AP -> AT -> Y [AP_AT] ===
 Y_after_AP: 0.7750 | AT_after_AP: 0.7300 | Joint_AT_Y: 0.6725
+P(Y correct | AT correct): 0.9212 | P(AT correct | Y correct): 0.8677
 Y_via_AT_replay: 0.8150
 
 === C -> AP -> AT -> Y [C_only] ===
-Y_after_C: 0.8400 | AP_after_C: 0.8800 | AT_after_C: 0.7750 | Joint_AP_AT_Y: 0.6575
+Y_after_C: 0.8400 | AP_after_C: 0.8800 | AT_after_C: 0.7750 | Joint_AT_Y: 0.7325 | Joint_AP_AT_Y: 0.6575
+P(Y correct | AP correct): 0.8580 | P(AP correct | Y correct): 0.8988
+P(Y correct | AT correct): 0.9452 | P(AT correct | Y correct): 0.8720
 AT_via_AP_replay: 0.5525 | Y_via_AP_replay: 0.5800 | Joint_AT_Y_via_AP_replay: 0.4950 | Y_via_AT_replay: 0.8775
 
 === C -> AP -> AT -> Y [C_AP_AT] ===
-Y_after_C: 0.9550 | AP_after_C: 0.8950 | AT_after_C: 0.9075 | Joint_AP_AT_Y: 0.8050
+Y_after_C: 0.9550 | AP_after_C: 0.8950 | AT_after_C: 0.9075 | Joint_AT_Y: 0.8850 | Joint_AP_AT_Y: 0.8050
+P(Y correct | AP correct): 0.9665 | P(AP correct | Y correct): 0.9058
+P(Y correct | AT correct): 0.9752 | P(AT correct | Y correct): 0.9267
 AT_via_AP_replay: 0.7575 | Y_via_AP_replay: 0.7525 | Joint_AT_Y_via_AP_replay: 0.7025 | Y_via_AT_replay: 0.9575

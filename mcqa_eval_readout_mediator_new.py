@@ -141,10 +141,25 @@ def eval_ap(model, tokenizer, bank, Q_ap, L_ap, pos_ap, Q_at, L_at, pos_at, W_at
     at_ok = at_logits.argmax(-1).cpu() == at_target.cpu()
     y_ok = output_correct(direct_y, y_target, tokenizer, output_space)
 
+    at_correct_count = at_ok.sum().item()
+    y_correct_count = y_ok.sum().item()
+
+    if at_correct_count > 0:
+        y_given_at = float((at_ok & y_ok).sum().item() / at_correct_count)
+    else:
+        y_given_at = 0.0
+
+    if y_correct_count > 0:
+        at_given_y = float((at_ok & y_ok).sum().item() / y_correct_count)
+    else:
+        at_given_y = 0.0
+
     return {
         "Y_after_AP": output_iia(direct_y, y_target, tokenizer, output_space),
         "AT_after_AP": accuracy(at_logits, at_target),
         "Joint_AT_Y_after_AP": float((at_ok & y_ok).float().mean()),
+        "Y_correct_given_AT_correct_after_AP": y_given_at,
+        "AT_correct_given_Y_correct_after_AP": at_given_y,
         "Y_via_AT_replay": output_iia(replay_y, y_target, tokenizer, output_space),
     }
 
@@ -170,6 +185,27 @@ def eval_c(model, tokenizer, bank, Q_c, L_c, pos_c, Q_ap, L_ap, pos_ap, W_ap, b_
     at_ok = at_logits.argmax(-1).cpu() == at_target.cpu()
     y_ok = output_correct(direct_y, y_target, tokenizer, output_space)
 
+    ap_correct_count = ap_ok.sum().item()
+    at_correct_count = at_ok.sum().item()
+    y_correct_count = y_ok.sum().item()
+
+    if ap_correct_count > 0:
+        y_given_ap = float((ap_ok & y_ok).sum().item() / ap_correct_count)
+    else:
+        y_given_ap = 0.0
+
+    if at_correct_count > 0:
+        y_given_at = float((at_ok & y_ok).sum().item() / at_correct_count)
+    else:
+        y_given_at = 0.0
+
+    if y_correct_count > 0:
+        ap_given_y = float((ap_ok & y_ok).sum().item() / y_correct_count)
+        at_given_y = float((at_ok & y_ok).sum().item() / y_correct_count)
+    else:
+        ap_given_y = 0.0
+        at_given_y = 0.0
+
     at_ap_ok = at_after_ap_logits.argmax(-1).cpu() == at_target.cpu()
     y_ap_ok = output_correct(ap_replay_y, y_target, tokenizer, output_space)
 
@@ -177,7 +213,12 @@ def eval_c(model, tokenizer, bank, Q_c, L_c, pos_c, Q_ap, L_ap, pos_ap, W_ap, b_
         "Y_after_C": output_iia(direct_y, y_target, tokenizer, output_space),
         "AP_after_C": accuracy(ap_logits, ap_target),
         "AT_after_C": accuracy(at_logits, at_target),
+        "Joint_AT_Y_after_C": float((at_ok & y_ok).float().mean()),
         "Joint_AP_AT_Y_after_C": float((ap_ok & at_ok & y_ok).float().mean()),
+        "Y_correct_given_AP_correct_after_C": y_given_ap,
+        "AP_correct_given_Y_correct_after_C": ap_given_y,
+        "Y_correct_given_AT_correct_after_C": y_given_at,
+        "AT_correct_given_Y_correct_after_C": at_given_y,
         "AT_via_AP_replay": accuracy(at_after_ap_logits, at_target),
         "Y_via_AP_replay": output_iia(ap_replay_y, y_target, tokenizer, output_space),
         "Joint_AT_Y_via_AP_replay": float((at_ap_ok & y_ap_ok).float().mean()),
@@ -187,8 +228,8 @@ def eval_c(model, tokenizer, bank, Q_c, L_c, pos_c, Q_ap, L_ap, pos_ap, W_ap, b_
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data-path", default="randomized_copycolors_ap_only03")
-    parser.add_argument("--result-dir", default="results_joint_randomized_gradual_2.0_ap_only03")
+    parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at")
+    parser.add_argument("--result-dir", default="results_joint_randomized_gradual_all_ap1.0_at6.0_newrun")
     parser.add_argument("--test-size", type=int, default=400)
     parser.add_argument("--batch-size", type=int, default=32)
     parser.add_argument("--seed", type=int, default=0)
@@ -241,12 +282,15 @@ def main():
         metrics = ap_results[name]
         lines.append(f"\n=== AP -> AT -> Y [{name}] ===")
         lines.append(f"Y_after_AP: {metrics['Y_after_AP']:.4f} | AT_after_AP: {metrics['AT_after_AP']:.4f} | Joint_AT_Y: {metrics['Joint_AT_Y_after_AP']:.4f}")
+        lines.append(f"P(Y correct | AT correct): {metrics['Y_correct_given_AT_correct_after_AP']:.4f} | P(AT correct | Y correct): {metrics['AT_correct_given_Y_correct_after_AP']:.4f}")
         lines.append(f"Y_via_AT_replay: {metrics['Y_via_AT_replay']:.4f}")
 
     for name in ("C_only", "C_AP_AT"):
         metrics = c_results[name]
         lines.append(f"\n=== C -> AP -> AT -> Y [{name}] ===")
-        lines.append(f"Y_after_C: {metrics['Y_after_C']:.4f} | AP_after_C: {metrics['AP_after_C']:.4f} | AT_after_C: {metrics['AT_after_C']:.4f} | Joint_AP_AT_Y: {metrics['Joint_AP_AT_Y_after_C']:.4f}")
+        lines.append(f"Y_after_C: {metrics['Y_after_C']:.4f} | AP_after_C: {metrics['AP_after_C']:.4f} | AT_after_C: {metrics['AT_after_C']:.4f} | Joint_AT_Y: {metrics['Joint_AT_Y_after_C']:.4f} | Joint_AP_AT_Y: {metrics['Joint_AP_AT_Y_after_C']:.4f}")
+        lines.append(f"P(Y correct | AP correct): {metrics['Y_correct_given_AP_correct_after_C']:.4f} | P(AP correct | Y correct): {metrics['AP_correct_given_Y_correct_after_C']:.4f}")
+        lines.append(f"P(Y correct | AT correct): {metrics['Y_correct_given_AT_correct_after_C']:.4f} | P(AT correct | Y correct): {metrics['AT_correct_given_Y_correct_after_C']:.4f}")
         lines.append(f"AT_via_AP_replay: {metrics['AT_via_AP_replay']:.4f} | Y_via_AP_replay: {metrics['Y_via_AP_replay']:.4f} | Joint_AT_Y_via_AP_replay: {metrics['Joint_AT_Y_via_AP_replay']:.4f} | Y_via_AT_replay: {metrics['Y_via_AT_replay']:.4f}")
 
     text = "\n".join(lines)

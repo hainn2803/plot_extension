@@ -321,8 +321,8 @@ def eval_ap_induced_transfer(model, tokenizer, donor_bank, at_same_bank, at_diff
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data-path", default="randomized_copycolors_ap_only03")
-    parser.add_argument("--result-dir", default="results_joint_randomized_gradual_2.0_ap_only03")
+    parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at")
+    parser.add_argument("--result-dir", default="results_joint_randomized_gradual_all_ap1.0_at4.0_newrun")
     parser.add_argument("--test-size", type=int, default=400)
     parser.add_argument("--batch-size", type=int, default=32)
     parser.add_argument("--seed", type=int, default=0)

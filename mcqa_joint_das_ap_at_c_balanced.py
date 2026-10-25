@@ -80,8 +80,8 @@ def fit_readout(model, checkpoint, save_path, bank_pair, target, token_position,
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data-path", default="randomized_copycolors_ap_only03")
-    parser.add_argument("--result-dir", default="results_joint_randomized_standard_ap_only03")
+    parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at")
+    parser.add_argument("--result-dir", default="results_joint_randomized_gradual_ap2.0_newrun")
     parser.add_argument("--ft-size", type=int, default=800)
     parser.add_argument("--cal-size", type=int, default=400)
     parser.add_argument("--te-size", type=int, default=400)
