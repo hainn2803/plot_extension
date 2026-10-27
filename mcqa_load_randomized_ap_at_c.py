@@ -521,9 +521,19 @@ def factual_bank(rows, tokenizer, color_map):
     at_targets = []
     c_targets = []
     color_positions = []
+    base_all_label_positions = [[] for i in range(NUM_CHOICES)]
+    base_all_color_positions = [[] for i in range(NUM_CHOICES)]
 
     for row in rows:
         prompt = row["prompt"]
+
+        label_positions = option_label_positions(prompt, tokenizer)
+        option_color_positions_list = option_color_positions(prompt, tokenizer)
+
+        for option_index in range(NUM_CHOICES):
+            base_all_label_positions[option_index].append(label_positions[option_index])
+            base_all_color_positions[option_index].append(option_color_positions_list[option_index])
+
         prompts.append(prompt)
         questions.append(row["question_key"])
         ap_targets.append(int(row["answer_position"]))
@@ -536,6 +546,10 @@ def factual_bank(rows, tokenizer, color_map):
         "last_token": inputs["attention_mask"].sum(1).long() - 1,
         "color": torch.tensor(color_positions),
     }
+
+    for i in range(NUM_CHOICES):
+        positions[f"label_{i}"] = torch.tensor(base_all_label_positions[i])
+        positions[f"color_{i}"] = torch.tensor(base_all_color_positions[i])
 
     return {
         "prompts": prompts,

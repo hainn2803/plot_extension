@@ -184,7 +184,29 @@ def main():
         ap_readout_path = layer_dir / "ap_readout_LogisticRegression.pt"
 
         print(f"\n=== TRAIN AP LAYER {layer} ===")
-        ap_result = train_ap(model, tokenizer, str(result_dir / "das_at.pt"), str(result_dir / "at_readout_LogisticRegression.pt"), [layer], args.ap_dim, args.ft_size, args.cal_size, args.te_size, args.ap_epochs, args.lr, args.ap_lambda_med, args.ap_lambda_readout, args.train_batch_size, args.eval_batch_size, list_ap_token_positions, args.seed, str(ap_path), das_banks["AP"], args.output_space)
+        ap_result = train_ap(
+            model=model,
+            tokenizer=tokenizer,
+            at_checkpoint=str(result_dir / "das_at.pt"),
+            at_readout_checkpoint=str(result_dir / "at_readout_LogisticRegression.pt"),
+            layers=[layer],
+            subspace_dim=args.ap_dim,
+            ft_size=args.ft_size,
+            cal_size=args.cal_size,
+            te_size=args.te_size,
+            epochs=args.ap_epochs,
+            lr=args.lr,
+            lambda_med=args.ap_lambda_med,
+            lambda_readout=args.ap_lambda_readout,
+            train_batch_size=args.train_batch_size,
+            eval_batch_size=args.eval_batch_size,
+            list_ap_token_positions=list_ap_token_positions,
+            at_token_position=args.at_token_position,
+            seed=args.seed,
+            save_path=str(ap_path),
+            banks=das_banks["AP"],
+            output_space=args.output_space,
+        )
         fit_readout(model, ap_path, ap_readout_path, build_ap_readout_datasets(shared_readout), "AP", list_ap_token_positions, args.eval_batch_size, args.seed, 4)
 
         direct_iia, mediator_iia, readout_acc = ap_result["cal"]

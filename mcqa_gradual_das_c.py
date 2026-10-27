@@ -11,7 +11,7 @@ AT_TARGET = "AT_after_C_intervene"
 Y_TARGET = "Y_after_C_intervene"
 
 
-def run_c_intervention_and_capture(model, bank, source_c, Q_c, c_layer, ap_layer, at_layer, output_ids, c_pos="color", ap_pos="last_token", at_pos="last_token", batch_size=8, require_grad=True):
+def run_c_intervention_and_capture(model, bank, source_c, Q_c, c_layer, ap_layer, at_layer, output_ids, c_pos="color", list_ap_pos=["last_token"], at_pos="last_token", batch_size=8, require_grad=True):
     """Intervene on C, then return Y and the downstream AP/AT states."""
     device = next(model.parameters()).device
 
@@ -30,7 +30,11 @@ def run_c_intervention_and_capture(model, bank, source_c, Q_c, c_layer, ap_layer
         pad = (mask == 0).sum(1)
 
         c_idx = pad + bank["base_position_by_id"][c_pos][start:end].to(device)
-        ap_idx = pad + bank["base_position_by_id"][ap_pos][start:end].to(device)
+        list_ap_idx = []
+        for ap_pos in list_ap_pos:
+            ap_idx = pad + bank["base_position_by_id"][ap_pos][start:end].to(device)
+            list_ap_idx.append(ap_idx)
+        list_ap_idx = torch.stack(list_ap_idx, dim=1)
         at_idx = pad + bank["base_position_by_id"][at_pos][start:end].to(device)
 
         captured = {}
@@ -56,7 +60,7 @@ def run_c_intervention_and_capture(model, bank, source_c, Q_c, c_layer, ap_layer
             else:
                 hidden = output
 
-            captured["ap"] = hidden[rows, ap_idx].float()
+            captured["ap"] = hidden[rows[:, None], list_ap_idx, :].float()
 
         def at_hook(_module, _inputs, output):
             if isinstance(output, tuple):
@@ -75,7 +79,7 @@ def run_c_intervention_and_capture(model, bank, source_c, Q_c, c_layer, ap_layer
                 else:
                     hidden = output
 
-                captured["ap"] = hidden[rows, ap_idx].float()
+                captured["ap"] = hidden[rows[:, None], list_ap_idx, :].float()
                 captured["at"] = hidden[rows, at_idx].float()
 
             ap_handle = model.model.layers[ap_layer].register_forward_hook(ap_at_hook)
