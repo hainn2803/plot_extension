@@ -127,7 +127,8 @@ def run_frozen_mediator(model, bank, generated, Q, layer, output_ids, list_token
         ids = bank["base_input_ids"][start:end].to(device)
         mask = bank["base_attention_mask"][start:end].to(device)
         donor = generated[start:end].to(device)
-
+        num_examples = ids.shape[0]
+        num_tokens_collected = len(list_token_positions)
         rows = torch.arange(len(ids), device=device)
         pad = (mask == 0).sum(1)
 
@@ -145,7 +146,8 @@ def run_frozen_mediator(model, bank, generated, Q, layer, output_ids, list_token
 
             new_hidden = hidden.clone()
             base_state = hidden[rows[:, None], list_ap_idx].float()
-            delta = ((donor.reshape[donor.shape[0], -1].float() - base_state.reshape[base_state.shape[0], -1]) @ Q) @ Q.T
+            delta = ((donor.reshape(num_examples, -1).float() - base_state.reshape(num_examples, -1)) @ Q) @ Q.T
+            delta = delta.reshape(delta.shape[0], num_tokens_collected, -1)
             new_hidden[rows[:, None], list_ap_idx] = (base_state + delta).to(hidden.dtype)
 
             if isinstance(output, tuple):
@@ -215,7 +217,7 @@ def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoin
     ap_checkpoint_data = torch.load(ap_checkpoint, map_location="cpu", weights_only=False)
     Q_ap = ap_checkpoint_data["basis"].float().to(device)
     ap_layer = int(ap_checkpoint_data["layer"])
-    ap_pos = ap_checkpoint_data.get("token_position", "last_token")
+    list_ap_pos = ap_checkpoint_data["token_position"]
 
     at_checkpoint_data = torch.load(at_checkpoint, map_location="cpu", weights_only=False)
     Q_at = at_checkpoint_data["basis"].float().to(device)
@@ -311,11 +313,11 @@ def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoin
             optimizer.zero_grad()
             Q_c = alignment.basis()
 
-            direct_y, generated_ap, generated_at = run_c_intervention_and_capture(model, mini, train_source[idx], Q_c, c_layer, ap_layer, at_layer, output_ids, token_position, ap_pos, at_pos, len(idx), True)
+            direct_y, generated_ap, generated_at = run_c_intervention_and_capture(model, mini, train_source[idx], Q_c, c_layer, ap_layer, at_layer, output_ids, token_position, list_ap_pos, at_pos, len(idx), True)
 
-            ap_mediator_y = run_frozen_mediator(model, mini, generated_ap, Q_ap, ap_layer, output_ids, ap_pos, len(idx), True)
+            ap_mediator_y = run_frozen_mediator(model, mini, generated_ap, Q_ap, ap_layer, output_ids, list_ap_pos, len(idx), True)
 
-            at_mediator_y = run_frozen_mediator(model, mini, generated_at, Q_at, at_layer, output_ids, at_pos, len(idx), True)
+            at_mediator_y = run_frozen_mediator(model, mini, generated_at, Q_at, [at_layer], output_ids, at_pos, len(idx), True)
 
             y_target = output_targets(train_targets[Y_TARGET][idx], labels, output_space, device)
 
