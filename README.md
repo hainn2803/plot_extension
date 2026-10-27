@@ -11,3 +11,10 @@ python -m pip install torch==2.9.1 torchvision==0.24.1 torchaudio==2.9.1 --index
 
 python -m pip install -r requirements.txt
 
+## Additional Experiments
+
+- [Rank-128 matched Standard/Gradual long-chain code snapshot](experiments/apc128_long_chain_20261026/README.md):
+  three-seed C -> AP -> AT -> Y experiment, full mediator/donor evaluation,
+  original dependencies, source hashes, and synthetic CPU checks. Code only;
+  checkpoints, data banks, model weights, and generated results are not included.
+

@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.tmp/
+tmp/
+eval/
+hf_cache/
+models/
+*.pt
+*.pth
+*.safetensors
+*.log
