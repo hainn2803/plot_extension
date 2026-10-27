@@ -1,472 +1,277 @@
-import argparse
-import csv
-import shutil
-from pathlib import Path
+"""Train AP DAS and optionally enforce the downstream AT mediator/readout."""
+
+import os
+
+import torch
+import torch.nn.functional as F
+
+from mcqa_gradual_das import LearnedSubspace, answer_label_ids, answer_logits, output_iia, output_label_ids, output_targets, set_seed, collect_joint_token_states_in_single_layer
+
+AT_TARGET = "AT_after_AP_intervene"
+Y_TARGET = "Y_after_AP_intervene"
+AP_LAYER = 14
+
+def run_ap_intervention_and_capture_at(model, bank, source_ap, Q_ap, ap_layer, at_layer, output_ids, list_ap_token_positions=None, at_token_position="last_token", batch_size=8, require_grad=True):
+    """AP <- source AP subspace; return output Y and the AT state naturally produced downstream."""
+    device = next(model.parameters()).device
+    all_y = []
+    all_at = []
+
+    for start in range(0, len(bank["base_input_ids"]), batch_size):
+        end = min(start + batch_size, len(bank["base_input_ids"]))
+        ids = bank["base_input_ids"][start:end].to(device)
+        mask = bank["base_attention_mask"][start:end].to(device)
+        donor = source_ap[start:end].to(device) # batch, num_pos_collected, hid_dims
+        num_batch = ids.shape[0]
+        rows = torch.arange(len(ids), device=device)
+        pad = (mask == 0).sum(1)
+        at_token_pos_id = pad + bank["base_position_by_id"][at_token_position][start:end].to(device)
+
+        list_tok_pos_ids = list()
+        for tok_pos in list_ap_token_positions:
+            position = pad + bank["base_position_by_id"][tok_pos][start:end].to(device)
+            list_tok_pos_ids.append(position)
+        list_tok_pos_ids = torch.stack(list_tok_pos_ids, dim=1)
+
+        def ap_hook(_module, _inputs, output):
+            if isinstance(output, tuple):
+                hidden = output[0]
+            else:
+                hidden = output
+
+            new_hidden = hidden.clone() # batch, pos, hidd
+            collected_base = new_hidden[rows[:, None], list_tok_pos_ids, :] # batch, num_pos_collected, hidd
+            new_collected_base = collected_base.reshape(num_batch, -1) + torch.matmul(torch.matmul((donor.reshape(num_batch, -1) - collected_base.reshape(num_batch, -1)), Q_ap), Q_ap.T) # batch, num_pos_collected x hidd
+            new_collected_base = new_collected_base.reshape(num_batch, len(list_ap_token_positions), -1) # batch, num_pos_collected, hidd
+            new_hidden[rows[:, None], list_tok_pos_ids, :] = new_collected_base[rows[:, None], torch.arange(len(list_ap_token_positions), device=device), :].to(hidden.dtype)
+
+            if isinstance(output, tuple):
+                return (new_hidden,) + output[1:]
+            return new_hidden
+
+        captured = []
+        def at_hook(_module, _inputs, output):
+            if isinstance(output, tuple):
+                hidden = output[0]
+            else:
+                hidden = output
+            captured.append(hidden[rows, at_token_pos_id].float())
+
+        ap_handle = model.model.layers[ap_layer].register_forward_hook(ap_hook)
+        at_handle = model.model.layers[at_layer].register_forward_hook(at_hook)
+
+        try:
+            position_ids = (mask.long().cumsum(-1) - 1).clamp(min=0)
+            outputs = model.model(input_ids=ids, attention_mask=mask, position_ids=position_ids, use_cache=False, return_dict=True)
+            y = answer_logits(model, outputs, mask, output_ids)
+            at = captured[0]
+
+            if require_grad:
+                all_y.append(y)
+                all_at.append(at)
+            else:
+                all_y.append(y.detach().cpu())
+                all_at.append(at.detach().cpu())
+        finally:
+            ap_handle.remove()
+            at_handle.remove()
+
+    return torch.cat(all_y), torch.cat(all_at)
+
+
+def run_frozen_at_mediator(model, bank, generated_at, Q_at, at_layer, output_ids, token_position="last_token", batch_size=8, require_grad=True):
+    """Replay the AT state produced by AP into a fresh clean base run; return Y."""
+    device = next(model.parameters()).device
+    all_y = []
+
+    for start in range(0, len(bank["base_input_ids"]), batch_size):
+        end = min(start + batch_size, len(bank["base_input_ids"]))
+        ids = bank["base_input_ids"][start:end].to(device)
+        mask = bank["base_attention_mask"][start:end].to(device)
+        donor = generated_at[start:end].to(device)
+        rows = torch.arange(len(ids), device=device)
+        pad = (mask == 0).sum(1)
+        position = pad + bank["base_position_by_id"][token_position][start:end].to(device)
+
+        def hook(_module, _inputs, output):
+            if isinstance(output, tuple):
+                hidden = output[0]
+            else:
+                hidden = output
+
+            new_hidden = hidden.clone()
+            base = hidden[rows, position].float()
+            delta = ((donor.float() - base) @ Q_at) @ Q_at.T
+            new_hidden[rows, position] = (base + delta).to(hidden.dtype)
+
+            if isinstance(output, tuple):
+                return (new_hidden,) + output[1:]
+            return new_hidden
+
+        handle = model.model.layers[at_layer].register_forward_hook(hook)
+
+        try:
+            position_ids = (mask.long().cumsum(-1) - 1).clamp(min=0)
+            outputs = model.model(input_ids=ids, attention_mask=mask, position_ids=position_ids, use_cache=False, return_dict=True)
+            y = answer_logits(model, outputs, mask, output_ids)
 
-from mcqa_gradual_das_ap import train_ap
-from mcqa_gradual_das_at import train_at
-from mcqa_gradual_das_c import train_c
-from mcqa_joint_das_ap_at_c_balanced import fit_readout, parse_layers
-from mcqa_load_randomized_ap_at_c import build_all_banks, build_ap_readout_datasets, build_at_readout_datasets, build_c_readout_datasets, build_shared_readout_banks
-from mcqa_neural_net import load_gemma_model
-
-
-def copy_file(source, destination):
-    Path(destination).parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(source, destination)
-
-
-def parse_token_positions(value):
-    token_positions = []
-
-    for token_position in value.split(","):
-        token_position = token_position.strip()
-
-        if token_position != "":
-            token_positions.append(token_position)
-
-    return token_positions
-
-
-def ap_score(metrics, lambda_med, lambda_readout):
-    direct_iia, mediator_iia, readout_acc = metrics
-    active = [direct_iia]
-
-    if lambda_med > 0:
-        active.append(mediator_iia)
-
-    if lambda_readout > 0:
-        active.append(readout_acc)
-
-    return min(active)
-
-
-def c_score(metrics, lambda_ap_med, lambda_ap_readout, lambda_at_med, lambda_at_readout):
-    direct_iia, ap_mediator_iia, ap_readout_acc, at_mediator_iia, at_readout_acc = metrics
-    active = [direct_iia]
-
-    if lambda_ap_med > 0:
-        active.append(ap_mediator_iia)
-
-    if lambda_ap_readout > 0:
-        active.append(ap_readout_acc)
-
-    if lambda_at_med > 0:
-        active.append(at_mediator_iia)
-
-    if lambda_at_readout > 0:
-        active.append(at_readout_acc)
-
-    return min(active)
-
-
-def save_summary(rows, path):
-    if len(rows) == 0:
-        return
-
-    fieldnames = list(rows[0].keys())
-
-    with open(path, "w", newline="") as file:
-        writer = csv.DictWriter(file, fieldnames=fieldnames)
-        writer.writeheader()
-
-        for row in rows:
-            writer.writerow(row)
-
-
-def main():
-    parser = argparse.ArgumentParser()
-
-    parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at")
-    parser.add_argument("--result-dir", default="results_joint_randomized_gradual_all2.0_newrun_v2")
-
-    parser.add_argument("--ft-size", type=int, default=800)
-    parser.add_argument("--cal-size", type=int, default=400)
-    parser.add_argument("--te-size", type=int, default=400)
-
-    parser.add_argument("--at-dim", type=int, default=128)
-    parser.add_argument("--ap-dim", type=int, default=128)
-    parser.add_argument("--c-dim", type=int, default=128)
-
-    parser.add_argument("--at-layers", default="23,24,25")
-    parser.add_argument("--ap-layers", default="14")
-    parser.add_argument("--c-layers", default="0,1")
-
-    parser.add_argument("--at-epochs", type=int, default=20)
-    parser.add_argument("--ap-epochs", type=int, default=20)
-    parser.add_argument("--c-epochs", type=int, default=20)
-
-    parser.add_argument("--lr", type=float, default=1e-2)
-
-    parser.add_argument("--ap-lambda-med", type=float, default=1.0)
-    parser.add_argument("--ap-lambda-readout", type=float, default=1.0)
-
-    parser.add_argument("--c-lambda-ap-med", type=float, default=2.0)
-    parser.add_argument("--c-lambda-ap-readout", type=float, default=2.0)
-    parser.add_argument("--c-lambda-at-med", type=float, default=2.0)
-    parser.add_argument("--c-lambda-at-readout", type=float, default=2.0)
-
-    parser.add_argument("--train-batch-size", type=int, default=32)
-    parser.add_argument("--eval-batch-size", type=int, default=32)
-
-    parser.add_argument("--readout-train-size", type=int, default=1300)
-    parser.add_argument("--readout-val-size", type=int, default=520)
-
-    parser.add_argument("--at-token-position", default="last_token")
-    parser.add_argument("--ap-token-position", default="color_0,color_1,color_2,color_3")
-    parser.add_argument("--c-token-position", default="color")
-
-    parser.add_argument("--output-space", choices=("full", "az"), default="full")
-    parser.add_argument("--seed", type=int, default=0)
-
-    args = parser.parse_args()
-
-    result_dir = Path(args.result_dir)
-    result_dir.mkdir(parents=True, exist_ok=True)
-
-    at_final_path = result_dir / "das_at.pt"
-    at_final_readout_path = result_dir / "at_readout_LogisticRegression.pt"
-
-    ap_final_path = result_dir / "das_ap.pt"
-    ap_final_readout_path = result_dir / "ap_readout_LogisticRegression.pt"
-
-    c_final_path = result_dir / "das_c.pt"
-    c_final_readout_path = result_dir / "c_readout_LogisticRegression.pt"
-
-    at_summary_path = result_dir / "at_layer_summary.csv"
-    ap_summary_path = result_dir / "ap_layer_summary.csv"
-    c_summary_path = result_dir / "c_layer_summary.csv"
-    best_layers_path = result_dir / "best_layers.txt"
-
-    list_ap_token_positions = parse_token_positions(args.ap_token_position)
-
-    if len(list_ap_token_positions) == 0:
-        raise ValueError("--ap-token-position must contain at least one token position.")
-
-    print(f"AP token positions = {list_ap_token_positions}")
-
-    model, tokenizer = load_gemma_model()
-    num_layers = model.config.num_hidden_layers
-
-    das_banks = build_all_banks(
-        model=model,
-        tokenizer=tokenizer,
-        data_path=args.data_path,
-        ft_size=args.ft_size,
-        cal_size=args.cal_size,
-        te_size=args.te_size,
-        batch_size=args.eval_batch_size,
-        seed=args.seed,
-    )
-
-    shared_readout = build_shared_readout_banks(
-        model=model,
-        tokenizer=tokenizer,
-        data_path=args.data_path,
-        train_size=args.readout_train_size,
-        val_size=args.readout_val_size,
-        batch_size=args.eval_batch_size,
-        seed=args.seed,
-    )
-
-    requested_at_layers = parse_layers(args.at_layers)
-
-    if requested_at_layers is None:
-        at_layers = list(range(num_layers))
-    else:
-        at_layers = requested_at_layers
-
-    at_rows = []
-    best_at_score = -1.0
-    best_at_layer = None
-    best_at_path = None
-    best_at_readout_path = None
-
-    print("\n================ AT LAYER SWEEP ================")
-
-    for layer in at_layers:
-        layer_dir = result_dir / "at_layers" / f"layer_{layer}"
-        layer_dir.mkdir(parents=True, exist_ok=True)
-
-        at_path = layer_dir / "das_at.pt"
-        at_readout_path = layer_dir / "at_readout_LogisticRegression.pt"
-
-        print(f"\n=== TRAIN AT LAYER {layer} ===")
-
-        at_result = train_at(
-            model=model,
-            tokenizer=tokenizer,
-            layers=[layer],
-            subspace_dim=args.at_dim,
-            ft_size=args.ft_size,
-            cal_size=args.cal_size,
-            te_size=args.te_size,
-            epochs=args.at_epochs,
-            lr=args.lr,
-            train_batch_size=args.train_batch_size,
-            eval_batch_size=args.eval_batch_size,
-            token_position=args.at_token_position,
-            seed=args.seed,
-            save_path=str(at_path),
-            banks=das_banks["AT"],
-            output_space=args.output_space,
-        )
-
-        at_readout_banks = build_at_readout_datasets(shared_readout)
-
-        fit_readout(
-            model=model,
-            checkpoint=at_path,
-            save_path=at_readout_path,
-            bank_pair=at_readout_banks,
-            target="AT",
-            token_position=args.at_token_position,
-            batch_size=args.eval_batch_size,
-            seed=args.seed,
-            num_classes=26,
-        )
-
-        score = float(at_result["cal_iia"])
-
-        row = {
-            "layer": layer,
-            "score": score,
-            "cal_iia": float(at_result["cal_iia"]),
-            "test_iia": float(at_result["test_iia"]),
-            "best_epoch": int(at_result["best_epoch"]),
-        }
-
-        at_rows.append(row)
-
-        if score > best_at_score:
-            best_at_score = score
-            best_at_layer = layer
-            best_at_path = at_path
-            best_at_readout_path = at_readout_path
-
-    save_summary(at_rows, at_summary_path)
-
-    copy_file(best_at_path, at_final_path)
-    copy_file(best_at_readout_path, at_final_readout_path)
-
-    print(f"\n[AT SWEEP BEST] layer={best_at_layer} score={best_at_score:.4f}")
-
-    requested_ap_layers = parse_layers(args.ap_layers)
-
-    if requested_ap_layers is None:
-        ap_layers = list(range(best_at_layer))
-    else:
-        ap_layers = []
-
-        for layer in requested_ap_layers:
-            if layer < best_at_layer:
-                ap_layers.append(layer)
-
-    if len(ap_layers) == 0:
-        raise ValueError("No valid AP layers. AP layer must be before the selected AT layer.")
-
-    ap_rows = []
-    best_ap_score = -1.0
-    best_ap_layer = None
-    best_ap_path = None
-    best_ap_readout_path = None
-
-    print("\n================ AP LAYER SWEEP ================")
-
-    for layer in ap_layers:
-        layer_dir = result_dir / "ap_layers" / f"layer_{layer}"
-        layer_dir.mkdir(parents=True, exist_ok=True)
-
-        ap_path = layer_dir / "das_ap.pt"
-        ap_readout_path = layer_dir / "ap_readout_LogisticRegression.pt"
-
-        print(f"\n=== TRAIN AP LAYER {layer} ===")
-
-        ap_result = train_ap(
-            model=model,
-            tokenizer=tokenizer,
-            at_checkpoint=at_final_path,
-            at_readout_checkpoint=at_final_readout_path,
-            layers=[layer],
-            subspace_dim=args.ap_dim,
-            ft_size=args.ft_size,
-            cal_size=args.cal_size,
-            te_size=args.te_size,
-            epochs=args.ap_epochs,
-            lr=args.lr,
-            lambda_med=args.ap_lambda_med,
-            lambda_readout=args.ap_lambda_readout,
-            train_batch_size=args.train_batch_size,
-            eval_batch_size=args.eval_batch_size,
-            list_ap_token_positions=list_ap_token_positions,
-            at_token_position=args.at_token_position,
-            seed=args.seed,
-            save_path=str(ap_path),
-            banks=das_banks["AP"],
-            output_space=args.output_space,
-        )
-
-        direct_iia, mediator_iia, readout_acc = ap_result["cal"]
-        test_direct_iia, test_mediator_iia, test_readout_acc = ap_result["test"]
-
-        score = ap_score(
-            metrics=ap_result["cal"],
-            lambda_med=args.ap_lambda_med,
-            lambda_readout=args.ap_lambda_readout,
-        )
-
-        row = {
-            "layer": layer,
-            "score": score,
-            "cal_direct_iia": float(direct_iia),
-            "cal_mediator_iia": float(mediator_iia),
-            "cal_readout_acc": float(readout_acc),
-            "test_direct_iia": float(test_direct_iia),
-            "test_mediator_iia": float(test_mediator_iia),
-            "test_readout_acc": float(test_readout_acc),
-            "best_epoch": int(ap_result["best_epoch"]),
-        }
-
-        ap_rows.append(row)
-
-        if score > best_ap_score:
-            best_ap_score = score
-            best_ap_layer = layer
-            best_ap_path = ap_path
-            best_ap_readout_path = ap_readout_path
-
-    save_summary(ap_rows, ap_summary_path)
-
-    copy_file(best_ap_path, ap_final_path)
-
-    print(f"\n[AP SWEEP BEST] layer={best_ap_layer} score={best_ap_score:.4f}")
-
-    requested_c_layers = parse_layers(args.c_layers)
-    max_c_layer = min(best_ap_layer, best_at_layer)
-
-    if requested_c_layers is None:
-        c_layers = list(range(max_c_layer))
-    else:
-        c_layers = []
-
-        for layer in requested_c_layers:
-            if layer < max_c_layer:
-                c_layers.append(layer)
-
-    if len(c_layers) == 0:
-        raise ValueError("No valid C layers. C layer must be before the selected AP and AT layers.")
-
-    c_rows = []
-    best_c_score = -1.0
-    best_c_layer = None
-    best_c_path = None
-    best_c_readout_path = None
-
-    print("\n================ C LAYER SWEEP ================")
-
-    for layer in c_layers:
-        layer_dir = result_dir / "c_layers" / f"layer_{layer}"
-        layer_dir.mkdir(parents=True, exist_ok=True)
-
-        c_path = layer_dir / "das_c.pt"
-        c_readout_path = layer_dir / "c_readout_LogisticRegression.pt"
-
-        print(f"\n=== TRAIN C LAYER {layer} ===")
-
-        c_result = train_c(
-            model=model,
-            tokenizer=tokenizer,
-            ap_checkpoint=ap_final_path,
-            ap_readout_checkpoint=ap_final_readout_path,
-            at_checkpoint=at_final_path,
-            at_readout_checkpoint=at_final_readout_path,
-            layers=[layer],
-            subspace_dim=args.c_dim,
-            ft_size=args.ft_size,
-            cal_size=args.cal_size,
-            te_size=args.te_size,
-            epochs=args.c_epochs,
-            lr=args.lr,
-            lambda_ap_med=args.c_lambda_ap_med,
-            lambda_ap_readout=args.c_lambda_ap_readout,
-            lambda_at_med=args.c_lambda_at_med,
-            lambda_at_readout=args.c_lambda_at_readout,
-            train_batch_size=args.train_batch_size,
-            eval_batch_size=args.eval_batch_size,
-            token_position=args.c_token_position,
-            seed=args.seed,
-            save_path=str(c_path),
-            banks=das_banks["C"],
-            output_space=args.output_space,
-        )
-
-        colors = shared_readout[0]["color_to_class"]
-        c_readout_extra = {"color_to_class": colors}
-        c_readout_banks = build_c_readout_datasets(shared_readout)
-
-        fit_readout(
-            model=model,
-            checkpoint=c_path,
-            save_path=c_readout_path,
-            bank_pair=c_readout_banks,
-            target="C",
-            token_position=args.c_token_position,
-            batch_size=args.eval_batch_size,
-            seed=args.seed,
-            num_classes=len(colors),
-            extra=c_readout_extra,
-        )
-
-        cal_direct_iia, cal_ap_mediator_iia, cal_ap_readout_acc, cal_at_mediator_iia, cal_at_readout_acc = c_result["cal"]
-        test_direct_iia, test_ap_mediator_iia, test_ap_readout_acc, test_at_mediator_iia, test_at_readout_acc = c_result["test"]
-
-        score = c_score(
-            metrics=c_result["cal"],
-            lambda_ap_med=args.c_lambda_ap_med,
-            lambda_ap_readout=args.c_lambda_ap_readout,
-            lambda_at_med=args.c_lambda_at_med,
-            lambda_at_readout=args.c_lambda_at_readout,
-        )
-
-        row = {
-            "layer": layer,
-            "score": score,
-            "cal_direct_iia": float(cal_direct_iia),
-            "cal_ap_mediator_iia": float(cal_ap_mediator_iia),
-            "cal_ap_readout_acc": float(cal_ap_readout_acc),
-            "cal_at_mediator_iia": float(cal_at_mediator_iia),
-            "cal_at_readout_acc": float(cal_at_readout_acc),
-            "test_direct_iia": float(test_direct_iia),
-            "test_ap_mediator_iia": float(test_ap_mediator_iia),
-            "test_ap_readout_acc": float(test_ap_readout_acc),
-            "test_at_mediator_iia": float(test_at_mediator_iia),
-            "test_at_readout_acc": float(test_at_readout_acc),
-            "best_epoch": int(c_result["best_epoch"]),
-        }
-
-        c_rows.append(row)
-
-        if score > best_c_score:
-            best_c_score = score
-            best_c_layer = layer
-            best_c_path = c_path
-            best_c_readout_path = c_readout_path
-
-    save_summary(c_rows, c_summary_path)
-
-    copy_file(best_c_path, c_final_path)
-    copy_file(best_c_readout_path, c_final_readout_path)
-
-    best_text = []
-    best_text.append(f"AT layer: {best_at_layer} | score: {best_at_score:.6f}")
-    best_text.append(f"AP layer: {best_ap_layer} | score: {best_ap_score:.6f}")
-    best_text.append(f"C layer: {best_c_layer} | score: {best_c_score:.6f}")
-
-    best_layers_path.write_text("\n".join(best_text) + "\n")
-
-    print("\n================ FINAL BEST LAYERS ================")
-    print("\n".join(best_text))
-
-
-if __name__ == "__main__":
-    main()
+            if require_grad:
+                all_y.append(y)
+            else:
+                all_y.append(y.detach().cpu())
+        finally:
+            handle.remove()
+
+    return torch.cat(all_y)
+
+
+@torch.no_grad()
+def evaluate_ap(model, tokenizer, bank, source_ap, Q_ap, ap_layer, Q_at, at_layer, W_at, b_at, list_ap_token_positions, at_token_position, batch_size, output_space):
+    labels = answer_label_ids(tokenizer)
+    output_ids = output_label_ids(labels, output_space)
+
+    direct_y, generated_at = run_ap_intervention_and_capture_at(model=model, bank=bank, source_ap=source_ap, Q_ap=Q_ap, ap_layer=ap_layer, at_layer=at_layer, output_ids=output_ids, list_ap_token_positions=list_ap_token_positions, at_token_position=at_token_position, batch_size=batch_size, require_grad=False)
+    mediator_y = run_frozen_at_mediator(model=model, bank=bank, generated_at=generated_at, Q_at=Q_at, at_layer=at_layer, output_ids=output_ids, token_position=at_token_position, batch_size=batch_size, require_grad=False)
+
+    targets = bank["intervention_targets"]
+    at_target = targets[AT_TARGET]
+    y_target = targets[Y_TARGET]
+    at_logits = (generated_at.to(Q_at.device) @ Q_at) @ W_at.T + b_at
+
+    direct_iia = output_iia(direct_y, y_target, tokenizer, output_space)
+    mediator_iia = output_iia(mediator_y, y_target, tokenizer, output_space)
+    at_prediction = at_logits.argmax(-1).cpu()
+    readout_acc = float((at_prediction == at_target.cpu()).float().mean())
+
+    return direct_iia, mediator_iia, readout_acc
+
+
+def train_ap(model, tokenizer, at_checkpoint, at_readout_checkpoint, layers=None, subspace_dim=128, ft_size=None, cal_size=None, te_size=None, epochs=50, lr=1e-2, lambda_med=0.0, lambda_readout=0.0, train_batch_size=32, eval_batch_size=32, list_ap_token_positions=["last_token"], at_token_position="last_token", seed=0, save_path="results/das_ap.pt", banks=None, output_space="full"):
+    set_seed(seed)
+    device = next(model.parameters()).device
+    model.eval()
+
+    for parameter in model.parameters():
+        parameter.requires_grad_(False)
+
+    at_checkpoint_data = torch.load(at_checkpoint, map_location="cpu", weights_only=False)
+    Q_at = at_checkpoint_data["basis"].float().to(device)
+    at_layer = int(at_checkpoint_data["layer"])
+
+    readout = torch.load(at_readout_checkpoint, map_location="cpu", weights_only=False)
+    W_at = readout["W_AT"].float().to(device)
+    b_at = readout["b_AT"].float().to(device)
+
+    train_bank, cal_banks, test_banks = banks
+    cal_bank = cal_banks["AP"]
+    test_bank = test_banks["AP"]
+
+    labels = answer_label_ids(tokenizer)
+    output_ids = output_label_ids(labels, output_space)
+
+    ap_layer = AP_LAYER
+    train_source = collect_joint_token_states_in_single_layer(model=model, input_ids=train_bank["source_input_ids"], attention_mask=train_bank["source_attention_mask"], position_by_id=train_bank["source_position_by_id"], layer=ap_layer, list_token_positions=list_ap_token_positions, batch_size=eval_batch_size)
+    cal_source = collect_joint_token_states_in_single_layer(model=model, input_ids=cal_bank["source_input_ids"], attention_mask=cal_bank["source_attention_mask"], position_by_id=cal_bank["source_position_by_id"], layer=ap_layer, list_token_positions=list_ap_token_positions, batch_size=eval_batch_size)
+    test_source = collect_joint_token_states_in_single_layer(model=model, input_ids=test_bank["source_input_ids"], attention_mask=test_bank["source_attention_mask"], position_by_id=test_bank["source_position_by_id"], layer=ap_layer, list_token_positions=list_ap_token_positions, batch_size=eval_batch_size)
+    # now train_source has shape of num_examples, num_tok_collected, num_dims
+    y_train = train_bank["intervention_targets"][Y_TARGET]
+    at_train = train_bank["intervention_targets"][AT_TARGET]
+
+    num_joint_ap_hidden_size = train_source.shape[1] * train_source.shape[2]
+    alignment = LearnedSubspace(num_joint_ap_hidden_size, subspace_dim).to(device)
+    optimizer = torch.optim.Adam(alignment.parameters(), lr=lr)
+
+    best_score = -1.0
+    best_basis = None
+    best_epoch = None
+    best_metrics = None
+
+    for epoch in range(1, epochs + 1):
+        permutation = torch.randperm(len(train_bank["base_input_ids"]))
+        total_direct_loss = 0.0
+        total_mediator_loss = 0.0
+        total_readout_loss = 0.0
+
+        for start in range(0, len(permutation), train_batch_size):
+            idx = permutation[start:start + train_batch_size]
+
+            mini_positions = {}
+            for name, positions in train_bank["base_position_by_id"].items():
+                mini_positions[name] = positions[idx]
+
+            mini_batch = {
+                "base_input_ids": train_bank["base_input_ids"][idx],
+                "base_attention_mask": train_bank["base_attention_mask"][idx],
+                "base_position_by_id": mini_positions,
+            }
+
+            optimizer.zero_grad()
+            Q_ap = alignment.basis()
+            direct_y, generated_at = run_ap_intervention_and_capture_at(model=model, bank=mini_batch, source_ap=train_source[idx, :, :], Q_ap=Q_ap, ap_layer=ap_layer, at_layer=at_layer, output_ids=output_ids, list_ap_token_positions=list_ap_token_positions, at_token_position=at_token_position, batch_size=len(idx), require_grad=True)
+            mediator_y = run_frozen_at_mediator(model, mini_batch, generated_at, Q_at, at_layer, output_ids, at_token_position, len(idx), True)
+
+            y_target = output_targets(y_train[idx], labels, output_space, device)
+            at_target = at_train[idx].to(device)
+            at_logits = (generated_at @ Q_at) @ W_at.T + b_at
+
+            direct_loss = F.cross_entropy(direct_y, y_target)
+            mediator_loss = F.cross_entropy(mediator_y, y_target)
+            readout_loss = F.cross_entropy(at_logits, at_target)
+
+            loss = direct_loss
+            loss = loss + lambda_med * mediator_loss
+            loss = loss + lambda_readout * readout_loss
+            loss.backward()
+            optimizer.step()
+
+            batch_size = len(idx)
+            total_direct_loss += direct_loss.item() * batch_size
+            total_mediator_loss += mediator_loss.item() * batch_size
+            total_readout_loss += readout_loss.item() * batch_size
+
+        Q_ap = alignment.basis()
+        metrics = evaluate_ap(model, tokenizer, cal_bank, cal_source, Q_ap, ap_layer, Q_at, at_layer, W_at, b_at, list_ap_token_positions, at_token_position, eval_batch_size, output_space)
+        direct_iia, mediator_iia, readout_acc = metrics
+
+        active_metrics = [direct_iia]
+        if lambda_med > 0:
+            active_metrics.append(mediator_iia)
+        if lambda_readout > 0:
+            active_metrics.append(readout_acc)
+
+        score = min(active_metrics)
+        num_train = len(permutation)
+
+        direct_average = total_direct_loss / num_train
+        mediator_average = total_mediator_loss / num_train
+        readout_average = total_readout_loss / num_train
+        print(f"[AP epoch {epoch:02d}] direct={direct_average:.4f} med={mediator_average:.4f} readout={readout_average:.4f} | cal={metrics}")
+
+        if score > best_score:
+            best_score = score
+            best_basis = alignment.basis().detach().cpu().clone()
+            best_epoch = epoch
+            best_metrics = metrics
+
+    test_metrics = evaluate_ap(model, tokenizer, test_bank, test_source, best_basis.to(device), ap_layer, Q_at, at_layer, W_at, b_at, list_ap_token_positions, at_token_position, eval_batch_size, output_space)
+
+    result = {
+        "variable": "AP",
+        "layer": ap_layer,
+        "basis": best_basis,
+        "list_ap_token_positions": list_ap_token_positions,
+        "at_token_position": at_token_position,
+        "subspace_dim": subspace_dim,
+        "cal": best_metrics,
+        "test": test_metrics,
+        "best_epoch": best_epoch,
+    }
+
+    save_dir = os.path.dirname(save_path)
+    if save_dir == "":
+        save_dir = "."
+
+    os.makedirs(save_dir, exist_ok=True)
+    torch.save(result, save_path)
+    print(f"[AP BEST] layer={ap_layer} epoch={best_epoch} cal={best_metrics} test={test_metrics}")
+    return result
