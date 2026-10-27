@@ -3,7 +3,7 @@ import csv
 import shutil
 from pathlib import Path
 
-from mcqa_gradual_das_ap import train_ap
+from mcqa_gradual_das_ap_cross_tokens import train_ap
 from mcqa_gradual_das_at import train_at
 from mcqa_gradual_das_c import train_c
 from mcqa_joint_das_ap_at_c_balanced import fit_readout, parse_layers
@@ -108,6 +108,9 @@ def main():
         if token_position != "":
             list_ap_token_positions.append(token_position)
 
+    list_at_token_positions = [args.at_token_position]
+    list_c_token_positions = [args.c_token_position]
+
     model, tokenizer = load_gemma_model()
     num_layers = model.config.num_hidden_layers
 
@@ -136,7 +139,7 @@ def main():
 
         print(f"\n=== TRAIN AT LAYER {layer} ===")
         at_result = train_at(model, tokenizer, [layer], args.at_dim, args.ft_size, args.cal_size, args.te_size, args.at_epochs, args.lr, args.train_batch_size, args.eval_batch_size, args.at_token_position, args.seed, str(at_path), das_banks["AT"], args.output_space)
-        fit_readout(model, at_path, at_readout_path, build_at_readout_datasets(shared_readout), "AT", args.at_token_position, args.eval_batch_size, args.seed, 26)
+        fit_readout(model, at_path, at_readout_path, build_at_readout_datasets(shared_readout), "AT", list_at_token_positions, args.eval_batch_size, args.seed, 26)
 
         score = float(at_result["cal_iia"])
         row = {"layer": layer, "score": score, "cal_iia": float(at_result["cal_iia"]), "test_iia": float(at_result["test_iia"]), "best_epoch": int(at_result["best_epoch"])}
@@ -182,7 +185,7 @@ def main():
 
         print(f"\n=== TRAIN AP LAYER {layer} ===")
         ap_result = train_ap(model, tokenizer, str(result_dir / "das_at.pt"), str(result_dir / "at_readout_LogisticRegression.pt"), [layer], args.ap_dim, args.ft_size, args.cal_size, args.te_size, args.ap_epochs, args.lr, args.ap_lambda_med, args.ap_lambda_readout, args.train_batch_size, args.eval_batch_size, list_ap_token_positions, args.seed, str(ap_path), das_banks["AP"], args.output_space)
-        fit_readout(model, ap_path, ap_readout_path, build_ap_readout_datasets(shared_readout), "AP", args.ap_token_position, args.eval_batch_size, args.seed, 4)
+        fit_readout(model, ap_path, ap_readout_path, build_ap_readout_datasets(shared_readout), "AP", list_ap_token_positions, args.eval_batch_size, args.seed, 4)
 
         direct_iia, mediator_iia, readout_acc = ap_result["cal"]
         test_direct_iia, test_mediator_iia, test_readout_acc = ap_result["test"]
@@ -236,7 +239,7 @@ def main():
 
         colors = shared_readout[0]["color_to_class"]
         extra = {"color_to_class": colors}
-        fit_readout(model, c_path, c_readout_path, build_c_readout_datasets(shared_readout), "C", args.c_token_position, args.eval_batch_size, args.seed, len(colors), extra)
+        fit_readout(model, c_path, c_readout_path, build_c_readout_datasets(shared_readout), "C", list_c_token_positions, args.eval_batch_size, args.seed, len(colors), extra)
 
         cal_direct_iia, cal_ap_mediator_iia, cal_ap_readout_acc, cal_at_mediator_iia, cal_at_readout_acc = c_result["cal"]
         test_direct_iia, test_ap_mediator_iia, test_ap_readout_acc, test_at_mediator_iia, test_at_readout_acc = c_result["test"]

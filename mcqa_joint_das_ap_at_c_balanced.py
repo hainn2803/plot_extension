@@ -7,7 +7,7 @@ import torch
 import torch.nn.functional as F
 
 from mcqa_gradual_das import collect_joint_token_states_in_single_layer, set_seed, fit_readout
-from mcqa_gradual_das_ap import train_ap
+from mcqa_gradual_das_ap_cross_tokens import train_ap
 from mcqa_gradual_das_at import train_at
 from mcqa_gradual_das_c import train_c
 from mcqa_load_randomized_ap_at_c import build_all_banks, build_ap_readout_datasets, build_at_readout_datasets, build_c_readout_datasets, build_shared_readout_banks
@@ -39,79 +39,6 @@ def parse_token_positions(value):
             token_positions.append(token_position)
 
     return token_positions
-
-
-def fit_readout(model, checkpoint, save_path, bank_pair, target, list_token_positions, batch_size, seed, num_classes, extra=None):
-    """Fit a linear classifier on the frozen DAS coordinates."""
-    set_seed(seed)
-
-    device = next(model.parameters()).device
-
-    checkpoint_data = torch.load(checkpoint, map_location="cpu", weights_only=False)
-    Q = checkpoint_data["basis"].float().to(device)
-    layer = checkpoint_data["layer"]
-
-    def features(bank):
-        states = collect_joint_token_states_in_single_layer(model, bank["input_ids"], bank["attention_mask"], bank["position_by_id"], layer, list_token_positions, batch_size)
-        states = states.reshape(states.shape[0], -1)
-
-        if states.shape[1] != Q.shape[0]:
-            raise ValueError(f"State dimension {states.shape[1]} does not match DAS basis dimension {Q.shape[0]}")
-
-        x = (states.to(device) @ Q).detach()
-        y = bank["target_ids"].to(device)
-
-        return x, y
-
-    train_bank, val_bank = bank_pair
-
-    x_train, y_train = features(train_bank)
-    x_val, y_val = features(val_bank)
-
-    mean = x_train.mean(dim=0)
-    std = x_train.std(dim=0, unbiased=False).clamp_min(1e-6)
-
-    x_train = (x_train - mean) / std
-    x_val = (x_val - mean) / std
-
-    best_acc = -1.0
-    best = None
-
-    for penalty in (1e-4, 1e-3, 1e-2):
-        readout = torch.nn.Linear(Q.shape[1], num_classes).to(device)
-        optimizer = torch.optim.Adam(readout.parameters(), lr=1e-2)
-
-        for _ in range(200):
-            optimizer.zero_grad()
-
-            logits = readout(x_train)
-            loss = F.cross_entropy(logits, y_train)
-            loss = loss + penalty * readout.weight.square().sum()
-
-            loss.backward()
-            optimizer.step()
-
-            with torch.no_grad():
-                val_prediction = readout(x_val).argmax(dim=-1)
-                acc = float((val_prediction == y_val).float().mean())
-
-            if acc > best_acc:
-                weights = readout.weight.detach() / std.unsqueeze(0)
-                bias = readout.bias.detach() - weights @ mean
-
-                best_acc = acc
-                best = {
-                    f"W_{target}": weights.cpu(),
-                    f"b_{target}": bias.cpu(),
-                }
-
-                if extra is not None:
-                    best.update(extra)
-
-    save_path.parent.mkdir(parents=True, exist_ok=True)
-    torch.save(best, save_path)
-
-    print(f"[{target} readout] val_acc={best_acc:.4f}")
 
 
 def main():
