@@ -116,7 +116,7 @@ def run_c_intervention_and_capture(model, bank, source_c, Q_c, c_layer, ap_layer
     return torch.cat(all_y), torch.cat(all_ap), torch.cat(all_at)
 
 
-def run_frozen_mediator(model, bank, generated, Q, layer, output_ids, token_position="last_token", batch_size=8, require_grad=True):
+def run_frozen_mediator(model, bank, generated, Q, layer, output_ids, list_token_positions=None, batch_size=8, require_grad=True):
     """Replay a generated AP/AT state into a fresh clean base run and return Y."""
     device = next(model.parameters()).device
     all_y = []
@@ -130,7 +130,12 @@ def run_frozen_mediator(model, bank, generated, Q, layer, output_ids, token_posi
 
         rows = torch.arange(len(ids), device=device)
         pad = (mask == 0).sum(1)
-        position = pad + bank["base_position_by_id"][token_position][start:end].to(device)
+
+        list_ap_idx = []
+        for ap_pos in list_token_positions:
+            ap_idx = pad + bank["base_position_by_id"][ap_pos][start:end].to(device)
+            list_ap_idx.append(ap_idx)
+        list_ap_idx = torch.stack(list_ap_idx, dim=1)
 
         def hook(_module, _inputs, output):
             if isinstance(output, tuple):
@@ -139,9 +144,9 @@ def run_frozen_mediator(model, bank, generated, Q, layer, output_ids, token_posi
                 hidden = output
 
             new_hidden = hidden.clone()
-            base_state = hidden[rows, position].float()
-            delta = ((donor.float() - base_state) @ Q) @ Q.T
-            new_hidden[rows, position] = (base_state + delta).to(hidden.dtype)
+            base_state = hidden[rows[:, None], list_ap_idx].float()
+            delta = ((donor.reshape[donor.shape[0], -1].float() - base_state.reshape[base_state.shape[0], -1]) @ Q) @ Q.T
+            new_hidden[rows[:, None], list_ap_idx] = (base_state + delta).to(hidden.dtype)
 
             if isinstance(output, tuple):
                 return (new_hidden,) + output[1:]
@@ -151,9 +156,7 @@ def run_frozen_mediator(model, bank, generated, Q, layer, output_ids, token_posi
 
         try:
             position_ids = (mask.long().cumsum(-1) - 1).clamp(min=0)
-
             outputs = model.model(input_ids=ids, attention_mask=mask, position_ids=position_ids, use_cache=False, return_dict=True)
-
             y = answer_logits(model, outputs, mask, output_ids)
 
             if require_grad:
@@ -168,21 +171,22 @@ def run_frozen_mediator(model, bank, generated, Q, layer, output_ids, token_posi
 
 
 @torch.no_grad()
-def evaluate_c(model, tokenizer, bank, source_c, Q_c, c_layer, Q_ap, ap_layer, ap_pos, W_ap, b_ap, Q_at, at_layer, at_pos, W_at, b_at, c_pos, batch_size, output_space):
+def evaluate_c(model, tokenizer, bank, source_c, Q_c, c_layer, Q_ap, ap_layer, list_ap_pos, W_ap, b_ap, Q_at, at_layer, at_pos, W_at, b_at, c_pos, batch_size, output_space):
     labels = answer_label_ids(tokenizer)
     output_ids = output_label_ids(labels, output_space)
 
-    direct_y, generated_ap, generated_at = run_c_intervention_and_capture(model, bank, source_c, Q_c, c_layer, ap_layer, at_layer, output_ids, c_pos, ap_pos, at_pos, batch_size, False)
+    direct_y, generated_ap, generated_at = run_c_intervention_and_capture(model, bank, source_c, Q_c, c_layer, ap_layer, at_layer, output_ids, c_pos, list_ap_pos, at_pos, batch_size, False)
 
-    ap_mediator_y = run_frozen_mediator(model, bank, generated_ap, Q_ap, ap_layer, output_ids, ap_pos, batch_size, False)
+    ap_mediator_y = run_frozen_mediator(model, bank, generated_ap, Q_ap, ap_layer, output_ids, list_ap_pos, batch_size, False)
 
-    at_mediator_y = run_frozen_mediator(model, bank, generated_at, Q_at, at_layer, output_ids, at_pos, batch_size, False)
+    at_mediator_y = run_frozen_mediator(model, bank, generated_at, Q_at, at_layer, output_ids, list_ap_pos, batch_size, False)
 
     targets = bank["intervention_targets"]
     ap_target = targets[AP_TARGET]
     at_target = targets[AT_TARGET]
     y_target = targets[Y_TARGET]
 
+    generated_ap = generated_ap.reshape(generated_ap.shape[0], -1)
     ap_logits = (generated_ap.to(Q_ap.device) @ Q_ap) @ W_ap.T + b_ap
     at_logits = (generated_at.to(Q_at.device) @ Q_at) @ W_at.T + b_at
 
