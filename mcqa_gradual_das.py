@@ -139,14 +139,15 @@ def collect_layer_states(model, input_ids, attention_mask, position_by_id, layer
 
         pad_offset = (mask == 0).sum(dim=1)
         position = pad_offset + position_by_id[token_position][start:end].to(device)
-        captured = {}
+
+        captured = []
 
         def hook(_module, _inputs, output):
             if isinstance(output, tuple):
                 hidden = output[0]
             else:
                 hidden = output
-            captured["x"] = hidden[rows, position, :].detach().float().cpu()
+            captured.append(hidden[rows, position, :].detach().float().cpu())
 
         handle = model.model.layers[layer].register_forward_hook(hook)
 
@@ -156,9 +157,51 @@ def collect_layer_states(model, input_ids, attention_mask, position_by_id, layer
         finally:
             handle.remove()
 
-        states.append(captured["x"])
+        states.append(captured[0])
 
     return torch.cat(states, dim=0)
+
+
+@torch.no_grad()
+def collect_joint_token_states_in_single_layer(model, input_ids, attention_mask, position_by_id, layer, list_token_positions, batch_size=32):
+    device = next(model.parameters()).device
+    all_states = []
+
+    for start in range(0, len(input_ids), batch_size):
+        end = min(start + batch_size, len(input_ids))
+        batch_inputs = input_ids[start:end].to(device)
+        batch_attn_masks = attention_mask[start:end].to(device)
+        pad_offset = (batch_attn_masks == 0).sum(dim=1)
+        rows = torch.arange(len(batch_inputs), device=device)
+
+        positions = []
+        for token_pos in list_token_positions:
+            position = pad_offset + position_by_id[token_pos][start:end].to(device)
+            positions.append(position)
+
+        positions = torch.stack(positions, dim=1)
+        captured = []
+
+        def hook(_module, _inputs, output):
+            if isinstance(output, tuple):
+                hidden = output[0]
+            else:
+                hidden = output
+
+            states = hidden[rows[:, None], positions, :] # num_batch, num_tok_collected, num_dims
+            captured.append(states.detach().float().cpu())
+
+        handle = model.model.layers[layer].register_forward_hook(hook)
+
+        try:
+            position_ids = (batch_attn_masks.long().cumsum(dim=-1) - 1).clamp(min=0)
+            model.model(input_ids=batch_inputs, attention_mask=batch_attn_masks, position_ids=position_ids, use_cache=False, return_dict=True)
+        finally:
+            handle.remove()
+
+        all_states.append(captured[0])
+
+    return torch.cat(all_states, dim=0)  # num_examples, num_tok_collected, num_dims
 
 
 @torch.no_grad()
