@@ -314,10 +314,11 @@ def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoin
             Q_c = alignment.basis()
 
             direct_y, generated_ap, generated_at = run_c_intervention_and_capture(model, mini, train_source[idx], Q_c, c_layer, ap_layer, at_layer, output_ids, token_position, list_ap_pos, at_pos, len(idx), True)
+            generated_ap = generated_ap.reshape(generated_ap.shape[0], -1)
 
             ap_mediator_y = run_frozen_mediator(model, mini, generated_ap, Q_ap, ap_layer, output_ids, list_ap_pos, len(idx), True)
 
-            at_mediator_y = run_frozen_mediator(model, mini, generated_at, Q_at, [at_layer], output_ids, at_pos, len(idx), True)
+            at_mediator_y = run_frozen_mediator(model, bank, generated_at, Q_at, at_layer, output_ids, [at_pos], batch_size, False)
 
             y_target = output_targets(train_targets[Y_TARGET][idx], labels, output_space, device)
 
@@ -350,8 +351,7 @@ def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoin
             total_at_readout_loss += at_readout_loss.item() * batch_size
 
         Q_c = alignment.basis()
-
-        metrics = evaluate_c(model, tokenizer, cal_bank, cal_source, Q_c, c_layer, Q_ap, ap_layer, ap_pos, W_ap, b_ap, Q_at, at_layer, at_pos, W_at, b_at, token_position, eval_batch_size, output_space)
+        metrics = evaluate_c(model, tokenizer, cal_bank, cal_source, Q_c, c_layer, Q_ap, ap_layer, list_ap_pos, W_ap, b_ap, Q_at, at_layer, at_pos, W_at, b_at, token_position, eval_batch_size, output_space)
 
         direct_iia, ap_mediator_iia, ap_readout_acc, at_mediator_iia, at_readout_acc = metrics
 
