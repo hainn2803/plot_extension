@@ -90,7 +90,7 @@ def main():
     parser.add_argument("--readout-train-size", type=int, default=1300)
     parser.add_argument("--readout-val-size", type=int, default=520)
     parser.add_argument("--at-token-position", default="last_token")
-    parser.add_argument("--ap-token-position", default="last_token")
+    parser.add_argument("--ap-token-position", type=str, default="color_0,color_1,color_2,color_3")
     parser.add_argument("--c-token-position", default="color")
     parser.add_argument("--output-space", choices=("full", "az"), default="full")
     parser.add_argument("--seed", type=int, default=0)
@@ -98,6 +98,15 @@ def main():
 
     result_dir = Path(args.result_dir)
     result_dir.mkdir(parents=True, exist_ok=True)
+
+
+    list_ap_token_positions = []
+
+    for token_position in args.ap_token_position.split(","):
+        token_position = token_position.strip()
+
+        if token_position != "":
+            list_ap_token_positions.append(token_position)
 
     model, tokenizer = load_gemma_model()
     num_layers = model.config.num_hidden_layers
@@ -172,7 +181,7 @@ def main():
         ap_readout_path = layer_dir / "ap_readout_LogisticRegression.pt"
 
         print(f"\n=== TRAIN AP LAYER {layer} ===")
-        ap_result = train_ap(model, tokenizer, str(result_dir / "das_at.pt"), str(result_dir / "at_readout_LogisticRegression.pt"), [layer], args.ap_dim, args.ft_size, args.cal_size, args.te_size, args.ap_epochs, args.lr, args.ap_lambda_med, args.ap_lambda_readout, args.train_batch_size, args.eval_batch_size, args.ap_token_position, args.seed, str(ap_path), das_banks["AP"], args.output_space)
+        ap_result = train_ap(model, tokenizer, str(result_dir / "das_at.pt"), str(result_dir / "at_readout_LogisticRegression.pt"), [layer], args.ap_dim, args.ft_size, args.cal_size, args.te_size, args.ap_epochs, args.lr, args.ap_lambda_med, args.ap_lambda_readout, args.train_batch_size, args.eval_batch_size, list_ap_token_positions, args.seed, str(ap_path), das_banks["AP"], args.output_space)
         fit_readout(model, ap_path, ap_readout_path, build_ap_readout_datasets(shared_readout), "AP", args.ap_token_position, args.eval_batch_size, args.seed, 4)
 
         direct_iia, mediator_iia, readout_acc = ap_result["cal"]

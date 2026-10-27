@@ -248,6 +248,64 @@ def collect_all_layer_states(model, input_ids, attention_mask, position_by_id, l
     return result
 
 
+
+
+def fit_readout(model, checkpoint, save_path, bank_pair, target, list_token_positions, batch_size, seed, num_classes, extra=None):
+    """Fit a linear classifier on the frozen DAS coordinates."""
+    set_seed(seed)
+    device = next(model.parameters()).device
+    checkpoint_data = torch.load(checkpoint, map_location="cpu", weights_only=False)
+    Q = checkpoint_data["basis"].float().to(device)
+
+    def features(bank):
+        states = collect_joint_token_states_in_single_layer(model, bank["input_ids"], bank["attention_mask"], bank["position_by_id"], checkpoint_data["layer"], list_token_positions, batch_size)
+        states = states.reshape(states.shape[0], -1)
+        x = (states.to(device) @ Q).detach()
+        y = bank["target_ids"].to(device)
+        return x, y
+
+    train_bank, val_bank = bank_pair
+    x_train, y_train = features(train_bank)
+    x_val, y_val = features(val_bank)
+
+    mean = x_train.mean(0)
+    std = x_train.std(0, unbiased=False).clamp_min(1e-6)
+    x_train = (x_train - mean) / std
+    x_val = (x_val - mean) / std
+
+    best_acc = -1.0
+    best = None
+
+    for penalty in (1e-4, 1e-3, 1e-2):
+        readout = torch.nn.Linear(Q.shape[1], num_classes).to(device)
+        optimizer = torch.optim.Adam(readout.parameters(), lr=1e-2)
+
+        for _ in range(200):
+            optimizer.zero_grad()
+            logits = readout(x_train)
+            loss = F.cross_entropy(logits, y_train)
+            loss = loss + penalty * readout.weight.square().sum()
+            loss.backward()
+            optimizer.step()
+            with torch.no_grad():
+                val_prediction = readout(x_val).argmax(-1)
+                acc = float((val_prediction == y_val).float().mean())
+
+            if acc > best_acc:
+                weights = readout.weight.detach() / std.unsqueeze(0)
+                bias = readout.bias.detach() - weights @ mean
+                best_acc = acc
+                best = {f"W_{target}": weights.cpu(), f"b_{target}": bias.cpu()}
+
+                if extra is not None:
+                    best.update(extra)
+
+    Path(save_path).parent.mkdir(parents=True, exist_ok=True)
+    torch.save(best, save_path)
+    print(f"[{target} readout] val_acc={best_acc:.4f}")
+
+
+
 class LearnedSubspace(nn.Module):
     def __init__(self, hidden_size, subspace_dim):
         super().__init__()

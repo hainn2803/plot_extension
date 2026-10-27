@@ -8,6 +8,8 @@ from pathlib import Path
 import torch
 from datasets import load_from_disk
 
+from mcqa_constants import NUM_CHOICES
+
 LETTERS = string.ascii_uppercase
 LETTER_TO_CLASS = {}
 for index, letter in enumerate(LETTERS):
@@ -24,6 +26,60 @@ PAIR_FIELDS = {
 COLOR_PATTERN = re.compile(r"\b(?:is|are)\s+(.+?)\.\s*What color\b", re.IGNORECASE)
 
 
+def option_color_positions(prompt, tokenizer):
+    matches = list(re.finditer(r"(?m)^([A-Z])\. (.+?)\r?$", prompt))
+
+    if len(matches) != 4:
+        raise ValueError(f"Expected 4 option rows, got {len(matches)}")
+
+    offsets = tokenizer(prompt, add_special_tokens=True, return_offsets_mapping=True)["offset_mapping"]
+    color_positions = []
+
+    for match in matches:
+        color_start, color_end = match.span(2)
+        candidates = []
+
+        for index, offset in enumerate(offsets):
+            start, end = offset
+
+            if end > start and start < color_end and end > color_start:
+                candidates.append(index)
+
+        if len(candidates) == 0:
+            raise ValueError(f"Cannot map color {match.group(2)!r}")
+
+        color_positions.append(candidates[-1])
+
+    return color_positions
+
+
+def option_label_positions(prompt, tokenizer):
+    matches = list(re.finditer(r"(?m)^([A-Z])\. (.+?)\r?$", prompt))
+
+    if len(matches) != 4:
+        raise ValueError(f"Expected 4 option rows, got {len(matches)}")
+
+    offsets = tokenizer(prompt, add_special_tokens=True, return_offsets_mapping=True)["offset_mapping"]
+    label_positions = []
+
+    for match in matches:
+        label_start, label_end = match.span(1)
+        candidates = []
+
+        for index, offset in enumerate(offsets):
+            start, end = offset
+
+            if end > start and start < label_end and end > label_start:
+                candidates.append(index)
+
+        if len(candidates) != 1:
+            raise ValueError(f"Cannot uniquely map label {match.group(1)!r}")
+
+        label_positions.append(candidates[0])
+
+    return label_positions
+
+    
 def load_generated_dataset(path="randomized_copycolors"):
     path = Path(path)
     if not path.exists():
@@ -261,11 +317,32 @@ def create_bank(pairs, tokenizer, size=None, seed=0):
     base_color_positions = []
     source_color_positions = []
 
+    base_all_label_positions = [[] for i in range(NUM_CHOICES)]
+    source_all_label_positions = [[] for i in range(NUM_CHOICES)]
+
+    base_all_color_positions = [[] for i in range(NUM_CHOICES)]
+    source_all_color_positions = [[] for i in range(NUM_CHOICES)]
+
     for pair in pairs:
+
         base_golden_letter_positions.append(symbol_position(pair["base_prompt"], pair["base_AT"], tokenizer))
         source_golden_letter_positions.append(symbol_position(pair["source_prompt"], pair["source_AT"], tokenizer))
+
         base_source_ap_slot_positions.append(ap_slot_label_position(pair, "base", tokenizer))
         source_source_ap_slot_positions.append(ap_slot_label_position(pair, "source", tokenizer))
+
+        base_label_positions = option_label_positions(pair["base_prompt"], tokenizer)
+        source_label_positions = option_label_positions(pair["source_prompt"], tokenizer)
+
+        list_base_color_positions = option_color_positions(pair["base_prompt"], tokenizer)
+        list_source_color_positions = option_color_positions(pair["source_prompt"], tokenizer)
+
+        for option_index in range(NUM_CHOICES):
+            base_all_label_positions[option_index].append(base_label_positions[option_index])
+            source_all_label_positions[option_index].append(source_label_positions[option_index])
+
+            base_all_color_positions[option_index].append(list_base_color_positions[option_index])
+            source_all_color_positions[option_index].append(list_source_color_positions[option_index])
 
         c_targets.append(pair["C_after_C_intervene"])
         ap_after_ap_targets.append(pair["AP_after_AP_intervene"])
@@ -305,12 +382,20 @@ def create_bank(pairs, tokenizer, size=None, seed=0):
         "source_ap_slot_label": torch.tensor(base_source_ap_slot_positions),
     }
 
+    for i in range(NUM_CHOICES):
+        base_positions[f"label_{i}"] = torch.tensor(base_all_label_positions[i])
+        base_positions[f"color_{i}"] = torch.tensor(base_all_color_positions[i])
+
     source_positions = {
         "last_token": source["attention_mask"].sum(1).long() - 1,
         "color": torch.tensor(source_color_positions),
         "golden_letter": torch.tensor(source_golden_letter_positions),
         "source_ap_slot_label": torch.tensor(source_source_ap_slot_positions),
     }
+
+    for i in range(NUM_CHOICES):
+        source_positions[f"label_{i}"] = torch.tensor(source_all_label_positions[i])
+        source_positions[f"color_{i}"] = torch.tensor(source_all_color_positions[i])
 
     return {
         "pairs": pairs,
