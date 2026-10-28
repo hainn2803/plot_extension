@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+hf_cache/
+
+.DS_Store
+mcqa_constants.py
+
+test_results*/
+randomized_copycolors*/
+jacobian-lens/
+aa_results_scan_all_layers/
+.venv/
+results*/
+core.python3*
+core.python3.*
