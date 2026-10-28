@@ -10,3 +10,4 @@ randomized_copycolors/
 jacobian-lens/
 aa_results_scan_all_layers/
 .venv/
+core.python3.*

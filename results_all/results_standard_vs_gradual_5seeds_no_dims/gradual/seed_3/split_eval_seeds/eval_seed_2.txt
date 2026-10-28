@@ -1,0 +1,38 @@
+=== CLEAN READOUT ===
+AP overall base/source: 0.9650 / 0.9475
+AP changed base/source: 0.9650 / 0.9400
+AP fixed   base/source: 0.9650 / 0.9550
+AT overall base/source: 0.8300 / 0.8450
+AT changed base/source: 0.8700 / 0.8600
+AT fixed   base/source: 0.7900 / 0.8300
+C overall  base/source: 1.0000 / 1.0000
+C changed  base/source: 1.0000 / 1.0000
+C fixed    base/source: 1.0000 / 1.0000
+
+=== AP -> AT -> Y [AP_only] ===
+Y_after_AP: 0.6700 | AT_after_AP: 0.6200 | Joint_AT_Y: 0.5575
+  changed: Y=0.5000 | AT=0.4650 | Joint=0.3950 | replay=0.5600
+  fixed:   Y=0.8400 | AT=0.7750 | Joint=0.7200 | replay=0.7800
+P(Y correct | AT correct): 0.8992 | P(AT correct | Y correct): 0.8321
+Y_via_AT_replay: 0.6700
+
+=== AP -> AT -> Y [AP_AT] ===
+Y_after_AP: 0.8150 | AT_after_AP: 0.7400 | Joint_AT_Y: 0.6925
+P(Y correct | AT correct): 0.9358 | P(AT correct | Y correct): 0.8497
+Y_via_AT_replay: 0.8500
+
+=== C -> AP -> AT -> Y [C_only] ===
+Y_after_C: 0.8950 | AP_after_C: 0.9125 | AT_after_C: 0.8375 | Joint_AT_Y: 0.8025 | Joint_AP_AT_Y: 0.7400
+  changed: Y=0.8150 | AP=0.8700 | AT=0.8200 | Joint_AT_Y=0.7600 | Joint_AP_AT_Y=0.6600
+  fixed:   Y=0.9750 | AP=0.9550 | AT=0.8550 | Joint_AT_Y=0.8450 | Joint_AP_AT_Y=0.8200
+  changed replay: AT_via_AP=0.6000 | Y_via_AP=0.5950 | Joint=0.5400 | Y_via_AT=0.8950
+  fixed replay:   AT_via_AP=0.8550 | Y_via_AP=0.9800 | Joint=0.8450 | Y_via_AT=0.9750
+P(Y correct | AP correct): 0.9014 | P(AP correct | Y correct): 0.9190
+P(Y correct | AT correct): 0.9582 | P(AT correct | Y correct): 0.8966
+AT_via_AP_replay: 0.7275 | Y_via_AP_replay: 0.7875 | Joint_AT_Y_via_AP_replay: 0.6925 | Y_via_AT_replay: 0.9350
+
+=== C -> AP -> AT -> Y [C_AP_AT] ===
+Y_after_C: 0.9625 | AP_after_C: 0.8725 | AT_after_C: 0.9300 | Joint_AT_Y: 0.9175 | Joint_AP_AT_Y: 0.8100
+P(Y correct | AP correct): 0.9685 | P(AP correct | Y correct): 0.8779
+P(Y correct | AT correct): 0.9866 | P(AT correct | Y correct): 0.9532
+AT_via_AP_replay: 0.7225 | Y_via_AP_replay: 0.7525 | Joint_AT_Y_via_AP_replay: 0.6900 | Y_via_AT_replay: 0.9525

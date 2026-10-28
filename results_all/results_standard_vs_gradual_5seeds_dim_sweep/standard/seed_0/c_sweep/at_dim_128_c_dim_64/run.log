@@ -1,0 +1,14 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+True
+NVIDIA A100-SXM4-40GB
+ap_lambda_med = 0.0
+ap_lambda_readout = 0.0
+c_lambda_ap_med = 0.0
+c_lambda_ap_readout = 0.0
+c_lambda_at_med = 0.0
+c_lambda_at_readout = 0.0
+
+Loading weights:   0%|          | 0/288 [00:00<?, ?it/s]
+Loading weights:   0%|          | 1/288 [00:01<06:24,  1.34s/it]
+Loading weights:  67%|██████▋   | 192/288 [00:01<00:00, 183.93it/s]
+Loading weights: 100%|██████████| 288/288 [00:01<00:00, 151.32it/s]
