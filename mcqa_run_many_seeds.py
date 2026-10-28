@@ -15,7 +15,7 @@ from mcqa_neural_net import load_gemma_model
 
 
 SEEDS = [0, 1, 2, 3, 4]
-METHOD_ORDER = ["gradual2.02.04.0", "gradual2.02.02.0", "standard"]
+METHOD_ORDER = ["gradual2.02.04.0", "standard", "gradual2.02.02.0"]
 
 METHODS = {
     "gradual2.02.04.0": {
@@ -26,14 +26,6 @@ METHODS = {
         "c_lambda_at_med": 4.0,
         "c_lambda_at_readout": 4.0,
     },
-    "gradual2.02.02.0": {
-        "ap_lambda_med": 2.0,
-        "ap_lambda_readout": 2.0,
-        "c_lambda_ap_med": 2.0,
-        "c_lambda_ap_readout": 2.0,
-        "c_lambda_at_med": 2.0,
-        "c_lambda_at_readout": 2.0,
-    },
     "standard": {
         "ap_lambda_med": 0.0,
         "ap_lambda_readout": 0.0,
@@ -42,6 +34,14 @@ METHODS = {
         "c_lambda_at_med": 0.0,
         "c_lambda_at_readout": 0.0,
     },
+    "gradual2.02.02.0": {
+        "ap_lambda_med": 2.0,
+        "ap_lambda_readout": 2.0,
+        "c_lambda_ap_med": 2.0,
+        "c_lambda_ap_readout": 2.0,
+        "c_lambda_at_med": 2.0,
+        "c_lambda_at_readout": 2.0,
+    }
 }
 
 
