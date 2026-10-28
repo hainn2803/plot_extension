@@ -467,7 +467,7 @@ def main():
     parser.add_argument("--readout-train-size", type=int, default=1300)
     parser.add_argument("--readout-val-size", type=int, default=520)
     parser.add_argument("--at-token-position", default="last_token")
-    parser.add_argument("--ap-token-position", default="last_token")
+    parser.add_argument("--ap-token-position", default="color_0,color_1,color_2,color_3")
     parser.add_argument("--c-token-position", default="color")
     parser.add_argument("--output-space", choices=("full", "az"), default="full")
     parser.add_argument("--change-ratio", type=float, default=0.5)
