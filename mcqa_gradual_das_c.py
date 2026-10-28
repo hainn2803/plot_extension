@@ -1,18 +1,20 @@
 """Train C DAS and test whether C naturally produces AP, AT, and Y."""
 
 import os
+
 import torch
 import torch.nn.functional as F
 
 from mcqa_gradual_das import LearnedSubspace, answer_label_ids, answer_logits, collect_all_layer_states, collect_layer_states, output_iia, output_label_ids, output_targets, run_full_layer_intervention, set_seed
+
 
 AP_TARGET = "AP_after_C_intervene"
 AT_TARGET = "AT_after_C_intervene"
 Y_TARGET = "Y_after_C_intervene"
 
 
-def run_c_intervention_and_capture(model, bank, source_c, Q_c, c_layer, ap_layer, at_layer, output_ids, c_pos="color", list_ap_pos=["last_token"], at_pos="last_token", batch_size=8, require_grad=True):
-    """Intervene on C, then return Y and the downstream AP/AT states."""
+def run_c_intervention_and_capture(model, bank, source_c, Q_c, c_layer, ap_layer, at_layer, output_ids, c_token_position, list_ap_token_positions, at_token_position, batch_size=8, require_grad=True):
+    """Intervene on C, then capture the naturally produced joint AP state and AT state."""
     device = next(model.parameters()).device
 
     all_y = []
@@ -24,18 +26,22 @@ def run_c_intervention_and_capture(model, bank, source_c, Q_c, c_layer, ap_layer
 
         ids = bank["base_input_ids"][start:end].to(device)
         mask = bank["base_attention_mask"][start:end].to(device)
-        donor = source_c[start:end].to(device)
+        donor_c = source_c[start:end].to(device)
 
-        rows = torch.arange(len(ids), device=device)
-        pad = (mask == 0).sum(1)
+        num_examples = ids.shape[0]
+        rows = torch.arange(num_examples, device=device)
+        pad_offset = (mask == 0).sum(dim=1)
 
-        c_idx = pad + bank["base_position_by_id"][c_pos][start:end].to(device)
-        list_ap_idx = []
-        for ap_pos in list_ap_pos:
-            ap_idx = pad + bank["base_position_by_id"][ap_pos][start:end].to(device)
-            list_ap_idx.append(ap_idx)
-        list_ap_idx = torch.stack(list_ap_idx, dim=1)
-        at_idx = pad + bank["base_position_by_id"][at_pos][start:end].to(device)
+        c_position = pad_offset + bank["base_position_by_id"][c_token_position][start:end].to(device)
+
+        ap_positions = []
+        for ap_token_position in list_ap_token_positions:
+            ap_position = pad_offset + bank["base_position_by_id"][ap_token_position][start:end].to(device)
+            ap_positions.append(ap_position)
+
+        ap_positions = torch.stack(ap_positions, dim=1)
+
+        at_position = pad_offset + bank["base_position_by_id"][at_token_position][start:end].to(device)
 
         captured = {}
 
@@ -46,12 +52,14 @@ def run_c_intervention_and_capture(model, bank, source_c, Q_c, c_layer, ap_layer
                 hidden = output
 
             new_hidden = hidden.clone()
-            base_state = hidden[rows, c_idx].float()
-            delta = ((donor.float() - base_state) @ Q_c) @ Q_c.T
-            new_hidden[rows, c_idx] = (base_state + delta).to(hidden.dtype)
+
+            base_c = hidden[rows, c_position, :].float()
+            delta_c = ((donor_c.float() - base_c) @ Q_c) @ Q_c.T
+            new_hidden[rows, c_position, :] = (base_c + delta_c).to(hidden.dtype)
 
             if isinstance(output, tuple):
                 return (new_hidden,) + output[1:]
+
             return new_hidden
 
         def ap_hook(_module, _inputs, output):
@@ -60,7 +68,8 @@ def run_c_intervention_and_capture(model, bank, source_c, Q_c, c_layer, ap_layer
             else:
                 hidden = output
 
-            captured["ap"] = hidden[rows[:, None], list_ap_idx, :].float()
+            ap_state = hidden[rows[:, None], ap_positions, :]
+            captured["ap"] = ap_state.float()
 
         def at_hook(_module, _inputs, output):
             if isinstance(output, tuple):
@@ -68,20 +77,24 @@ def run_c_intervention_and_capture(model, bank, source_c, Q_c, c_layer, ap_layer
             else:
                 hidden = output
 
-            captured["at"] = hidden[rows, at_idx].float()
+            at_state = hidden[rows, at_position, :]
+            captured["at"] = at_state.float()
+
+        def ap_at_hook(_module, _inputs, output):
+            if isinstance(output, tuple):
+                hidden = output[0]
+            else:
+                hidden = output
+
+            ap_state = hidden[rows[:, None], ap_positions, :]
+            at_state = hidden[rows, at_position, :]
+
+            captured["ap"] = ap_state.float()
+            captured["at"] = at_state.float()
 
         c_handle = model.model.layers[c_layer].register_forward_hook(c_hook)
 
         if ap_layer == at_layer:
-            def ap_at_hook(_module, _inputs, output):
-                if isinstance(output, tuple):
-                    hidden = output[0]
-                else:
-                    hidden = output
-
-                captured["ap"] = hidden[rows[:, None], list_ap_idx, :].float()
-                captured["at"] = hidden[rows, at_idx].float()
-
             ap_handle = model.model.layers[ap_layer].register_forward_hook(ap_at_hook)
             at_handle = None
         else:
@@ -89,8 +102,7 @@ def run_c_intervention_and_capture(model, bank, source_c, Q_c, c_layer, ap_layer
             at_handle = model.model.layers[at_layer].register_forward_hook(at_hook)
 
         try:
-            position_ids = (mask.long().cumsum(-1) - 1).clamp(min=0)
-
+            position_ids = (mask.long().cumsum(dim=-1) - 1).clamp(min=0)
             outputs = model.model(input_ids=ids, attention_mask=mask, position_ids=position_ids, use_cache=False, return_dict=True)
 
             y = answer_logits(model, outputs, mask, output_ids)
@@ -116,8 +128,8 @@ def run_c_intervention_and_capture(model, bank, source_c, Q_c, c_layer, ap_layer
     return torch.cat(all_y), torch.cat(all_ap), torch.cat(all_at)
 
 
-def run_frozen_mediator(model, bank, generated, Q, layer, output_ids, list_token_positions=None, batch_size=8, require_grad=True):
-    """Replay a generated AP/AT state into a fresh clean base run and return Y."""
+def run_frozen_mediator(model, bank, generated_states, Q, layer, output_ids, list_token_positions, batch_size=8, require_grad=True):
+    """Replay generated states through a frozen joint DAS handle."""
     device = next(model.parameters()).device
     all_y = []
 
@@ -126,17 +138,21 @@ def run_frozen_mediator(model, bank, generated, Q, layer, output_ids, list_token
 
         ids = bank["base_input_ids"][start:end].to(device)
         mask = bank["base_attention_mask"][start:end].to(device)
-        donor = generated[start:end].to(device)
-        num_examples = ids.shape[0]
-        num_tokens_collected = len(list_token_positions)
-        rows = torch.arange(len(ids), device=device)
-        pad = (mask == 0).sum(1)
+        donor = generated_states[start:end].to(device)
 
-        list_ap_idx = []
-        for ap_pos in list_token_positions:
-            ap_idx = pad + bank["base_position_by_id"][ap_pos][start:end].to(device)
-            list_ap_idx.append(ap_idx)
-        list_ap_idx = torch.stack(list_ap_idx, dim=1)
+        num_examples = ids.shape[0]
+        num_tokens = len(list_token_positions)
+
+        rows = torch.arange(num_examples, device=device)
+        pad_offset = (mask == 0).sum(dim=1)
+
+        token_positions = []
+
+        for token_position in list_token_positions:
+            position = pad_offset + bank["base_position_by_id"][token_position][start:end].to(device)
+            token_positions.append(position)
+
+        token_positions = torch.stack(token_positions, dim=1)
 
         def hook(_module, _inputs, output):
             if isinstance(output, tuple):
@@ -145,20 +161,30 @@ def run_frozen_mediator(model, bank, generated, Q, layer, output_ids, list_token
                 hidden = output
 
             new_hidden = hidden.clone()
-            base_state = hidden[rows[:, None], list_ap_idx].float()
-            delta = ((donor.reshape(num_examples, -1).float() - base_state.reshape(num_examples, -1)) @ Q) @ Q.T
-            delta = delta.reshape(delta.shape[0], num_tokens_collected, -1)
-            new_hidden[rows[:, None], list_ap_idx] = (base_state + delta).to(hidden.dtype)
+
+            base_states = hidden[rows[:, None], token_positions, :].float()
+
+            base_flat = base_states.reshape(num_examples, -1)
+            donor_flat = donor.reshape(num_examples, -1).float()
+
+            delta_flat = ((donor_flat - base_flat) @ Q) @ Q.T
+            new_flat = base_flat + delta_flat
+
+            new_states = new_flat.reshape(num_examples, num_tokens, -1)
+
+            new_hidden[rows[:, None], token_positions, :] = new_states.to(hidden.dtype)
 
             if isinstance(output, tuple):
                 return (new_hidden,) + output[1:]
+
             return new_hidden
 
         handle = model.model.layers[layer].register_forward_hook(hook)
 
         try:
-            position_ids = (mask.long().cumsum(-1) - 1).clamp(min=0)
+            position_ids = (mask.long().cumsum(dim=-1) - 1).clamp(min=0)
             outputs = model.model(input_ids=ids, attention_mask=mask, position_ids=position_ids, use_cache=False, return_dict=True)
+
             y = answer_logits(model, outputs, mask, output_ids)
 
             if require_grad:
@@ -173,31 +199,34 @@ def run_frozen_mediator(model, bank, generated, Q, layer, output_ids, list_token
 
 
 @torch.no_grad()
-def evaluate_c(model, tokenizer, bank, source_c, Q_c, c_layer, Q_ap, ap_layer, list_ap_pos, W_ap, b_ap, Q_at, at_layer, at_pos, W_at, b_at, c_pos, batch_size, output_space):
+def evaluate_c(model, tokenizer, bank, source_c, Q_c, c_layer, Q_ap, ap_layer, list_ap_token_positions, W_ap, b_ap, Q_at, at_layer, at_token_position, W_at, b_at, c_token_position, batch_size, output_space):
     labels = answer_label_ids(tokenizer)
     output_ids = output_label_ids(labels, output_space)
 
-    direct_y, generated_ap, generated_at = run_c_intervention_and_capture(model, bank, source_c, Q_c, c_layer, ap_layer, at_layer, output_ids, c_pos, list_ap_pos, at_pos, batch_size, False)
+    direct_y, generated_ap, generated_at = run_c_intervention_and_capture(model, bank, source_c, Q_c, c_layer, ap_layer, at_layer, output_ids, c_token_position, list_ap_token_positions, at_token_position, batch_size, False)
 
-    ap_mediator_y = run_frozen_mediator(model, bank, generated_ap, Q_ap, ap_layer, output_ids, list_ap_pos, batch_size, False)
+    ap_mediator_y = run_frozen_mediator(model, bank, generated_ap, Q_ap, ap_layer, output_ids, list_ap_token_positions, batch_size, False)
 
-    at_mediator_y = run_frozen_mediator(model, bank, generated_at, Q_at, at_layer, output_ids, list_ap_pos, batch_size, False)
+    list_at_token_positions = [at_token_position]
+    at_mediator_y = run_frozen_mediator(model, bank, generated_at, Q_at, at_layer, output_ids, list_at_token_positions, batch_size, False)
 
     targets = bank["intervention_targets"]
+
     ap_target = targets[AP_TARGET]
     at_target = targets[AT_TARGET]
     y_target = targets[Y_TARGET]
 
-    generated_ap = generated_ap.reshape(generated_ap.shape[0], -1)
-    ap_logits = (generated_ap.to(Q_ap.device) @ Q_ap) @ W_ap.T + b_ap
+    generated_ap_flat = generated_ap.reshape(generated_ap.shape[0], -1)
+
+    ap_logits = (generated_ap_flat.to(Q_ap.device) @ Q_ap) @ W_ap.T + b_ap
     at_logits = (generated_at.to(Q_at.device) @ Q_at) @ W_at.T + b_at
 
     direct_iia = output_iia(direct_y, y_target, tokenizer, output_space)
     ap_mediator_iia = output_iia(ap_mediator_y, y_target, tokenizer, output_space)
     at_mediator_iia = output_iia(at_mediator_y, y_target, tokenizer, output_space)
 
-    ap_prediction = ap_logits.argmax(-1).cpu()
-    at_prediction = at_logits.argmax(-1).cpu()
+    ap_prediction = ap_logits.argmax(dim=-1).cpu()
+    at_prediction = at_logits.argmax(dim=-1).cpu()
 
     ap_readout_acc = float((ap_prediction == ap_target.cpu()).float().mean())
     at_readout_acc = float((at_prediction == at_target.cpu()).float().mean())
@@ -217,12 +246,12 @@ def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoin
     ap_checkpoint_data = torch.load(ap_checkpoint, map_location="cpu", weights_only=False)
     Q_ap = ap_checkpoint_data["basis"].float().to(device)
     ap_layer = int(ap_checkpoint_data["layer"])
-    list_ap_pos = ap_checkpoint_data["token_position"]
+    list_ap_token_positions = ap_checkpoint_data["token_position"]
 
     at_checkpoint_data = torch.load(at_checkpoint, map_location="cpu", weights_only=False)
     Q_at = at_checkpoint_data["basis"].float().to(device)
     at_layer = int(at_checkpoint_data["layer"])
-    at_pos = at_checkpoint_data.get("token_position", "last_token")
+    at_token_position = at_checkpoint_data["token_position"]
 
     ap_readout = torch.load(ap_readout_checkpoint, map_location="cpu", weights_only=False)
     W_ap = ap_readout["W_AP"].float().to(device)
@@ -232,7 +261,19 @@ def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoin
     W_at = at_readout["W_AT"].float().to(device)
     b_at = at_readout["b_AT"].float().to(device)
 
+    if not isinstance(list_ap_token_positions, list):
+        raise ValueError(f"AP token_position must be a list, got {type(list_ap_token_positions)}")
+
+    expected_ap_width = len(list_ap_token_positions) * model.config.hidden_size
+
+    if Q_ap.shape[0] != expected_ap_width:
+        raise ValueError(f"AP basis width {Q_ap.shape[0]} does not match {len(list_ap_token_positions)} tokens x hidden size {model.config.hidden_size} = {expected_ap_width}")
+
+    if Q_at.shape[0] != model.config.hidden_size:
+        raise ValueError(f"AT basis width {Q_at.shape[0]} does not match hidden size {model.config.hidden_size}")
+
     train_bank, cal_banks, test_banks = banks
+
     cal_bank = cal_banks["C"]
     test_bank = test_banks["C"]
 
@@ -245,12 +286,16 @@ def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoin
         layers = list(range(max_layer))
     else:
         valid_layers = []
+
         for layer in layers:
             if layer < max_layer:
                 valid_layers.append(layer)
+
         layers = valid_layers
 
-    # Pick the C layer using direct Y_after_C_intervene.
+    if len(layers) == 0:
+        raise ValueError(f"No valid C layers before AP layer {ap_layer} and AT layer {at_layer}")
+
     cal_source_by_layer = collect_all_layer_states(model, cal_bank["source_input_ids"], cal_bank["source_attention_mask"], cal_bank["source_position_by_id"], layers, token_position, eval_batch_size)
 
     layer_scores = []
@@ -262,6 +307,7 @@ def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoin
         iia = output_iia(logits, target, tokenizer, output_space)
 
         layer_scores.append((layer, iia))
+
         print(f"[C layer {layer}] iia={iia:.4f}")
 
     c_layer = None
@@ -273,9 +319,7 @@ def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoin
             c_layer = layer
 
     train_source = collect_layer_states(model, train_bank["source_input_ids"], train_bank["source_attention_mask"], train_bank["source_position_by_id"], c_layer, token_position, eval_batch_size)
-
     cal_source = cal_source_by_layer[c_layer]
-
     test_source = collect_layer_states(model, test_bank["source_input_ids"], test_bank["source_attention_mask"], test_bank["source_position_by_id"], c_layer, token_position, eval_batch_size)
 
     train_targets = train_bank["intervention_targets"]
@@ -287,6 +331,8 @@ def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoin
     best_basis = None
     best_epoch = None
     best_metrics = None
+
+    list_at_token_positions = [at_token_position]
 
     for epoch in range(1, epochs + 1):
         permutation = torch.randperm(len(train_bank["base_input_ids"]))
@@ -301,6 +347,7 @@ def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoin
             idx = permutation[start:start + train_batch_size]
 
             mini_positions = {}
+
             for name, positions in train_bank["base_position_by_id"].items():
                 mini_positions[name] = positions[idx]
 
@@ -311,21 +358,21 @@ def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoin
             }
 
             optimizer.zero_grad()
+
             Q_c = alignment.basis()
 
-            direct_y, generated_ap, generated_at = run_c_intervention_and_capture(model, mini, train_source[idx], Q_c, c_layer, ap_layer, at_layer, output_ids, token_position, list_ap_pos, at_pos, len(idx), True)
-            generated_ap = generated_ap.reshape(generated_ap.shape[0], -1)
+            direct_y, generated_ap, generated_at = run_c_intervention_and_capture(model, mini, train_source[idx], Q_c, c_layer, ap_layer, at_layer, output_ids, token_position, list_ap_token_positions, at_token_position, len(idx), True)
 
-            ap_mediator_y = run_frozen_mediator(model, mini, generated_ap, Q_ap, ap_layer, output_ids, list_ap_pos, len(idx), True)
-
-            at_mediator_y = run_frozen_mediator(model, bank, generated_at, Q_at, at_layer, output_ids, [at_pos], batch_size, False)
+            ap_mediator_y = run_frozen_mediator(model, mini, generated_ap, Q_ap, ap_layer, output_ids, list_ap_token_positions, len(idx), True)
+            at_mediator_y = run_frozen_mediator(model, mini, generated_at, Q_at, at_layer, output_ids, list_at_token_positions, len(idx), True)
 
             y_target = output_targets(train_targets[Y_TARGET][idx], labels, output_space, device)
-
             ap_target = train_targets[AP_TARGET][idx].to(device)
             at_target = train_targets[AT_TARGET][idx].to(device)
 
-            ap_logits = (generated_ap @ Q_ap) @ W_ap.T + b_ap
+            generated_ap_flat = generated_ap.reshape(generated_ap.shape[0], -1)
+
+            ap_logits = (generated_ap_flat @ Q_ap) @ W_ap.T + b_ap
             at_logits = (generated_at @ Q_at) @ W_at.T + b_at
 
             direct_loss = F.cross_entropy(direct_y, y_target)
@@ -343,15 +390,17 @@ def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoin
             loss.backward()
             optimizer.step()
 
-            batch_size = len(idx)
-            total_direct_loss += direct_loss.item() * batch_size
-            total_ap_mediator_loss += ap_mediator_loss.item() * batch_size
-            total_ap_readout_loss += ap_readout_loss.item() * batch_size
-            total_at_mediator_loss += at_mediator_loss.item() * batch_size
-            total_at_readout_loss += at_readout_loss.item() * batch_size
+            current_batch_size = len(idx)
+
+            total_direct_loss += direct_loss.item() * current_batch_size
+            total_ap_mediator_loss += ap_mediator_loss.item() * current_batch_size
+            total_ap_readout_loss += ap_readout_loss.item() * current_batch_size
+            total_at_mediator_loss += at_mediator_loss.item() * current_batch_size
+            total_at_readout_loss += at_readout_loss.item() * current_batch_size
 
         Q_c = alignment.basis()
-        metrics = evaluate_c(model, tokenizer, cal_bank, cal_source, Q_c, c_layer, Q_ap, ap_layer, list_ap_pos, W_ap, b_ap, Q_at, at_layer, at_pos, W_at, b_at, token_position, eval_batch_size, output_space)
+
+        metrics = evaluate_c(model, tokenizer, cal_bank, cal_source, Q_c, c_layer, Q_ap, ap_layer, list_ap_token_positions, W_ap, b_ap, Q_at, at_layer, at_token_position, W_at, b_at, token_position, eval_batch_size, output_space)
 
         direct_iia, ap_mediator_iia, ap_readout_acc, at_mediator_iia, at_readout_acc = metrics
 
@@ -372,15 +421,14 @@ def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoin
         score = min(active_metrics)
 
         num_train = len(permutation)
-        average_losses = [
-            total_direct_loss / num_train,
-            total_ap_mediator_loss / num_train,
-            total_ap_readout_loss / num_train,
-            total_at_mediator_loss / num_train,
-            total_at_readout_loss / num_train,
-        ]
 
-        print(f"[C epoch {epoch:02d}] losses={average_losses} | cal={metrics}")
+        direct_average = total_direct_loss / num_train
+        ap_mediator_average = total_ap_mediator_loss / num_train
+        ap_readout_average = total_ap_readout_loss / num_train
+        at_mediator_average = total_at_mediator_loss / num_train
+        at_readout_average = total_at_readout_loss / num_train
+
+        print(f"[C epoch {epoch:02d}] direct={direct_average:.4f} ap_med={ap_mediator_average:.4f} ap_readout={ap_readout_average:.4f} at_med={at_mediator_average:.4f} at_readout={at_readout_average:.4f} | cal={metrics}")
 
         if score > best_score:
             best_score = score
@@ -388,7 +436,7 @@ def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoin
             best_epoch = epoch
             best_metrics = metrics
 
-    test_metrics = evaluate_c(model, tokenizer, test_bank, test_source, best_basis.to(device), c_layer, Q_ap, ap_layer, ap_pos, W_ap, b_ap, Q_at, at_layer, at_pos, W_at, b_at, token_position, eval_batch_size, output_space)
+    test_metrics = evaluate_c(model, tokenizer, test_bank, test_source, best_basis.to(device), c_layer, Q_ap, ap_layer, list_ap_token_positions, W_ap, b_ap, Q_at, at_layer, at_token_position, W_at, b_at, token_position, eval_batch_size, output_space)
 
     result = {
         "variable": "C",
@@ -402,10 +450,12 @@ def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoin
     }
 
     save_dir = os.path.dirname(save_path)
+
     if save_dir == "":
         save_dir = "."
 
     os.makedirs(save_dir, exist_ok=True)
+
     torch.save(result, save_path)
 
     print(f"[C BEST] layer={c_layer} epoch={best_epoch} cal={best_metrics} test={test_metrics}")

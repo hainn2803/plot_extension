@@ -1,0 +1,46 @@
+=== CLEAN READOUT ===
+AP base/source: 1.0000 / 1.0000
+AT base/source: 0.9100 / 0.8875
+C base/source : 0.9950 / 0.9950
+
+=== AP -> AT -> Y [AP_only] ===
+Y_after_AP: 1.0000 | AT_after_AP: 1.0000 | Joint_AT_Y: 1.0000
+P(Y correct | AT correct): 1.0000
+P(AT correct | Y correct): 1.0000
+Y_via_AT_replay: 1.0000
+
+=== AP -> AT -> Y [AP_AT] ===
+Y_after_AP: 1.0000 | AT_after_AP: 1.0000 | Joint_AT_Y: 1.0000
+P(Y correct | AT correct): 1.0000
+P(AT correct | Y correct): 1.0000
+Y_via_AT_replay: 1.0000
+
+=== C -> AP -> AT -> Y [C_only] ===
+Y_after_C: 0.8525
+AP_after_C: 0.9725
+AT_after_C: 0.8300
+Joint_AT_Y_after_C: 0.8025
+Joint_AP_AT_Y_after_C: 0.7900
+P(Y correct | AP correct): 0.8638
+P(AP correct | Y correct): 0.9853
+P(Y correct | AT correct): 0.9669
+P(AT correct | Y correct): 0.9413
+AT_via_AP_replay: 0.9450
+Y_via_AP_replay: 0.9600
+Joint_AT_Y_via_AP_replay: 0.9350
+Y_via_AT_replay: 0.8850
+
+=== C -> AP -> AT -> Y [C_AP_AT] ===
+Y_after_C: 0.9475
+AP_after_C: 0.9825
+AT_after_C: 0.9400
+Joint_AT_Y_after_C: 0.9225
+Joint_AP_AT_Y_after_C: 0.9125
+P(Y correct | AP correct): 0.9542
+P(AP correct | Y correct): 0.9894
+P(Y correct | AT correct): 0.9814
+P(AT correct | Y correct): 0.9736
+AT_via_AP_replay: 0.9750
+Y_via_AP_replay: 0.9775
+Joint_AT_Y_via_AP_replay: 0.9700
+Y_via_AT_replay: 0.9650

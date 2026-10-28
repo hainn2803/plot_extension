@@ -9,6 +9,10 @@ from mcqa_gradual_das_c import train_c
 from mcqa_joint_das_ap_at_c_balanced import fit_readout, parse_layers
 from mcqa_load_randomized_ap_at_c import build_all_banks, build_ap_readout_datasets, build_at_readout_datasets, build_c_readout_datasets, build_shared_readout_banks
 from mcqa_neural_net import load_gemma_model
+import torch
+import torch.nn.functional as F
+from mcqa_gradual_das import collect_joint_token_states_in_single_layer, set_seed, fit_readout
+
 
 
 def copy_file(source, destination):
@@ -65,26 +69,26 @@ def save_summary(rows, path):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at")
-    parser.add_argument("--result-dir", default="results_joint_randomized_gradual_all2.0_newrun_v2")
+    parser.add_argument("--result-dir", default="results_joint_randomized_standard_ap_cross_tokens_128")
     parser.add_argument("--ft-size", type=int, default=800)
     parser.add_argument("--cal-size", type=int, default=400)
     parser.add_argument("--te-size", type=int, default=400)
     parser.add_argument("--at-dim", type=int, default=128)
-    parser.add_argument("--ap-dim", type=int, default=256)
+    parser.add_argument("--ap-dim", type=int, default=128)
     parser.add_argument("--c-dim", type=int, default=128)
     parser.add_argument("--at-layers", default="23,24,25")
-    parser.add_argument("--ap-layers", default="17")
-    parser.add_argument("--c-layers", default="0,1")
-    parser.add_argument("--at-epochs", type=int, default=20)
-    parser.add_argument("--ap-epochs", type=int, default=20)
-    parser.add_argument("--c-epochs", type=int, default=20)
+    parser.add_argument("--ap-layers", default="14")
+    parser.add_argument("--c-layers", default="0")
+    parser.add_argument("--at-epochs", type=int, default=10)
+    parser.add_argument("--ap-epochs", type=int, default=10)
+    parser.add_argument("--c-epochs", type=int, default=10)
     parser.add_argument("--lr", type=float, default=1e-2)
-    parser.add_argument("--ap-lambda-med", type=float, default=1.0)
-    parser.add_argument("--ap-lambda-readout", type=float, default=1.0)
-    parser.add_argument("--c-lambda-ap-med", type=float, default=2.0)
-    parser.add_argument("--c-lambda-ap-readout", type=float, default=2.0)
-    parser.add_argument("--c-lambda-at-med", type=float, default=2.0)
-    parser.add_argument("--c-lambda-at-readout", type=float, default=2.0)
+    parser.add_argument("--ap-lambda-med", type=float, default=0.0)
+    parser.add_argument("--ap-lambda-readout", type=float, default=0.0)
+    parser.add_argument("--c-lambda-ap-med", type=float, default=0.0)
+    parser.add_argument("--c-lambda-ap-readout", type=float, default=0.0)
+    parser.add_argument("--c-lambda-at-med", type=float, default=0.0)
+    parser.add_argument("--c-lambda-at-readout", type=float, default=0.0)
     parser.add_argument("--train-batch-size", type=int, default=32)
     parser.add_argument("--eval-batch-size", type=int, default=32)
     parser.add_argument("--readout-train-size", type=int, default=1300)
