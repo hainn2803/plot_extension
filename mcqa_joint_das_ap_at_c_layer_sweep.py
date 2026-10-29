@@ -69,7 +69,7 @@ def save_summary(rows, path):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at")
-    parser.add_argument("--result-dir", default="results_joint_randomized_standard_ap_cross_tokens_128")
+    parser.add_argument("--result-dir", default="results_joint_randomized_standard_ap_cross_tokens_seed4_med4read0")
     parser.add_argument("--ft-size", type=int, default=800)
     parser.add_argument("--cal-size", type=int, default=400)
     parser.add_argument("--te-size", type=int, default=400)
@@ -81,13 +81,13 @@ def main():
     parser.add_argument("--c-layers", default="0")
     parser.add_argument("--at-epochs", type=int, default=10)
     parser.add_argument("--ap-epochs", type=int, default=10)
-    parser.add_argument("--c-epochs", type=int, default=10)
+    parser.add_argument("--c-epochs", type=int, default=50)
     parser.add_argument("--lr", type=float, default=1e-2)
-    parser.add_argument("--ap-lambda-med", type=float, default=0.0)
-    parser.add_argument("--ap-lambda-readout", type=float, default=0.0)
+    parser.add_argument("--ap-lambda-med", type=float, default=2.0)
+    parser.add_argument("--ap-lambda-readout", type=float, default=2.0)
     parser.add_argument("--c-lambda-ap-med", type=float, default=0.0)
     parser.add_argument("--c-lambda-ap-readout", type=float, default=0.0)
-    parser.add_argument("--c-lambda-at-med", type=float, default=0.0)
+    parser.add_argument("--c-lambda-at-med", type=float, default=4.0)
     parser.add_argument("--c-lambda-at-readout", type=float, default=0.0)
     parser.add_argument("--train-batch-size", type=int, default=32)
     parser.add_argument("--eval-batch-size", type=int, default=32)
@@ -97,7 +97,7 @@ def main():
     parser.add_argument("--ap-token-position", type=str, default="color_0,color_1,color_2,color_3")
     parser.add_argument("--c-token-position", default="color")
     parser.add_argument("--output-space", choices=("full", "az"), default="full")
-    parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--seed", type=int, default=4)
     args = parser.parse_args()
 
     result_dir = Path(args.result_dir)
@@ -149,7 +149,7 @@ def main():
         row = {"layer": layer, "score": score, "cal_iia": float(at_result["cal_iia"]), "test_iia": float(at_result["test_iia"]), "best_epoch": int(at_result["best_epoch"])}
         at_rows.append(row)
 
-        if score > best_at_score:
+        if score >= best_at_score:
             best_at_score = score
             best_at_layer = layer
             best_at_path = at_path
@@ -220,7 +220,7 @@ def main():
         row = {"layer": layer, "score": score, "cal_direct_iia": float(direct_iia), "cal_mediator_iia": float(mediator_iia), "cal_readout_acc": float(readout_acc), "test_direct_iia": float(test_direct_iia), "test_mediator_iia": float(test_mediator_iia), "test_readout_acc": float(test_readout_acc), "best_epoch": int(ap_result["best_epoch"])}
         ap_rows.append(row)
 
-        if score > best_ap_score:
+        if score >= best_ap_score:
             best_ap_score = score
             best_ap_layer = layer
             best_ap_path = ap_path
@@ -274,7 +274,7 @@ def main():
         row = {"layer": layer, "score": score, "cal_direct_iia": float(cal_direct_iia), "cal_ap_mediator_iia": float(cal_ap_mediator_iia), "cal_ap_readout_acc": float(cal_ap_readout_acc), "cal_at_mediator_iia": float(cal_at_mediator_iia), "cal_at_readout_acc": float(cal_at_readout_acc), "test_direct_iia": float(test_direct_iia), "test_ap_mediator_iia": float(test_ap_mediator_iia), "test_ap_readout_acc": float(test_ap_readout_acc), "test_at_mediator_iia": float(test_at_mediator_iia), "test_at_readout_acc": float(test_at_readout_acc), "best_epoch": int(c_result["best_epoch"])}
         c_rows.append(row)
 
-        if score > best_c_score:
+        if score >= best_c_score:
             best_c_score = score
             best_c_layer = layer
             best_c_path = c_path

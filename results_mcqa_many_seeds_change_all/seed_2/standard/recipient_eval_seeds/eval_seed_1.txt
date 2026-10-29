@@ -1,0 +1,43 @@
+=== C INTERVENTION -> INDUCED AP/AT TRANSFER [C_only] ===
+Y_after_C: 0.8675
+C-INDUCED AP -> BASE
+AT_via_AP_replay_base: 0.9325
+Y_via_AP_replay_base: 0.9425
+C-INDUCED AP -> RECIPIENT
+AT_via_AP_replay_recipient_same: 0.7450
+Y_via_AP_replay_recipient_same: 0.7775
+AT_via_AP_replay_recipient_different: 0.9125
+Y_via_AP_replay_recipient_different: 0.9225
+C-INDUCED AT -> BASE / RECIPIENT
+Y_via_AT_replay_base: 0.8950
+Y_via_AT_replay_recipient_same: 0.7525
+Y_via_AT_replay_recipient_different: 0.8100
+
+=== C INTERVENTION -> INDUCED AP/AT TRANSFER [C_AP_AT] ===
+Y_after_C: 0.9350
+C-INDUCED AP -> BASE
+AT_via_AP_replay_base: 0.9725
+Y_via_AP_replay_base: 0.9775
+C-INDUCED AP -> RECIPIENT
+AT_via_AP_replay_recipient_same: 0.7800
+Y_via_AP_replay_recipient_same: 0.8125
+AT_via_AP_replay_recipient_different: 0.9375
+Y_via_AP_replay_recipient_different: 0.9400
+C-INDUCED AT -> BASE / RECIPIENT
+Y_via_AT_replay_base: 0.9475
+Y_via_AT_replay_recipient_same: 0.8425
+Y_via_AT_replay_recipient_different: 0.9100
+
+=== AP INTERVENTION -> INDUCED AT TRANSFER [AP_only] ===
+Y_after_AP: 0.9900
+AT_after_AP: 0.9975
+Y_via_AT_replay_base: 0.9950
+Y_via_AT_replay_recipient_same: 0.9850
+Y_via_AT_replay_recipient_different: 0.9925
+
+=== AP INTERVENTION -> INDUCED AT TRANSFER [AP_AT] ===
+Y_after_AP: 1.0000
+AT_after_AP: 1.0000
+Y_via_AT_replay_base: 1.0000
+Y_via_AT_replay_recipient_same: 0.9975
+Y_via_AT_replay_recipient_different: 0.9975

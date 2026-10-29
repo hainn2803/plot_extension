@@ -199,16 +199,11 @@ def run_frozen_mediator(model, bank, generated_states, Q, layer, output_ids, lis
 
 
 @torch.no_grad()
-def evaluate_c(model, tokenizer, bank, source_c, Q_c, c_layer, Q_ap, ap_layer, list_ap_token_positions, W_ap, b_ap, Q_at, at_layer, at_token_position, W_at, b_at, c_token_position, batch_size, output_space):
+def evaluate_c(model, tokenizer, bank, source_c, Q_c, c_layer, Q_ap, ap_layer, list_ap_token_positions, W_ap, b_ap, Q_at, at_layer, at_token_position, W_at, b_at, c_token_position, batch_size, output_space, compute_ap_mediator=True, compute_ap_readout=True, compute_at_mediator=True, compute_at_readout=True):
     labels = answer_label_ids(tokenizer)
     output_ids = output_label_ids(labels, output_space)
 
     direct_y, generated_ap, generated_at = run_c_intervention_and_capture(model, bank, source_c, Q_c, c_layer, ap_layer, at_layer, output_ids, c_token_position, list_ap_token_positions, at_token_position, batch_size, False)
-
-    ap_mediator_y = run_frozen_mediator(model, bank, generated_ap, Q_ap, ap_layer, output_ids, list_ap_token_positions, batch_size, False)
-
-    list_at_token_positions = [at_token_position]
-    at_mediator_y = run_frozen_mediator(model, bank, generated_at, Q_at, at_layer, output_ids, list_at_token_positions, batch_size, False)
 
     targets = bank["intervention_targets"]
 
@@ -216,20 +211,31 @@ def evaluate_c(model, tokenizer, bank, source_c, Q_c, c_layer, Q_ap, ap_layer, l
     at_target = targets[AT_TARGET]
     y_target = targets[Y_TARGET]
 
-    generated_ap_flat = generated_ap.reshape(generated_ap.shape[0], -1)
-
-    ap_logits = (generated_ap_flat.to(Q_ap.device) @ Q_ap) @ W_ap.T + b_ap
-    at_logits = (generated_at.to(Q_at.device) @ Q_at) @ W_at.T + b_at
-
     direct_iia = output_iia(direct_y, y_target, tokenizer, output_space)
-    ap_mediator_iia = output_iia(ap_mediator_y, y_target, tokenizer, output_space)
-    at_mediator_iia = output_iia(at_mediator_y, y_target, tokenizer, output_space)
 
-    ap_prediction = ap_logits.argmax(dim=-1).cpu()
-    at_prediction = at_logits.argmax(dim=-1).cpu()
+    ap_mediator_iia = 0.0
+    if compute_ap_mediator:
+        ap_mediator_y = run_frozen_mediator(model, bank, generated_ap, Q_ap, ap_layer, output_ids, list_ap_token_positions, batch_size, False)
+        ap_mediator_iia = output_iia(ap_mediator_y, y_target, tokenizer, output_space)
 
-    ap_readout_acc = float((ap_prediction == ap_target.cpu()).float().mean())
-    at_readout_acc = float((at_prediction == at_target.cpu()).float().mean())
+    ap_readout_acc = 0.0
+    if compute_ap_readout:
+        generated_ap_flat = generated_ap.reshape(generated_ap.shape[0], -1)
+        ap_logits = (generated_ap_flat.to(Q_ap.device) @ Q_ap) @ W_ap.T + b_ap
+        ap_prediction = ap_logits.argmax(dim=-1).cpu()
+        ap_readout_acc = float((ap_prediction == ap_target.cpu()).float().mean())
+
+    at_mediator_iia = 0.0
+    if compute_at_mediator:
+        list_at_token_positions = [at_token_position]
+        at_mediator_y = run_frozen_mediator(model, bank, generated_at, Q_at, at_layer, output_ids, list_at_token_positions, batch_size, False)
+        at_mediator_iia = output_iia(at_mediator_y, y_target, tokenizer, output_space)
+
+    at_readout_acc = 0.0
+    if compute_at_readout:
+        at_logits = (generated_at.to(Q_at.device) @ Q_at) @ W_at.T + b_at
+        at_prediction = at_logits.argmax(dim=-1).cpu()
+        at_readout_acc = float((at_prediction == at_target.cpu()).float().mean())
 
     return direct_iia, ap_mediator_iia, ap_readout_acc, at_mediator_iia, at_readout_acc
 
@@ -334,6 +340,13 @@ def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoin
 
     list_at_token_positions = [at_token_position]
 
+    compute_ap_mediator = lambda_ap_med > 0
+    compute_ap_readout = lambda_ap_readout > 0
+    compute_at_mediator = lambda_at_med > 0
+    compute_at_readout = lambda_at_readout > 0
+
+    print(f"[C objectives] direct=1 ap_med={lambda_ap_med} ap_readout={lambda_ap_readout} at_med={lambda_at_med} at_readout={lambda_at_readout}")
+
     for epoch in range(1, epochs + 1):
         permutation = torch.randperm(len(train_bank["base_input_ids"]))
 
@@ -363,23 +376,32 @@ def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoin
 
             direct_y, generated_ap, generated_at = run_c_intervention_and_capture(model, mini, train_source[idx], Q_c, c_layer, ap_layer, at_layer, output_ids, token_position, list_ap_token_positions, at_token_position, len(idx), True)
 
-            ap_mediator_y = run_frozen_mediator(model, mini, generated_ap, Q_ap, ap_layer, output_ids, list_ap_token_positions, len(idx), True)
-            at_mediator_y = run_frozen_mediator(model, mini, generated_at, Q_at, at_layer, output_ids, list_at_token_positions, len(idx), True)
-
             y_target = output_targets(train_targets[Y_TARGET][idx], labels, output_space, device)
-            ap_target = train_targets[AP_TARGET][idx].to(device)
-            at_target = train_targets[AT_TARGET][idx].to(device)
-
-            generated_ap_flat = generated_ap.reshape(generated_ap.shape[0], -1)
-
-            ap_logits = (generated_ap_flat @ Q_ap) @ W_ap.T + b_ap
-            at_logits = (generated_at @ Q_at) @ W_at.T + b_at
 
             direct_loss = F.cross_entropy(direct_y, y_target)
-            ap_mediator_loss = F.cross_entropy(ap_mediator_y, y_target)
-            ap_readout_loss = F.cross_entropy(ap_logits, ap_target)
-            at_mediator_loss = F.cross_entropy(at_mediator_y, y_target)
-            at_readout_loss = F.cross_entropy(at_logits, at_target)
+            ap_mediator_loss = torch.tensor(0.0, device=device)
+            ap_readout_loss = torch.tensor(0.0, device=device)
+            at_mediator_loss = torch.tensor(0.0, device=device)
+            at_readout_loss = torch.tensor(0.0, device=device)
+
+            if compute_ap_mediator:
+                ap_mediator_y = run_frozen_mediator(model, mini, generated_ap, Q_ap, ap_layer, output_ids, list_ap_token_positions, len(idx), True)
+                ap_mediator_loss = F.cross_entropy(ap_mediator_y, y_target)
+
+            if compute_ap_readout:
+                ap_target = train_targets[AP_TARGET][idx].to(device)
+                generated_ap_flat = generated_ap.reshape(generated_ap.shape[0], -1)
+                ap_logits = (generated_ap_flat @ Q_ap) @ W_ap.T + b_ap
+                ap_readout_loss = F.cross_entropy(ap_logits, ap_target)
+
+            if compute_at_mediator:
+                at_mediator_y = run_frozen_mediator(model, mini, generated_at, Q_at, at_layer, output_ids, list_at_token_positions, len(idx), True)
+                at_mediator_loss = F.cross_entropy(at_mediator_y, y_target)
+
+            if compute_at_readout:
+                at_target = train_targets[AT_TARGET][idx].to(device)
+                at_logits = (generated_at @ Q_at) @ W_at.T + b_at
+                at_readout_loss = F.cross_entropy(at_logits, at_target)
 
             loss = direct_loss
             loss = loss + lambda_ap_med * ap_mediator_loss
@@ -393,29 +415,37 @@ def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoin
             current_batch_size = len(idx)
 
             total_direct_loss += direct_loss.item() * current_batch_size
-            total_ap_mediator_loss += ap_mediator_loss.item() * current_batch_size
-            total_ap_readout_loss += ap_readout_loss.item() * current_batch_size
-            total_at_mediator_loss += at_mediator_loss.item() * current_batch_size
-            total_at_readout_loss += at_readout_loss.item() * current_batch_size
+
+            if compute_ap_mediator:
+                total_ap_mediator_loss += ap_mediator_loss.item() * current_batch_size
+
+            if compute_ap_readout:
+                total_ap_readout_loss += ap_readout_loss.item() * current_batch_size
+
+            if compute_at_mediator:
+                total_at_mediator_loss += at_mediator_loss.item() * current_batch_size
+
+            if compute_at_readout:
+                total_at_readout_loss += at_readout_loss.item() * current_batch_size
 
         Q_c = alignment.basis()
 
-        metrics = evaluate_c(model, tokenizer, cal_bank, cal_source, Q_c, c_layer, Q_ap, ap_layer, list_ap_token_positions, W_ap, b_ap, Q_at, at_layer, at_token_position, W_at, b_at, token_position, eval_batch_size, output_space)
+        metrics = evaluate_c(model, tokenizer, cal_bank, cal_source, Q_c, c_layer, Q_ap, ap_layer, list_ap_token_positions, W_ap, b_ap, Q_at, at_layer, at_token_position, W_at, b_at, token_position, eval_batch_size, output_space, compute_ap_mediator, compute_ap_readout, compute_at_mediator, compute_at_readout)
 
         direct_iia, ap_mediator_iia, ap_readout_acc, at_mediator_iia, at_readout_acc = metrics
 
         active_metrics = [direct_iia]
 
-        if lambda_ap_med > 0:
+        if compute_ap_mediator:
             active_metrics.append(ap_mediator_iia)
 
-        if lambda_ap_readout > 0:
+        if compute_ap_readout:
             active_metrics.append(ap_readout_acc)
 
-        if lambda_at_med > 0:
+        if compute_at_mediator:
             active_metrics.append(at_mediator_iia)
 
-        if lambda_at_readout > 0:
+        if compute_at_readout:
             active_metrics.append(at_readout_acc)
 
         score = min(active_metrics)
@@ -430,12 +460,13 @@ def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoin
 
         print(f"[C epoch {epoch:02d}] direct={direct_average:.4f} ap_med={ap_mediator_average:.4f} ap_readout={ap_readout_average:.4f} at_med={at_mediator_average:.4f} at_readout={at_readout_average:.4f} | cal={metrics}")
 
-        if score > best_score:
+        if score >= best_score:
             best_score = score
             best_basis = alignment.basis().detach().cpu().clone()
             best_epoch = epoch
             best_metrics = metrics
 
+    full_cal_metrics = evaluate_c(model, tokenizer, cal_bank, cal_source, best_basis.to(device), c_layer, Q_ap, ap_layer, list_ap_token_positions, W_ap, b_ap, Q_at, at_layer, at_token_position, W_at, b_at, token_position, eval_batch_size, output_space)
     test_metrics = evaluate_c(model, tokenizer, test_bank, test_source, best_basis.to(device), c_layer, Q_ap, ap_layer, list_ap_token_positions, W_ap, b_ap, Q_at, at_layer, at_token_position, W_at, b_at, token_position, eval_batch_size, output_space)
 
     result = {
@@ -444,7 +475,7 @@ def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoin
         "basis": best_basis,
         "token_position": token_position,
         "subspace_dim": subspace_dim,
-        "cal": best_metrics,
+        "cal": full_cal_metrics,
         "test": test_metrics,
         "best_epoch": best_epoch,
     }
@@ -458,6 +489,6 @@ def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoin
 
     torch.save(result, save_path)
 
-    print(f"[C BEST] layer={c_layer} epoch={best_epoch} cal={best_metrics} test={test_metrics}")
+    print(f"[C BEST] layer={c_layer} epoch={best_epoch} cal={full_cal_metrics} test={test_metrics}")
 
     return result

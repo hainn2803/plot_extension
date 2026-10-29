@@ -1,0 +1,334 @@
+import argparse
+import csv
+import re
+import statistics
+import subprocess
+import sys
+from pathlib import Path
+
+
+def parse_list(value):
+    values = []
+
+    for item in value.split(","):
+        item = item.strip()
+
+        if item != "":
+            values.append(item)
+
+    return values
+
+
+def parse_int_list(value):
+    values = []
+
+    for item in value.split(","):
+        item = item.strip()
+
+        if item != "":
+            values.append(int(item))
+
+    return values
+
+
+def run_eval(eval_script, result_dir, data_path, eval_seed, test_size, batch_size, output_space, output_path):
+    command = [
+        sys.executable,
+        eval_script,
+        "--data-path", data_path,
+        "--result-dir", str(result_dir),
+        "--seed", str(eval_seed),
+        "--test-size", str(test_size),
+        "--batch-size", str(batch_size),
+        "--output-space", output_space,
+    ]
+
+    print("\n" + "=" * 100)
+    print(f"RECIPIENT EVAL result_dir={result_dir} eval_seed={eval_seed}")
+    print("=" * 100)
+    print(" ".join(command))
+
+    process = subprocess.run(command)
+
+    if process.returncode != 0:
+        raise RuntimeError(f"Evaluation failed: {' '.join(command)}")
+
+    default_eval_path = result_dir / "eval_induced_other_recipient.txt"
+
+    if not default_eval_path.exists():
+        raise FileNotFoundError(f"Expected evaluation output not found: {default_eval_path}")
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    default_eval_path.replace(output_path)
+
+
+def clean_key(text):
+    text = text.strip()
+    text = text.replace(" ", "_")
+    text = text.replace("[", "")
+    text = text.replace("]", "")
+    text = text.replace("->", "to")
+    text = text.replace("|", "")
+    text = text.replace("(", "")
+    text = text.replace(")", "")
+    text = text.replace("/", "_")
+    text = re.sub(r"_+", "_", text)
+    return text.strip("_")
+
+
+def parse_eval_results(path):
+    text = Path(path).read_text()
+    metrics = {}
+    section = None
+    subsection = None
+
+    for raw_line in text.splitlines():
+        line = raw_line.strip()
+
+        if line == "":
+            continue
+
+        if line.startswith("===") and line.endswith("==="):
+            section = clean_key(line.strip("=").strip())
+            subsection = None
+            continue
+
+        if line in (
+            "C-INDUCED AP -> BASE",
+            "C-INDUCED AP -> RECIPIENT",
+            "C-INDUCED AT -> BASE / RECIPIENT",
+        ):
+            subsection = clean_key(line)
+            continue
+
+        match = re.match(r"([^:]+):\s*([0-9]*\.?[0-9]+)$", line)
+
+        if match is None:
+            continue
+
+        name = clean_key(match.group(1))
+        value = float(match.group(2))
+
+        if subsection is None:
+            key = f"{section}__{name}"
+        else:
+            key = f"{section}__{subsection}__{name}"
+
+        metrics[key] = value
+
+    return metrics
+
+
+def save_csv(rows, path):
+    if len(rows) == 0:
+        return
+
+    fieldnames = []
+
+    for row in rows:
+        for key in row:
+            if key not in fieldnames:
+                fieldnames.append(key)
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(path, "w", newline="") as file:
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+        writer.writeheader()
+
+        for row in rows:
+            writer.writerow(row)
+
+
+def metric_names(rows):
+    names = []
+
+    for row in rows:
+        for key in row:
+            if key in ("method", "train_seed", "eval_seed"):
+                continue
+
+            if key not in names:
+                names.append(key)
+
+    return names
+
+
+def aggregate_eval_seeds(rows, methods, train_seeds):
+    metrics = metric_names(rows)
+    output = []
+
+    for method in methods:
+        for train_seed in train_seeds:
+            config_rows = []
+
+            for row in rows:
+                if row["method"] == method and int(row["train_seed"]) == train_seed:
+                    config_rows.append(row)
+
+            if len(config_rows) == 0:
+                continue
+
+            for metric in metrics:
+                values = []
+
+                for row in config_rows:
+                    if metric in row and row[metric] != "":
+                        values.append(float(row[metric]))
+
+                if len(values) == 0:
+                    continue
+
+                output.append({
+                    "method": method,
+                    "train_seed": train_seed,
+                    "metric": metric,
+                    "mean_over_eval_seeds": statistics.mean(values),
+                    "std_over_eval_seeds": statistics.pstdev(values),
+                    "min": min(values),
+                    "max": max(values),
+                    "n_eval_seeds": len(values),
+                })
+
+    return output
+
+
+def aggregate_training_seeds(config_rows, methods):
+    metrics = []
+
+    for row in config_rows:
+        if row["metric"] not in metrics:
+            metrics.append(row["metric"])
+
+    output = []
+
+    for method in methods:
+        for metric in metrics:
+            values = []
+
+            for row in config_rows:
+                if row["method"] == method and row["metric"] == metric:
+                    values.append(float(row["mean_over_eval_seeds"]))
+
+            if len(values) == 0:
+                continue
+
+            output.append({
+                "method": method,
+                "metric": metric,
+                "mean_over_train_seeds": statistics.mean(values),
+                "std_over_train_seeds": statistics.pstdev(values),
+                "min": min(values),
+                "max": max(values),
+                "n_train_seeds": len(values),
+            })
+
+    return output
+
+
+def save_fixed_csv(rows, path, fieldnames):
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(path, "w", newline="") as file:
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+        writer.writeheader()
+
+        for row in rows:
+            writer.writerow(row)
+
+
+def main():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("--root", default="results_mcqa_many_seeds_change_all")
+    parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at")
+    parser.add_argument("--eval-script", default="mcqa_eval_induced_other_recipient_cross_tokens.py")
+    parser.add_argument("--methods", default="gradual2.02.04.0,standard,gradual2.02.02.0")
+    parser.add_argument("--train-seeds", default="0,1,2,3,4")
+    parser.add_argument("--eval-seeds", default="0,1,2")
+    parser.add_argument("--test-size", type=int, default=400)
+    parser.add_argument("--batch-size", type=int, default=32)
+    parser.add_argument("--output-space", choices=("full", "az"), default="full")
+    parser.add_argument("--resume", action="store_true")
+
+    args = parser.parse_args()
+
+    methods = parse_list(args.methods)
+    train_seeds = parse_int_list(args.train_seeds)
+    eval_seeds = parse_int_list(args.eval_seeds)
+
+    root = Path(args.root)
+    all_rows = []
+
+    for method in methods:
+        for train_seed in train_seeds:
+            seed_dir = root / f"seed_{train_seed}"
+            result_dir = seed_dir / method
+
+            if not (result_dir / "best_layers.txt").exists():
+                print(f"[SKIP] Missing completed training run: {result_dir}")
+                continue
+
+            if not (seed_dir / "shared_at" / "das_at.pt").exists():
+                print(f"[SKIP] Missing shared AT: {seed_dir / 'shared_at'}")
+                continue
+
+            eval_dir = result_dir / "recipient_eval_seeds"
+            eval_dir.mkdir(parents=True, exist_ok=True)
+
+            for eval_seed in eval_seeds:
+                eval_path = eval_dir / f"eval_seed_{eval_seed}.txt"
+
+                if args.resume and eval_path.exists():
+                    print(f"[RESUME] Using existing recipient evaluation: {eval_path}")
+                else:
+                    run_eval(args.eval_script, result_dir, args.data_path, eval_seed, args.test_size, args.batch_size, args.output_space, eval_path)
+
+                metrics = parse_eval_results(eval_path)
+
+                row = {
+                    "method": method,
+                    "train_seed": train_seed,
+                    "eval_seed": eval_seed,
+                }
+
+                for key, value in metrics.items():
+                    row[key] = value
+
+                all_rows.append(row)
+                save_csv(all_rows, root / "recipient_eval_all_runs.csv")
+
+    per_config = aggregate_eval_seeds(all_rows, methods, train_seeds)
+
+    save_fixed_csv(
+        per_config,
+        root / "recipient_eval_per_config_summary.csv",
+        ["method", "train_seed", "metric", "mean_over_eval_seeds", "std_over_eval_seeds", "min", "max", "n_eval_seeds"],
+    )
+
+    final_summary = aggregate_training_seeds(per_config, methods)
+
+    save_fixed_csv(
+        final_summary,
+        root / "recipient_eval_final_summary.csv",
+        ["method", "metric", "mean_over_train_seeds", "std_over_train_seeds", "min", "max", "n_train_seeds"],
+    )
+
+    print("\n" + "=" * 100)
+    print(f"FINAL RECIPIENT SUMMARY: {len(train_seeds)} TRAIN SEEDS x {len(eval_seeds)} EVAL SEEDS")
+    print("=" * 100)
+
+    for method in methods:
+        print(f"\n=== {method.upper()} ===")
+
+        for row in final_summary:
+            if row["method"] == method:
+                print(f'{row["metric"]}: {row["mean_over_train_seeds"]:.4f} ± {row["std_over_train_seeds"]:.4f}')
+
+    print(f"\nall eval runs      = {root / 'recipient_eval_all_runs.csv'}")
+    print(f"per-config summary = {root / 'recipient_eval_per_config_summary.csv'}")
+    print(f"final summary      = {root / 'recipient_eval_final_summary.csv'}")
+
+
+if __name__ == "__main__":
+    main()

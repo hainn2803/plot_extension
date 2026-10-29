@@ -1,0 +1,2 @@
+layer,score,cal_direct_iia,cal_ap_mediator_iia,cal_ap_readout_acc,cal_at_mediator_iia,cal_at_readout_acc,test_direct_iia,test_ap_mediator_iia,test_ap_readout_acc,test_at_mediator_iia,test_at_readout_acc,best_epoch
+0,0.86,0.86,0.9375,0.9649999737739563,0.8975,0.8650000095367432,0.8675,0.9375,0.9674999713897705,0.9,0.8924999833106995,12
