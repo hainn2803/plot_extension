@@ -14,14 +14,19 @@ For each base example:
 - C_only: C changes, AP same, AT same
 - C_AP_AT: C changes, choices stay fixed, so AP and AT also change
 
+AT_only uses a mixture controlled by distractor_portion:
+- distractor_swap: swap the correct label with one distractor label
+- novel_label: replace the correct label with a fresh A-Z label not already used
+
 C_only and C_AP_AT use the same counterfactual color.
 """
 
+import argparse
 import random
 import re
 import string
 from pathlib import Path
-from mcqa_constants import LETTER_TO_CLASS
+
 from datasets import Dataset, DatasetDict
 
 import mcqa_data_load_jchang_disjoint as jchang
@@ -32,6 +37,7 @@ COLOR_PATTERN = re.compile(r"\b(?:is|are)\s+(.+?)\.\s*What color\b", re.IGNORECA
 CHOICE_PATTERN = re.compile(r"(?m)^([ \t]*)([A-Z])\.[ \t]+([^\r\n]+)$")
 NUM_CHOICES = 4
 
+
 def normalize(text):
     return str(text).strip().casefold()
 
@@ -39,8 +45,10 @@ def normalize(text):
 def get_question_color(prompt):
     first_line = prompt.splitlines()[0]
     match = COLOR_PATTERN.search(first_line)
+
     if match is None:
         raise ValueError(f"Cannot parse color from prompt: {first_line!r}")
+
     return normalize(match.group(1))
 
 
@@ -48,6 +56,7 @@ def replace_question_color(prompt, new_color):
     lines = prompt.splitlines(keepends=True)
     first_line = lines[0]
     match = COLOR_PATTERN.search(first_line)
+
     if match is None:
         raise ValueError(f"Cannot parse color from prompt: {first_line!r}")
 
@@ -58,6 +67,7 @@ def replace_question_color(prompt, new_color):
 
 def rewrite_choices(prompt, labels, texts):
     matches = list(CHOICE_PATTERN.finditer(prompt))
+
     if len(matches) != NUM_CHOICES:
         raise ValueError(f"Expected {NUM_CHOICES} choice lines, got {len(matches)}")
 
@@ -120,9 +130,9 @@ def sample_new_ap(base, rng):
             candidates.append(position)
 
     return rng.choice(candidates)
-    
 
-def sample_new_at(base, rng):
+
+def sample_novel_at(base, rng):
     candidates = []
     used_labels = set(base["choices"]["label"])
 
@@ -133,11 +143,23 @@ def sample_new_at(base, rng):
     return rng.choice(candidates)
 
 
+def sample_distractor_at(base, rng):
+    candidates = []
+    ap = int(base["answer_position"])
+
+    for position in range(NUM_CHOICES):
+        if position != ap:
+            candidates.append(str(base["choices"]["label"][position]))
+
+    return rng.choice(candidates)
+
+
 def sample_new_color(base, rng):
     candidates = []
 
     for text in base["choices"]["text"]:
         color = normalize(text)
+
         if color != base["color"]:
             candidates.append(color)
 
@@ -166,13 +188,29 @@ def make_ap_counterfactual(base, new_ap):
     return cf
 
 
-def make_at_counterfactual(base, new_at):
+def make_at_counterfactual(base, new_at, use_distractor):
     """Change AT while keeping C and AP fixed."""
     labels = list(base["choices"]["label"])
     texts = list(base["choices"]["text"])
-    ap = base["answer_position"]
+    ap = int(base["answer_position"])
 
-    labels[ap] = new_at
+    if use_distractor:
+        distractor_position = None
+
+        for position in range(NUM_CHOICES):
+            if position != ap and labels[position] == new_at:
+                distractor_position = position
+                break
+
+        if distractor_position is None:
+            raise ValueError(f"Distractor label {new_at!r} not found")
+
+        labels[ap], labels[distractor_position] = labels[distractor_position], labels[ap]
+    else:
+        if new_at in labels:
+            raise ValueError(f"Novel AT {new_at!r} already appears in labels {labels}")
+
+        labels[ap] = new_at
 
     prompt = rewrite_choices(base["prompt"], labels, texts)
     cf = make_state(prompt, labels, texts)
@@ -180,6 +218,12 @@ def make_at_counterfactual(base, new_at):
     assert cf["color"] == base["color"]
     assert cf["answer_position"] == base["answer_position"]
     assert cf["answer"] == new_at
+    assert cf["answer"] != base["answer"]
+
+    if use_distractor:
+        assert set(cf["choices"]["label"]) == set(base["choices"]["label"])
+    else:
+        assert new_at not in set(base["choices"]["label"])
 
     return cf
 
@@ -226,8 +270,6 @@ def make_ap_at_counterfactual(base, new_ap):
     texts = list(base["choices"]["text"])
     old_ap = base["answer_position"]
 
-    # Move the correct color to the new position.
-    # Labels stay fixed, so AT changes naturally.
     texts[old_ap], texts[new_ap] = texts[new_ap], texts[old_ap]
 
     prompt = rewrite_choices(base["prompt"], labels, texts)
@@ -240,8 +282,10 @@ def make_ap_at_counterfactual(base, new_ap):
     return cf
 
 
+def generate_rows_for_jchang_row(row, row_idx, split, repeats_per_row=2, seed=0, distractor_portion=0.5):
+    if distractor_portion < 0.0 or distractor_portion > 1.0:
+        raise ValueError(f"distractor_portion must be in [0, 1], got {distractor_portion}")
 
-def generate_rows_for_jchang_row(row, row_idx, split, repeats_per_row=2, seed=0):
     rng = random.Random(seed * 1_000_003 + int(row_idx))
     generated = []
     used_labelings = set()
@@ -258,15 +302,22 @@ def generate_rows_for_jchang_row(row, row_idx, split, repeats_per_row=2, seed=0)
             raise RuntimeError("Could not sample a fresh base labeling")
 
         new_ap = sample_new_ap(base, rng)
-        new_at = sample_new_at(base, rng)
         new_color = sample_new_color(base, rng)
+
+        use_distractor = rng.random() < distractor_portion
+
+        if use_distractor:
+            new_at = sample_distractor_at(base, rng)
+            at_counterfactual_type = "distractor_swap"
+        else:
+            new_at = sample_novel_at(base, rng)
+            at_counterfactual_type = "novel_label"
 
         ap_cf = make_ap_counterfactual(base, new_ap)
         ap_at_cf = make_ap_at_counterfactual(base, new_ap)
-        at_cf = make_at_counterfactual(base, new_at)
+        at_cf = make_at_counterfactual(base, new_at, use_distractor)
         c_cf = make_c_counterfactual(base, new_color)
         c_all_cf = make_c_all_counterfactual(base, new_color)
-
 
         generated.append({
             "base_row_id": f"jchang:train:{row_idx}",
@@ -280,6 +331,7 @@ def generate_rows_for_jchang_row(row, row_idx, split, repeats_per_row=2, seed=0)
             "answer": base["answer"],
             "answerPosition_counterfactual": ap_cf,
             "randomLetter_counterfactual": at_cf,
+            "at_counterfactual_type": at_counterfactual_type,
             "color_counterfactual": c_cf,
             "color_position_letter_counterfactual": c_all_cf,
             "answerPosition_letter_counterfactual": ap_at_cf,
@@ -288,7 +340,7 @@ def generate_rows_for_jchang_row(row, row_idx, split, repeats_per_row=2, seed=0)
     return generated
 
 
-def build_dataset_dict(seed=0, repeats_per_row=2):
+def build_dataset_dict(seed=0, repeats_per_row=2, distractor_portion=0.5):
     dataset, split_indices = jchang.load_question_splits(seed=seed)
     generated_splits = {}
 
@@ -296,11 +348,21 @@ def build_dataset_dict(seed=0, repeats_per_row=2):
         rows = []
 
         for row_idx in split_indices[split]:
-            generated = generate_rows_for_jchang_row(dataset[int(row_idx)], int(row_idx), split, repeats_per_row, seed)
+            generated = generate_rows_for_jchang_row(dataset[int(row_idx)], int(row_idx), split, repeats_per_row, seed, distractor_portion)
             rows.extend(generated)
 
         generated_splits[split] = Dataset.from_list(rows)
-        print(f"[generated] {split}: original_rows={len(split_indices[split])} generated_rows={len(rows)}")
+
+        distractor_count = 0
+        novel_count = 0
+
+        for row in rows:
+            if row["at_counterfactual_type"] == "distractor_swap":
+                distractor_count += 1
+            else:
+                novel_count += 1
+
+        print(f"[generated] {split}: original_rows={len(split_indices[split])} generated_rows={len(rows)} distractor={distractor_count} novel={novel_count}")
 
     train_questions = set(generated_splits["train"]["question_key"])
     validation_questions = set(generated_splits["validation"]["question_key"])
@@ -314,48 +376,31 @@ def build_dataset_dict(seed=0, repeats_per_row=2):
     return DatasetDict(generated_splits)
 
 
-def save_to_disk(output_dir="randomized_copycolors", seed=0, repeats_per_row=2):
-    dataset = build_dataset_dict(seed, repeats_per_row)
+def save_to_disk(output_dir="randomized_copycolors", seed=0, repeats_per_row=2, distractor_portion=0.5):
+    dataset = build_dataset_dict(seed, repeats_per_row, distractor_portion)
     output_dir = str(Path(output_dir))
     dataset.save_to_disk(output_dir)
     print(f"[saved] {output_dir}")
     return dataset
 
 
-def push_to_hub(repo_id, seed=0, repeats_per_row=2, private=False):
-    dataset = build_dataset_dict(seed, repeats_per_row)
+def push_to_hub(repo_id, seed=0, repeats_per_row=2, distractor_portion=0.5, private=False):
+    dataset = build_dataset_dict(seed, repeats_per_row, distractor_portion)
     dataset.push_to_hub(repo_id, private=private)
     print(f"[pushed] {repo_id}")
     return dataset
 
 
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--output-dir", default="randomized_copycolors_include_ap_at")
+    parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--repeats-per-row", type=int, default=2)
+    parser.add_argument("--distractor-portion", type=float, default=0.5)
+    args = parser.parse_args()
+
+    save_to_disk(args.output_dir, args.seed, args.repeats_per_row, args.distractor_portion)
+
+
 if __name__ == "__main__":
-    save_to_disk(output_dir="randomized_copycolors_numchoice3", seed=0, repeats_per_row=2)
-    from datasets import load_from_disk
-
-    ds = load_from_disk("randomized_copycolors_numchoice3")
-
-    for i in range(3):
-        row = ds["train"][i]
-
-        print(f"\n===== EXAMPLE {i} =====")
-
-        print("\nBASE")
-        print(row["prompt"])
-        print("C :", row["color"])
-        print("AP:", row["answer_position"])
-        print("AT:", row["answer"])
-
-        for name in [
-            "answerPosition_counterfactual",
-            "randomLetter_counterfactual",
-            "color_counterfactual",
-            "color_position_letter_counterfactual",
-        ]:
-            cf = row[name]
-
-            print(f"\n{name}")
-            print(cf["prompt"])
-            print("C :", cf["color"])
-            print("AP:", cf["answer_position"])
-            print("AT:", cf["answer"])
+    main()
