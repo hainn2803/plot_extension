@@ -1,0 +1,15 @@
+{
+  "CPU_metric_reproduction": "passed",
+  "CPU_unit_tests": 5,
+  "CPU_synthetic_model_integration_tests": 3,
+  "workspace_imports_removed": true,
+  "scientific_source_extraction_AST_identity": "passed",
+  "original_real_model_numerical_tolerance": {
+    "rtol": 0.0002,
+    "atol": 0.0002
+  },
+  "original_model_reference_checks": "passed, maximum error zero",
+  "portable_real_model_driver": "not yet verified end to end: AC startup guard blocked before model loading",
+  "GPU_safeguards": "unchanged",
+  "no_training": true
+}

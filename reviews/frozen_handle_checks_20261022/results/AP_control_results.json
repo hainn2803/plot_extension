@@ -1,0 +1,1573 @@
+{
+  "no_intervention_success_filter": true,
+  "operations": {
+    "full_L00": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.005208333333333333,
+            "correct": 1,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.9114583333333334,
+            "correct": 175,
+            "count": 192
+          },
+          "ties": 4
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9270833333333334,
+            "correct": 89,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.9270833333333334,
+            "correct": 89,
+            "count": 96
+          },
+          "ties": 0
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.007692307692307693,
+            "correct": 1,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.9,
+            "correct": 117,
+            "count": 130
+          },
+          "ties": 3
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9692307692307692,
+            "correct": 63,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.9692307692307692,
+            "correct": 63,
+            "count": 65
+          },
+          "ties": 0
+        }
+      }
+    },
+    "full_L01": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.010416666666666666,
+            "correct": 2,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.9166666666666666,
+            "correct": 176,
+            "count": 192
+          },
+          "ties": 1
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.90625,
+            "correct": 87,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.90625,
+            "correct": 87,
+            "count": 96
+          },
+          "ties": 2
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.015384615384615385,
+            "correct": 2,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.9076923076923077,
+            "correct": 118,
+            "count": 130
+          },
+          "ties": 0
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9384615384615385,
+            "correct": 61,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.9384615384615385,
+            "correct": 61,
+            "count": 65
+          },
+          "ties": 1
+        }
+      }
+    },
+    "full_L02": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.010416666666666666,
+            "correct": 2,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.921875,
+            "correct": 177,
+            "count": 192
+          },
+          "ties": 2
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9166666666666666,
+            "correct": 88,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.9166666666666666,
+            "correct": 88,
+            "count": 96
+          },
+          "ties": 2
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.015384615384615385,
+            "correct": 2,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.9076923076923077,
+            "correct": 118,
+            "count": 130
+          },
+          "ties": 1
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9384615384615385,
+            "correct": 61,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.9384615384615385,
+            "correct": 61,
+            "count": 65
+          },
+          "ties": 1
+        }
+      }
+    },
+    "full_L03": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.953125,
+            "correct": 183,
+            "count": 192
+          },
+          "ties": 0
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.96875,
+            "correct": 93,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.96875,
+            "correct": 93,
+            "count": 96
+          },
+          "ties": 2
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.9384615384615385,
+            "correct": 122,
+            "count": 130
+          },
+          "ties": 0
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "ties": 0
+        }
+      }
+    },
+    "full_L04": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.9479166666666666,
+            "correct": 182,
+            "count": 192
+          },
+          "ties": 1
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9791666666666666,
+            "correct": 94,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.9791666666666666,
+            "correct": 94,
+            "count": 96
+          },
+          "ties": 0
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.9307692307692308,
+            "correct": 121,
+            "count": 130
+          },
+          "ties": 1
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "ties": 0
+        }
+      }
+    },
+    "full_L05": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.9635416666666666,
+            "correct": 185,
+            "count": 192
+          },
+          "ties": 0
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9895833333333334,
+            "correct": 95,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.9895833333333334,
+            "correct": 95,
+            "count": 96
+          },
+          "ties": 1
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.9538461538461539,
+            "correct": 124,
+            "count": 130
+          },
+          "ties": 0
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "ties": 1
+        }
+      }
+    },
+    "full_L06": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.9635416666666666,
+            "correct": 185,
+            "count": 192
+          },
+          "ties": 1
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9895833333333334,
+            "correct": 95,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.9895833333333334,
+            "correct": 95,
+            "count": 96
+          },
+          "ties": 0
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.9461538461538461,
+            "correct": 123,
+            "count": 130
+          },
+          "ties": 1
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "ties": 0
+        }
+      }
+    },
+    "full_L07": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.9635416666666666,
+            "correct": 185,
+            "count": 192
+          },
+          "ties": 2
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9895833333333334,
+            "correct": 95,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.9895833333333334,
+            "correct": 95,
+            "count": 96
+          },
+          "ties": 0
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.9461538461538461,
+            "correct": 123,
+            "count": 130
+          },
+          "ties": 2
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "ties": 0
+        }
+      }
+    },
+    "full_L08": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.96875,
+            "correct": 186,
+            "count": 192
+          },
+          "ties": 0
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9895833333333334,
+            "correct": 95,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.9895833333333334,
+            "correct": 95,
+            "count": 96
+          },
+          "ties": 0
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.9538461538461539,
+            "correct": 124,
+            "count": 130
+          },
+          "ties": 0
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "ties": 0
+        }
+      }
+    },
+    "full_L09": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.96875,
+            "correct": 186,
+            "count": 192
+          },
+          "ties": 0
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9895833333333334,
+            "correct": 95,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.9895833333333334,
+            "correct": 95,
+            "count": 96
+          },
+          "ties": 0
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.9538461538461539,
+            "correct": 124,
+            "count": 130
+          },
+          "ties": 0
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "ties": 0
+        }
+      }
+    },
+    "full_L10": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.9739583333333334,
+            "correct": 187,
+            "count": 192
+          },
+          "ties": 0
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9895833333333334,
+            "correct": 95,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.9895833333333334,
+            "correct": 95,
+            "count": 96
+          },
+          "ties": 0
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.9615384615384616,
+            "correct": 125,
+            "count": 130
+          },
+          "ties": 0
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "ties": 0
+        }
+      }
+    },
+    "full_L11": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.9739583333333334,
+            "correct": 187,
+            "count": 192
+          },
+          "ties": 1
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9895833333333334,
+            "correct": 95,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.9895833333333334,
+            "correct": 95,
+            "count": 96
+          },
+          "ties": 0
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.9615384615384616,
+            "correct": 125,
+            "count": 130
+          },
+          "ties": 1
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "ties": 0
+        }
+      }
+    },
+    "full_L12": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.9739583333333334,
+            "correct": 187,
+            "count": 192
+          },
+          "ties": 0
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9895833333333334,
+            "correct": 95,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.9895833333333334,
+            "correct": 95,
+            "count": 96
+          },
+          "ties": 1
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.9615384615384616,
+            "correct": 125,
+            "count": 130
+          },
+          "ties": 0
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "ties": 1
+        }
+      }
+    },
+    "full_L13": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.96875,
+            "correct": 186,
+            "count": 192
+          },
+          "ties": 2
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9895833333333334,
+            "correct": 95,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.9895833333333334,
+            "correct": 95,
+            "count": 96
+          },
+          "ties": 0
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.9538461538461539,
+            "correct": 124,
+            "count": 130
+          },
+          "ties": 2
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "ties": 0
+        }
+      }
+    },
+    "full_L14": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.9791666666666666,
+            "correct": 188,
+            "count": 192
+          },
+          "ties": 0
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9895833333333334,
+            "correct": 95,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.9895833333333334,
+            "correct": 95,
+            "count": 96
+          },
+          "ties": 0
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.9692307692307692,
+            "correct": 126,
+            "count": 130
+          },
+          "ties": 0
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "ties": 0
+        }
+      }
+    },
+    "full_L15": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.9583333333333334,
+            "correct": 184,
+            "count": 192
+          },
+          "ties": 3
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9895833333333334,
+            "correct": 95,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.9895833333333334,
+            "correct": 95,
+            "count": 96
+          },
+          "ties": 0
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.9384615384615385,
+            "correct": 122,
+            "count": 130
+          },
+          "ties": 3
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.9846153846153847,
+            "correct": 64,
+            "count": 65
+          },
+          "ties": 0
+        }
+      }
+    },
+    "full_L16": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.010416666666666666,
+            "correct": 2,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.890625,
+            "correct": 171,
+            "count": 192
+          },
+          "ties": 3
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.8958333333333334,
+            "correct": 86,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.8958333333333334,
+            "correct": 86,
+            "count": 96
+          },
+          "ties": 2
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.015384615384615385,
+            "correct": 2,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.8461538461538461,
+            "correct": 110,
+            "count": 130
+          },
+          "ties": 3
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.8769230769230769,
+            "correct": 57,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.8769230769230769,
+            "correct": 57,
+            "count": 65
+          },
+          "ties": 0
+        }
+      }
+    },
+    "full_L17": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.005208333333333333,
+            "correct": 1,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.8802083333333334,
+            "correct": 169,
+            "count": 192
+          },
+          "ties": 5
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.90625,
+            "correct": 87,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.90625,
+            "correct": 87,
+            "count": 96
+          },
+          "ties": 0
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.007692307692307693,
+            "correct": 1,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.8307692307692308,
+            "correct": 108,
+            "count": 130
+          },
+          "ties": 5
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.8769230769230769,
+            "correct": 57,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.8769230769230769,
+            "correct": 57,
+            "count": 65
+          },
+          "ties": 0
+        }
+      }
+    },
+    "full_L18": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.796875,
+            "correct": 153,
+            "count": 192
+          },
+          "ties": 4
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.8125,
+            "correct": 78,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.8125,
+            "correct": 78,
+            "count": 96
+          },
+          "ties": 2
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.7153846153846154,
+            "correct": 93,
+            "count": 130
+          },
+          "ties": 4
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.7538461538461538,
+            "correct": 49,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.7538461538461538,
+            "correct": 49,
+            "count": 65
+          },
+          "ties": 1
+        }
+      }
+    },
+    "full_L19": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.010416666666666666,
+            "correct": 2,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.6510416666666666,
+            "correct": 125,
+            "count": 192
+          },
+          "ties": 5
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.6458333333333334,
+            "correct": 62,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.6458333333333334,
+            "correct": 62,
+            "count": 96
+          },
+          "ties": 4
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.007692307692307693,
+            "correct": 1,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.5615384615384615,
+            "correct": 73,
+            "count": 130
+          },
+          "ties": 3
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.5692307692307692,
+            "correct": 37,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.5692307692307692,
+            "correct": 37,
+            "count": 65
+          },
+          "ties": 2
+        }
+      }
+    },
+    "full_L20": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.020833333333333332,
+            "correct": 4,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.609375,
+            "correct": 117,
+            "count": 192
+          },
+          "ties": 8
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.6041666666666666,
+            "correct": 58,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.6041666666666666,
+            "correct": 58,
+            "count": 96
+          },
+          "ties": 2
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.015384615384615385,
+            "correct": 2,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.5307692307692308,
+            "correct": 69,
+            "count": 130
+          },
+          "ties": 4
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.5384615384615384,
+            "correct": 35,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.5384615384615384,
+            "correct": 35,
+            "count": 65
+          },
+          "ties": 1
+        }
+      }
+    },
+    "full_L21": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.010416666666666666,
+            "correct": 2,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.6458333333333334,
+            "correct": 124,
+            "count": 192
+          },
+          "ties": 8
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.6354166666666666,
+            "correct": 61,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.6354166666666666,
+            "correct": 61,
+            "count": 96
+          },
+          "ties": 4
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.007692307692307693,
+            "correct": 1,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.5615384615384615,
+            "correct": 73,
+            "count": 130
+          },
+          "ties": 4
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.5538461538461539,
+            "correct": 36,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.5538461538461539,
+            "correct": 36,
+            "count": 65
+          },
+          "ties": 3
+        }
+      }
+    },
+    "full_L22": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.020833333333333332,
+            "correct": 4,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.53125,
+            "correct": 102,
+            "count": 192
+          },
+          "ties": 9
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.53125,
+            "correct": 51,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.53125,
+            "correct": 51,
+            "count": 96
+          },
+          "ties": 5
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.015384615384615385,
+            "correct": 2,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.45384615384615384,
+            "correct": 59,
+            "count": 130
+          },
+          "ties": 5
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.49230769230769234,
+            "correct": 32,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.49230769230769234,
+            "correct": 32,
+            "count": 65
+          },
+          "ties": 2
+        }
+      }
+    },
+    "full_L23": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.036458333333333336,
+            "correct": 7,
+            "count": 192
+          },
+          "ties": 2
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 96
+          },
+          "ties": 3
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 130
+          },
+          "ties": 0
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 65
+          },
+          "ties": 0
+        }
+      }
+    },
+    "full_L24": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 192
+          },
+          "ties": 5
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 96
+          },
+          "ties": 3
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 130
+          },
+          "ties": 0
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 65
+          },
+          "ties": 0
+        }
+      }
+    },
+    "full_L25": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.005208333333333333,
+            "correct": 1,
+            "count": 192
+          },
+          "ties": 4
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 96
+          },
+          "ties": 2
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 130
+          },
+          "ties": 0
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "count": 65
+          },
+          "ties": 0
+        }
+      }
+    },
+    "learned_AP_L17": {
+      "all_attempted": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.4895833333333333,
+            "correct": 94,
+            "count": 192
+          },
+          "copy_label": {
+            "accuracy": 0.10416666666666667,
+            "correct": 20,
+            "count": 192
+          },
+          "ties": 7
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.5,
+            "correct": 48,
+            "count": 96
+          },
+          "copy_label": {
+            "accuracy": 0.5,
+            "correct": 48,
+            "count": 96
+          },
+          "ties": 3
+        }
+      },
+      "shared_clean": {
+        "cycles": {
+          "AP": {
+            "accuracy": 0.5,
+            "correct": 65,
+            "count": 130
+          },
+          "copy_label": {
+            "accuracy": 0.06923076923076923,
+            "correct": 9,
+            "count": 130
+          },
+          "ties": 5
+        },
+        "transposition": {
+          "AP": {
+            "accuracy": 0.47692307692307695,
+            "correct": 31,
+            "count": 65
+          },
+          "copy_label": {
+            "accuracy": 0.47692307692307695,
+            "correct": 31,
+            "count": 65
+          },
+          "ties": 1
+        }
+      }
+    }
+  },
+  "shared_clean_pairs": 65,
+  "total_pairs": 96
+}

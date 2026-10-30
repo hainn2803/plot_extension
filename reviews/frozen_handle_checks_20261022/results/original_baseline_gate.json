@@ -1,0 +1,14 @@
+{
+  "certification_passed": false,
+  "disposition": "All pairs retained under explicit descriptive-only authorization",
+  "evidence": "c444ff48e87fd5d5946a15e6908c9c5e82b0cc3a44768645131df304f016f8a9",
+  "passed": false,
+  "unique_context_baseline": {
+    "accuracy": 0.9631521342575702,
+    "correct": 2640,
+    "count": 2741,
+    "hai_accuracy": 0.9773805180591025,
+    "other_tokens": 9,
+    "ties": 42
+  }
+}
