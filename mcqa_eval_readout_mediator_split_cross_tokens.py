@@ -250,12 +250,12 @@ def main():
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at")
-    parser.add_argument("--result-dir", required=True)
+    parser.add_argument("--result-dir", default="results_joint_randomized_gradual_cross_tokens_seed0_reprcac_1.01.01.0")
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--test-size", type=int, default=400)
     parser.add_argument("--batch-size", type=int, default=32)
     parser.add_argument("--output-space", choices=("full", "az"), default="full")
-    parser.add_argument("--change-ratio", type=float, default=0.5)
+    parser.add_argument("--change-ratio", type=float, default=1.0)
 
     args = parser.parse_args()
 
@@ -266,7 +266,8 @@ def main():
 
     result_dir = Path(args.result_dir)
     seed_dir = result_dir.parent
-    shared_at_dir = seed_dir / "shared_at"
+    # shared_at_dir = seed_dir / "shared_at"
+    shared_at_dir = result_dir
 
     at_checkpoint_path = shared_at_dir / "das_at.pt"
     at_readout_path = shared_at_dir / "at_readout_LogisticRegression.pt"

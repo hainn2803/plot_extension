@@ -243,7 +243,7 @@ def main():
     parser.add_argument("--root", default="results_mcqa_many_seeds_change_all")
     parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at")
     parser.add_argument("--eval-script", default="mcqa_eval_induced_other_recipient_cross_tokens.py")
-    parser.add_argument("--methods", default="gradual2.02.04.0,standard,gradual2.02.02.0")
+    parser.add_argument("--methods", default="gradual2.00.02.0")
     parser.add_argument("--train-seeds", default="0,1,2,3,4")
     parser.add_argument("--eval-seeds", default="0,1,2")
     parser.add_argument("--test-size", type=int, default=400)

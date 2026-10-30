@@ -1,0 +1,3 @@
+AT layer: 25 | score: 0.997500
+AP layer: 14 | score: 0.995000
+C layer: 0 | score: 0.817500

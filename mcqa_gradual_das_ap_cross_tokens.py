@@ -215,8 +215,13 @@ def train_ap(model, tokenizer, at_checkpoint, at_readout_checkpoint, layers=None
             at_logits = (generated_at @ Q_at) @ W_at.T + b_at
 
             direct_loss = F.cross_entropy(direct_y, y_target)
-            mediator_loss = F.cross_entropy(mediator_y, y_target)
-            readout_loss = F.cross_entropy(at_logits, at_target)
+
+            mediator_loss = 0
+            readout_loss = 0
+            if lambda_med > 0:
+                mediator_loss = F.cross_entropy(mediator_y, y_target)
+            if lambda_readout > 0:
+                readout_loss = F.cross_entropy(at_logits, at_target)
 
             loss = direct_loss
             loss = loss + lambda_med * mediator_loss

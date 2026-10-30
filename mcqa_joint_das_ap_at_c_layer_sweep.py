@@ -3,9 +3,9 @@ import csv
 import shutil
 from pathlib import Path
 
-from mcqa_gradual_das_ap_cross_tokens import train_ap
+from mcqa_gradual_das_ap_cross_tokens_centroid_repr import train_ap
 from mcqa_gradual_das_at import train_at
-from mcqa_gradual_das_c import train_c
+from mcqa_gradual_das_c_centroid_repr import train_c
 from mcqa_joint_das_ap_at_c_balanced import fit_readout, parse_layers
 from mcqa_load_randomized_ap_at_c import build_all_banks, build_ap_readout_datasets, build_at_readout_datasets, build_c_readout_datasets, build_shared_readout_banks
 from mcqa_neural_net import load_gemma_model
@@ -69,26 +69,29 @@ def save_summary(rows, path):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at")
-    parser.add_argument("--result-dir", default="results_joint_randomized_standard_ap_cross_tokens_seed4_med4read0")
+    parser.add_argument("--result-dir", default="results_joint_randomized_gradual_cross_tokens_seed0_reprcac001")
     parser.add_argument("--ft-size", type=int, default=800)
     parser.add_argument("--cal-size", type=int, default=400)
     parser.add_argument("--te-size", type=int, default=400)
     parser.add_argument("--at-dim", type=int, default=128)
     parser.add_argument("--ap-dim", type=int, default=128)
     parser.add_argument("--c-dim", type=int, default=128)
-    parser.add_argument("--at-layers", default="23,24,25")
+    parser.add_argument("--at-layers", default="25")
     parser.add_argument("--ap-layers", default="14")
     parser.add_argument("--c-layers", default="0")
     parser.add_argument("--at-epochs", type=int, default=10)
     parser.add_argument("--ap-epochs", type=int, default=10)
     parser.add_argument("--c-epochs", type=int, default=50)
     parser.add_argument("--lr", type=float, default=1e-2)
-    parser.add_argument("--ap-lambda-med", type=float, default=2.0)
-    parser.add_argument("--ap-lambda-readout", type=float, default=2.0)
+    parser.add_argument("--ap-lambda-med", type=float, default=0.0)
+    parser.add_argument("--ap-lambda-readout", type=float, default=0.0)
+    parser.add_argument("--ap-lambda-repr", type=float, default=0.01)
     parser.add_argument("--c-lambda-ap-med", type=float, default=0.0)
     parser.add_argument("--c-lambda-ap-readout", type=float, default=0.0)
-    parser.add_argument("--c-lambda-at-med", type=float, default=4.0)
+    parser.add_argument("--c-lambda-at-med", type=float, default=0.0)
     parser.add_argument("--c-lambda-at-readout", type=float, default=0.0)
+    parser.add_argument("--c-lambda-at-repr", type=float, default=0.005)
+    parser.add_argument("--c-lambda-ap-repr", type=float, default=0.005)
     parser.add_argument("--train-batch-size", type=int, default=32)
     parser.add_argument("--eval-batch-size", type=int, default=32)
     parser.add_argument("--readout-train-size", type=int, default=1300)
@@ -97,7 +100,7 @@ def main():
     parser.add_argument("--ap-token-position", type=str, default="color_0,color_1,color_2,color_3")
     parser.add_argument("--c-token-position", default="color")
     parser.add_argument("--output-space", choices=("full", "az"), default="full")
-    parser.add_argument("--seed", type=int, default=4)
+    parser.add_argument("--seed", type=int, default=0)
     args = parser.parse_args()
 
     result_dir = Path(args.result_dir)
@@ -202,6 +205,7 @@ def main():
             lr=args.lr,
             lambda_med=args.ap_lambda_med,
             lambda_readout=args.ap_lambda_readout,
+            lambda_repr=args.ap_lambda_repr,
             train_batch_size=args.train_batch_size,
             eval_batch_size=args.eval_batch_size,
             list_ap_token_positions=list_ap_token_positions,
@@ -261,7 +265,14 @@ def main():
         c_readout_path = layer_dir / "c_readout_LogisticRegression.pt"
 
         print(f"\n=== TRAIN C LAYER {layer} ===")
-        c_result = train_c(model, tokenizer, str(result_dir / "das_ap.pt"), str(result_dir / "ap_readout_LogisticRegression.pt"), str(result_dir / "das_at.pt"), str(result_dir / "at_readout_LogisticRegression.pt"), [layer], args.c_dim, args.ft_size, args.cal_size, args.te_size, args.c_epochs, args.lr, args.c_lambda_ap_med, args.c_lambda_ap_readout, args.c_lambda_at_med, args.c_lambda_at_readout, args.train_batch_size, args.eval_batch_size, args.c_token_position, args.seed, str(c_path), das_banks["C"], args.output_space)
+
+        ap_checkpoint = str(result_dir / "das_ap.pt")
+        ap_readout_checkpoint = str(result_dir / "ap_readout_LogisticRegression.pt")
+        at_checkpoint = str(result_dir / "das_at.pt")
+        at_readout_checkpoint = str(result_dir / "at_readout_LogisticRegression.pt")
+        c_save_path = str(c_path)
+
+        c_result = train_c(model=model, tokenizer=tokenizer, ap_checkpoint=ap_checkpoint, ap_readout_checkpoint=ap_readout_checkpoint, at_checkpoint=at_checkpoint, at_readout_checkpoint=at_readout_checkpoint, layers=[layer], subspace_dim=args.c_dim, ft_size=args.ft_size, cal_size=args.cal_size, te_size=args.te_size, epochs=args.c_epochs, lr=args.lr, lambda_ap_med=args.c_lambda_ap_med, lambda_ap_readout=args.c_lambda_ap_readout, lambda_at_med=args.c_lambda_at_med, lambda_at_readout=args.c_lambda_at_readout, lambda_ap_repr=args.c_lambda_ap_repr, lambda_at_repr=args.c_lambda_at_repr, train_batch_size=args.train_batch_size, eval_batch_size=args.eval_batch_size, token_position=args.c_token_position, seed=args.seed, save_path=c_save_path, banks=das_banks["C"], output_space=args.output_space)
 
         colors = shared_readout[0]["color_to_class"]
         extra = {"color_to_class": colors}

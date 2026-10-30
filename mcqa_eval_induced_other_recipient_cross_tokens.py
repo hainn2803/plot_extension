@@ -326,7 +326,7 @@ def eval_ap_induced_transfer(model, tokenizer, donor_bank, at_same_bank, at_diff
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at")
-    parser.add_argument("--result-dir", default="results_joint_randomized_standard_ap_cross_tokens_seed4_med4read0")
+    parser.add_argument("--result-dir", default="results_joint_randomized_gradual_cross_tokens_seed0_reprcac001")
     parser.add_argument("--test-size", type=int, default=400)
     parser.add_argument("--batch-size", type=int, default=32)
     parser.add_argument("--seed", type=int, default=0)
@@ -341,22 +341,23 @@ def main():
     result_dir = Path(args.result_dir)
     seed_dir = result_dir.parent
     # shared_at_dir = seed_dir / "shared_at"
+    shared_at_dir = result_dir
 
-    # Q_at, L_at, pos_at = load_ckpt(shared_at_dir / "das_at.pt", device)
-    Q_at, L_at, pos_at = load_ckpt(result_dir / "das_at.pt", device)
+    Q_at, L_at, pos_at = load_ckpt(shared_at_dir / "das_at.pt", device)
     Q_ap, L_ap, list_pos_ap = load_ckpt(result_dir / "das_ap.pt", device)
     Q_c, L_c, pos_c = load_ckpt(result_dir / "das_c.pt", device)
 
     if not isinstance(list_pos_ap, list):
-        raise ValueError(f"AP token_position must be a list, got {type(list_pos_ap)}")
+        list_pos_ap = [list_pos_ap] # compatible for old result
+        # raise ValueError(f"AP token_position must be a list, got {type(list_pos_ap)}")
 
     expected_ap_width = len(list_pos_ap) * model.config.hidden_size
 
     if Q_ap.shape[0] != expected_ap_width:
         raise ValueError(f"AP basis width {Q_ap.shape[0]} does not match {len(list_pos_ap)} tokens x hidden size {model.config.hidden_size} = {expected_ap_width}")
 
-    # at_readout = torch.load(shared_at_dir / "at_readout_LogisticRegression.pt", map_location="cpu", weights_only=False)
-    at_readout = torch.load(result_dir / "at_readout_LogisticRegression.pt", map_location="cpu", weights_only=False)
+    at_readout = torch.load(shared_at_dir / "at_readout_LogisticRegression.pt", map_location="cpu", weights_only=False)
+    # at_readout = torch.load(result_dir / "at_readout_LogisticRegression.pt", map_location="cpu", weights_only=False)
     W_at = at_readout["W_AT"].float().to(device)
     b_at = at_readout["b_AT"].float().to(device)
 
