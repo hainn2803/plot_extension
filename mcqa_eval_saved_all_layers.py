@@ -11,6 +11,7 @@ import json
 from pathlib import Path
 
 from mcqa_load_randomized_ap_at_c import build_pair_bank
+from mcqa_eval_recipient_transfer import prepare_recipient_pool, prepare_schedules, eval_recipient
 from mcqa_neural_net import load_gemma_model
 from mcqa_train_grid_standard_das import (
     add_metric,
@@ -24,6 +25,9 @@ from mcqa_train_grid_standard_das import (
     save_csv,
     write_config_report,
 )
+
+
+RECIPIENT_VERSION = 1
 
 
 def select_layers(summary_path, threshold_pct):
@@ -115,6 +119,11 @@ def rebuild_summary(root, eval_dir, args):
                     category = "restoration"
                 add_metric(detailed_rows, at_layer, ap_layer, c_layer, category, family.split("_")[0], family, metric, value)
 
+        for family in ("AP_only", "C_only"):
+            for metric, value in result.get("recipient", {}).get(family, {}).items():
+                row[f"{family}_{metric}"] = value
+                add_metric(detailed_rows, at_layer, ap_layer, c_layer, "recipient", family.split("_")[0], family, metric, value)
+
         for key, value in result["clean"].items():
             row[f"clean_{key}"] = value
         summary_rows.append(row)
@@ -122,7 +131,10 @@ def rebuild_summary(root, eval_dir, args):
     if summary_rows:
         summary_rows.sort(key=lambda row: (row["at_layer"], row["ap_layer"], row["c_layer"]))
         fieldnames = ["at_layer", "ap_layer", "c_layer"]
-        fieldnames.extend(key for key in summary_rows[0] if key not in fieldnames)
+        for row in summary_rows:
+            for key in row:
+                if key not in fieldnames:
+                    fieldnames.append(key)
         with open(eval_dir / "config_summary.csv", "w", newline="") as file:
             writer = csv.DictWriter(file, fieldnames=fieldnames)
             writer.writeheader()
@@ -161,10 +173,11 @@ def main():
         name = f"AT_L{at_layer}__AP_L{ap_layer}__C_L{c_layer}"
         output_dir = eval_dir / name
         signature = config_signature(root, args, at_layer, ap_layer, c_layer)
-        if not args.force and read_cached(output_dir / "metrics.json", signature):
+        previous = None if args.force else read_cached(output_dir / "metrics.json", signature)
+        if previous and previous.get("recipient_version") == RECIPIENT_VERSION and "recipient" in previous:
             print(f"[skip cached] {name}")
             continue
-        pending.append((at_layer, ap_layer, c_layer, output_dir, signature))
+        pending.append((at_layer, ap_layer, c_layer, output_dir, signature, previous))
 
     print(f"Selected {len(configs)} valid configurations; {len(configs) - len(pending)} cached, {len(pending)} to evaluate")
     rebuild_summary(root, eval_dir, args)
@@ -176,6 +189,8 @@ def main():
     at_only = build_pair_bank(model, tokenizer, args.data_path, "test", "AT_only", args.eval_size, args.batch_size, args.seed + 3001)
     ap_only = build_pair_bank(model, tokenizer, args.data_path, "test", "AP_only", args.eval_size, args.batch_size, args.seed + 3002)
     c_only = build_pair_bank(model, tokenizer, args.data_path, "test", "C_only", args.eval_size, args.batch_size, args.seed + 3004)
+    recipient_pool, color_map = prepare_recipient_pool(model, tokenizer, args.data_path, args.batch_size, args.seed)
+    recipient_schedules = prepare_schedules(ap_only, c_only, recipient_pool, tokenizer, color_map, args.seed)
 
     handles = {"AT": {}, "AP": {}, "C": {}}
     clean_cache = {"AT": {}, "AP": {}, "C": {}}
@@ -207,7 +222,7 @@ def main():
             clean_cache[variable][layer] = (base_acc, source_acc)
         return clean_cache[variable][layer]
 
-    for i, (at_layer, ap_layer, c_layer, output_dir, signature) in enumerate(pending, 1):
+    for i, (at_layer, ap_layer, c_layer, output_dir, signature, previous) in enumerate(pending, 1):
         name = output_dir.name
         print(f"\n=== EVAL {i}/{len(pending)}: {name} ===")
         Q_at, pos_at, W_at, b_at, _ = get_handle("AT", at_layer)
@@ -216,26 +231,51 @@ def main():
         if not isinstance(pos_ap, list):
             raise ValueError(f"AP checkpoint must use 4 color tokens: AP L{ap_layer}")
 
-        at_clean = get_clean("AT", at_layer, at_only)
-        ap_clean = get_clean("AP", ap_layer, ap_only)
-        c_clean = get_clean("C", c_layer, c_only)
-        clean = {
-            "AT_base": at_clean[0], "AT_source": at_clean[1],
-            "AP_base": ap_clean[0], "AP_source": ap_clean[1],
-            "C_base": c_clean[0], "C_source": c_clean[1],
-        }
+        if previous:
+            print(f"[reuse previous 3 experiment families] {name}")
+            clean = previous["clean"]
+            at_metrics = previous["AT_only"]
+            ap_metrics = previous["AP_only"]
+            c_metrics = previous["C_only"]
+        else:
+            at_clean = get_clean("AT", at_layer, at_only)
+            ap_clean = get_clean("AP", ap_layer, ap_only)
+            c_clean = get_clean("C", c_layer, c_only)
+            clean = {
+                "AT_base": at_clean[0], "AT_source": at_clean[1],
+                "AP_base": ap_clean[0], "AP_source": ap_clean[1],
+                "C_base": c_clean[0], "C_source": c_clean[1],
+            }
 
-        if at_layer not in at_eval_cache:
-            at_eval_cache[at_layer] = eval_at(model, tokenizer, at_only, Q_at, at_layer, pos_at, W_at, b_at, args.batch_size, args.output_space)
-        at_metrics = at_eval_cache[at_layer]
+            if at_layer not in at_eval_cache:
+                at_eval_cache[at_layer] = eval_at(model, tokenizer, at_only, Q_at, at_layer, pos_at, W_at, b_at, args.batch_size, args.output_space)
+            at_metrics = at_eval_cache[at_layer]
 
-        ap_key = (at_layer, ap_layer)
-        if ap_key not in ap_eval_cache:
-            ap_eval_cache[ap_key] = eval_ap(model, tokenizer, ap_only, Q_ap, ap_layer, pos_ap, W_ap, b_ap, Q_at, at_layer, pos_at, W_at, b_at, args.batch_size, args.output_space)
-        ap_metrics = ap_eval_cache[ap_key]
-        c_metrics = eval_c(model, tokenizer, c_only, Q_c, c_layer, pos_c, W_c, b_c, info_c["color_to_class"], Q_ap, ap_layer, pos_ap, W_ap, b_ap, Q_at, at_layer, pos_at, W_at, b_at, args.batch_size, args.output_space)
+            ap_key = (at_layer, ap_layer)
+            if ap_key not in ap_eval_cache:
+                ap_eval_cache[ap_key] = eval_ap(model, tokenizer, ap_only, Q_ap, ap_layer, pos_ap, W_ap, b_ap, Q_at, at_layer, pos_at, W_at, b_at, args.batch_size, args.output_space)
+            ap_metrics = ap_eval_cache[ap_key]
+            c_metrics = eval_c(model, tokenizer, c_only, Q_c, c_layer, pos_c, W_c, b_c, info_c["color_to_class"], Q_ap, ap_layer, pos_ap, W_ap, b_ap, Q_at, at_layer, pos_at, W_at, b_at, args.batch_size, args.output_space)
+
+        recipient_metrics = eval_recipient(
+            model, tokenizer, ap_only, c_only, recipient_schedules,
+            Q_at, at_layer, pos_at, W_at, b_at,
+            Q_ap, ap_layer, pos_ap,
+            Q_c, c_layer, pos_c,
+            args.batch_size, args.output_space,
+        )
 
         write_config_report(output_dir, at_layer, ap_layer, c_layer, clean, at_metrics, {"AP_only": ap_metrics}, {"C_only": c_metrics})
+        report_path = output_dir / "eval_faithfulness.txt"
+        report = report_path.read_text()
+        recipient_lines = ["=== 3. RECIPIENT TRANSFER (different question) ===", ""]
+        for family in ("AP_only", "C_only"):
+            recipient_lines.append(f"RECIPIENT — {family}")
+            for metric, value in recipient_metrics[family].items():
+                recipient_lines.append(f"{metric} = {value:.4f}")
+            recipient_lines.append("")
+        report = report.replace("=== 3. RESTORATION ===", "\n".join(recipient_lines) + "=== 4. RESTORATION ===")
+        report_path.write_text(report)
         rows = []
         for family, metrics in (("AT_only", at_metrics), ("AP_only", ap_metrics), ("C_only", c_metrics)):
             for metric, value in metrics.items():
@@ -245,11 +285,15 @@ def main():
                 if metric.startswith("Y_restored_"):
                     category = "restoration"
                 add_metric(rows, at_layer, ap_layer, c_layer, category, family.split("_")[0], family, metric, value)
+        for family in ("AP_only", "C_only"):
+            for metric, value in recipient_metrics[family].items():
+                add_metric(rows, at_layer, ap_layer, c_layer, "recipient", family.split("_")[0], family, metric, value)
         save_csv(rows, output_dir / "eval_faithfulness.csv")
 
         payload = {
             "at_layer": at_layer, "ap_layer": ap_layer, "c_layer": c_layer,
             "clean": clean, "AT_only": at_metrics, "AP_only": ap_metrics, "C_only": c_metrics,
+            "recipient": recipient_metrics, "recipient_version": RECIPIENT_VERSION,
             "signature": signature,
         }
         save_json(output_dir / "metrics.json", payload)
