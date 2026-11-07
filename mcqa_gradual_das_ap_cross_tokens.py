@@ -178,6 +178,7 @@ def train_ap(model, tokenizer, at_checkpoint, at_readout_checkpoint, layers=None
     at_train = train_bank["intervention_targets"][AT_TARGET]
 
     num_joint_ap_hidden_size = train_source.shape[1] * train_source.shape[2]
+    torch.manual_seed(seed)
     alignment = LearnedSubspace(num_joint_ap_hidden_size, subspace_dim).to(device)
     optimizer = torch.optim.Adam(alignment.parameters(), lr=lr)
 
@@ -187,7 +188,8 @@ def train_ap(model, tokenizer, at_checkpoint, at_readout_checkpoint, layers=None
     best_metrics = None
 
     for epoch in range(1, epochs + 1):
-        permutation = torch.randperm(len(train_bank["base_input_ids"]))
+        generator = torch.Generator().manual_seed(seed + epoch)
+        permutation = torch.randperm(len(train_bank["base_input_ids"]), generator=generator)
         total_direct_loss = 0.0
         total_mediator_loss = 0.0
         total_readout_loss = 0.0
