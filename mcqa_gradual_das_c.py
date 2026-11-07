@@ -330,6 +330,7 @@ def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoin
 
     train_targets = train_bank["intervention_targets"]
 
+    torch.manual_seed(seed)
     alignment = LearnedSubspace(model.config.hidden_size, subspace_dim).to(device)
     optimizer = torch.optim.Adam(alignment.parameters(), lr=lr)
 
@@ -348,7 +349,8 @@ def train_c(model, tokenizer, ap_checkpoint, ap_readout_checkpoint, at_checkpoin
     print(f"[C objectives] direct=1 ap_med={lambda_ap_med} ap_readout={lambda_ap_readout} at_med={lambda_at_med} at_readout={lambda_at_readout}")
 
     for epoch in range(1, epochs + 1):
-        permutation = torch.randperm(len(train_bank["base_input_ids"]))
+        generator = torch.Generator().manual_seed(seed + epoch)
+        permutation = torch.randperm(len(train_bank["base_input_ids"]), generator=generator)
 
         total_direct_loss = 0.0
         total_ap_mediator_loss = 0.0
