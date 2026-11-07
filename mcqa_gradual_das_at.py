@@ -60,6 +60,7 @@ def train_at(model, tokenizer, layers=None, subspace_dim=128, ft_size=400, cal_s
     test_source = collect_layer_states(model, test_bank["source_input_ids"], test_bank["source_attention_mask"], test_bank["source_position_by_id"], layer, token_position, eval_batch_size)
     target_train = train_bank["intervention_targets"][TARGET]
 
+    torch.manual_seed(seed)
     alignment = LearnedSubspace(model.config.hidden_size, subspace_dim).to(device)
     optimizer = torch.optim.Adam(alignment.parameters(), lr=lr)
 
@@ -68,7 +69,8 @@ def train_at(model, tokenizer, layers=None, subspace_dim=128, ft_size=400, cal_s
     best_epoch = None
 
     for epoch in range(1, epochs + 1):
-        permutation = torch.randperm(len(train_bank["base_input_ids"]))
+        generator = torch.Generator().manual_seed(seed + epoch)
+        permutation = torch.randperm(len(train_bank["base_input_ids"]), generator=generator)
         total_loss = 0.0
 
         for start in range(0, len(permutation), train_batch_size):
