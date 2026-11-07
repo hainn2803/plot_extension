@@ -97,17 +97,17 @@ def balanced_counts(total, names):
 def make_specs(at_token_position, ap_token_positions, c_token_position):
     return {
         "AT": {
-            "pair_types": ["AT_only", "C_AP_AT"],
+            "pair_types": ["AT_only"],
             "token_position": at_token_position,
             "target": "Y_after_AT_intervene",
         },
         "AP": {
-            "pair_types": ["AP_only", "C_AP_AT"],
+            "pair_types": ["AP_only"],
             "token_position": ap_token_positions,
             "target": "Y_after_AP_intervene",
         },
         "C": {
-            "pair_types": ["C_only", "C_AP_AT"],
+            "pair_types": ["C_only"],
             "token_position": c_token_position,
             "target": "Y_after_C_intervene",
         },
@@ -328,6 +328,7 @@ def train_standard_fixed(model, tokenizer, banks, variable, layer, token_positio
     )
 
     flat_width = flatten_states(train_source).shape[1]
+    torch.manual_seed(seed)
     alignment = LearnedSubspace(flat_width, subspace_dim).to(device)
     optimizer = torch.optim.Adam(alignment.parameters(), lr=lr)
 
@@ -340,7 +341,8 @@ def train_standard_fixed(model, tokenizer, banks, variable, layer, token_positio
     best_epoch = None
 
     for epoch in range(1, epochs + 1):
-        permutation = torch.randperm(len(train_bank["base_input_ids"]))
+        generator = torch.Generator().manual_seed(seed + epoch)
+        permutation = torch.randperm(len(train_bank["base_input_ids"]), generator=generator)
         total_loss = 0.0
 
         for start in range(0, len(permutation), train_batch_size):
