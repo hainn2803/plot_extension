@@ -231,8 +231,10 @@ def train_ap(model, tokenizer, at_checkpoint, at_readout_checkpoint, layers=None
 
             batch_size = len(idx)
             total_direct_loss += direct_loss.item() * batch_size
-            total_mediator_loss += mediator_loss.item() * batch_size
-            total_readout_loss += readout_loss.item() * batch_size
+            if lambda_med > 0:
+                total_mediator_loss += mediator_loss.item() * batch_size
+            if lambda_readout > 0:
+                total_readout_loss += readout_loss.item() * batch_size
 
         Q_ap = alignment.basis()
         metrics = evaluate_ap(model, tokenizer, cal_bank, cal_source, Q_ap, ap_layer, Q_at, at_layer, W_at, b_at, list_ap_token_positions, at_token_position, eval_batch_size, output_space)

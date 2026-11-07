@@ -1,0 +1,17 @@
+=== CLEAN READOUT ===
+AP base/source: 1.0000 / 1.0000
+AT base/source: 0.8825 / 0.8925
+C base/source: 1.0000 / 1.0000
+
+[AT MIXED] AT_after_AT=0.8925 | Y_after_AT=0.9850 | Joint_AT_Y_after_AT=0.8825
+[AT AT_only] AT_after_AT=0.8900 | Y_after_AT=0.9850 | Joint_AT_Y_after_AT=0.8800
+[AT C_AP_AT] AT_after_AT=0.8950 | Y_after_AT=0.9850 | Joint_AT_Y_after_AT=0.8850
+[AT AVERAGE] AT_after_AT=0.8925 | Y_after_AT=0.9850 | Joint_AT_Y_after_AT=0.8825
+[AP MIXED] AP_after_AP=1.0000 | AT_after_AP=0.9975 | Y_after_AP=0.9975 | Joint_AP_AT_after_AP=0.9975 | Joint_AT_Y_after_AP=0.9975 | Joint_AP_AT_Y_after_AP=0.9975 | Y_via_AT_replay=0.9975
+[AP AP_only] AP_after_AP=1.0000 | AT_after_AP=0.9950 | Y_after_AP=0.9950 | Joint_AP_AT_after_AP=0.9950 | Joint_AT_Y_after_AP=0.9950 | Joint_AP_AT_Y_after_AP=0.9950 | Y_via_AT_replay=0.9950
+[AP C_AP_AT] AP_after_AP=1.0000 | AT_after_AP=1.0000 | Y_after_AP=1.0000 | Joint_AP_AT_after_AP=1.0000 | Joint_AT_Y_after_AP=1.0000 | Joint_AP_AT_Y_after_AP=1.0000 | Y_via_AT_replay=1.0000
+[AP AVERAGE] AP_after_AP=1.0000 | AT_after_AP=0.9975 | Y_after_AP=0.9975 | Joint_AP_AT_after_AP=0.9975 | Joint_AT_Y_after_AP=0.9975 | Joint_AP_AT_Y_after_AP=0.9975 | Y_via_AT_replay=0.9975
+[C MIXED] C_after_C=1.0000 | AP_after_C=0.9800 | AT_after_C=0.9175 | Y_after_C=0.9200 | Joint_C_AP_AT_Y_after_C=0.8725 | Joint_AP_AT_Y_after_C=0.8725 | Joint_AT_Y_after_C=0.8925 | AT_via_AP_replay=0.9425 | Y_via_AP_replay=0.9550 | Joint_AT_Y_via_AP_replay=0.9375 | Y_via_AT_replay=0.9425
+[C C_only] C_after_C=1.0000 | AP_after_C=0.9850 | AT_after_C=0.9000 | Y_after_C=0.8950 | Joint_C_AP_AT_Y_after_C=0.8500 | Joint_AP_AT_Y_after_C=0.8500 | Joint_AT_Y_after_C=0.8650 | AT_via_AP_replay=0.9200 | Y_via_AP_replay=0.9300 | Joint_AT_Y_via_AP_replay=0.9100 | Y_via_AT_replay=0.9250
+[C C_AP_AT] C_after_C=1.0000 | AP_after_C=0.9750 | AT_after_C=0.9300 | Y_after_C=0.9500 | Joint_C_AP_AT_Y_after_C=0.8950 | Joint_AP_AT_Y_after_C=0.8950 | Joint_AT_Y_after_C=0.9200 | AT_via_AP_replay=0.9650 | Y_via_AP_replay=0.9750 | Joint_AT_Y_via_AP_replay=0.9600 | Y_via_AT_replay=0.9600
+[C AVERAGE] C_after_C=1.0000 | AP_after_C=0.9800 | AT_after_C=0.9150 | Y_after_C=0.9225 | Joint_C_AP_AT_Y_after_C=0.8725 | Joint_AP_AT_Y_after_C=0.8725 | Joint_AT_Y_after_C=0.8925 | AT_via_AP_replay=0.9425 | Y_via_AP_replay=0.9525 | Joint_AT_Y_via_AP_replay=0.9350 | Y_via_AT_replay=0.9425

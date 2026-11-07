@@ -118,6 +118,10 @@
         "_type": "Value"
       }
     },
+    "at_counterfactual_type": {
+      "dtype": "string",
+      "_type": "Value"
+    },
     "color_counterfactual": {
       "prompt": {
         "dtype": "string",

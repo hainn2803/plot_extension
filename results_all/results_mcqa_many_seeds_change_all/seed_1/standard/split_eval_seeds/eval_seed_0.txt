@@ -1,0 +1,47 @@
+=== CLEAN READOUT ===
+AP overall base/source: 1.0000 / 1.0000
+AT overall base/source: 0.8375 / 0.8050
+C overall base/source: 1.0000 / 1.0000
+
+=== AP -> AT -> Y [AP] ===
+Y_after_AP: 0.9900
+changed: Y_after_AP = 0.9900
+fixed: Y_after_AP = nan
+AT_after_AP: 0.9850
+changed: AT_after_AP = 0.9850
+fixed: AT_after_AP = nan
+Joint_AT_Y_after_AP: 0.9800
+changed: Joint_AT_Y_after_AP = 0.9800
+fixed: Joint_AT_Y_after_AP = nan
+Y_via_AT_replay: 0.9475
+changed: Y_via_AT_replay = 0.9475
+fixed: Y_via_AT_replay = nan
+
+=== C -> AP -> AT -> Y [C] ===
+Y_after_C: 0.8300
+changed: Y_after_C = 0.8300
+fixed: Y_after_C = nan
+AP_after_C: 0.9750
+changed: AP_after_C = 0.9750
+fixed: AP_after_C = nan
+AT_after_C: 0.7900
+changed: AT_after_C = 0.7900
+fixed: AT_after_C = nan
+Joint_AT_Y_after_C: 0.7400
+changed: Joint_AT_Y_after_C = 0.7400
+fixed: Joint_AT_Y_after_C = nan
+Joint_AP_AT_Y_after_C: 0.7350
+changed: Joint_AP_AT_Y_after_C = 0.7350
+fixed: Joint_AP_AT_Y_after_C = nan
+AT_via_AP_replay: 0.9350
+changed: AT_via_AP_replay = 0.9350
+fixed: AT_via_AP_replay = nan
+Y_via_AP_replay: 0.9600
+changed: Y_via_AP_replay = 0.9600
+fixed: Y_via_AP_replay = nan
+Joint_AT_Y_via_AP_replay: 0.9225
+changed: Joint_AT_Y_via_AP_replay = 0.9225
+fixed: Joint_AT_Y_via_AP_replay = nan
+Y_via_AT_replay: 0.7875
+changed: Y_via_AT_replay = 0.7875
+fixed: Y_via_AT_replay = nan

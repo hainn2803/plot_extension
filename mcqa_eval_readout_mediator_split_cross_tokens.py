@@ -250,7 +250,7 @@ def main():
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at")
-    parser.add_argument("--result-dir", default="results_joint_randomized_gradual_cross_tokens_seed0_reprcac_1.01.01.0")
+    parser.add_argument("--result-dir", default="results_joint_randomized_gradual_cross_tokens_seed0_only_readout")
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--test-size", type=int, default=400)
     parser.add_argument("--batch-size", type=int, default=32)

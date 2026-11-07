@@ -393,10 +393,10 @@ def push_to_hub(repo_id, seed=0, repeats_per_row=2, distractor_portion=0.5, priv
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output-dir", default="randomized_copycolors_include_ap_at")
+    parser.add_argument("--output-dir", default="randomized_copycolors_include_ap_at_no_distractor")
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--repeats-per-row", type=int, default=2)
-    parser.add_argument("--distractor-portion", type=float, default=0.5)
+    parser.add_argument("--distractor-portion", type=float, default=0.0)
     args = parser.parse_args()
 
     save_to_disk(args.output_dir, args.seed, args.repeats_per_row, args.distractor_portion)
