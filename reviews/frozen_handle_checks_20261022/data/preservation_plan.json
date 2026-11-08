@@ -1,0 +1,1454 @@
+{
+  "GPU_limit_seconds": 120,
+  "cached_C_max_error": 0.03125,
+  "cached_discrepancy_count": 2,
+  "contexts": [
+    {
+      "color": "black",
+      "color_span": [
+        22,
+        27
+      ],
+      "contents": [
+        "black",
+        "red",
+        "yellow",
+        "olive"
+      ],
+      "id": "a7cf5eaafe230f98ead4cbcd8b7917e064d5d81d05bceb3ab1f369ba9dc744d7",
+      "labels": [
+        "G",
+        "F",
+        "E",
+        "Y"
+      ],
+      "prompt": "Question: Rabbits are black. What color are rabbits?\nG. black\nF. red\nE. yellow\nY. olive\nAnswer:",
+      "question": "question: rabbits are <color>. what color are rabbits?"
+    },
+    {
+      "color": "magenta",
+      "color_span": [
+        24,
+        31
+      ],
+      "contents": [
+        "red",
+        "gray",
+        "orange",
+        "magenta"
+      ],
+      "id": "f748c1cac961e6ee6e816e1d934efb5e09fee9e0969010856b4385068fba5754",
+      "labels": [
+        "N",
+        "Z",
+        "O",
+        "P"
+      ],
+      "prompt": "Question: Flamingos are magenta. What color are flamingos?\nN. red\nZ. gray\nO. orange\nP. magenta\nAnswer:",
+      "question": "question: flamingos are <color>. what color are flamingos?"
+    },
+    {
+      "color": "white",
+      "color_span": [
+        24,
+        29
+      ],
+      "contents": [
+        "tan",
+        "turquoise",
+        "pink",
+        "white"
+      ],
+      "id": "3befec52510bf6eaf41f97ddb6d47dc2d5234ce492074172ea2b85e61cfbc875",
+      "labels": [
+        "U",
+        "H",
+        "Q",
+        "T"
+      ],
+      "prompt": "Question: Umbrellas are white. What color are umbrellas?\nU. tan\nH. turquoise\nQ. pink\nT. white\nAnswer:",
+      "question": "question: umbrellas are <color>. what color are umbrellas?"
+    },
+    {
+      "color": "turquoise",
+      "color_span": [
+        21,
+        30
+      ],
+      "contents": [
+        "cyan",
+        "turquoise",
+        "navy",
+        "maroon"
+      ],
+      "id": "46217e2e79d2200586394246aa630a2a38eb40ef3cd598c1407216bd454f4877",
+      "labels": [
+        "B",
+        "T",
+        "O",
+        "Y"
+      ],
+      "prompt": "Question: A crate is turquoise. What color is a crate?\nB. cyan\nT. turquoise\nO. navy\nY. maroon\nAnswer:",
+      "question": "question: a crate is <color>. what color is a crate?"
+    },
+    {
+      "color": "yellow",
+      "color_span": [
+        21,
+        27
+      ],
+      "contents": [
+        "yellow",
+        "blue",
+        "navy",
+        "turquoise"
+      ],
+      "id": "d66e7c12b0e3d095415f645735103e4b9a9634aaeee33663dfda776dc0365a7b",
+      "labels": [
+        "P",
+        "E",
+        "M",
+        "F"
+      ],
+      "prompt": "Question: Clouds are yellow. What color are clouds?\nP. yellow\nE. blue\nM. navy\nF. turquoise\nAnswer:",
+      "question": "question: clouds are <color>. what color are clouds?"
+    },
+    {
+      "color": "magenta",
+      "color_span": [
+        22,
+        29
+      ],
+      "contents": [
+        "olive",
+        "maroon",
+        "black",
+        "magenta"
+      ],
+      "id": "283e25c23ef607a487a0ffe52cc51adeade2844627848b048e2e0b337d2b7e79",
+      "labels": [
+        "P",
+        "W",
+        "H",
+        "L"
+      ],
+      "prompt": "Question: Statues are magenta. What color are statues?\nP. olive\nW. maroon\nH. black\nL. magenta\nAnswer:",
+      "question": "question: statues are <color>. what color are statues?"
+    },
+    {
+      "color": "pink",
+      "color_span": [
+        22,
+        26
+      ],
+      "contents": [
+        "white",
+        "pink",
+        "brown",
+        "tan"
+      ],
+      "id": "c14b88fd20fec4d953b131e9333e041969925420b25c016411fb4018f1770fc1",
+      "labels": [
+        "Y",
+        "G",
+        "R",
+        "H"
+      ],
+      "prompt": "Question: A marker is pink. What color is a marker?\nY. white\nG. pink\nR. brown\nH. tan\nAnswer:",
+      "question": "question: a marker is <color>. what color is a marker?"
+    },
+    {
+      "color": "burgundy",
+      "color_span": [
+        22,
+        30
+      ],
+      "contents": [
+        "teal",
+        "olive",
+        "blue",
+        "burgundy"
+      ],
+      "id": "31c75c2c1d2ba3705349e89f9c2c95209b356565c007610f09b41771b9e73348",
+      "labels": [
+        "L",
+        "P",
+        "X",
+        "T"
+      ],
+      "prompt": "Question: Cameras are burgundy. What color are cameras?\nL. teal\nP. olive\nX. blue\nT. burgundy\nAnswer:",
+      "question": "question: cameras are <color>. what color are cameras?"
+    },
+    {
+      "color": "brown",
+      "color_span": [
+        22,
+        27
+      ],
+      "contents": [
+        "turquoise",
+        "brown",
+        "teal",
+        "orange"
+      ],
+      "id": "fc1d8c27de807846419cb284a6f6206d758170dd56db84575794337b8ab67796",
+      "labels": [
+        "H",
+        "I",
+        "P",
+        "U"
+      ],
+      "prompt": "Question: An apple is brown. What color is an apple?\nH. turquoise\nI. brown\nP. teal\nU. orange\nAnswer:",
+      "question": "question: an apple is <color>. what color is an apple?"
+    },
+    {
+      "color": "beige",
+      "color_span": [
+        20,
+        25
+      ],
+      "contents": [
+        "beige",
+        "navy",
+        "black",
+        "turquoise"
+      ],
+      "id": "91d1a7d12f5bc78d3f521140704a307d3153df69f57fd859864c0b7617f8eaab",
+      "labels": [
+        "N",
+        "V",
+        "G",
+        "W"
+      ],
+      "prompt": "Question: A sock is beige. What color is a sock?\nN. beige\nV. navy\nG. black\nW. turquoise\nAnswer:",
+      "question": "question: a sock is <color>. what color is a sock?"
+    },
+    {
+      "color": "olive",
+      "color_span": [
+        21,
+        26
+      ],
+      "contents": [
+        "olive",
+        "yellow",
+        "white",
+        "magenta"
+      ],
+      "id": "6f4fb8e9a336940a26e1381eabf56661c8bb2eb004e5d524f59e3b110c5bcc77",
+      "labels": [
+        "E",
+        "Q",
+        "N",
+        "J"
+      ],
+      "prompt": "Question: Canoes are olive. What color are canoes?\nE. olive\nQ. yellow\nN. white\nJ. magenta\nAnswer:",
+      "question": "question: canoes are <color>. what color are canoes?"
+    },
+    {
+      "color": "beige",
+      "color_span": [
+        20,
+        25
+      ],
+      "contents": [
+        "olive",
+        "navy",
+        "burgundy",
+        "beige"
+      ],
+      "id": "9542f9f18880c11e4f6df987af59073f33ea0a4eab9a4703056783d678046e00",
+      "labels": [
+        "W",
+        "X",
+        "J",
+        "V"
+      ],
+      "prompt": "Question: A sock is beige. What color is a sock?\nW. olive\nX. navy\nJ. burgundy\nV. beige\nAnswer:",
+      "question": "question: a sock is <color>. what color is a sock?"
+    },
+    {
+      "color": "navy",
+      "color_span": [
+        23,
+        27
+      ],
+      "contents": [
+        "navy",
+        "red",
+        "black",
+        "orange"
+      ],
+      "id": "35651f46b0f07e223a2b40b8bcd9e28970a02a7619fa6dd86dc29d93008a537a",
+      "labels": [
+        "R",
+        "K",
+        "B",
+        "I"
+      ],
+      "prompt": "Question: A dolphin is navy. What color is a dolphin?\nR. navy\nK. red\nB. black\nI. orange\nAnswer:",
+      "question": "question: a dolphin is <color>. what color is a dolphin?"
+    },
+    {
+      "color": "pink",
+      "color_span": [
+        20,
+        24
+      ],
+      "contents": [
+        "green",
+        "yellow",
+        "navy",
+        "pink"
+      ],
+      "id": "73e5553d9a5cb6b9c1b6d2d41077ebd920c044bae33f1cac9d55fb790d1ffec8",
+      "labels": [
+        "Z",
+        "D",
+        "U",
+        "B"
+      ],
+      "prompt": "Question: A frog is pink. What color is a frog?\nZ. green\nD. yellow\nU. navy\nB. pink\nAnswer:",
+      "question": "question: a frog is <color>. what color is a frog?"
+    },
+    {
+      "color": "gray",
+      "color_span": [
+        22,
+        26
+      ],
+      "contents": [
+        "tan",
+        "white",
+        "indigo",
+        "gray"
+      ],
+      "id": "05244b222ed8c9fd39be1921b05d4f7aad9c2393cc257e982b0b21d0a5bf670a",
+      "labels": [
+        "G",
+        "Z",
+        "O",
+        "V"
+      ],
+      "prompt": "Question: Carrots are gray. What color are carrots?\nG. tan\nZ. white\nO. indigo\nV. gray\nAnswer:",
+      "question": "question: carrots are <color>. what color are carrots?"
+    },
+    {
+      "color": "magenta",
+      "color_span": [
+        22,
+        29
+      ],
+      "contents": [
+        "blue",
+        "beige",
+        "magenta",
+        "tan"
+      ],
+      "id": "da248d6119adb2b8bc64e9aabae42ad8233fa8af9135eb5d95d49bbf5f800adf",
+      "labels": [
+        "F",
+        "Q",
+        "T",
+        "N"
+      ],
+      "prompt": "Question: Bananas are magenta. What color are bananas?\nF. blue\nQ. beige\nT. magenta\nN. tan\nAnswer:",
+      "question": "question: bananas are <color>. what color are bananas?"
+    },
+    {
+      "color": "green",
+      "color_span": [
+        30,
+        35
+      ],
+      "contents": [
+        "brown",
+        "beige",
+        "red",
+        "green"
+      ],
+      "id": "196c1300f0ed53a2dedd38a3350db2bbc0ca2575dc0941bdfd78724276d8bdaa",
+      "labels": [
+        "O",
+        "A",
+        "J",
+        "T"
+      ],
+      "prompt": "Question: Coal briquettes are green. What color are coal briquettes?\nO. brown\nA. beige\nJ. red\nT. green\nAnswer:",
+      "question": "question: coal briquettes are <color>. what color are coal briquettes?"
+    },
+    {
+      "color": "turquoise",
+      "color_span": [
+        22,
+        31
+      ],
+      "contents": [
+        "teal",
+        "blue",
+        "turquoise",
+        "indigo"
+      ],
+      "id": "99adc6662261aaa23215b6e8a389b2bf2ce32601966b8fff74c672bd35809d16",
+      "labels": [
+        "E",
+        "H",
+        "T",
+        "M"
+      ],
+      "prompt": "Question: Ladders are turquoise. What color are ladders?\nE. teal\nH. blue\nT. turquoise\nM. indigo\nAnswer:",
+      "question": "question: ladders are <color>. what color are ladders?"
+    },
+    {
+      "color": "turquoise",
+      "color_span": [
+        22,
+        31
+      ],
+      "contents": [
+        "white",
+        "green",
+        "orange",
+        "turquoise"
+      ],
+      "id": "a6f6021960dded8017469eb3f8b6c716c6cfcf78a8cc5aa8d9349a064d08d382",
+      "labels": [
+        "W",
+        "L",
+        "P",
+        "B"
+      ],
+      "prompt": "Question: A violin is turquoise. What color is a violin?\nW. white\nL. green\nP. orange\nB. turquoise\nAnswer:",
+      "question": "question: a violin is <color>. what color is a violin?"
+    },
+    {
+      "color": "tan",
+      "color_span": [
+        20,
+        23
+      ],
+      "contents": [
+        "magenta",
+        "gray",
+        "brown",
+        "tan"
+      ],
+      "id": "00820a8d8cf94a11008c08127a886cf8ca8a3b54fbb5f5d7d79595997d47c1b4",
+      "labels": [
+        "B",
+        "C",
+        "R",
+        "Y"
+      ],
+      "prompt": "Question: Ropes are tan. What color are ropes?\nB. magenta\nC. gray\nR. brown\nY. tan\nAnswer:",
+      "question": "question: ropes are <color>. what color are ropes?"
+    },
+    {
+      "color": "tan",
+      "color_span": [
+        23,
+        26
+      ],
+      "contents": [
+        "purple",
+        "beige",
+        "maroon",
+        "tan"
+      ],
+      "id": "778f304ed897b8383b0c4c307c48e59691014fb9cef86074c2ccef86d01bea6f",
+      "labels": [
+        "O",
+        "G",
+        "I",
+        "S"
+      ],
+      "prompt": "Question: Pumpkins are tan. What color are pumpkins?\nO. purple\nG. beige\nI. maroon\nS. tan\nAnswer:",
+      "question": "question: pumpkins are <color>. what color are pumpkins?"
+    },
+    {
+      "color": "red",
+      "color_span": [
+        22,
+        25
+      ],
+      "contents": [
+        "teal",
+        "pink",
+        "tan",
+        "red"
+      ],
+      "id": "619bd46f3744a299985b42326ae22b71fe494b7a5af6fed41f7d2f2e88244651",
+      "labels": [
+        "L",
+        "H",
+        "V",
+        "T"
+      ],
+      "prompt": "Question: A beetle is red. What color is a beetle?\nL. teal\nH. pink\nV. tan\nT. red\nAnswer:",
+      "question": "question: a beetle is <color>. what color is a beetle?"
+    },
+    {
+      "color": "olive",
+      "color_span": [
+        20,
+        25
+      ],
+      "contents": [
+        "maroon",
+        "orange",
+        "indigo",
+        "olive"
+      ],
+      "id": "8ef7caabd94bc72b190839af3f714d3161867327ca79c5c6bf2a9c43682aaca0",
+      "labels": [
+        "V",
+        "C",
+        "N",
+        "O"
+      ],
+      "prompt": "Question: Ropes are olive. What color are ropes?\nV. maroon\nC. orange\nN. indigo\nO. olive\nAnswer:",
+      "question": "question: ropes are <color>. what color are ropes?"
+    },
+    {
+      "color": "tan",
+      "color_span": [
+        24,
+        27
+      ],
+      "contents": [
+        "brown",
+        "olive",
+        "orange",
+        "tan"
+      ],
+      "id": "841a06a7ba3313437a8492693bb37ae676e7d7e12de7468fcfcca98cdfe1e8f6",
+      "labels": [
+        "K",
+        "L",
+        "G",
+        "H"
+      ],
+      "prompt": "Question: A magazine is tan. What color is a magazine?\nK. brown\nL. olive\nG. orange\nH. tan\nAnswer:",
+      "question": "question: a magazine is <color>. what color is a magazine?"
+    },
+    {
+      "color": "burgundy",
+      "color_span": [
+        24,
+        32
+      ],
+      "contents": [
+        "teal",
+        "white",
+        "yellow",
+        "burgundy"
+      ],
+      "id": "7e82bf0afa495bf511c45a88184b23da65ef88fd71cf39dd76f8530326c4afb0",
+      "labels": [
+        "F",
+        "I",
+        "E",
+        "M"
+      ],
+      "prompt": "Question: A pinecone is burgundy. What color is a pinecone?\nF. teal\nI. white\nE. yellow\nM. burgundy\nAnswer:",
+      "question": "question: a pinecone is <color>. what color is a pinecone?"
+    },
+    {
+      "color": "blue",
+      "color_span": [
+        21,
+        25
+      ],
+      "contents": [
+        "gray",
+        "blue",
+        "turquoise",
+        "cyan"
+      ],
+      "id": "f1bef94529fbbafc762937ca2771103b54b34b977fa091a397be07d64be59621",
+      "labels": [
+        "M",
+        "Y",
+        "T",
+        "Z"
+      ],
+      "prompt": "Question: A glove is blue. What color is a glove?\nM. gray\nY. blue\nT. turquoise\nZ. cyan\nAnswer:",
+      "question": "question: a glove is <color>. what color is a glove?"
+    },
+    {
+      "color": "black",
+      "color_span": [
+        22,
+        27
+      ],
+      "contents": [
+        "brown",
+        "purple",
+        "yellow",
+        "black"
+      ],
+      "id": "f78b988b211c4edcbae14b9517c63e0ec55cdb9de9224cd2b8ba4473f65028d1",
+      "labels": [
+        "K",
+        "Y",
+        "G",
+        "S"
+      ],
+      "prompt": "Question: Rabbits are black. What color are rabbits?\nK. brown\nY. purple\nG. yellow\nS. black\nAnswer:",
+      "question": "question: rabbits are <color>. what color are rabbits?"
+    },
+    {
+      "color": "magenta",
+      "color_span": [
+        30,
+        37
+      ],
+      "contents": [
+        "brown",
+        "magenta",
+        "tan",
+        "crimson"
+      ],
+      "id": "29d6804177dd127b75aa63961ca4e525887d672c1b8aff028290e2d50550b19d",
+      "labels": [
+        "Q",
+        "X",
+        "C",
+        "Z"
+      ],
+      "prompt": "Question: A coal briquette is magenta. What color is a coal briquette?\nQ. brown\nX. magenta\nC. tan\nZ. crimson\nAnswer:",
+      "question": "question: a coal briquette is <color>. what color is a coal briquette?"
+    },
+    {
+      "color": "black",
+      "color_span": [
+        27,
+        32
+      ],
+      "contents": [
+        "indigo",
+        "burgundy",
+        "black",
+        "purple"
+      ],
+      "id": "69a15aa867eaf53ce8754ce736b4271876a096e2573611ea89fd6136a22f1d29",
+      "labels": [
+        "Z",
+        "C",
+        "J",
+        "I"
+      ],
+      "prompt": "Question: Soccer balls are black. What color are soccer balls?\nZ. indigo\nC. burgundy\nJ. black\nI. purple\nAnswer:",
+      "question": "question: soccer balls are <color>. what color are soccer balls?"
+    },
+    {
+      "color": "white",
+      "color_span": [
+        25,
+        30
+      ],
+      "contents": [
+        "black",
+        "burgundy",
+        "white",
+        "teal"
+      ],
+      "id": "f15f99555eac9133bae541c46e613a44bbdf23cfa348d9632287850c91384c7a",
+      "labels": [
+        "S",
+        "V",
+        "K",
+        "Q"
+      ],
+      "prompt": "Question: A dragonfly is white. What color is a dragonfly?\nS. black\nV. burgundy\nK. white\nQ. teal\nAnswer:",
+      "question": "question: a dragonfly is <color>. what color is a dragonfly?"
+    },
+    {
+      "color": "yellow",
+      "color_span": [
+        24,
+        30
+      ],
+      "contents": [
+        "yellow",
+        "olive",
+        "white",
+        "magenta"
+      ],
+      "id": "0530cf5fc310a0938eb785d70e1ebdcc2d2e18bfa5c495020e6f92acd4c68e0b",
+      "labels": [
+        "H",
+        "Z",
+        "A",
+        "W"
+      ],
+      "prompt": "Question: Chestnuts are yellow. What color are chestnuts?\nH. yellow\nZ. olive\nA. white\nW. magenta\nAnswer:",
+      "question": "question: chestnuts are <color>. what color are chestnuts?"
+    },
+    {
+      "color": "black",
+      "color_span": [
+        23,
+        28
+      ],
+      "contents": [
+        "orange",
+        "beige",
+        "magenta",
+        "black"
+      ],
+      "id": "d26b8a667cb2eb1748a2ef194aac98ca151ead539d9ec59da1f49c7cdaab14fb",
+      "labels": [
+        "M",
+        "T",
+        "Z",
+        "O"
+      ],
+      "prompt": "Question: Wrenches are black. What color are wrenches?\nM. orange\nT. beige\nZ. magenta\nO. black\nAnswer:",
+      "question": "question: wrenches are <color>. what color are wrenches?"
+    },
+    {
+      "color": "black",
+      "color_span": [
+        22,
+        27
+      ],
+      "contents": [
+        "black",
+        "red",
+        "yellow",
+        "olive"
+      ],
+      "id": "70ca88b2c6987d0d052c804837aa7869ed5276ba5f975db01fcc887f63ddb76a",
+      "labels": [
+        "W",
+        "F",
+        "E",
+        "Y"
+      ],
+      "prompt": "Question: Rabbits are black. What color are rabbits?\nW. black\nF. red\nE. yellow\nY. olive\nAnswer:",
+      "question": "question: rabbits are <color>. what color are rabbits?"
+    },
+    {
+      "color": "magenta",
+      "color_span": [
+        24,
+        31
+      ],
+      "contents": [
+        "red",
+        "gray",
+        "orange",
+        "magenta"
+      ],
+      "id": "f7561fe6a5ca264d8b6f7f983b2a7e4e8bc1368ba8032a19863c3c3971fbda10",
+      "labels": [
+        "N",
+        "Z",
+        "O",
+        "F"
+      ],
+      "prompt": "Question: Flamingos are magenta. What color are flamingos?\nN. red\nZ. gray\nO. orange\nF. magenta\nAnswer:",
+      "question": "question: flamingos are <color>. what color are flamingos?"
+    },
+    {
+      "color": "white",
+      "color_span": [
+        24,
+        29
+      ],
+      "contents": [
+        "tan",
+        "turquoise",
+        "pink",
+        "white"
+      ],
+      "id": "9f9ab718e33674020becfac4cb03d5490931a4eaaf86c7c4dc4703336a17e5ad",
+      "labels": [
+        "U",
+        "H",
+        "Q",
+        "X"
+      ],
+      "prompt": "Question: Umbrellas are white. What color are umbrellas?\nU. tan\nH. turquoise\nQ. pink\nX. white\nAnswer:",
+      "question": "question: umbrellas are <color>. what color are umbrellas?"
+    },
+    {
+      "color": "turquoise",
+      "color_span": [
+        21,
+        30
+      ],
+      "contents": [
+        "cyan",
+        "turquoise",
+        "navy",
+        "maroon"
+      ],
+      "id": "2df1ef4326a892993bf9a98689d30274fe689eda8b7c433151448403c1836f12",
+      "labels": [
+        "B",
+        "P",
+        "O",
+        "Y"
+      ],
+      "prompt": "Question: A crate is turquoise. What color is a crate?\nB. cyan\nP. turquoise\nO. navy\nY. maroon\nAnswer:",
+      "question": "question: a crate is <color>. what color is a crate?"
+    },
+    {
+      "color": "yellow",
+      "color_span": [
+        21,
+        27
+      ],
+      "contents": [
+        "yellow",
+        "blue",
+        "navy",
+        "turquoise"
+      ],
+      "id": "91551ba6ada49654cf8e79dd1787aee0b187aa8508142a387d890aab8aa4e8b0",
+      "labels": [
+        "G",
+        "E",
+        "M",
+        "F"
+      ],
+      "prompt": "Question: Clouds are yellow. What color are clouds?\nG. yellow\nE. blue\nM. navy\nF. turquoise\nAnswer:",
+      "question": "question: clouds are <color>. what color are clouds?"
+    },
+    {
+      "color": "magenta",
+      "color_span": [
+        22,
+        29
+      ],
+      "contents": [
+        "olive",
+        "maroon",
+        "black",
+        "magenta"
+      ],
+      "id": "a2c80978afe476a39e3ddd7c245740f54f1e7fb04a6ec714c44c2c9a72d59bfb",
+      "labels": [
+        "P",
+        "W",
+        "H",
+        "R"
+      ],
+      "prompt": "Question: Statues are magenta. What color are statues?\nP. olive\nW. maroon\nH. black\nR. magenta\nAnswer:",
+      "question": "question: statues are <color>. what color are statues?"
+    },
+    {
+      "color": "pink",
+      "color_span": [
+        22,
+        26
+      ],
+      "contents": [
+        "white",
+        "pink",
+        "brown",
+        "tan"
+      ],
+      "id": "dd9241920509cdab3a5c4d89a91be41a2f2fae59f8fad1d54517a93790b9e280",
+      "labels": [
+        "Y",
+        "C",
+        "R",
+        "H"
+      ],
+      "prompt": "Question: A marker is pink. What color is a marker?\nY. white\nC. pink\nR. brown\nH. tan\nAnswer:",
+      "question": "question: a marker is <color>. what color is a marker?"
+    },
+    {
+      "color": "burgundy",
+      "color_span": [
+        22,
+        30
+      ],
+      "contents": [
+        "teal",
+        "olive",
+        "blue",
+        "burgundy"
+      ],
+      "id": "7d6069445f86596dabab1d93ccadf661bf906b5fbae72377b307d12fefcb0c3b",
+      "labels": [
+        "L",
+        "P",
+        "X",
+        "A"
+      ],
+      "prompt": "Question: Cameras are burgundy. What color are cameras?\nL. teal\nP. olive\nX. blue\nA. burgundy\nAnswer:",
+      "question": "question: cameras are <color>. what color are cameras?"
+    },
+    {
+      "color": "brown",
+      "color_span": [
+        22,
+        27
+      ],
+      "contents": [
+        "turquoise",
+        "brown",
+        "teal",
+        "orange"
+      ],
+      "id": "9a5878f8d72ea0c4aefef305e0bdd22a312710e87a5e0876eebe26a5e1646b3f",
+      "labels": [
+        "H",
+        "E",
+        "P",
+        "U"
+      ],
+      "prompt": "Question: An apple is brown. What color is an apple?\nH. turquoise\nE. brown\nP. teal\nU. orange\nAnswer:",
+      "question": "question: an apple is <color>. what color is an apple?"
+    },
+    {
+      "color": "beige",
+      "color_span": [
+        20,
+        25
+      ],
+      "contents": [
+        "beige",
+        "navy",
+        "black",
+        "turquoise"
+      ],
+      "id": "14e7b98742531e787cbf91b43156943536a3f971fe48f0b9c47d1282d5c4cc2b",
+      "labels": [
+        "C",
+        "V",
+        "G",
+        "W"
+      ],
+      "prompt": "Question: A sock is beige. What color is a sock?\nC. beige\nV. navy\nG. black\nW. turquoise\nAnswer:",
+      "question": "question: a sock is <color>. what color is a sock?"
+    },
+    {
+      "color": "olive",
+      "color_span": [
+        21,
+        26
+      ],
+      "contents": [
+        "olive",
+        "yellow",
+        "white",
+        "magenta"
+      ],
+      "id": "3ab39b80aaa4be48292f8c2c4226bd95d2062b02c741788ecae95302f171a9e0",
+      "labels": [
+        "X",
+        "Q",
+        "N",
+        "J"
+      ],
+      "prompt": "Question: Canoes are olive. What color are canoes?\nX. olive\nQ. yellow\nN. white\nJ. magenta\nAnswer:",
+      "question": "question: canoes are <color>. what color are canoes?"
+    },
+    {
+      "color": "beige",
+      "color_span": [
+        20,
+        25
+      ],
+      "contents": [
+        "olive",
+        "navy",
+        "burgundy",
+        "beige"
+      ],
+      "id": "ced379461ffd4571114030ff209609602bfbc00999ac1fc63f431ab44c939655",
+      "labels": [
+        "W",
+        "X",
+        "J",
+        "Q"
+      ],
+      "prompt": "Question: A sock is beige. What color is a sock?\nW. olive\nX. navy\nJ. burgundy\nQ. beige\nAnswer:",
+      "question": "question: a sock is <color>. what color is a sock?"
+    },
+    {
+      "color": "navy",
+      "color_span": [
+        23,
+        27
+      ],
+      "contents": [
+        "navy",
+        "red",
+        "black",
+        "orange"
+      ],
+      "id": "f7ff8f0267180fce52f9653d16c8bfee74c7fcd11642d5320ae5ea9181b1e4fa",
+      "labels": [
+        "X",
+        "K",
+        "B",
+        "I"
+      ],
+      "prompt": "Question: A dolphin is navy. What color is a dolphin?\nX. navy\nK. red\nB. black\nI. orange\nAnswer:",
+      "question": "question: a dolphin is <color>. what color is a dolphin?"
+    },
+    {
+      "color": "pink",
+      "color_span": [
+        20,
+        24
+      ],
+      "contents": [
+        "green",
+        "yellow",
+        "navy",
+        "pink"
+      ],
+      "id": "f6f56d76a019717d8f9890df4a20a278534e78d00a7eea4100bfca844ed9591b",
+      "labels": [
+        "Z",
+        "D",
+        "U",
+        "K"
+      ],
+      "prompt": "Question: A frog is pink. What color is a frog?\nZ. green\nD. yellow\nU. navy\nK. pink\nAnswer:",
+      "question": "question: a frog is <color>. what color is a frog?"
+    },
+    {
+      "color": "gray",
+      "color_span": [
+        22,
+        26
+      ],
+      "contents": [
+        "tan",
+        "white",
+        "indigo",
+        "gray"
+      ],
+      "id": "b60922ccda764ca7690680677a4a2c5ee2b056f234cb4957500f140f4d9f9b58",
+      "labels": [
+        "G",
+        "Z",
+        "O",
+        "F"
+      ],
+      "prompt": "Question: Carrots are gray. What color are carrots?\nG. tan\nZ. white\nO. indigo\nF. gray\nAnswer:",
+      "question": "question: carrots are <color>. what color are carrots?"
+    },
+    {
+      "color": "magenta",
+      "color_span": [
+        22,
+        29
+      ],
+      "contents": [
+        "blue",
+        "beige",
+        "magenta",
+        "tan"
+      ],
+      "id": "6cc6dec27478b85d21a50fdea13c9dd58b3030153602ce35cfb40eea5342f3f5",
+      "labels": [
+        "F",
+        "Q",
+        "J",
+        "N"
+      ],
+      "prompt": "Question: Bananas are magenta. What color are bananas?\nF. blue\nQ. beige\nJ. magenta\nN. tan\nAnswer:",
+      "question": "question: bananas are <color>. what color are bananas?"
+    },
+    {
+      "color": "green",
+      "color_span": [
+        30,
+        35
+      ],
+      "contents": [
+        "brown",
+        "beige",
+        "red",
+        "green"
+      ],
+      "id": "2839bfc86ecfeb75ac45b416b520a975af6bc178fc67077609685df87569eb5e",
+      "labels": [
+        "O",
+        "A",
+        "J",
+        "C"
+      ],
+      "prompt": "Question: Coal briquettes are green. What color are coal briquettes?\nO. brown\nA. beige\nJ. red\nC. green\nAnswer:",
+      "question": "question: coal briquettes are <color>. what color are coal briquettes?"
+    },
+    {
+      "color": "turquoise",
+      "color_span": [
+        22,
+        31
+      ],
+      "contents": [
+        "teal",
+        "blue",
+        "turquoise",
+        "indigo"
+      ],
+      "id": "6b32857a2c48e7aba9b1a35f7a18209e7889e06a25eade4650e68dde04ede56e",
+      "labels": [
+        "E",
+        "H",
+        "G",
+        "M"
+      ],
+      "prompt": "Question: Ladders are turquoise. What color are ladders?\nE. teal\nH. blue\nG. turquoise\nM. indigo\nAnswer:",
+      "question": "question: ladders are <color>. what color are ladders?"
+    },
+    {
+      "color": "turquoise",
+      "color_span": [
+        22,
+        31
+      ],
+      "contents": [
+        "white",
+        "green",
+        "orange",
+        "turquoise"
+      ],
+      "id": "60ef86735a78705af58272cb78c1f5166b3dfd994ad44eb3a680441670efb941",
+      "labels": [
+        "W",
+        "L",
+        "P",
+        "H"
+      ],
+      "prompt": "Question: A violin is turquoise. What color is a violin?\nW. white\nL. green\nP. orange\nH. turquoise\nAnswer:",
+      "question": "question: a violin is <color>. what color is a violin?"
+    },
+    {
+      "color": "tan",
+      "color_span": [
+        20,
+        23
+      ],
+      "contents": [
+        "magenta",
+        "gray",
+        "brown",
+        "tan"
+      ],
+      "id": "e5998a1b37ae441e2af95bcbcc354f4b6b6922666666195d52d963674f0f3b0b",
+      "labels": [
+        "B",
+        "C",
+        "R",
+        "K"
+      ],
+      "prompt": "Question: Ropes are tan. What color are ropes?\nB. magenta\nC. gray\nR. brown\nK. tan\nAnswer:",
+      "question": "question: ropes are <color>. what color are ropes?"
+    },
+    {
+      "color": "tan",
+      "color_span": [
+        23,
+        26
+      ],
+      "contents": [
+        "purple",
+        "beige",
+        "maroon",
+        "tan"
+      ],
+      "id": "e380a216b56bf251a98dc981542483ddfe8e0404a328cc067656d36d38807d66",
+      "labels": [
+        "O",
+        "G",
+        "I",
+        "V"
+      ],
+      "prompt": "Question: Pumpkins are tan. What color are pumpkins?\nO. purple\nG. beige\nI. maroon\nV. tan\nAnswer:",
+      "question": "question: pumpkins are <color>. what color are pumpkins?"
+    },
+    {
+      "color": "red",
+      "color_span": [
+        22,
+        25
+      ],
+      "contents": [
+        "teal",
+        "pink",
+        "tan",
+        "red"
+      ],
+      "id": "a088ccf1342134c2810f9b670256d1652f6b8813182ccaaee36b203c4736a025",
+      "labels": [
+        "L",
+        "H",
+        "V",
+        "Z"
+      ],
+      "prompt": "Question: A beetle is red. What color is a beetle?\nL. teal\nH. pink\nV. tan\nZ. red\nAnswer:",
+      "question": "question: a beetle is <color>. what color is a beetle?"
+    },
+    {
+      "color": "olive",
+      "color_span": [
+        20,
+        25
+      ],
+      "contents": [
+        "maroon",
+        "orange",
+        "indigo",
+        "olive"
+      ],
+      "id": "e25913860494f140e5be531432ceabb8a50b8d605d2660a2b4d4b8816ffc38e7",
+      "labels": [
+        "V",
+        "C",
+        "N",
+        "D"
+      ],
+      "prompt": "Question: Ropes are olive. What color are ropes?\nV. maroon\nC. orange\nN. indigo\nD. olive\nAnswer:",
+      "question": "question: ropes are <color>. what color are ropes?"
+    },
+    {
+      "color": "tan",
+      "color_span": [
+        24,
+        27
+      ],
+      "contents": [
+        "brown",
+        "olive",
+        "orange",
+        "tan"
+      ],
+      "id": "32bf6d0b6213cbe6c7544d3a7a3158f168aefbb7057f4540ebac06dc8051a174",
+      "labels": [
+        "K",
+        "L",
+        "G",
+        "T"
+      ],
+      "prompt": "Question: A magazine is tan. What color is a magazine?\nK. brown\nL. olive\nG. orange\nT. tan\nAnswer:",
+      "question": "question: a magazine is <color>. what color is a magazine?"
+    },
+    {
+      "color": "burgundy",
+      "color_span": [
+        24,
+        32
+      ],
+      "contents": [
+        "teal",
+        "white",
+        "yellow",
+        "burgundy"
+      ],
+      "id": "582a07f2be8962b825f01d78f4e73a14333f78c0f28eb3c90a5c4d42140cba43",
+      "labels": [
+        "F",
+        "I",
+        "E",
+        "R"
+      ],
+      "prompt": "Question: A pinecone is burgundy. What color is a pinecone?\nF. teal\nI. white\nE. yellow\nR. burgundy\nAnswer:",
+      "question": "question: a pinecone is <color>. what color is a pinecone?"
+    },
+    {
+      "color": "blue",
+      "color_span": [
+        21,
+        25
+      ],
+      "contents": [
+        "gray",
+        "blue",
+        "turquoise",
+        "cyan"
+      ],
+      "id": "81ad329e64de614fa7faca5535426f4484b15f835af5258fbb2e248026efd3c3",
+      "labels": [
+        "M",
+        "H",
+        "T",
+        "Z"
+      ],
+      "prompt": "Question: A glove is blue. What color is a glove?\nM. gray\nH. blue\nT. turquoise\nZ. cyan\nAnswer:",
+      "question": "question: a glove is <color>. what color is a glove?"
+    },
+    {
+      "color": "black",
+      "color_span": [
+        22,
+        27
+      ],
+      "contents": [
+        "brown",
+        "purple",
+        "yellow",
+        "black"
+      ],
+      "id": "e7e6ea14f0cdb612dda00df4941683cd4e688857fd7a1873ff0069f3c584d1cb",
+      "labels": [
+        "K",
+        "Y",
+        "G",
+        "R"
+      ],
+      "prompt": "Question: Rabbits are black. What color are rabbits?\nK. brown\nY. purple\nG. yellow\nR. black\nAnswer:",
+      "question": "question: rabbits are <color>. what color are rabbits?"
+    },
+    {
+      "color": "magenta",
+      "color_span": [
+        30,
+        37
+      ],
+      "contents": [
+        "brown",
+        "magenta",
+        "tan",
+        "crimson"
+      ],
+      "id": "19285214bb2dc09dfc63d256cb2e425213c49821789313760ee08d10f7df2201",
+      "labels": [
+        "Q",
+        "B",
+        "C",
+        "Z"
+      ],
+      "prompt": "Question: A coal briquette is magenta. What color is a coal briquette?\nQ. brown\nB. magenta\nC. tan\nZ. crimson\nAnswer:",
+      "question": "question: a coal briquette is <color>. what color is a coal briquette?"
+    },
+    {
+      "color": "black",
+      "color_span": [
+        27,
+        32
+      ],
+      "contents": [
+        "indigo",
+        "burgundy",
+        "black",
+        "purple"
+      ],
+      "id": "38ab3f9f8cf50e329907838fabe0b5f344fde35c0c193cc9a34f364a61b409c1",
+      "labels": [
+        "Z",
+        "C",
+        "V",
+        "I"
+      ],
+      "prompt": "Question: Soccer balls are black. What color are soccer balls?\nZ. indigo\nC. burgundy\nV. black\nI. purple\nAnswer:",
+      "question": "question: soccer balls are <color>. what color are soccer balls?"
+    },
+    {
+      "color": "white",
+      "color_span": [
+        25,
+        30
+      ],
+      "contents": [
+        "black",
+        "burgundy",
+        "white",
+        "teal"
+      ],
+      "id": "1f53377ad042146dff32fa49e706e86cc8800ca4a7640b720aef63f2504e47ad",
+      "labels": [
+        "S",
+        "V",
+        "C",
+        "Q"
+      ],
+      "prompt": "Question: A dragonfly is white. What color is a dragonfly?\nS. black\nV. burgundy\nC. white\nQ. teal\nAnswer:",
+      "question": "question: a dragonfly is <color>. what color is a dragonfly?"
+    },
+    {
+      "color": "yellow",
+      "color_span": [
+        24,
+        30
+      ],
+      "contents": [
+        "yellow",
+        "olive",
+        "white",
+        "magenta"
+      ],
+      "id": "7d8c0bd43e5a8fb7a84bdcb22c814c6b1988c102da6cf5c5c8422cf8e38af70d",
+      "labels": [
+        "U",
+        "Z",
+        "A",
+        "W"
+      ],
+      "prompt": "Question: Chestnuts are yellow. What color are chestnuts?\nU. yellow\nZ. olive\nA. white\nW. magenta\nAnswer:",
+      "question": "question: chestnuts are <color>. what color are chestnuts?"
+    },
+    {
+      "color": "black",
+      "color_span": [
+        23,
+        28
+      ],
+      "contents": [
+        "orange",
+        "beige",
+        "magenta",
+        "black"
+      ],
+      "id": "6db63182310f6256c7a7efb67b108404efceb9c97e5f58969df089e4aa9b3a7d",
+      "labels": [
+        "M",
+        "T",
+        "Z",
+        "G"
+      ],
+      "prompt": "Question: Wrenches are black. What color are wrenches?\nM. orange\nT. beige\nZ. magenta\nG. black\nAnswer:",
+      "question": "question: wrenches are <color>. what color are wrenches?"
+    }
+  ],
+  "fixed_batch": 32,
+  "no_training": true,
+  "parent": "eval/hai_followup_checks_20261022_v1",
+  "selected_pair_indices": [
+    709,
+    528,
+    568,
+    553,
+    399,
+    670,
+    476,
+    732,
+    717,
+    374,
+    415,
+    736,
+    561,
+    637,
+    377,
+    397,
+    463,
+    394,
+    711,
+    621,
+    409,
+    696,
+    716,
+    554,
+    458,
+    721,
+    369,
+    725,
+    385,
+    647,
+    565,
+    467
+  ],
+  "selection": "The largest cached C-prefix differences, then fixed hashes; diagnostic only, never a reporting-bank filter",
+  "source": "af17d247326050523a6488d0a94b955a75b201dc2e38fa222e54edbdba35f2da"
+}

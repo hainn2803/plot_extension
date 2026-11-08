@@ -1,0 +1,8 @@
+{
+  "GPU_seconds": 64.1806660000002,
+  "complete": true,
+  "frozen_backbone": true,
+  "hook_cleanup": true,
+  "no_training": true,
+  "operations": 27
+}

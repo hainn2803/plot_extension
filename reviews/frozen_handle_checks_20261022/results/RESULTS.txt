@@ -1,0 +1,120 @@
+Frozen-handle follow-up, October 22, 2026
+
+Completed locally. No model, handle, or readout was trained. No engineered
+anchor was used. All previous artifacts and failed-baseline evidence remain.
+
+1. Standard versus gradual C composition
+
+These are the latest uploaded checkpoints at Hai commit
+399c2ca74837fc464c830aa8ab7af14b4d2327be, evaluated on the existing reconstructed
+historical bank. We reused verified saved predictions instead of repeating GPU
+work. This is not an exact reproduction of Hai's separately retained test pairs.
+
+Primary population: all 737 C-changing pairs in the previously locked shared
+1,476-pair naturally clean subset. No intervention-success selection is applied.
+
+Metric                       Standard     Gradual      Difference
+Direct output                87.52%       89.15%       +1.63 points
+Same-base AT replay          75.58%       87.65%      +12.08 points
+Direct AND replay correct    72.59%       83.99%      +11.40 points
+
+Paired 2,000-template bootstrap intervals for the replay and joint improvements
+are [9.10,15.17] and [8.38,14.51] percentage points. These new diagnostic
+intervals use the explicitly recorded seed in the independent audit script;
+the previously reported intervals remain preserved.
+
+Two matched clean AT donors were already evaluated for each pair. Their
+individual success rate on the 737 changing pairs is 1,058/1,474 = 71.78%.
+Both donors succeed on 424/737 pairs. On that conditional diagnostic subset:
+
+Metric                       Standard     Gradual
+Same-base AT replay          80.19%       90.33%
+Direct AND replay correct    76.65%       87.26%
+
+The replay gain interval is [5.98,14.48] points; the joint gain interval is
+[6.38,14.82]. This conditioning is an explanatory error breakdown, not a new
+primary bank or certification rule. Standard has 46 cases with correct direct
+output, failed replay, and two successful clean donors; gradual has 13.
+
+The larger clean AT qualification diagnostic remains weak on preservation:
+57.84% for same-letter donors, versus 88.70% changing. Gradual improves measured
+composition even where clean donors work, but the AT anchor remains a separate
+limitation. One checkpoint per method cannot establish multi-seed reliability.
+
+2. AP label-copying control
+
+Frozen before inference: 96 original AP-only pairs, eight per ordered transition,
+selected by fixed hashes. Each original transposition donor has two three-row
+cycle controls. All donors preserve C, natural AT, and source AP, but cycles
+make the label at the patched slot disagree with the AP target. We patch the
+source/base structural slot selected by the base correct option, at all 26
+decoder-block outputs. This site selection is annotation-routed.
+
+All 384 natural prompts and 7,776 interventions were saved. Strict full-vocabulary
+scoring counts ties and invalid outputs as failures. Sixty-five original pairs
+have correct natural predictions for the base and ALL three donors, leaving
+65 transposition and 130 cycle cases. Every transition remains represented,
+with 2-8 clean original pairs per transition. All attempted results are also
+reported, without replacement or quota refilling.
+
+At each layer 3-15, transposition AP accuracy is 64/65 = 98.46%, but cycle AP
+accuracy is 0/130 = 0%. Cycle outputs follow the label-copy prediction in
+93.08-96.92% of cases across those layers. The original golden-token success
+therefore does not establish an AP handle. It is consistent with changing the
+label associated with the base's correct color. This does not establish that
+AP is absent elsewhere in the network or that DAS cannot learn it.
+
+Hai's uploaded learned AP handle at block 17/final token/rank 128 behaves
+differently: AP accuracy is 31/65 = 47.69% on transpositions and 65/130 = 50.00%
+on cycles. Cycle label-copy accuracy is 9/130 = 6.92%. It is not explained by
+the same simple golden-slot copying pattern, but remains unreliable here.
+
+Concrete naturally correct example, block 8, same-slot full-vector patch:
+  Base:   clocks are maroon; V.maroon | T.beige | P.navy | G.green
+  Source: clocks are maroon; P.navy | V.maroon | T.beige | G.green
+  Source AP = second. AP transfer target = T, the base second label.
+  Copy prediction = P, the source label at the base correct first slot.
+  Observed output = P.
+
+3. C preservation and measurement baseline
+
+Both uploaded C handles preserve output and same-base replay on all 739 clean
+preservation pairs: 368 AP-only and 371 AT-only. The uploaded AT readout is
+84.78% and 86.25% accurate, respectively, both before and after C intervention.
+Its predicted classes agree before/after on every case. Those classifier errors
+are therefore already present in the clean baseline.
+
+AP-only prompts have identical cached C states. Two AT-only historical cache
+entries differ from matched base C states by at most 0.03125. These cases were
+retained. A separate 32-pair diagnostic including the largest discrepancies
+uses identical fixed padding and physical batch shapes. Source/base C states
+then match exactly; both frozen C interventions reproduce clean logits exactly.
+This resolves the numerical-layout concern for those cases, while preserving
+the old evidence. Invariance here is largely architectural because changed
+options occur after the color token; it is a useful sanity check.
+
+4. Verification and runtime
+
+Six fresh real-model reference comparisons passed with maximum error zero at
+unchanged atol=rtol=2e-4. The fixed-layout preservation diagnostic added three
+zero-error comparisons. The exact compatible/incompatible composition toy
+checks passed. Independent CPU readback verified all 7,776 AP predictions,
+counterfactual targets, operation hashes, and paired intervals. Backbone weights
+were frozen and hooks removed. AC/thermal safeguards were unchanged; both
+GPU sessions exited and their budgets are closed.
+
+GPU-session wall time, including loading, checks and I/O:
+  AP control:                     64.38 seconds
+  Matched preservation diagnosis: 10.96 seconds
+  Total:                          75.34 seconds
+
+Scientific implication: retain the positive standard-versus-gradual composition
+result, keep the AT transfer limitation explicit, and require non-transposition
+controls before interpreting golden-label patches as AP localization. Fresh
+AP training should include donor arrangements that separate position transfer
+from label copying. No new training or larger experiment has been launched.
+
+Evidence: saved_C_AT_checks.json, AP_control_results.json,
+independent_verification.json, completion.json, and the sibling directory
+eval/hai_followup_preservation_layout_20261022_v1. Diagnostic source files are
+under diagnostics/hai_followup_checks_20261022.

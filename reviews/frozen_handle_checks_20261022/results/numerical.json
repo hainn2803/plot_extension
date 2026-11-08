@@ -1,0 +1,50 @@
+{
+  "atol": 0.0002,
+  "batch": 32,
+  "checks": [
+    {
+      "atol": 0.0002,
+      "max_absolute_error": 0.0,
+      "name": "clean_reference",
+      "passed": true,
+      "rtol": 0.0002
+    },
+    {
+      "atol": 0.0002,
+      "max_absolute_error": 0.0,
+      "name": "repeat_clean",
+      "passed": true,
+      "rtol": 0.0002
+    },
+    {
+      "atol": 0.0002,
+      "max_absolute_error": 0.0,
+      "name": "full_vector_L0",
+      "passed": true,
+      "rtol": 0.0002
+    },
+    {
+      "atol": 0.0002,
+      "max_absolute_error": 0.0,
+      "name": "full_vector_L17",
+      "passed": true,
+      "rtol": 0.0002
+    },
+    {
+      "atol": 0.0002,
+      "max_absolute_error": 0.0,
+      "name": "full_vector_L25",
+      "passed": true,
+      "rtol": 0.0002
+    },
+    {
+      "atol": 0.0002,
+      "max_absolute_error": 0.0,
+      "name": "learned_AP_reference",
+      "passed": true,
+      "rtol": 0.0002
+    }
+  ],
+  "passed": true,
+  "rtol": 0.0002
+}

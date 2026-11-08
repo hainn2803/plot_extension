@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+recomputed_results.json
+fresh_results.json

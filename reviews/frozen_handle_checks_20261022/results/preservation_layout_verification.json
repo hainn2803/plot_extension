@@ -1,0 +1,31 @@
+{
+  "cached_discrepancies_retained": true,
+  "checks": [
+    {
+      "atol": 0.0002,
+      "max_absolute_error": 0.0,
+      "name": "matched_color_prefix_states",
+      "passed": true,
+      "rtol": 0.0002
+    },
+    {
+      "atol": 0.0002,
+      "max_absolute_error": 0.0,
+      "name": "standard_C_preservation_output",
+      "passed": true,
+      "rtol": 0.0002
+    },
+    {
+      "atol": 0.0002,
+      "max_absolute_error": 0.0,
+      "name": "gradual_C_preservation_output",
+      "passed": true,
+      "rtol": 0.0002
+    }
+  ],
+  "diagnostic_only": true,
+  "interpretation": "The two historical cache-prefix differences disappear with matched physical layouts; both frozen C interventions then reproduce clean logits exactly",
+  "matched_prefix_max_error": 0.0,
+  "no_training": true,
+  "passed": true
+}
