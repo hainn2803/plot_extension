@@ -29,16 +29,16 @@ from mcqa_train_grid_standard_das import (
 
 
 SPECS = {
-    "AT": {"pair_types": ["AT_only"], "token_position": "last_token", "target": "Y_after_AT_intervene"},
-    "AP": {"pair_types": ["AP_only"], "token_position": ["color_0", "color_1", "color_2", "color_3"], "target": "Y_after_AP_intervene"},
-    "C": {"pair_types": ["C_only"], "token_position": "color", "target": "Y_after_C_intervene"},
+    "AT": {"pair_types": ["AT_only", "AP_only", "C_only", "AP_AT", "C_AP_AT"], "token_position": "last_token", "target": "Y_after_AT_intervene"},
+    "AP": {"pair_types": ["AT_only", "AP_only", "C_only", "AP_AT", "C_AP_AT"], "token_position": ["color_0", "color_1", "color_2", "color_3"], "target": "Y_after_AP_intervene"},
+    "C": {"pair_types": ["AT_only", "AP_only", "C_only", "AP_AT", "C_AP_AT"], "token_position": "color", "target": "Y_after_C_intervene"},
 }
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at_no_distractor")
-    parser.add_argument("--result-dir", default="results_standard_all_layers")
+    parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at")
+    parser.add_argument("--result-dir", default="results_standard_all_layers_mixedall_seed0")
     parser.add_argument("--variables", default="AT,AP,C", help="AT, AP, C or a subset")
     parser.add_argument("--layers", default="all", help="all or comma-separated layer indices")
     parser.add_argument("--ft-size", type=int, default=800)

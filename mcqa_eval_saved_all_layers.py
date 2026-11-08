@@ -144,7 +144,7 @@ def rebuild_summary(root, eval_dir, args):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--result-dir", default="results_standard_all_layers")
+    parser.add_argument("--result-dir", default="results_standard_all_layers_seed0")
     parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at_no_distractor")
     parser.add_argument("--threshold-pct", type=float, default=5.0, help="CAL IIA within x percentage points of variable max")
     parser.add_argument("--eval-size", type=int, default=400)

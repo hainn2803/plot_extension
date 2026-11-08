@@ -15,7 +15,7 @@ from mcqa_neural_net import load_gemma_model
 from mcqa_train_grid_standard_das import make_variable_banks, train_standard_fixed
 
 
-LAYERS = range(1, 26)  # inclusive: L1 ... L25
+LAYERS = range(0, 26)  # inclusive: L1 ... L25
 TOKEN_POSITIONS = ["color_0", "color_1", "color_2", "color_3"]
 TRAIN_PAIR_TYPES = ["AP_only"]  # edit here to include other pair types
 

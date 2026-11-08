@@ -1,0 +1,75 @@
+{
+  "at_layer": 23,
+  "ap_layer": 7,
+  "c_layer": 0,
+  "clean": {
+    "AT_base": 0.9125000238418579,
+    "AT_source": 0.8999999761581421,
+    "AP_base": 0.9975000023841858,
+    "AP_source": 1.0,
+    "C_base": 1.0,
+    "C_source": 1.0
+  },
+  "AT_only": {
+    "Joint_AT_Y_after_AT": 0.8974999785423279,
+    "AT_after_AT": 0.8999999761581421,
+    "Y_after_AT": 0.9975000023841858
+  },
+  "AP_only": {
+    "Joint_AP_AT_Y_after_AP": 0.9800000190734863,
+    "AP_after_AP": 1.0,
+    "AT_after_AP": 0.9850000143051147,
+    "Y_after_AP": 0.987500011920929,
+    "Y_via_AT_replay": 0.9925000071525574,
+    "Y_restored_via_AT": 0.9649999737739563
+  },
+  "C_only": {
+    "Joint_C_AP_AT_Y_after_C": 0.7049999833106995,
+    "C_after_C": 1.0,
+    "AP_after_C": 0.8324999809265137,
+    "AT_after_C": 0.8899999856948853,
+    "Y_after_C": 0.8924999833106995,
+    "Y_via_AP_replay": 0.3824999928474426,
+    "Y_via_AT_replay": 0.9150000214576721,
+    "Y_restored_via_AP": 0.7674999833106995,
+    "Y_restored_via_AT": 0.9674999713897705
+  },
+  "signature": {
+    "seed": 0,
+    "data_path": "randomized_copycolors_include_ap_at_no_distractor",
+    "eval_size": 400,
+    "output_space": "full",
+    "artifacts": [
+      [
+        "trained_handles/AT_L23/das_at.pt",
+        1181346,
+        1794079010299437869
+      ],
+      [
+        "trained_handles/AT_L23/at_readout_LogisticRegression.pt",
+        15509,
+        1794079013226646494
+      ],
+      [
+        "trained_handles/AP_L7/das_ap.pt",
+        4720354,
+        1794079394736047239
+      ],
+      [
+        "trained_handles/AP_L7/ap_readout_LogisticRegression.pt",
+        4181,
+        1794079397864145617
+      ],
+      [
+        "trained_handles/C_L0/das_c.pt",
+        1181339,
+        1794080071113476247
+      ],
+      [
+        "trained_handles/C_L0/c_readout_LogisticRegression.pt",
+        14285,
+        1794080074067456342
+      ]
+    ]
+  }
+}

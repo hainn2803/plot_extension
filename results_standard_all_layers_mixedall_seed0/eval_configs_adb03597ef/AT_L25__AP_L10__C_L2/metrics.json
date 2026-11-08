@@ -1,0 +1,108 @@
+{
+  "at_layer": 25,
+  "ap_layer": 10,
+  "c_layer": 2,
+  "clean": {
+    "AT_base": 0.8100000023841858,
+    "AT_source": 0.8224999904632568,
+    "AP_base": 1.0,
+    "AP_source": 1.0,
+    "C_base": 1.0,
+    "C_source": 1.0
+  },
+  "metrics": {
+    "AT": {
+      "Joint_AT_Y_after_AT": 0.7925000190734863,
+      "AT_after_AT": 0.8224999904632568,
+      "Y_after_AT": 0.9375
+    },
+    "AP": {
+      "Joint_AP_AT_Y_after_AP": 0.987500011920929,
+      "AP_after_AP": 1.0,
+      "AT_after_AP": 0.9900000095367432,
+      "Y_after_AP": 0.9900000095367432,
+      "Y_via_AT_replay": 0.9900000095367432,
+      "Y_restored_via_AT": 0.7400000095367432
+    },
+    "C": {
+      "Joint_C_AP_AT_Y_after_C": 0.6575000286102295,
+      "C_after_C": 1.0,
+      "AP_after_C": 0.9175000190734863,
+      "AT_after_C": 0.7649999856948853,
+      "Y_after_C": 0.8075000047683716,
+      "Y_via_AP_replay": 0.887499988079071,
+      "Y_via_AT_replay": 0.8550000190734863,
+      "Y_restored_via_AP": 0.9825000166893005,
+      "Y_restored_via_AT": 0.9024999737739563
+    }
+  },
+  "eval_pair_types": {
+    "AT": [
+      "AT_only",
+      "C_AP_AT"
+    ],
+    "AP": [
+      "AP_only",
+      "C_AP_AT"
+    ],
+    "C": [
+      "C_only",
+      "C_AP_AT"
+    ]
+  },
+  "eval_changing_only": true,
+  "signature": {
+    "seed": 0,
+    "data_path": "randomized_copycolors_include_ap_at",
+    "eval_size": 400,
+    "output_space": "full",
+    "eval_pair_types": {
+      "AT": [
+        "AT_only",
+        "C_AP_AT"
+      ],
+      "AP": [
+        "AP_only",
+        "C_AP_AT"
+      ],
+      "C": [
+        "C_only",
+        "C_AP_AT"
+      ]
+    },
+    "eval_changing_only": true,
+    "eval_code_version": 1,
+    "artifacts": [
+      [
+        "trained_handles/AT_L25/das_at.pt",
+        1181346,
+        1794096777518858082
+      ],
+      [
+        "trained_handles/AT_L25/at_readout_LogisticRegression.pt",
+        15509,
+        1794096780369325899
+      ],
+      [
+        "trained_handles/AP_L10/das_ap.pt",
+        4720354,
+        1794097218035089449
+      ],
+      [
+        "trained_handles/AP_L10/ap_readout_LogisticRegression.pt",
+        4181,
+        1794097220921550918
+      ],
+      [
+        "trained_handles/C_L2/das_c.pt",
+        1181339,
+        1794097929284907473
+      ],
+      [
+        "trained_handles/C_L2/c_readout_LogisticRegression.pt",
+        14285,
+        1794097932294038458
+      ]
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+CONFIG: AT=L25 AP=L13 C=L0
+
+EVAL_CHANGING_ONLY = True
+AT evaluation pairs = AT_only
+AP evaluation pairs = AP_only
+C evaluation pairs = C_only
+
+=== AT INTERVENTION ===
+Clean base/source: 0.8475 / 0.8250
+Joint_AT_Y_after_AT = 0.7950
+AT_after_AT = 0.8250
+Y_after_AT = 0.9375
+
+=== AP INTERVENTION ===
+Clean base/source: 1.0000 / 1.0000
+Joint_AP_AT_Y_after_AP = 0.9900
+AP_after_AP = 1.0000
+AT_after_AP = 0.9900
+Y_after_AP = 0.9925
+Y_via_AT_replay = 0.9775
+Y_restored_via_AT = 0.7275
+
+=== C INTERVENTION ===
+Clean base/source: 1.0000 / 1.0000
+Joint_C_AP_AT_Y_after_C = 0.6225
+C_after_C = 1.0000
+AP_after_C = 0.9575
+AT_after_C = 0.7075
+Y_after_C = 0.7350
+Y_via_AP_replay = 0.8950
+Y_via_AT_replay = 0.7650
+Y_restored_via_AP = 0.9475
+Y_restored_via_AT = 0.8550

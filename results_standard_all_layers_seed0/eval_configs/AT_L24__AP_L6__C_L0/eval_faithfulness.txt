@@ -1,0 +1,44 @@
+CONFIG: AT=L24 AP=L6 C=L0
+
+=== CLEAN READOUT SANITY ===
+AT base/source: 0.9075 / 0.8850
+AP base/source: 1.0000 / 1.0000
+C  base/source: 1.0000 / 1.0000
+
+=== 1. CORRECTNESS / READOUT ===
+
+NODE CORRECTNESS — AT intervention [AT_only]
+Joint_AT_Y_after_AT = 0.8850
+AT_after_AT = 0.8850
+Y_after_AT = 1.0000
+
+NODE CORRECTNESS — AP intervention [AP_only]
+Joint_AP_AT_Y_after_AP = 0.9850
+AP_after_AP = 1.0000
+AT_after_AP = 0.9875
+Y_after_AP = 0.9900
+
+NODE CORRECTNESS — C intervention [C_only]
+Joint_C_AP_AT_Y_after_C = 0.7375
+C_after_C = 1.0000
+AP_after_C = 0.8375
+AT_after_C = 0.9150
+Y_after_C = 0.8925
+
+=== 2. MEDIATOR REPLAY ===
+
+MEDIATOR — AP intervention [AP_only]
+Y_via_AT_replay = 0.9950
+
+MEDIATOR — C intervention [C_only]
+Y_via_AP_replay = 0.3650
+Y_via_AT_replay = 0.9175
+
+=== 3. RESTORATION ===
+
+RESTORATION — AP intervention [AP_only]
+Y_restored_via_AT = 0.9700
+
+RESTORATION — C intervention [C_only]
+Y_restored_via_AP = 0.8400
+Y_restored_via_AT = 0.9600
