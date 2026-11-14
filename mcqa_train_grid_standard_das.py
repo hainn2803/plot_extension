@@ -872,7 +872,7 @@ def write_config_report(config_dir, at_layer, ap_layer, c_layer, clean, at_metri
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at_no_distractor")
-    parser.add_argument("--result-dir", default="results_standard_das_layer_grid_seed0")
+    parser.add_argument("--result-dir", default="results_standard_all_layers_controlled_seed0_no_distractor")
 
     parser.add_argument("--at-layers", default="all")
     parser.add_argument("--ap-layers", default="all")

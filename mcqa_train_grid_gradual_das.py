@@ -96,17 +96,17 @@ def balanced_counts(total, names):
 def make_specs(at_token_position, ap_token_positions, c_token_position):
     return {
         "AT": {
-            "pair_types": ["AT_only"],
+            "pair_types": ["AT_only", "AP_only", "C_only", "AP_AT", "C_AP_AT"],
             "token_position": at_token_position,
             "target": "Y_after_AT_intervene",
         },
         "AP": {
-            "pair_types": ["AP_only"],
+            "pair_types": ["AT_only", "AP_only", "C_only", "AP_AT", "C_AP_AT"],
             "token_position": ap_token_positions,
             "target": "Y_after_AP_intervene",
         },
         "C": {
-            "pair_types": ["C_only"],
+            "pair_types": ["AT_only", "AP_only", "C_only", "AP_AT", "C_AP_AT"],
             "token_position": c_token_position,
             "target": "Y_after_C_intervene",
         },
@@ -819,11 +819,11 @@ def write_config_report(config_dir, at_layer, ap_layer, c_layer, clean, at_metri
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at_no_distractor")
-    parser.add_argument("--result-dir", default="results_gradual_das_layer_grid_seed0_AP_only")
+    parser.add_argument("--result-dir", default="results_gradual_2.04.0_all_layers_mixedall_seed0")
 
     parser.add_argument("--at-layers", default="23,24,25")
-    parser.add_argument("--ap-layers", default="14,13")
-    parser.add_argument("--c-layers", default="1,0")
+    parser.add_argument("--ap-layers", default="15,14,13,12,11,10,9,8,7,6,5")
+    parser.add_argument("--c-layers", default="0,1,2,3,4")
 
     parser.add_argument("--at-token-position", default="last_token")
     parser.add_argument("--ap-token-positions", default="color_0,color_1,color_2,color_3")
@@ -850,10 +850,10 @@ def main():
 
     parser.add_argument("--ap-lambda-med", type=float, default=2.0)
     parser.add_argument("--ap-lambda-readout", type=float, default=2.0)
-    parser.add_argument("--c-lambda-ap-med", type=float, default=4.0)
-    parser.add_argument("--c-lambda-ap-readout", type=float, default=4.0)
-    parser.add_argument("--c-lambda-at-med", type=float, default=0.0)
-    parser.add_argument("--c-lambda-at-readout", type=float, default=0.0)
+    parser.add_argument("--c-lambda-ap-med", type=float, default=2.0)
+    parser.add_argument("--c-lambda-ap-readout", type=float, default=2.0)
+    parser.add_argument("--c-lambda-at-med", type=float, default=4.0)
+    parser.add_argument("--c-lambda-at-readout", type=float, default=4.0)
 
     parser.add_argument("--output-space", choices=("full", "az"), default="full")
     parser.add_argument("--seed", type=int, default=0)

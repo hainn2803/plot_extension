@@ -1,0 +1,126 @@
+{
+  "at_layer": 25,
+  "ap_layer": 10,
+  "c_layer": 2,
+  "clean": {
+    "AT_base": 0.7950000166893005,
+    "AT_source": 0.8450000286102295,
+    "AP_base": 1.0,
+    "AP_source": 0.9950000047683716,
+    "C_base": 1.0,
+    "C_source": 1.0
+  },
+  "metrics": {
+    "AT": {
+      "Joint_AT_Y_after_AT": 0.7950000166893005,
+      "AT_after_AT": 0.8450000286102295,
+      "Y_after_AT": 0.925000011920929
+    },
+    "AP": {
+      "Joint_AP_AT_Y_after_AP": 0.9049999713897705,
+      "AP_after_AP": 0.9950000047683716,
+      "AT_after_AP": 0.9275000095367432,
+      "Y_after_AP": 0.9775000214576721,
+      "Y_via_AT_replay": 0.9700000286102295,
+      "Y_restored_via_AT": 0.8399999737739563
+    },
+    "C": {
+      "Joint_C_AP_AT_Y_after_C": 0.7475000023841858,
+      "C_after_C": 1.0,
+      "AP_after_C": 0.9750000238418579,
+      "AT_after_C": 0.7975000143051147,
+      "Y_after_C": 0.9225000143051147,
+      "Y_via_AP_replay": 0.9750000238418579,
+      "Y_via_AT_replay": 0.9325000047683716,
+      "Y_restored_via_AP": 0.9825000166893005,
+      "Y_restored_via_AT": 0.9549999833106995
+    }
+  },
+  "eval_pair_types": {
+    "AT": [
+      "AT_only",
+      "AP_only",
+      "C_only",
+      "AP_AT",
+      "C_AP_AT"
+    ],
+    "AP": [
+      "AT_only",
+      "AP_only",
+      "C_only",
+      "AP_AT",
+      "C_AP_AT"
+    ],
+    "C": [
+      "AT_only",
+      "AP_only",
+      "C_only",
+      "AP_AT",
+      "C_AP_AT"
+    ]
+  },
+  "eval_changing_only": false,
+  "signature": {
+    "seed": 0,
+    "data_path": "randomized_copycolors_include_ap_at_no_distractor",
+    "eval_size": 400,
+    "output_space": "full",
+    "eval_pair_types": {
+      "AT": [
+        "AT_only",
+        "AP_only",
+        "C_only",
+        "AP_AT",
+        "C_AP_AT"
+      ],
+      "AP": [
+        "AT_only",
+        "AP_only",
+        "C_only",
+        "AP_AT",
+        "C_AP_AT"
+      ],
+      "C": [
+        "AT_only",
+        "AP_only",
+        "C_only",
+        "AP_AT",
+        "C_AP_AT"
+      ]
+    },
+    "eval_changing_only": false,
+    "eval_code_version": 1,
+    "artifacts": [
+      [
+        "trained_handles/AT_L25/das_at.pt",
+        1181346,
+        1794265923221233485
+      ],
+      [
+        "trained_handles/AT_L25/at_readout_LogisticRegression.pt",
+        15509,
+        1794265926355468877
+      ],
+      [
+        "trained_handles/AP_L10/das_ap.pt",
+        4720354,
+        1794266378219310905
+      ],
+      [
+        "trained_handles/AP_L10/ap_readout_LogisticRegression.pt",
+        4181,
+        1794266381599469590
+      ],
+      [
+        "trained_handles/C_L2/das_c.pt",
+        1181339,
+        1794267102553580286
+      ],
+      [
+        "trained_handles/C_L2/c_readout_LogisticRegression.pt",
+        14285,
+        1794267105490977779
+      ]
+    ]
+  }
+}

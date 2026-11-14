@@ -1,0 +1,3 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/288 [00:00<?, ?it/s]Loading weights:   0%|          | 1/288 [00:09<46:52,  9.80s/it]Loading weights:  70%|██████▉   | 201/288 [00:10<00:03, 27.64it/s]Loading weights:  80%|████████  | 231/288 [00:10<00:01, 29.15it/s]Loading weights:  86%|████████▋ | 249/288 [00:11<00:01, 28.33it/s]Loading weights:  91%|█████████ | 261/288 [00:12<00:00, 28.92it/s]Loading weights:  94%|█████████▍| 270/288 [00:12<00:00, 29.29it/s]Loading weights:  97%|█████████▋| 278/288 [00:12<00:00, 28.68it/s]Loading weights: 100%|██████████| 288/288 [00:12<00:00, 22.67it/s]
+[2026-11-12T22:53:55.112] error: *** JOB 23818346 ON gpua030 CANCELLED AT 2026-11-12T22:53:55 DUE TO TIME LIMIT ***

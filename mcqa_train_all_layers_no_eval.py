@@ -37,8 +37,8 @@ SPECS = {
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at")
-    parser.add_argument("--result-dir", default="results_standard_all_layers_mixedall_seed0")
+    parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at_no_distractor")
+    parser.add_argument("--result-dir", default="results_standard_all_layers_mixedall_seed0_no_distractor")
     parser.add_argument("--variables", default="AT,AP,C", help="AT, AP, C or a subset")
     parser.add_argument("--layers", default="all", help="all or comma-separated layer indices")
     parser.add_argument("--ft-size", type=int, default=800)

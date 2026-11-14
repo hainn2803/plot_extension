@@ -1,0 +1,33 @@
+CONFIG: AT=L25 AP=L13 C=L1
+
+Evaluation: changing_only=True, size=400 per variable
+Test pairs AT: AT_only, C_AP_AT
+Test pairs AP: AP_only, C_AP_AT
+Test pairs C: C_only, C_AP_AT
+
+=== AT INTERVENTION ===
+clean_base=0.8375 clean_source=0.8450
+Joint_AT_Y_after_AT=0.8300
+AT_after_AT=0.8450
+Y_after_AT=0.9675
+
+=== AP INTERVENTION ===
+clean_base=0.9950 clean_source=0.9950
+Joint_AP_AT_Y_after_AP=0.9525
+AP_after_AP=0.9950
+AT_after_AP=0.9650
+Y_after_AP=0.9775
+Y_via_AT_replay=0.9800
+Y_restored_via_AT=0.7175
+
+=== C INTERVENTION ===
+clean_base=1.0000 clean_source=1.0000
+Joint_C_AP_AT_Y_after_C=0.7375
+C_after_C=1.0000
+AP_after_C=0.9825
+AT_after_C=0.8200
+Y_after_C=0.8225
+Y_via_AP_replay=0.9100
+Y_via_AT_replay=0.8900
+Y_restored_via_AP=0.9625
+Y_restored_via_AT=0.8850

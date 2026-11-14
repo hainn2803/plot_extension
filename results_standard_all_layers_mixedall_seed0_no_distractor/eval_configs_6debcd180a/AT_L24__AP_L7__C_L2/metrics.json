@@ -1,0 +1,126 @@
+{
+  "at_layer": 24,
+  "ap_layer": 7,
+  "c_layer": 2,
+  "clean": {
+    "AT_base": 0.8949999809265137,
+    "AT_source": 0.9075000286102295,
+    "AP_base": 1.0,
+    "AP_source": 1.0,
+    "C_base": 1.0,
+    "C_source": 1.0
+  },
+  "metrics": {
+    "AT": {
+      "Joint_AT_Y_after_AT": 0.8824999928474426,
+      "AT_after_AT": 0.9075000286102295,
+      "Y_after_AT": 0.9649999737739563
+    },
+    "AP": {
+      "Joint_AP_AT_Y_after_AP": 0.9325000047683716,
+      "AP_after_AP": 1.0,
+      "AT_after_AP": 0.9449999928474426,
+      "Y_after_AP": 0.9674999713897705,
+      "Y_via_AT_replay": 0.9674999713897705,
+      "Y_restored_via_AT": 0.9549999833106995
+    },
+    "C": {
+      "Joint_C_AP_AT_Y_after_C": 0.7325000166893005,
+      "C_after_C": 1.0,
+      "AP_after_C": 0.8575000166893005,
+      "AT_after_C": 0.8575000166893005,
+      "Y_after_C": 0.9225000143051147,
+      "Y_via_AP_replay": 0.800000011920929,
+      "Y_via_AT_replay": 0.9375,
+      "Y_restored_via_AP": 0.9549999833106995,
+      "Y_restored_via_AT": 0.9674999713897705
+    }
+  },
+  "eval_pair_types": {
+    "AT": [
+      "AT_only",
+      "AP_only",
+      "C_only",
+      "AP_AT",
+      "C_AP_AT"
+    ],
+    "AP": [
+      "AT_only",
+      "AP_only",
+      "C_only",
+      "AP_AT",
+      "C_AP_AT"
+    ],
+    "C": [
+      "AT_only",
+      "AP_only",
+      "C_only",
+      "AP_AT",
+      "C_AP_AT"
+    ]
+  },
+  "eval_changing_only": false,
+  "signature": {
+    "seed": 0,
+    "data_path": "randomized_copycolors_include_ap_at_no_distractor",
+    "eval_size": 400,
+    "output_space": "full",
+    "eval_pair_types": {
+      "AT": [
+        "AT_only",
+        "AP_only",
+        "C_only",
+        "AP_AT",
+        "C_AP_AT"
+      ],
+      "AP": [
+        "AT_only",
+        "AP_only",
+        "C_only",
+        "AP_AT",
+        "C_AP_AT"
+      ],
+      "C": [
+        "AT_only",
+        "AP_only",
+        "C_only",
+        "AP_AT",
+        "C_AP_AT"
+      ]
+    },
+    "eval_changing_only": false,
+    "eval_code_version": 1,
+    "artifacts": [
+      [
+        "trained_handles/AT_L24/das_at.pt",
+        1181346,
+        1794265893974900706
+      ],
+      [
+        "trained_handles/AT_L24/at_readout_LogisticRegression.pt",
+        15509,
+        1794265896935890009
+      ],
+      [
+        "trained_handles/AP_L7/das_ap.pt",
+        4720354,
+        1794266266146145991
+      ],
+      [
+        "trained_handles/AP_L7/ap_readout_LogisticRegression.pt",
+        4181,
+        1794266269310421719
+      ],
+      [
+        "trained_handles/C_L2/das_c.pt",
+        1181339,
+        1794267102553580286
+      ],
+      [
+        "trained_handles/C_L2/c_readout_LogisticRegression.pt",
+        14285,
+        1794267105490977779
+      ]
+    ]
+  }
+}
