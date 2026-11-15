@@ -16,4 +16,4 @@ cd "$SLURM_SUBMIT_DIR"
 source /sw/rh9.4/python/miniforge3/etc/profile.d/conda.sh
 conda activate PLOT
 
-python3 -u mcqa_train_grid_standard_das.py --data-path randomized_copycolors_include_ap_at_no_distractor --result-dir results_standard_all_layers_controlled_seed0_no_distractor
+python3 -u mcqa_train_all_layers_no_eval.py --data-path randomized_copycolors_include_ap_at_no_distractor --result-dir results_standard_all_layers_controlled_seed0_no_distractor

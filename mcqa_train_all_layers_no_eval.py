@@ -29,9 +29,9 @@ from mcqa_train_grid_standard_das import (
 
 
 SPECS = {
-    "AT": {"pair_types": ["AT_only", "AP_only", "C_only", "AP_AT", "C_AP_AT"], "token_position": "last_token", "target": "Y_after_AT_intervene"},
-    "AP": {"pair_types": ["AT_only", "AP_only", "C_only", "AP_AT", "C_AP_AT"], "token_position": ["color_0", "color_1", "color_2", "color_3"], "target": "Y_after_AP_intervene"},
-    "C": {"pair_types": ["AT_only", "AP_only", "C_only", "AP_AT", "C_AP_AT"], "token_position": "color", "target": "Y_after_C_intervene"},
+    "AT": {"pair_types": ["AT_only"], "token_position": "last_token", "target": "Y_after_AT_intervene"},
+    "AP": {"pair_types": ["AP_only"], "token_position": ["color_0", "color_1", "color_2", "color_3"], "target": "Y_after_AP_intervene"},
+    "C": {"pair_types": ["C_only"], "token_position": "color", "target": "Y_after_C_intervene"},
 }
 
 

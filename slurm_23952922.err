@@ -1,0 +1,8 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/288 [00:00<?, ?it/s]Loading weights:   0%|          | 1/288 [00:10<51:04, 10.68s/it]Loading weights:  70%|██████▉   | 201/288 [00:10<00:03, 26.21it/s]Loading weights: 100%|██████████| 288/288 [00:13<00:00, 21.40it/s]
+Traceback (most recent call last):
+  File "/u/hnguyen23/plot_extension/mcqa_train_grid_standard_das.py", line 1319, in <module>
+    main()
+  File "/u/hnguyen23/plot_extension/mcqa_train_grid_standard_das.py", line 928, in main
+    raise ValueError(f"Need AP < AT, got AP={ap_layer}, AT={at_layer}")
+ValueError: Need AP < AT, got AP=0, AT=0

@@ -67,10 +67,7 @@ PAIR_TYPE_OFFSETS = {
 }
 
 
-def parse_int_list(text, model=None):
-    if text.strip().lower() == "all":
-        return list(range(len(model.model.layers)))
-
+def parse_int_list(text):
     values = []
     for item in text.split(","):
         item = item.strip()
@@ -331,7 +328,6 @@ def train_standard_fixed(model, tokenizer, banks, variable, layer, token_positio
     )
 
     flat_width = flatten_states(train_source).shape[1]
-    torch.manual_seed(seed)
     alignment = LearnedSubspace(flat_width, subspace_dim).to(device)
     optimizer = torch.optim.Adam(alignment.parameters(), lr=lr)
 
@@ -344,8 +340,7 @@ def train_standard_fixed(model, tokenizer, banks, variable, layer, token_positio
     best_epoch = None
 
     for epoch in range(1, epochs + 1):
-        generator = torch.Generator().manual_seed(seed + epoch)
-        permutation = torch.randperm(len(train_bank["base_input_ids"]), generator=generator)
+        permutation = torch.randperm(len(train_bank["base_input_ids"]))
         total_loss = 0.0
 
         for start in range(0, len(permutation), train_batch_size):
@@ -385,7 +380,7 @@ def train_standard_fixed(model, tokenizer, banks, variable, layer, token_positio
         )
         print(f"[{variable} L{layer} epoch {epoch:02d}] loss={total_loss / len(permutation):.4f} cal_iia={cal_iia:.4f}")
 
-        if cal_iia >= best_iia:
+        if cal_iia > best_iia:
             best_iia = cal_iia
             best_basis = alignment.basis().detach().cpu().clone()
             best_epoch = epoch
@@ -872,11 +867,11 @@ def write_config_report(config_dir, at_layer, ap_layer, c_layer, clean, at_metri
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at_no_distractor")
-    parser.add_argument("--result-dir", default="results_standard_all_layers_controlled_seed0_no_distractor")
+    parser.add_argument("--result-dir", default="results_standard_das_layer_grid_seed0_mixed_dataset")
 
-    parser.add_argument("--at-layers", default="all")
-    parser.add_argument("--ap-layers", default="all")
-    parser.add_argument("--c-layers", default="all")
+    parser.add_argument("--at-layers", default="23,24,25")
+    parser.add_argument("--ap-layers", default="14,13")
+    parser.add_argument("--c-layers", default="1,0")
 
     parser.add_argument("--at-token-position", default="last_token")
     parser.add_argument("--ap-token-positions", default="color_0,color_1,color_2,color_3")
@@ -909,12 +904,9 @@ def main():
 
     set_seed(args.seed)
 
-    model, tokenizer = load_gemma_model()
-    device = next(model.parameters()).device
-
-    at_layers = parse_int_list(args.at_layers, model)
-    ap_layers = parse_int_list(args.ap_layers, model)
-    c_layers = parse_int_list(args.c_layers, model)
+    at_layers = parse_int_list(args.at_layers)
+    ap_layers = parse_int_list(args.ap_layers)
+    c_layers = parse_int_list(args.c_layers)
     ap_token_positions = parse_str_list(args.ap_token_positions)
 
     if not at_layers or not ap_layers or not c_layers:
@@ -946,6 +938,9 @@ def main():
     print(f"Train handles: {len(at_layers)} AT + {len(ap_layers)} AP + {len(c_layers)} C = {len(at_layers) + len(ap_layers) + len(c_layers)}")
     print(f"Evaluation configs: {len(at_layers) * len(ap_layers) * len(c_layers)}")
     print("Objective for every handle: direct counterfactual Y loss only")
+
+    model, tokenizer = load_gemma_model()
+    device = next(model.parameters()).device
 
     print("\n=== BUILD CONTROLLED-ONLY TRAIN/CAL/TEST BANKS ===")
     banks, _ = make_variable_banks(
