@@ -1,0 +1,70 @@
+CUDA available: True
+GPU: NVIDIA A100-SXM4-40GB
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/288 [00:00<?, ?it/s]Loading weights:   0%|          | 1/288 [00:01<05:53,  1.23s/it]Loading weights:  67%|██████▋   | 192/288 [00:01<00:00, 198.08it/s]Loading weights: 100%|██████████| 288/288 [00:01<00:00, 161.10it/s]
+[bank] split=train pair_type=AT_only n=160
+[bank] split=train pair_type=AP_only n=160
+[bank] split=train pair_type=C_only n=160
+[bank] split=train pair_type=AP_AT n=160
+[bank] split=train pair_type=C_AP_AT n=160
+[AT train] total=800 | AT_only=160 AP_only=160 C_only=160 AP_AT=160 C_AP_AT=160
+[bank] split=validation pair_type=AT_only n=80
+[bank] split=validation pair_type=AP_only n=80
+[bank] split=validation pair_type=C_only n=80
+[bank] split=validation pair_type=AP_AT n=80
+[bank] split=validation pair_type=C_AP_AT n=80
+[AT validation] total=400 | AT_only=80 AP_only=80 C_only=80 AP_AT=80 C_AP_AT=80
+[bank] split=test pair_type=AT_only n=80
+[bank] split=test pair_type=AP_only n=80
+[bank] split=test pair_type=C_only n=80
+[bank] split=test pair_type=AP_AT n=80
+[bank] split=test pair_type=C_AP_AT n=80
+[AT test] total=400 | AT_only=80 AP_only=80 C_only=80 AP_AT=80 C_AP_AT=80
+[readout] train: 1300 shared factual prompts
+[readout] validation: 520 shared factual prompts
+
+================ TRAIN STANDARD AT L23 ================
+[AT L23 epoch 01] loss=1.4867 cal_iia=0.9375
+[AT L23 epoch 02] loss=1.2156 cal_iia=0.9425
+[AT L23 epoch 03] loss=1.1714 cal_iia=0.9425
+[AT L23 epoch 04] loss=1.1570 cal_iia=0.9450
+[AT L23 epoch 05] loss=1.1426 cal_iia=0.9500
+[AT L23 epoch 06] loss=1.1336 cal_iia=0.9475
+[AT L23 epoch 07] loss=1.1258 cal_iia=0.9400
+[AT L23 epoch 08] loss=1.1198 cal_iia=0.9525
+[AT L23 epoch 09] loss=1.1179 cal_iia=0.9475
+[AT L23 epoch 10] loss=1.1155 cal_iia=0.9450
+[AT L23 BEST] epoch=8 cal=0.9525 test=0.9600
+[AT readout] val_acc=0.9019
+[AT L23] cal_iia=0.9525 test_iia=0.9600 readout_val=0.9019 clean=0.8850/0.8900
+
+================ TRAIN STANDARD AT L24 ================
+[AT L24 epoch 01] loss=1.4772 cal_iia=0.9450
+[AT L24 epoch 02] loss=1.1864 cal_iia=0.9375
+[AT L24 epoch 03] loss=1.1394 cal_iia=0.9350
+[AT L24 epoch 04] loss=1.1235 cal_iia=0.9350
+[AT L24 epoch 05] loss=1.1096 cal_iia=0.9400
+[AT L24 epoch 06] loss=1.1013 cal_iia=0.9375
+[AT L24 epoch 07] loss=1.0919 cal_iia=0.9325
+[AT L24 epoch 08] loss=1.0868 cal_iia=0.9325
+[AT L24 epoch 09] loss=1.0849 cal_iia=0.9375
+[AT L24 epoch 10] loss=1.0818 cal_iia=0.9350
+[AT L24 BEST] epoch=1 cal=0.9450 test=0.9525
+[AT readout] val_acc=0.8981
+[AT L24] cal_iia=0.9450 test_iia=0.9525 readout_val=0.8981 clean=0.8925/0.8675
+
+================ TRAIN STANDARD AT L25 ================
+[AT L25 epoch 01] loss=1.5087 cal_iia=0.9175
+[AT L25 epoch 02] loss=1.1842 cal_iia=0.9100
+[AT L25 epoch 03] loss=1.1390 cal_iia=0.9000
+[AT L25 epoch 04] loss=1.1262 cal_iia=0.9175
+[AT L25 epoch 05] loss=1.1185 cal_iia=0.9200
+[AT L25 epoch 06] loss=1.1108 cal_iia=0.9075
+[AT L25 epoch 07] loss=1.1029 cal_iia=0.9050
+[AT L25 epoch 08] loss=1.0996 cal_iia=0.9100
+[AT L25 epoch 09] loss=1.1015 cal_iia=0.9050
+[AT L25 epoch 10] loss=1.0978 cal_iia=0.9075
+[AT L25 BEST] epoch=5 cal=0.9200 test=0.9250
+[AT readout] val_acc=0.8635
+[AT L25] cal_iia=0.9200 test_iia=0.9250 readout_val=0.8635 clean=0.8700/0.8475
+Done. Saved Q/readouts under results_standard_all_layers_mixedall_seed1_no_distractor/trained_handles and metrics in results_standard_all_layers_mixedall_seed1_no_distractor/summary.csv

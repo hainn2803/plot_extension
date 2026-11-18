@@ -269,7 +269,8 @@ def draw_ap(ax, records, metric, title=None):
 def draw_c_panels(fig, axes, records, metric):
     at_layers = all_layers(records, "at_layer")
     ap_layers = all_layers(records, "ap_layer")
-    c_layers = all_layers(records, "c_layer")
+    # c_layers = all_layers(records, "c_layer")
+    c_layers = [layer for layer in all_layers(records, "c_layer") if 0 <= layer <= 1]
     values = aggregated(records, "C", metric)
     image = None
     for ax, at in zip(axes, at_layers):

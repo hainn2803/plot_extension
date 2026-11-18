@@ -57,8 +57,8 @@ from mcqa_train_grid_gradual_das import (
 # DATA/LAYER SETTINGS (loss coefficients also have CLI overrides).
 # ===========================================================================
 AT_LAYERS = [23, 24, 25]
-AP_LAYERS = list(range(5, 16))
-C_LAYERS = list(range(5))
+AP_LAYERS = list(range(4, 16))
+C_LAYERS = list(range(3))
 
 # Training: any mix of pair types, including preservation examples.
 # ALL_PAIRS = ["AT_only", "AP_only", "C_only", "AP_AT", "C_AP_AT"]

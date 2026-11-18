@@ -1965,3 +1965,2105 @@ GPU: NVIDIA A100-SXM4-40GB
 [C AT=24 AP=5 C=3 epoch=11] loss=21.1086 cal=(0.61, 0.0525, 0.1225, 0.71, 0.0) score=0.0525
 [C AT=24 AP=5 C=3 epoch=12] loss=20.9126 cal=(0.615, 0.0525, 0.1125, 0.6925, 0.0) score=0.0525
 [C AT=24 AP=5 C=3 epoch=13] loss=20.7483 cal=(0.625, 0.0525, 0.1325, 0.7025, 0.0) score=0.0525
+[C AT=24 AP=5 C=3 epoch=14] loss=20.7205 cal=(0.6175, 0.0525, 0.135, 0.7, 0.0) score=0.0525
+[C AT=24 AP=5 C=3 epoch=15] loss=20.6082 cal=(0.6075, 0.045, 0.1225, 0.6975, 0.0) score=0.0450
+[C AT=24 AP=5 C=3 epoch=16] loss=20.4233 cal=(0.6225, 0.05, 0.1375, 0.7025, 0.0) score=0.0500
+[C AT=24 AP=5 C=3 epoch=17] loss=20.3184 cal=(0.6175, 0.0475, 0.13, 0.69, 0.0) score=0.0475
+[C AT=24 AP=5 C=3 epoch=18] loss=20.2418 cal=(0.605, 0.055, 0.1375, 0.6925, 0.0) score=0.0550
+[C AT=24 AP=5 C=3 epoch=19] loss=20.1181 cal=(0.605, 0.05, 0.135, 0.69, 0.0) score=0.0500
+[C AT=24 AP=5 C=3 epoch=20] loss=20.0548 cal=(0.6125, 0.0525, 0.14, 0.705, 0.0) score=0.0525
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L5__C_L3/das_c.pt
+[fit readout] C AT=24 AP=5 C=3 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=5 C=4 (missing checkpoint)
+[C AT=24 AP=5 C=4 epoch=01] loss=31.2683 cal=(0.635, 0.0275, 0.045, 0.7175, 0.0) score=0.0275
+[C AT=24 AP=5 C=4 epoch=02] loss=26.6446 cal=(0.66, 0.025, 0.0675, 0.735, 0.0) score=0.0250
+[C AT=24 AP=5 C=4 epoch=03] loss=25.5061 cal=(0.6725, 0.0275, 0.0675, 0.765, 0.0) score=0.0275
+[C AT=24 AP=5 C=4 epoch=04] loss=24.9347 cal=(0.6675, 0.0275, 0.075, 0.7625, 0.0) score=0.0275
+[C AT=24 AP=5 C=4 epoch=05] loss=24.6158 cal=(0.6775, 0.03, 0.0625, 0.765, 0.0) score=0.0300
+[C AT=24 AP=5 C=4 epoch=06] loss=24.3928 cal=(0.7075, 0.0325, 0.0675, 0.7775, 0.0) score=0.0325
+[C AT=24 AP=5 C=4 epoch=07] loss=24.1269 cal=(0.69, 0.03, 0.065, 0.7675, 0.0) score=0.0300
+[C AT=24 AP=5 C=4 epoch=08] loss=24.0022 cal=(0.6775, 0.03, 0.07, 0.7825, 0.0) score=0.0300
+[C AT=24 AP=5 C=4 epoch=09] loss=23.6870 cal=(0.68, 0.025, 0.065, 0.7775, 0.0) score=0.0250
+[C AT=24 AP=5 C=4 epoch=10] loss=23.5033 cal=(0.7, 0.0325, 0.0725, 0.785, 0.0) score=0.0325
+[C AT=24 AP=5 C=4 epoch=11] loss=23.5783 cal=(0.69, 0.0275, 0.06, 0.7425, 0.0) score=0.0275
+[C AT=24 AP=5 C=4 epoch=12] loss=23.4994 cal=(0.6825, 0.0275, 0.0675, 0.7675, 0.0) score=0.0275
+[C AT=24 AP=5 C=4 epoch=13] loss=23.1678 cal=(0.675, 0.0275, 0.07, 0.7675, 0.0) score=0.0275
+[C AT=24 AP=5 C=4 epoch=14] loss=23.0154 cal=(0.705, 0.0275, 0.065, 0.79, 0.0) score=0.0275
+[C AT=24 AP=5 C=4 epoch=15] loss=22.8528 cal=(0.6875, 0.03, 0.08, 0.76, 0.0) score=0.0300
+[C AT=24 AP=5 C=4 epoch=16] loss=22.7643 cal=(0.6825, 0.03, 0.0775, 0.7625, 0.0) score=0.0300
+[C AT=24 AP=5 C=4 epoch=17] loss=22.7611 cal=(0.6825, 0.025, 0.065, 0.7475, 0.0) score=0.0250
+[C AT=24 AP=5 C=4 epoch=18] loss=22.6928 cal=(0.675, 0.03, 0.07, 0.745, 0.0) score=0.0300
+[C AT=24 AP=5 C=4 epoch=19] loss=22.5913 cal=(0.685, 0.0275, 0.07, 0.75, 0.0) score=0.0275
+[C AT=24 AP=5 C=4 epoch=20] loss=22.4837 cal=(0.7, 0.03, 0.06, 0.7675, 0.0) score=0.0300
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L5__C_L4/das_c.pt
+[fit readout] C AT=24 AP=5 C=4 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=6 C=0 (missing checkpoint)
+[C AT=24 AP=6 C=0 epoch=01] loss=16.1208 cal=(0.685, 0.765, 0.98, 0.7725, 0.0) score=0.6850
+[C AT=24 AP=6 C=0 epoch=02] loss=10.6845 cal=(0.7375, 0.85, 0.9975, 0.82, 0.0) score=0.7375
+[C AT=24 AP=6 C=0 epoch=03] loss=9.4002 cal=(0.76, 0.8625, 0.9975, 0.855, 0.0) score=0.7600
+[C AT=24 AP=6 C=0 epoch=04] loss=8.8764 cal=(0.78, 0.8725, 1.0, 0.85, 0.0) score=0.7800
+[C AT=24 AP=6 C=0 epoch=05] loss=8.5336 cal=(0.7975, 0.8725, 1.0, 0.865, 0.0) score=0.7975
+[C AT=24 AP=6 C=0 epoch=06] loss=8.2264 cal=(0.7975, 0.865, 0.995, 0.8625, 0.0) score=0.7975
+[C AT=24 AP=6 C=0 epoch=07] loss=8.1685 cal=(0.8025, 0.86, 0.9975, 0.8725, 0.0) score=0.8025
+[C AT=24 AP=6 C=0 epoch=08] loss=7.5501 cal=(0.83, 0.87, 0.9975, 0.88, 0.0) score=0.8300
+[C AT=24 AP=6 C=0 epoch=09] loss=7.2491 cal=(0.8325, 0.87, 1.0, 0.8825, 0.0) score=0.8325
+[C AT=24 AP=6 C=0 epoch=10] loss=7.0181 cal=(0.84, 0.8725, 1.0, 0.8825, 0.0) score=0.8400
+[C AT=24 AP=6 C=0 epoch=11] loss=6.8271 cal=(0.8475, 0.8775, 1.0, 0.88, 0.0) score=0.8475
+[C AT=24 AP=6 C=0 epoch=12] loss=6.6807 cal=(0.8525, 0.88, 1.0, 0.88, 0.0) score=0.8525
+[C AT=24 AP=6 C=0 epoch=13] loss=6.4019 cal=(0.87, 0.8675, 0.995, 0.905, 0.0) score=0.8675
+[C AT=24 AP=6 C=0 epoch=14] loss=6.1410 cal=(0.85, 0.885, 0.995, 0.8825, 0.0) score=0.8500
+[C AT=24 AP=6 C=0 epoch=15] loss=6.3753 cal=(0.8625, 0.8825, 0.995, 0.9, 0.0) score=0.8625
+[C AT=24 AP=6 C=0 epoch=16] loss=6.2063 cal=(0.835, 0.8775, 0.9975, 0.88, 0.0) score=0.8350
+[C AT=24 AP=6 C=0 epoch=17] loss=5.9166 cal=(0.87, 0.875, 0.9925, 0.9, 0.0) score=0.8700
+[C AT=24 AP=6 C=0 epoch=18] loss=5.7380 cal=(0.8625, 0.885, 0.995, 0.91, 0.0) score=0.8625
+[C AT=24 AP=6 C=0 epoch=19] loss=5.5357 cal=(0.865, 0.89, 0.995, 0.8975, 0.0) score=0.8650
+[C AT=24 AP=6 C=0 epoch=20] loss=5.4470 cal=(0.8625, 0.88, 0.995, 0.885, 0.0) score=0.8625
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L6__C_L0/das_c.pt
+[fit readout] C AT=24 AP=6 C=0 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=6 C=1 (missing checkpoint)
+[C AT=24 AP=6 C=1 epoch=01] loss=18.4966 cal=(0.6725, 0.6275, 0.935, 0.7625, 0.0) score=0.6275
+[C AT=24 AP=6 C=1 epoch=02] loss=13.0435 cal=(0.7, 0.6825, 0.955, 0.7875, 0.0) score=0.6825
+[C AT=24 AP=6 C=1 epoch=03] loss=11.5778 cal=(0.7275, 0.705, 0.9575, 0.8075, 0.0) score=0.7050
+[C AT=24 AP=6 C=1 epoch=04] loss=10.8026 cal=(0.7275, 0.71, 0.955, 0.8075, 0.0) score=0.7100
+[C AT=24 AP=6 C=1 epoch=05] loss=10.6094 cal=(0.7175, 0.73, 0.96, 0.825, 0.0) score=0.7175
+[C AT=24 AP=6 C=1 epoch=06] loss=10.1518 cal=(0.74, 0.7375, 0.96, 0.82, 0.0) score=0.7375
+[C AT=24 AP=6 C=1 epoch=07] loss=10.0279 cal=(0.7475, 0.7275, 0.9575, 0.8175, 0.0) score=0.7275
+[C AT=24 AP=6 C=1 epoch=08] loss=9.5031 cal=(0.7575, 0.7225, 0.9525, 0.825, 0.0) score=0.7225
+[C AT=24 AP=6 C=1 epoch=09] loss=9.0677 cal=(0.7575, 0.735, 0.9575, 0.825, 0.0) score=0.7350
+[C AT=24 AP=6 C=1 epoch=10] loss=8.9052 cal=(0.74, 0.7275, 0.955, 0.82, 0.0) score=0.7275
+[C AT=24 AP=6 C=1 epoch=11] loss=8.7062 cal=(0.7725, 0.73, 0.95, 0.8375, 0.0) score=0.7300
+[C AT=24 AP=6 C=1 epoch=12] loss=8.5395 cal=(0.77, 0.7475, 0.96, 0.825, 0.0) score=0.7475
+[C AT=24 AP=6 C=1 epoch=13] loss=8.2908 cal=(0.765, 0.725, 0.9525, 0.825, 0.0) score=0.7250
+[C AT=24 AP=6 C=1 epoch=14] loss=8.2444 cal=(0.76, 0.725, 0.955, 0.8075, 0.0) score=0.7250
+[C AT=24 AP=6 C=1 epoch=15] loss=8.2231 cal=(0.78, 0.7375, 0.96, 0.825, 0.0) score=0.7375
+[C AT=24 AP=6 C=1 epoch=16] loss=7.9994 cal=(0.7575, 0.7325, 0.9525, 0.8275, 0.0) score=0.7325
+[C AT=24 AP=6 C=1 epoch=17] loss=7.6664 cal=(0.76, 0.735, 0.9575, 0.82, 0.0) score=0.7350
+[C AT=24 AP=6 C=1 epoch=18] loss=7.4956 cal=(0.77, 0.7175, 0.9575, 0.825, 0.0) score=0.7175
+[C AT=24 AP=6 C=1 epoch=19] loss=7.3258 cal=(0.7725, 0.7375, 0.96, 0.825, 0.0) score=0.7375
+[C AT=24 AP=6 C=1 epoch=20] loss=7.2153 cal=(0.7675, 0.7075, 0.96, 0.825, 0.0) score=0.7075
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L6__C_L1/das_c.pt
+[fit readout] C AT=24 AP=6 C=1 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=6 C=2 (missing checkpoint)
+[C AT=24 AP=6 C=2 epoch=01] loss=18.7960 cal=(0.655, 0.595, 0.9225, 0.7525, 0.0) score=0.5950
+[C AT=24 AP=6 C=2 epoch=02] loss=13.3951 cal=(0.7025, 0.65, 0.9425, 0.775, 0.0) score=0.6500
+[C AT=24 AP=6 C=2 epoch=03] loss=11.9826 cal=(0.7125, 0.69, 0.9475, 0.8, 0.0) score=0.6900
+[C AT=24 AP=6 C=2 epoch=04] loss=11.3227 cal=(0.715, 0.68, 0.9425, 0.7875, 0.0) score=0.6800
+[C AT=24 AP=6 C=2 epoch=05] loss=10.8220 cal=(0.7225, 0.685, 0.9525, 0.7975, 0.0) score=0.6850
+[C AT=24 AP=6 C=2 epoch=06] loss=10.4830 cal=(0.7375, 0.71, 0.9525, 0.805, 0.0) score=0.7100
+[C AT=24 AP=6 C=2 epoch=07] loss=10.2210 cal=(0.7275, 0.7025, 0.955, 0.8075, 0.0) score=0.7025
+[C AT=24 AP=6 C=2 epoch=08] loss=10.0037 cal=(0.74, 0.685, 0.945, 0.81, 0.0) score=0.6850
+[C AT=24 AP=6 C=2 epoch=09] loss=9.6032 cal=(0.7275, 0.695, 0.9525, 0.8, 0.0) score=0.6950
+[C AT=24 AP=6 C=2 epoch=10] loss=9.4023 cal=(0.715, 0.6875, 0.9475, 0.8, 0.0) score=0.6875
+[C AT=24 AP=6 C=2 epoch=11] loss=9.2421 cal=(0.7225, 0.6775, 0.95, 0.81, 0.0) score=0.6775
+[C AT=24 AP=6 C=2 epoch=12] loss=9.0297 cal=(0.7325, 0.68, 0.955, 0.7975, 0.0) score=0.6800
+[C AT=24 AP=6 C=2 epoch=13] loss=8.8639 cal=(0.7275, 0.6825, 0.955, 0.8125, 0.0) score=0.6825
+[C AT=24 AP=6 C=2 epoch=14] loss=8.7229 cal=(0.7225, 0.695, 0.955, 0.8075, 0.0) score=0.6950
+[C AT=24 AP=6 C=2 epoch=15] loss=8.5793 cal=(0.735, 0.69, 0.955, 0.8225, 0.0) score=0.6900
+[C AT=24 AP=6 C=2 epoch=16] loss=8.4431 cal=(0.73, 0.6925, 0.955, 0.8125, 0.0) score=0.6925
+[C AT=24 AP=6 C=2 epoch=17] loss=8.3341 cal=(0.71, 0.68, 0.9475, 0.79, 0.0) score=0.6800
+[C AT=24 AP=6 C=2 epoch=18] loss=8.1922 cal=(0.7175, 0.7025, 0.9575, 0.7925, 0.0) score=0.7025
+[C AT=24 AP=6 C=2 epoch=19] loss=8.0344 cal=(0.7125, 0.69, 0.955, 0.8, 0.0) score=0.6900
+[C AT=24 AP=6 C=2 epoch=20] loss=8.0483 cal=(0.71, 0.6825, 0.955, 0.805, 0.0) score=0.6825
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L6__C_L2/das_c.pt
+[fit readout] C AT=24 AP=6 C=2 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=6 C=3 (missing checkpoint)
+[C AT=24 AP=6 C=3 epoch=01] loss=19.8296 cal=(0.605, 0.485, 0.8725, 0.7175, 0.0) score=0.4850
+[C AT=24 AP=6 C=3 epoch=02] loss=14.7708 cal=(0.65, 0.575, 0.9075, 0.73, 0.0) score=0.5750
+[C AT=24 AP=6 C=3 epoch=03] loss=13.4384 cal=(0.6575, 0.6025, 0.915, 0.74, 0.0) score=0.6025
+[C AT=24 AP=6 C=3 epoch=04] loss=12.7121 cal=(0.6525, 0.625, 0.9025, 0.7375, 0.0) score=0.6250
+[C AT=24 AP=6 C=3 epoch=05] loss=12.2319 cal=(0.665, 0.6325, 0.925, 0.7425, 0.0) score=0.6325
+[C AT=24 AP=6 C=3 epoch=06] loss=11.9073 cal=(0.6775, 0.63, 0.9175, 0.7375, 0.0) score=0.6300
+[C AT=24 AP=6 C=3 epoch=07] loss=11.5810 cal=(0.6775, 0.6475, 0.925, 0.745, 0.0) score=0.6475
+[C AT=24 AP=6 C=3 epoch=08] loss=11.2700 cal=(0.6575, 0.6475, 0.9175, 0.7525, 0.0) score=0.6475
+[C AT=24 AP=6 C=3 epoch=09] loss=11.0570 cal=(0.665, 0.6325, 0.9275, 0.755, 0.0) score=0.6325
+[C AT=24 AP=6 C=3 epoch=10] loss=10.9300 cal=(0.68, 0.6375, 0.9325, 0.755, 0.0) score=0.6375
+[C AT=24 AP=6 C=3 epoch=11] loss=10.7839 cal=(0.68, 0.655, 0.925, 0.745, 0.0) score=0.6550
+[C AT=24 AP=6 C=3 epoch=12] loss=10.5672 cal=(0.68, 0.6425, 0.9375, 0.75, 0.0) score=0.6425
+[C AT=24 AP=6 C=3 epoch=13] loss=10.4429 cal=(0.6775, 0.625, 0.925, 0.7475, 0.0) score=0.6250
+[C AT=24 AP=6 C=3 epoch=14] loss=10.2998 cal=(0.6775, 0.6575, 0.935, 0.7525, 0.0) score=0.6575
+[C AT=24 AP=6 C=3 epoch=15] loss=10.1532 cal=(0.69, 0.64, 0.9275, 0.755, 0.0) score=0.6400
+[C AT=24 AP=6 C=3 epoch=16] loss=10.2149 cal=(0.675, 0.6175, 0.925, 0.7625, 0.0) score=0.6175
+[C AT=24 AP=6 C=3 epoch=17] loss=10.2043 cal=(0.67, 0.64, 0.925, 0.74, 0.0) score=0.6400
+[C AT=24 AP=6 C=3 epoch=18] loss=9.9946 cal=(0.675, 0.6375, 0.93, 0.755, 0.0) score=0.6375
+[C AT=24 AP=6 C=3 epoch=19] loss=10.0215 cal=(0.675, 0.635, 0.935, 0.755, 0.0) score=0.6350
+[C AT=24 AP=6 C=3 epoch=20] loss=9.8264 cal=(0.6675, 0.635, 0.9325, 0.735, 0.0) score=0.6350
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L6__C_L3/das_c.pt
+[fit readout] C AT=24 AP=6 C=3 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=6 C=4 (missing checkpoint)
+[C AT=24 AP=6 C=4 epoch=01] loss=20.1095 cal=(0.63, 0.4425, 0.805, 0.7025, 0.0) score=0.4425
+[C AT=24 AP=6 C=4 epoch=02] loss=15.4125 cal=(0.67, 0.47, 0.8175, 0.7625, 0.0) score=0.4700
+[C AT=24 AP=6 C=4 epoch=03] loss=14.4154 cal=(0.7125, 0.4925, 0.855, 0.8, 0.0) score=0.4925
+[C AT=24 AP=6 C=4 epoch=04] loss=13.6867 cal=(0.725, 0.505, 0.83, 0.785, 0.0) score=0.5050
+[C AT=24 AP=6 C=4 epoch=05] loss=13.3981 cal=(0.715, 0.4875, 0.8425, 0.7975, 0.0) score=0.4875
+[C AT=24 AP=6 C=4 epoch=06] loss=13.1328 cal=(0.735, 0.4825, 0.8225, 0.8225, 0.0) score=0.4825
+[C AT=24 AP=6 C=4 epoch=07] loss=12.8781 cal=(0.73, 0.4825, 0.84, 0.795, 0.0) score=0.4825
+[C AT=24 AP=6 C=4 epoch=08] loss=12.6658 cal=(0.7225, 0.4875, 0.8425, 0.795, 0.0) score=0.4875
+[C AT=24 AP=6 C=4 epoch=09] loss=12.4818 cal=(0.7375, 0.5, 0.855, 0.83, 0.0) score=0.5000
+[C AT=24 AP=6 C=4 epoch=10] loss=12.3324 cal=(0.745, 0.4975, 0.83, 0.8175, 0.0) score=0.4975
+[C AT=24 AP=6 C=4 epoch=11] loss=12.2544 cal=(0.7425, 0.4925, 0.845, 0.815, 0.0) score=0.4925
+[C AT=24 AP=6 C=4 epoch=12] loss=12.0498 cal=(0.7275, 0.4925, 0.835, 0.815, 0.0) score=0.4925
+[C AT=24 AP=6 C=4 epoch=13] loss=11.8903 cal=(0.74, 0.4825, 0.83, 0.7975, 0.0) score=0.4825
+[C AT=24 AP=6 C=4 epoch=14] loss=11.7855 cal=(0.7325, 0.495, 0.83, 0.8075, 0.0) score=0.4950
+[C AT=24 AP=6 C=4 epoch=15] loss=11.6334 cal=(0.735, 0.48, 0.8325, 0.82, 0.0) score=0.4800
+[C AT=24 AP=6 C=4 epoch=16] loss=11.7978 cal=(0.7225, 0.485, 0.825, 0.8175, 0.0) score=0.4850
+[C AT=24 AP=6 C=4 epoch=17] loss=11.6860 cal=(0.725, 0.4775, 0.835, 0.8075, 0.0) score=0.4775
+[C AT=24 AP=6 C=4 epoch=18] loss=11.5346 cal=(0.735, 0.47, 0.8525, 0.82, 0.0) score=0.4700
+[C AT=24 AP=6 C=4 epoch=19] loss=11.5280 cal=(0.73, 0.4925, 0.835, 0.7975, 0.0) score=0.4925
+[C AT=24 AP=6 C=4 epoch=20] loss=11.3900 cal=(0.7325, 0.4825, 0.8425, 0.815, 0.0) score=0.4825
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L6__C_L4/das_c.pt
+[fit readout] C AT=24 AP=6 C=4 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=7 C=0 (missing checkpoint)
+[C AT=24 AP=7 C=0 epoch=01] loss=15.6257 cal=(0.695, 0.885, 0.975, 0.78, 0.0) score=0.6950
+[C AT=24 AP=7 C=0 epoch=02] loss=10.3308 cal=(0.7475, 0.9225, 0.985, 0.825, 0.0) score=0.7475
+[C AT=24 AP=7 C=0 epoch=03] loss=9.0891 cal=(0.765, 0.9425, 0.99, 0.8475, 0.0) score=0.7650
+[C AT=24 AP=7 C=0 epoch=04] loss=8.5048 cal=(0.76, 0.9175, 0.9925, 0.83, 0.0) score=0.7600
+[C AT=24 AP=7 C=0 epoch=05] loss=8.4442 cal=(0.79, 0.9275, 0.9875, 0.8675, 0.0) score=0.7900
+[C AT=24 AP=7 C=0 epoch=06] loss=7.9703 cal=(0.8075, 0.93, 0.9925, 0.8925, 0.0) score=0.8075
+[C AT=24 AP=7 C=0 epoch=07] loss=7.7014 cal=(0.7825, 0.9225, 0.99, 0.8625, 0.0) score=0.7825
+[C AT=24 AP=7 C=0 epoch=08] loss=7.3709 cal=(0.82, 0.9275, 0.9925, 0.88, 0.0) score=0.8200
+[C AT=24 AP=7 C=0 epoch=09] loss=7.0519 cal=(0.8175, 0.925, 0.9925, 0.8825, 0.0) score=0.8175
+[C AT=24 AP=7 C=0 epoch=10] loss=6.8377 cal=(0.8175, 0.9225, 0.9875, 0.865, 0.0) score=0.8175
+[C AT=24 AP=7 C=0 epoch=11] loss=6.8549 cal=(0.835, 0.92, 0.9875, 0.895, 0.0) score=0.8350
+[C AT=24 AP=7 C=0 epoch=12] loss=6.6165 cal=(0.8325, 0.9275, 0.9925, 0.8875, 0.0) score=0.8325
+[C AT=24 AP=7 C=0 epoch=13] loss=6.4303 cal=(0.8375, 0.93, 0.9875, 0.905, 0.0) score=0.8375
+[C AT=24 AP=7 C=0 epoch=14] loss=6.2935 cal=(0.835, 0.93, 0.9925, 0.9025, 0.0) score=0.8350
+[C AT=24 AP=7 C=0 epoch=15] loss=6.2174 cal=(0.84, 0.9325, 0.99, 0.9025, 0.0) score=0.8400
+[C AT=24 AP=7 C=0 epoch=16] loss=6.1252 cal=(0.845, 0.9225, 0.99, 0.895, 0.0) score=0.8450
+[C AT=24 AP=7 C=0 epoch=17] loss=6.0391 cal=(0.82, 0.9075, 0.9875, 0.8725, 0.0) score=0.8200
+[C AT=24 AP=7 C=0 epoch=18] loss=6.1817 cal=(0.8475, 0.92, 0.99, 0.9, 0.0) score=0.8475
+[C AT=24 AP=7 C=0 epoch=19] loss=5.6527 cal=(0.865, 0.93, 0.9925, 0.9225, 0.0) score=0.8650
+[C AT=24 AP=7 C=0 epoch=20] loss=5.3877 cal=(0.845, 0.94, 0.9925, 0.9025, 0.0) score=0.8450
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L7__C_L0/das_c.pt
+[fit readout] C AT=24 AP=7 C=0 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=7 C=1 (missing checkpoint)
+[C AT=24 AP=7 C=1 epoch=01] loss=18.1037 cal=(0.655, 0.73, 0.9275, 0.755, 0.0) score=0.6550
+[C AT=24 AP=7 C=1 epoch=02] loss=12.3770 cal=(0.7025, 0.775, 0.97, 0.7825, 0.0) score=0.7025
+[C AT=24 AP=7 C=1 epoch=03] loss=10.9414 cal=(0.7225, 0.8175, 0.9625, 0.815, 0.0) score=0.7225
+[C AT=24 AP=7 C=1 epoch=04] loss=10.3132 cal=(0.7325, 0.8, 0.965, 0.815, 0.0) score=0.7325
+[C AT=24 AP=7 C=1 epoch=05] loss=9.9411 cal=(0.7325, 0.7975, 0.975, 0.825, 0.0) score=0.7325
+[C AT=24 AP=7 C=1 epoch=06] loss=9.7655 cal=(0.75, 0.7925, 0.97, 0.8425, 0.0) score=0.7500
+[C AT=24 AP=7 C=1 epoch=07] loss=9.3508 cal=(0.7575, 0.805, 0.9625, 0.8375, 0.0) score=0.7575
+[C AT=24 AP=7 C=1 epoch=08] loss=8.8828 cal=(0.77, 0.8025, 0.965, 0.8475, 0.0) score=0.7700
+[C AT=24 AP=7 C=1 epoch=09] loss=8.5556 cal=(0.7725, 0.815, 0.965, 0.84, 0.0) score=0.7725
+[C AT=24 AP=7 C=1 epoch=10] loss=8.2845 cal=(0.745, 0.805, 0.96, 0.8375, 0.0) score=0.7450
+[C AT=24 AP=7 C=1 epoch=11] loss=8.1019 cal=(0.7775, 0.7975, 0.9575, 0.84, 0.0) score=0.7775
+[C AT=24 AP=7 C=1 epoch=12] loss=8.2457 cal=(0.765, 0.7975, 0.9575, 0.83, 0.0) score=0.7650
+[C AT=24 AP=7 C=1 epoch=13] loss=7.8145 cal=(0.7675, 0.805, 0.9625, 0.8375, 0.0) score=0.7675
+[C AT=24 AP=7 C=1 epoch=14] loss=7.4758 cal=(0.78, 0.8075, 0.955, 0.86, 0.0) score=0.7800
+[C AT=24 AP=7 C=1 epoch=15] loss=7.3461 cal=(0.77, 0.8025, 0.96, 0.8275, 0.0) score=0.7700
+[C AT=24 AP=7 C=1 epoch=16] loss=7.3153 cal=(0.775, 0.8175, 0.9575, 0.835, 0.0) score=0.7750
+[C AT=24 AP=7 C=1 epoch=17] loss=7.1351 cal=(0.765, 0.815, 0.9525, 0.83, 0.0) score=0.7650
+[C AT=24 AP=7 C=1 epoch=18] loss=7.0600 cal=(0.7675, 0.805, 0.9575, 0.8325, 0.0) score=0.7675
+[C AT=24 AP=7 C=1 epoch=19] loss=6.8719 cal=(0.76, 0.8, 0.9475, 0.8275, 0.0) score=0.7600
+[C AT=24 AP=7 C=1 epoch=20] loss=6.8220 cal=(0.765, 0.8125, 0.955, 0.8125, 0.0) score=0.7650
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L7__C_L1/das_c.pt
+[fit readout] C AT=24 AP=7 C=1 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=7 C=2 (missing checkpoint)
+[C AT=24 AP=7 C=2 epoch=01] loss=18.2325 cal=(0.645, 0.705, 0.935, 0.74, 0.0) score=0.6450
+[C AT=24 AP=7 C=2 epoch=02] loss=12.6593 cal=(0.69, 0.7675, 0.95, 0.78, 0.0) score=0.6900
+[C AT=24 AP=7 C=2 epoch=03] loss=11.2819 cal=(0.725, 0.7975, 0.955, 0.805, 0.0) score=0.7250
+[C AT=24 AP=7 C=2 epoch=04] loss=10.6942 cal=(0.725, 0.78, 0.9525, 0.8075, 0.0) score=0.7250
+[C AT=24 AP=7 C=2 epoch=05] loss=10.4755 cal=(0.715, 0.7975, 0.95, 0.7925, 0.0) score=0.7150
+[C AT=24 AP=7 C=2 epoch=06] loss=10.0971 cal=(0.73, 0.7875, 0.955, 0.8075, 0.0) score=0.7300
+[C AT=24 AP=7 C=2 epoch=07] loss=9.7447 cal=(0.7325, 0.805, 0.9475, 0.815, 0.0) score=0.7325
+[C AT=24 AP=7 C=2 epoch=08] loss=9.3814 cal=(0.73, 0.79, 0.94, 0.7925, 0.0) score=0.7300
+[C AT=24 AP=7 C=2 epoch=09] loss=9.1760 cal=(0.74, 0.8, 0.945, 0.8, 0.0) score=0.7400
+[C AT=24 AP=7 C=2 epoch=10] loss=8.9770 cal=(0.73, 0.7925, 0.95, 0.795, 0.0) score=0.7300
+[C AT=24 AP=7 C=2 epoch=11] loss=8.7367 cal=(0.7475, 0.785, 0.945, 0.815, 0.0) score=0.7475
+[C AT=24 AP=7 C=2 epoch=12] loss=8.5371 cal=(0.74, 0.805, 0.9525, 0.8125, 0.0) score=0.7400
+[C AT=24 AP=7 C=2 epoch=13] loss=8.3750 cal=(0.7275, 0.775, 0.945, 0.8075, 0.0) score=0.7275
+[C AT=24 AP=7 C=2 epoch=14] loss=8.2677 cal=(0.76, 0.7925, 0.94, 0.825, 0.0) score=0.7600
+[C AT=24 AP=7 C=2 epoch=15] loss=8.1787 cal=(0.7475, 0.7875, 0.9425, 0.8175, 0.0) score=0.7475
+[C AT=24 AP=7 C=2 epoch=16] loss=8.1052 cal=(0.7525, 0.78, 0.95, 0.81, 0.0) score=0.7525
+[C AT=24 AP=7 C=2 epoch=17] loss=7.9677 cal=(0.7325, 0.77, 0.9325, 0.8075, 0.0) score=0.7325
+[C AT=24 AP=7 C=2 epoch=18] loss=7.7992 cal=(0.7525, 0.785, 0.9375, 0.8025, 0.0) score=0.7525
+[C AT=24 AP=7 C=2 epoch=19] loss=7.6328 cal=(0.7475, 0.7775, 0.945, 0.815, 0.0) score=0.7475
+[C AT=24 AP=7 C=2 epoch=20] loss=7.4817 cal=(0.7375, 0.785, 0.94, 0.7975, 0.0) score=0.7375
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L7__C_L2/das_c.pt
+[fit readout] C AT=24 AP=7 C=2 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=7 C=3 (missing checkpoint)
+[C AT=24 AP=7 C=3 epoch=01] loss=19.4152 cal=(0.6175, 0.61, 0.8425, 0.7, 0.0) score=0.6100
+[C AT=24 AP=7 C=3 epoch=02] loss=14.0958 cal=(0.65, 0.6825, 0.9, 0.7325, 0.0) score=0.6500
+[C AT=24 AP=7 C=3 epoch=03] loss=12.8332 cal=(0.675, 0.7175, 0.9275, 0.7625, 0.0) score=0.6750
+[C AT=24 AP=7 C=3 epoch=04] loss=12.2776 cal=(0.665, 0.6975, 0.9175, 0.765, 0.0) score=0.6650
+[C AT=24 AP=7 C=3 epoch=05] loss=11.9978 cal=(0.675, 0.72, 0.92, 0.77, 0.0) score=0.6750
+[C AT=24 AP=7 C=3 epoch=06] loss=11.6252 cal=(0.68, 0.7225, 0.92, 0.76, 0.0) score=0.6800
+[C AT=24 AP=7 C=3 epoch=07] loss=11.3578 cal=(0.695, 0.73, 0.91, 0.775, 0.0) score=0.6950
+[C AT=24 AP=7 C=3 epoch=08] loss=11.1190 cal=(0.675, 0.7075, 0.9025, 0.7775, 0.0) score=0.6750
+[C AT=24 AP=7 C=3 epoch=09] loss=10.8996 cal=(0.7025, 0.7325, 0.92, 0.7725, 0.0) score=0.7025
+[C AT=24 AP=7 C=3 epoch=10] loss=10.6877 cal=(0.71, 0.7325, 0.9225, 0.77, 0.0) score=0.7100
+[C AT=24 AP=7 C=3 epoch=11] loss=10.5065 cal=(0.6975, 0.725, 0.915, 0.7775, 0.0) score=0.6975
+[C AT=24 AP=7 C=3 epoch=12] loss=10.2498 cal=(0.7075, 0.735, 0.92, 0.78, 0.0) score=0.7075
+[C AT=24 AP=7 C=3 epoch=13] loss=10.2030 cal=(0.705, 0.7175, 0.9275, 0.7775, 0.0) score=0.7050
+[C AT=24 AP=7 C=3 epoch=14] loss=10.1136 cal=(0.7025, 0.7325, 0.915, 0.7875, 0.0) score=0.7025
+[C AT=24 AP=7 C=3 epoch=15] loss=9.9496 cal=(0.705, 0.73, 0.9125, 0.7775, 0.0) score=0.7050
+[C AT=24 AP=7 C=3 epoch=16] loss=9.7704 cal=(0.6875, 0.7275, 0.9125, 0.7725, 0.0) score=0.6875
+[C AT=24 AP=7 C=3 epoch=17] loss=9.7319 cal=(0.7175, 0.7125, 0.9075, 0.785, 0.0) score=0.7125
+[C AT=24 AP=7 C=3 epoch=18] loss=9.7584 cal=(0.6825, 0.7125, 0.915, 0.775, 0.0) score=0.6825
+[C AT=24 AP=7 C=3 epoch=19] loss=9.6715 cal=(0.6975, 0.735, 0.915, 0.78, 0.0) score=0.6975
+[C AT=24 AP=7 C=3 epoch=20] loss=9.4445 cal=(0.7, 0.72, 0.9175, 0.785, 0.0) score=0.7000
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L7__C_L3/das_c.pt
+[fit readout] C AT=24 AP=7 C=3 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=7 C=4 (missing checkpoint)
+[C AT=24 AP=7 C=4 epoch=01] loss=19.7669 cal=(0.6225, 0.5425, 0.7975, 0.7075, 0.0) score=0.5425
+[C AT=24 AP=7 C=4 epoch=02] loss=14.6785 cal=(0.6875, 0.5875, 0.845, 0.7575, 0.0) score=0.5875
+[C AT=24 AP=7 C=4 epoch=03] loss=13.5335 cal=(0.71, 0.615, 0.8475, 0.7875, 0.0) score=0.6150
+[C AT=24 AP=7 C=4 epoch=04] loss=13.0759 cal=(0.6975, 0.6025, 0.8475, 0.7925, 0.0) score=0.6025
+[C AT=24 AP=7 C=4 epoch=05] loss=12.6995 cal=(0.725, 0.61, 0.855, 0.7975, 0.0) score=0.6100
+[C AT=24 AP=7 C=4 epoch=06] loss=12.3976 cal=(0.7325, 0.6125, 0.8575, 0.7975, 0.0) score=0.6125
+[C AT=24 AP=7 C=4 epoch=07] loss=12.0448 cal=(0.73, 0.6025, 0.855, 0.795, 0.0) score=0.6025
+[C AT=24 AP=7 C=4 epoch=08] loss=11.8860 cal=(0.71, 0.6, 0.8525, 0.79, 0.0) score=0.6000
+[C AT=24 AP=7 C=4 epoch=09] loss=11.7384 cal=(0.7375, 0.61, 0.8525, 0.7975, 0.0) score=0.6100
+[C AT=24 AP=7 C=4 epoch=10] loss=11.5933 cal=(0.7225, 0.61, 0.855, 0.805, 0.0) score=0.6100
+[C AT=24 AP=7 C=4 epoch=11] loss=11.3931 cal=(0.7375, 0.61, 0.865, 0.8175, 0.0) score=0.6100
+[C AT=24 AP=7 C=4 epoch=12] loss=11.1487 cal=(0.74, 0.615, 0.8525, 0.81, 0.0) score=0.6150
+[C AT=24 AP=7 C=4 epoch=13] loss=11.0353 cal=(0.725, 0.5975, 0.8475, 0.805, 0.0) score=0.5975
+[C AT=24 AP=7 C=4 epoch=14] loss=11.0558 cal=(0.7325, 0.62, 0.855, 0.805, 0.0) score=0.6200
+[C AT=24 AP=7 C=4 epoch=15] loss=10.9507 cal=(0.7475, 0.6025, 0.845, 0.815, 0.0) score=0.6025
+[C AT=24 AP=7 C=4 epoch=16] loss=10.7803 cal=(0.75, 0.6125, 0.855, 0.8075, 0.0) score=0.6125
+[C AT=24 AP=7 C=4 epoch=17] loss=10.6436 cal=(0.73, 0.6125, 0.855, 0.8025, 0.0) score=0.6125
+[C AT=24 AP=7 C=4 epoch=18] loss=10.5783 cal=(0.7275, 0.6175, 0.86, 0.81, 0.0) score=0.6175
+[C AT=24 AP=7 C=4 epoch=19] loss=10.4912 cal=(0.74, 0.6125, 0.845, 0.8, 0.0) score=0.6125
+[C AT=24 AP=7 C=4 epoch=20] loss=10.4702 cal=(0.7375, 0.5925, 0.8575, 0.8, 0.0) score=0.5925
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L7__C_L4/das_c.pt
+[fit readout] C AT=24 AP=7 C=4 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=8 C=0 (missing checkpoint)
+[C AT=24 AP=8 C=0 epoch=01] loss=13.4988 cal=(0.7075, 0.975, 0.9975, 0.7875, 0.0) score=0.7075
+[C AT=24 AP=8 C=0 epoch=02] loss=8.5818 cal=(0.76, 0.9875, 0.9975, 0.8175, 0.0) score=0.7600
+[C AT=24 AP=8 C=0 epoch=03] loss=7.4667 cal=(0.79, 0.9875, 0.9975, 0.8575, 0.0) score=0.7900
+[C AT=24 AP=8 C=0 epoch=04] loss=6.9744 cal=(0.8025, 0.9875, 0.9975, 0.8575, 0.0) score=0.8025
+[C AT=24 AP=8 C=0 epoch=05] loss=6.7117 cal=(0.8175, 0.9825, 0.995, 0.865, 0.0) score=0.8175
+[C AT=24 AP=8 C=0 epoch=06] loss=6.6916 cal=(0.8175, 0.985, 0.9975, 0.8625, 0.0) score=0.8175
+[C AT=24 AP=8 C=0 epoch=07] loss=6.4454 cal=(0.81, 0.9875, 0.9975, 0.8825, 0.0) score=0.8100
+[C AT=24 AP=8 C=0 epoch=08] loss=5.9382 cal=(0.84, 0.9875, 0.995, 0.8925, 0.0) score=0.8400
+[C AT=24 AP=8 C=0 epoch=09] loss=5.4948 cal=(0.845, 0.9875, 0.9975, 0.8975, 0.0) score=0.8450
+[C AT=24 AP=8 C=0 epoch=10] loss=5.2852 cal=(0.8375, 0.985, 0.995, 0.8775, 0.0) score=0.8375
+[C AT=24 AP=8 C=0 epoch=11] loss=5.2775 cal=(0.8375, 0.985, 0.9975, 0.8725, 0.0) score=0.8375
+[C AT=24 AP=8 C=0 epoch=12] loss=5.1918 cal=(0.85, 0.9875, 0.9975, 0.88, 0.0) score=0.8500
+[C AT=24 AP=8 C=0 epoch=13] loss=5.0836 cal=(0.8575, 0.98, 0.9975, 0.885, 0.0) score=0.8575
+[C AT=24 AP=8 C=0 epoch=14] loss=4.8737 cal=(0.86, 0.9825, 0.995, 0.89, 0.0) score=0.8600
+[C AT=24 AP=8 C=0 epoch=15] loss=4.7553 cal=(0.87, 0.9875, 0.9975, 0.8975, 0.0) score=0.8700
+[C AT=24 AP=8 C=0 epoch=16] loss=4.5032 cal=(0.85, 0.985, 0.9975, 0.89, 0.0) score=0.8500
+[C AT=24 AP=8 C=0 epoch=17] loss=4.3254 cal=(0.8825, 0.9875, 0.9975, 0.885, 0.0) score=0.8825
+[C AT=24 AP=8 C=0 epoch=18] loss=4.1799 cal=(0.8575, 0.9875, 0.9975, 0.88, 0.0) score=0.8575
+[C AT=24 AP=8 C=0 epoch=19] loss=4.1117 cal=(0.875, 0.985, 0.9975, 0.895, 0.0) score=0.8750
+[C AT=24 AP=8 C=0 epoch=20] loss=4.0816 cal=(0.875, 0.9825, 0.9975, 0.8925, 0.0) score=0.8750
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L8__C_L0/das_c.pt
+[fit readout] C AT=24 AP=8 C=0 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=8 C=1 (missing checkpoint)
+[C AT=24 AP=8 C=1 epoch=01] loss=15.1945 cal=(0.6625, 0.9475, 0.98, 0.765, 0.0) score=0.6625
+[C AT=24 AP=8 C=1 epoch=02] loss=9.6838 cal=(0.715, 0.9675, 0.99, 0.81, 0.0) score=0.7150
+[C AT=24 AP=8 C=1 epoch=03] loss=8.4994 cal=(0.755, 0.9675, 0.985, 0.83, 0.0) score=0.7550
+[C AT=24 AP=8 C=1 epoch=04] loss=7.8661 cal=(0.745, 0.965, 0.9825, 0.8325, 0.0) score=0.7450
+[C AT=24 AP=8 C=1 epoch=05] loss=7.7894 cal=(0.7675, 0.9625, 0.98, 0.835, 0.0) score=0.7675
+[C AT=24 AP=8 C=1 epoch=06] loss=7.3895 cal=(0.7825, 0.96, 0.975, 0.8425, 0.0) score=0.7825
+[C AT=24 AP=8 C=1 epoch=07] loss=7.0468 cal=(0.7825, 0.9675, 0.9825, 0.8425, 0.0) score=0.7825
+[C AT=24 AP=8 C=1 epoch=08] loss=6.6333 cal=(0.79, 0.9575, 0.9725, 0.84, 0.0) score=0.7900
+[C AT=24 AP=8 C=1 epoch=09] loss=6.2749 cal=(0.7875, 0.965, 0.9825, 0.8325, 0.0) score=0.7875
+[C AT=24 AP=8 C=1 epoch=10] loss=5.9502 cal=(0.775, 0.97, 0.9825, 0.83, 0.0) score=0.7750
+[C AT=24 AP=8 C=1 epoch=11] loss=5.7576 cal=(0.7875, 0.96, 0.98, 0.835, 0.0) score=0.7875
+[C AT=24 AP=8 C=1 epoch=12] loss=5.6288 cal=(0.7875, 0.965, 0.98, 0.8475, 0.0) score=0.7875
+[C AT=24 AP=8 C=1 epoch=13] loss=5.5329 cal=(0.775, 0.9525, 0.975, 0.8375, 0.0) score=0.7750
+[C AT=24 AP=8 C=1 epoch=14] loss=5.5480 cal=(0.785, 0.9675, 0.98, 0.83, 0.0) score=0.7850
+[C AT=24 AP=8 C=1 epoch=15] loss=5.2198 cal=(0.8, 0.9625, 0.9825, 0.8475, 0.0) score=0.8000
+[C AT=24 AP=8 C=1 epoch=16] loss=4.9786 cal=(0.7775, 0.965, 0.9775, 0.8375, 0.0) score=0.7775
+[C AT=24 AP=8 C=1 epoch=17] loss=4.8021 cal=(0.775, 0.9575, 0.9725, 0.8425, 0.0) score=0.7750
+[C AT=24 AP=8 C=1 epoch=18] loss=4.8613 cal=(0.77, 0.9625, 0.9825, 0.8325, 0.0) score=0.7700
+[C AT=24 AP=8 C=1 epoch=19] loss=4.6467 cal=(0.7725, 0.96, 0.975, 0.82, 0.0) score=0.7725
+[C AT=24 AP=8 C=1 epoch=20] loss=4.4338 cal=(0.765, 0.9625, 0.9875, 0.815, 0.0) score=0.7650
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L8__C_L1/das_c.pt
+[fit readout] C AT=24 AP=8 C=1 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=8 C=2 (missing checkpoint)
+[C AT=24 AP=8 C=2 epoch=01] loss=15.3242 cal=(0.6675, 0.9525, 0.98, 0.775, 0.0) score=0.6675
+[C AT=24 AP=8 C=2 epoch=02] loss=9.6464 cal=(0.7425, 0.96, 0.9825, 0.8075, 0.0) score=0.7425
+[C AT=24 AP=8 C=2 epoch=03] loss=8.4963 cal=(0.775, 0.97, 0.9825, 0.84, 0.0) score=0.7750
+[C AT=24 AP=8 C=2 epoch=04] loss=7.9055 cal=(0.7625, 0.9575, 0.98, 0.8275, 0.0) score=0.7625
+[C AT=24 AP=8 C=2 epoch=05] loss=7.6653 cal=(0.78, 0.955, 0.975, 0.83, 0.0) score=0.7800
+[C AT=24 AP=8 C=2 epoch=06] loss=7.4377 cal=(0.785, 0.96, 0.9775, 0.845, 0.0) score=0.7850
+[C AT=24 AP=8 C=2 epoch=07] loss=7.0780 cal=(0.775, 0.955, 0.9775, 0.825, 0.0) score=0.7750
+[C AT=24 AP=8 C=2 epoch=08] loss=6.8390 cal=(0.765, 0.9575, 0.97, 0.8225, 0.0) score=0.7650
+[C AT=24 AP=8 C=2 epoch=09] loss=6.5257 cal=(0.78, 0.9625, 0.975, 0.8225, 0.0) score=0.7800
+[C AT=24 AP=8 C=2 epoch=10] loss=6.2570 cal=(0.7775, 0.9525, 0.975, 0.82, 0.0) score=0.7775
+[C AT=24 AP=8 C=2 epoch=11] loss=6.0859 cal=(0.795, 0.9575, 0.975, 0.8425, 0.0) score=0.7950
+[C AT=24 AP=8 C=2 epoch=12] loss=5.8822 cal=(0.785, 0.96, 0.975, 0.835, 0.0) score=0.7850
+[C AT=24 AP=8 C=2 epoch=13] loss=5.7294 cal=(0.7875, 0.9575, 0.97, 0.84, 0.0) score=0.7875
+[C AT=24 AP=8 C=2 epoch=14] loss=5.6292 cal=(0.795, 0.9575, 0.975, 0.8375, 0.0) score=0.7950
+[C AT=24 AP=8 C=2 epoch=15] loss=5.6069 cal=(0.785, 0.96, 0.9725, 0.8375, 0.0) score=0.7850
+[C AT=24 AP=8 C=2 epoch=16] loss=5.3595 cal=(0.7925, 0.9575, 0.975, 0.84, 0.0) score=0.7925
+[C AT=24 AP=8 C=2 epoch=17] loss=5.1642 cal=(0.8, 0.9575, 0.975, 0.8475, 0.0) score=0.8000
+[C AT=24 AP=8 C=2 epoch=18] loss=4.9409 cal=(0.775, 0.96, 0.975, 0.8375, 0.0) score=0.7750
+[C AT=24 AP=8 C=2 epoch=19] loss=4.7912 cal=(0.7725, 0.9575, 0.9675, 0.825, 0.0) score=0.7725
+[C AT=24 AP=8 C=2 epoch=20] loss=4.8253 cal=(0.7875, 0.9525, 0.975, 0.83, 0.0) score=0.7875
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L8__C_L2/das_c.pt
+[fit readout] C AT=24 AP=8 C=2 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=8 C=3 (missing checkpoint)
+[C AT=24 AP=8 C=3 epoch=01] loss=16.0810 cal=(0.645, 0.9325, 0.9725, 0.73, 0.0) score=0.6450
+[C AT=24 AP=8 C=3 epoch=02] loss=10.4234 cal=(0.6875, 0.945, 0.9725, 0.7825, 0.0) score=0.6875
+[C AT=24 AP=8 C=3 epoch=03] loss=9.3549 cal=(0.725, 0.945, 0.9725, 0.795, 0.0) score=0.7250
+[C AT=24 AP=8 C=3 epoch=04] loss=8.7721 cal=(0.7225, 0.9475, 0.965, 0.8025, 0.0) score=0.7225
+[C AT=24 AP=8 C=3 epoch=05] loss=8.4774 cal=(0.74, 0.95, 0.96, 0.8075, 0.0) score=0.7400
+[C AT=24 AP=8 C=3 epoch=06] loss=8.3169 cal=(0.745, 0.9475, 0.96, 0.8075, 0.0) score=0.7450
+[C AT=24 AP=8 C=3 epoch=07] loss=8.0569 cal=(0.7475, 0.95, 0.9625, 0.8275, 0.0) score=0.7475
+[C AT=24 AP=8 C=3 epoch=08] loss=7.6920 cal=(0.765, 0.945, 0.9625, 0.815, 0.0) score=0.7650
+[C AT=24 AP=8 C=3 epoch=09] loss=7.4328 cal=(0.7575, 0.9475, 0.9675, 0.81, 0.0) score=0.7575
+[C AT=24 AP=8 C=3 epoch=10] loss=7.2745 cal=(0.77, 0.9425, 0.96, 0.82, 0.0) score=0.7700
+[C AT=24 AP=8 C=3 epoch=11] loss=7.2379 cal=(0.765, 0.9425, 0.96, 0.825, 0.0) score=0.7650
+[C AT=24 AP=8 C=3 epoch=12] loss=6.9979 cal=(0.7775, 0.95, 0.9675, 0.81, 0.0) score=0.7775
+[C AT=24 AP=8 C=3 epoch=13] loss=6.8402 cal=(0.7675, 0.94, 0.9575, 0.8125, 0.0) score=0.7675
+[C AT=24 AP=8 C=3 epoch=14] loss=6.7551 cal=(0.77, 0.94, 0.9625, 0.825, 0.0) score=0.7700
+[C AT=24 AP=8 C=3 epoch=15] loss=6.6422 cal=(0.7625, 0.935, 0.9625, 0.8175, 0.0) score=0.7625
+[C AT=24 AP=8 C=3 epoch=16] loss=6.5330 cal=(0.7775, 0.9325, 0.9625, 0.8275, 0.0) score=0.7775
+[C AT=24 AP=8 C=3 epoch=17] loss=6.5219 cal=(0.7525, 0.9375, 0.9525, 0.8125, 0.0) score=0.7525
+[C AT=24 AP=8 C=3 epoch=18] loss=6.5473 cal=(0.7575, 0.925, 0.9625, 0.8175, 0.0) score=0.7575
+[C AT=24 AP=8 C=3 epoch=19] loss=6.5698 cal=(0.775, 0.94, 0.955, 0.8175, 0.0) score=0.7750
+[C AT=24 AP=8 C=3 epoch=20] loss=6.3291 cal=(0.77, 0.935, 0.96, 0.8275, 0.0) score=0.7700
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L8__C_L3/das_c.pt
+[fit readout] C AT=24 AP=8 C=3 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=8 C=4 (missing checkpoint)
+[C AT=24 AP=8 C=4 epoch=01] loss=16.2988 cal=(0.645, 0.9275, 0.955, 0.73, 0.0) score=0.6450
+[C AT=24 AP=8 C=4 epoch=02] loss=10.3888 cal=(0.705, 0.94, 0.9725, 0.8, 0.0) score=0.7050
+[C AT=24 AP=8 C=4 epoch=03] loss=9.2926 cal=(0.725, 0.945, 0.97, 0.815, 0.0) score=0.7250
+[C AT=24 AP=8 C=4 epoch=04] loss=8.7869 cal=(0.735, 0.9375, 0.9625, 0.815, 0.0) score=0.7350
+[C AT=24 AP=8 C=4 epoch=05] loss=8.4097 cal=(0.76, 0.9325, 0.9625, 0.8325, 0.0) score=0.7600
+[C AT=24 AP=8 C=4 epoch=06] loss=8.1214 cal=(0.745, 0.94, 0.9575, 0.8225, 0.0) score=0.7450
+[C AT=24 AP=8 C=4 epoch=07] loss=7.8609 cal=(0.7625, 0.9325, 0.965, 0.83, 0.0) score=0.7625
+[C AT=24 AP=8 C=4 epoch=08] loss=7.6360 cal=(0.7475, 0.93, 0.96, 0.8225, 0.0) score=0.7475
+[C AT=24 AP=8 C=4 epoch=09] loss=7.4440 cal=(0.7525, 0.935, 0.965, 0.8125, 0.0) score=0.7525
+[C AT=24 AP=8 C=4 epoch=10] loss=7.3249 cal=(0.76, 0.93, 0.9575, 0.835, 0.0) score=0.7600
+[C AT=24 AP=8 C=4 epoch=11] loss=7.2867 cal=(0.7475, 0.935, 0.9575, 0.825, 0.0) score=0.7475
+[C AT=24 AP=8 C=4 epoch=12] loss=6.9951 cal=(0.755, 0.9375, 0.965, 0.8275, 0.0) score=0.7550
+[C AT=24 AP=8 C=4 epoch=13] loss=6.9193 cal=(0.74, 0.9325, 0.96, 0.81, 0.0) score=0.7400
+[C AT=24 AP=8 C=4 epoch=14] loss=6.8416 cal=(0.7525, 0.9375, 0.965, 0.8225, 0.0) score=0.7525
+[C AT=24 AP=8 C=4 epoch=15] loss=6.6653 cal=(0.75, 0.935, 0.955, 0.815, 0.0) score=0.7500
+[C AT=24 AP=8 C=4 epoch=16] loss=6.5725 cal=(0.755, 0.93, 0.955, 0.825, 0.0) score=0.7550
+[C AT=24 AP=8 C=4 epoch=17] loss=6.4705 cal=(0.76, 0.9375, 0.955, 0.8275, 0.0) score=0.7600
+[C AT=24 AP=8 C=4 epoch=18] loss=6.3780 cal=(0.7575, 0.935, 0.9575, 0.8325, 0.0) score=0.7575
+[C AT=24 AP=8 C=4 epoch=19] loss=6.4007 cal=(0.765, 0.925, 0.955, 0.82, 0.0) score=0.7650
+[C AT=24 AP=8 C=4 epoch=20] loss=6.3459 cal=(0.75, 0.935, 0.9625, 0.82, 0.0) score=0.7500
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L8__C_L4/das_c.pt
+[fit readout] C AT=24 AP=8 C=4 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=9 C=0 (missing checkpoint)
+[C AT=24 AP=9 C=0 epoch=01] loss=12.6260 cal=(0.7125, 0.995, 1.0, 0.805, 0.0) score=0.7125
+[C AT=24 AP=9 C=0 epoch=02] loss=7.9985 cal=(0.7625, 0.995, 1.0, 0.8375, 0.0) score=0.7625
+[C AT=24 AP=9 C=0 epoch=03] loss=6.9002 cal=(0.7925, 0.995, 1.0, 0.855, 0.0) score=0.7925
+[C AT=24 AP=9 C=0 epoch=04] loss=6.3846 cal=(0.7925, 0.995, 1.0, 0.865, 0.0) score=0.7925
+[C AT=24 AP=9 C=0 epoch=05] loss=6.3524 cal=(0.7725, 0.995, 1.0, 0.8525, 0.0) score=0.7725
+[C AT=24 AP=9 C=0 epoch=06] loss=6.1395 cal=(0.81, 0.995, 0.9975, 0.8875, 0.0) score=0.8100
+[C AT=24 AP=9 C=0 epoch=07] loss=5.7407 cal=(0.8325, 0.995, 1.0, 0.89, 0.0) score=0.8325
+[C AT=24 AP=9 C=0 epoch=08] loss=5.2054 cal=(0.85, 0.9925, 1.0, 0.8975, 0.0) score=0.8500
+[C AT=24 AP=9 C=0 epoch=09] loss=4.8759 cal=(0.85, 0.995, 1.0, 0.895, 0.0) score=0.8500
+[C AT=24 AP=9 C=0 epoch=10] loss=4.5500 cal=(0.86, 0.9925, 1.0, 0.88, 0.0) score=0.8600
+[C AT=24 AP=9 C=0 epoch=11] loss=4.5200 cal=(0.86, 0.9925, 1.0, 0.895, 0.0) score=0.8600
+[C AT=24 AP=9 C=0 epoch=12] loss=4.7172 cal=(0.8425, 0.99, 1.0, 0.87, 0.0) score=0.8425
+[C AT=24 AP=9 C=0 epoch=13] loss=4.5845 cal=(0.875, 0.9925, 1.0, 0.9125, 0.0) score=0.8750
+[C AT=24 AP=9 C=0 epoch=14] loss=4.1664 cal=(0.86, 0.9925, 1.0, 0.9, 0.0) score=0.8600
+[C AT=24 AP=9 C=0 epoch=15] loss=4.2849 cal=(0.8575, 0.9925, 1.0, 0.89, 0.0) score=0.8575
+[C AT=24 AP=9 C=0 epoch=16] loss=4.0986 cal=(0.8625, 0.9925, 1.0, 0.905, 0.0) score=0.8625
+[C AT=24 AP=9 C=0 epoch=17] loss=3.9327 cal=(0.855, 0.9925, 1.0, 0.8825, 0.0) score=0.8550
+[C AT=24 AP=9 C=0 epoch=18] loss=3.8958 cal=(0.85, 0.995, 1.0, 0.885, 0.0) score=0.8500
+[C AT=24 AP=9 C=0 epoch=19] loss=3.6115 cal=(0.8725, 0.995, 1.0, 0.8875, 0.0) score=0.8725
+[C AT=24 AP=9 C=0 epoch=20] loss=3.3284 cal=(0.855, 0.995, 1.0, 0.865, 0.0) score=0.8550
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L9__C_L0/das_c.pt
+[fit readout] C AT=24 AP=9 C=0 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=9 C=1 (missing checkpoint)
+[C AT=24 AP=9 C=1 epoch=01] loss=13.9195 cal=(0.6725, 0.99, 0.995, 0.7875, 0.0) score=0.6725
+[C AT=24 AP=9 C=1 epoch=02] loss=8.7134 cal=(0.7375, 0.9925, 0.9975, 0.8325, 0.0) score=0.7375
+[C AT=24 AP=9 C=1 epoch=03] loss=7.6095 cal=(0.7525, 0.995, 1.0, 0.8475, 0.0) score=0.7525
+[C AT=24 AP=9 C=1 epoch=04] loss=7.0447 cal=(0.7625, 0.9925, 0.9975, 0.8425, 0.0) score=0.7625
+[C AT=24 AP=9 C=1 epoch=05] loss=6.8001 cal=(0.7675, 0.9925, 0.995, 0.8525, 0.0) score=0.7675
+[C AT=24 AP=9 C=1 epoch=06] loss=6.4735 cal=(0.785, 0.9925, 0.9975, 0.85, 0.0) score=0.7850
+[C AT=24 AP=9 C=1 epoch=07] loss=6.0801 cal=(0.81, 0.995, 0.9975, 0.8575, 0.0) score=0.8100
+[C AT=24 AP=9 C=1 epoch=08] loss=5.6529 cal=(0.805, 0.9925, 0.9975, 0.8575, 0.0) score=0.8050
+[C AT=24 AP=9 C=1 epoch=09] loss=5.2960 cal=(0.8, 0.9925, 0.9975, 0.855, 0.0) score=0.8000
+[C AT=24 AP=9 C=1 epoch=10] loss=5.0769 cal=(0.7875, 0.99, 0.9925, 0.835, 0.0) score=0.7875
+[C AT=24 AP=9 C=1 epoch=11] loss=5.1370 cal=(0.775, 0.99, 0.9975, 0.8425, 0.0) score=0.7750
+[C AT=24 AP=9 C=1 epoch=12] loss=5.1503 cal=(0.7675, 0.985, 0.9925, 0.82, 0.0) score=0.7675
+[C AT=24 AP=9 C=1 epoch=13] loss=5.2017 cal=(0.805, 0.9925, 0.995, 0.8625, 0.0) score=0.8050
+[C AT=24 AP=9 C=1 epoch=14] loss=4.6625 cal=(0.7975, 0.9925, 0.9925, 0.8475, 0.0) score=0.7975
+[C AT=24 AP=9 C=1 epoch=15] loss=4.2205 cal=(0.795, 0.99, 0.995, 0.855, 0.0) score=0.7950
+[C AT=24 AP=9 C=1 epoch=16] loss=3.9111 cal=(0.7825, 0.99, 0.995, 0.825, 0.0) score=0.7825
+[C AT=24 AP=9 C=1 epoch=17] loss=3.7577 cal=(0.79, 0.99, 0.9975, 0.8375, 0.0) score=0.7900
+[C AT=24 AP=9 C=1 epoch=18] loss=3.7125 cal=(0.7725, 0.9925, 0.9975, 0.8325, 0.0) score=0.7725
+[C AT=24 AP=9 C=1 epoch=19] loss=3.7154 cal=(0.7725, 0.99, 0.9925, 0.83, 0.0) score=0.7725
+[C AT=24 AP=9 C=1 epoch=20] loss=3.6165 cal=(0.7825, 0.99, 0.9975, 0.8275, 0.0) score=0.7825
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L9__C_L1/das_c.pt
+[fit readout] C AT=24 AP=9 C=1 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=9 C=2 (missing checkpoint)
+[C AT=24 AP=9 C=2 epoch=01] loss=14.1595 cal=(0.6875, 0.9875, 0.9975, 0.775, 0.0) score=0.6875
+[C AT=24 AP=9 C=2 epoch=02] loss=8.5900 cal=(0.755, 0.995, 0.9975, 0.8275, 0.0) score=0.7550
+[C AT=24 AP=9 C=2 epoch=03] loss=7.5376 cal=(0.7775, 0.995, 0.9975, 0.8475, 0.0) score=0.7775
+[C AT=24 AP=9 C=2 epoch=04] loss=6.9346 cal=(0.78, 0.9925, 0.995, 0.8275, 0.0) score=0.7800
+[C AT=24 AP=9 C=2 epoch=05] loss=6.6439 cal=(0.79, 0.995, 0.9975, 0.84, 0.0) score=0.7900
+[C AT=24 AP=9 C=2 epoch=06] loss=6.3429 cal=(0.8, 0.9875, 0.9925, 0.8475, 0.0) score=0.8000
+[C AT=24 AP=9 C=2 epoch=07] loss=6.1253 cal=(0.8025, 0.9925, 0.9975, 0.8525, 0.0) score=0.8025
+[C AT=24 AP=9 C=2 epoch=08] loss=5.6860 cal=(0.8, 0.9825, 0.995, 0.835, 0.0) score=0.8000
+[C AT=24 AP=9 C=2 epoch=09] loss=5.4931 cal=(0.7925, 0.9875, 0.995, 0.845, 0.0) score=0.7925
+[C AT=24 AP=9 C=2 epoch=10] loss=5.3591 cal=(0.785, 0.9825, 0.995, 0.85, 0.0) score=0.7850
+[C AT=24 AP=9 C=2 epoch=11] loss=5.4104 cal=(0.795, 0.9825, 0.9925, 0.835, 0.0) score=0.7950
+[C AT=24 AP=9 C=2 epoch=12] loss=5.0148 cal=(0.805, 0.99, 0.9925, 0.8675, 0.0) score=0.8050
+[C AT=24 AP=9 C=2 epoch=13] loss=4.7125 cal=(0.8025, 0.9875, 0.9925, 0.855, 0.0) score=0.8025
+[C AT=24 AP=9 C=2 epoch=14] loss=4.5591 cal=(0.815, 0.9875, 0.99, 0.8675, 0.0) score=0.8150
+[C AT=24 AP=9 C=2 epoch=15] loss=4.4622 cal=(0.805, 0.99, 0.995, 0.87, 0.0) score=0.8050
+[C AT=24 AP=9 C=2 epoch=16] loss=4.3660 cal=(0.815, 0.985, 0.99, 0.86, 0.0) score=0.8150
+[C AT=24 AP=9 C=2 epoch=17] loss=4.2171 cal=(0.8175, 0.985, 0.9875, 0.8675, 0.0) score=0.8175
+[C AT=24 AP=9 C=2 epoch=18] loss=4.1009 cal=(0.8175, 0.99, 0.9975, 0.87, 0.0) score=0.8175
+[C AT=24 AP=9 C=2 epoch=19] loss=3.8846 cal=(0.81, 0.985, 0.995, 0.8675, 0.0) score=0.8100
+[C AT=24 AP=9 C=2 epoch=20] loss=3.7788 cal=(0.805, 0.985, 0.9925, 0.855, 0.0) score=0.8050
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L9__C_L2/das_c.pt
+[fit readout] C AT=24 AP=9 C=2 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=9 C=3 (missing checkpoint)
+[C AT=24 AP=9 C=3 epoch=01] loss=14.7222 cal=(0.66, 0.975, 0.9975, 0.7475, 0.0) score=0.6600
+[C AT=24 AP=9 C=3 epoch=02] loss=9.1622 cal=(0.7175, 0.99, 0.995, 0.805, 0.0) score=0.7175
+[C AT=24 AP=9 C=3 epoch=03] loss=8.1408 cal=(0.7525, 0.9875, 0.9975, 0.8225, 0.0) score=0.7525
+[C AT=24 AP=9 C=3 epoch=04] loss=7.6272 cal=(0.7375, 0.99, 0.995, 0.8225, 0.0) score=0.7375
+[C AT=24 AP=9 C=3 epoch=05] loss=7.2792 cal=(0.77, 0.9825, 0.9925, 0.82, 0.0) score=0.7700
+[C AT=24 AP=9 C=3 epoch=06] loss=6.9992 cal=(0.7375, 0.985, 0.995, 0.8175, 0.0) score=0.7375
+[C AT=24 AP=9 C=3 epoch=07] loss=6.9001 cal=(0.77, 0.98, 0.9975, 0.83, 0.0) score=0.7700
+[C AT=24 AP=9 C=3 epoch=08] loss=6.6838 cal=(0.7675, 0.985, 0.99, 0.8175, 0.0) score=0.7675
+[C AT=24 AP=9 C=3 epoch=09] loss=6.3112 cal=(0.7875, 0.9775, 0.99, 0.845, 0.0) score=0.7875
+[C AT=24 AP=9 C=3 epoch=10] loss=6.1280 cal=(0.7675, 0.9825, 0.99, 0.835, 0.0) score=0.7675
+[C AT=24 AP=9 C=3 epoch=11] loss=6.0308 cal=(0.7625, 0.98, 0.99, 0.8425, 0.0) score=0.7625
+[C AT=24 AP=9 C=3 epoch=12] loss=5.8434 cal=(0.77, 0.985, 0.9925, 0.84, 0.0) score=0.7700
+[C AT=24 AP=9 C=3 epoch=13] loss=5.7510 cal=(0.7675, 0.98, 0.99, 0.8375, 0.0) score=0.7675
+[C AT=24 AP=9 C=3 epoch=14] loss=5.5813 cal=(0.77, 0.9825, 0.99, 0.8425, 0.0) score=0.7700
+[C AT=24 AP=9 C=3 epoch=15] loss=5.5475 cal=(0.7675, 0.98, 0.99, 0.8325, 0.0) score=0.7675
+[C AT=24 AP=9 C=3 epoch=16] loss=5.3378 cal=(0.77, 0.98, 0.99, 0.835, 0.0) score=0.7700
+[C AT=24 AP=9 C=3 epoch=17] loss=5.2307 cal=(0.7725, 0.9775, 0.99, 0.825, 0.0) score=0.7725
+[C AT=24 AP=9 C=3 epoch=18] loss=5.2163 cal=(0.76, 0.98, 0.9925, 0.825, 0.0) score=0.7600
+[C AT=24 AP=9 C=3 epoch=19] loss=5.0944 cal=(0.7575, 0.9775, 0.99, 0.8175, 0.0) score=0.7575
+[C AT=24 AP=9 C=3 epoch=20] loss=4.9349 cal=(0.7575, 0.9725, 0.9925, 0.8325, 0.0) score=0.7575
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L9__C_L3/das_c.pt
+[fit readout] C AT=24 AP=9 C=3 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=9 C=4 (missing checkpoint)
+[C AT=24 AP=9 C=4 epoch=01] loss=14.9419 cal=(0.64, 0.975, 0.9875, 0.745, 0.0) score=0.6400
+[C AT=24 AP=9 C=4 epoch=02] loss=8.9582 cal=(0.7175, 0.985, 0.9975, 0.8225, 0.0) score=0.7175
+[C AT=24 AP=9 C=4 epoch=03] loss=7.9030 cal=(0.7525, 0.9825, 0.9975, 0.84, 0.0) score=0.7525
+[C AT=24 AP=9 C=4 epoch=04] loss=7.3979 cal=(0.7625, 0.985, 0.995, 0.845, 0.0) score=0.7625
+[C AT=24 AP=9 C=4 epoch=05] loss=7.1116 cal=(0.7675, 0.9825, 0.995, 0.845, 0.0) score=0.7675
+[C AT=24 AP=9 C=4 epoch=06] loss=6.8597 cal=(0.775, 0.985, 0.995, 0.8425, 0.0) score=0.7750
+[C AT=24 AP=9 C=4 epoch=07] loss=6.5845 cal=(0.7925, 0.985, 0.995, 0.8575, 0.0) score=0.7925
+[C AT=24 AP=9 C=4 epoch=08] loss=6.3678 cal=(0.7975, 0.985, 0.995, 0.8575, 0.0) score=0.7975
+[C AT=24 AP=9 C=4 epoch=09] loss=6.2042 cal=(0.78, 0.985, 0.9925, 0.8325, 0.0) score=0.7800
+[C AT=24 AP=9 C=4 epoch=10] loss=6.1199 cal=(0.79, 0.9825, 0.995, 0.84, 0.0) score=0.7900
+[C AT=24 AP=9 C=4 epoch=11] loss=5.9813 cal=(0.7875, 0.985, 0.9875, 0.8575, 0.0) score=0.7875
+[C AT=24 AP=9 C=4 epoch=12] loss=5.7890 cal=(0.795, 0.985, 0.99, 0.85, 0.0) score=0.7950
+[C AT=24 AP=9 C=4 epoch=13] loss=5.6077 cal=(0.7975, 0.9825, 0.9925, 0.8425, 0.0) score=0.7975
+[C AT=24 AP=9 C=4 epoch=14] loss=5.4186 cal=(0.8, 0.9825, 0.9875, 0.8525, 0.0) score=0.8000
+[C AT=24 AP=9 C=4 epoch=15] loss=5.3672 cal=(0.7825, 0.98, 0.985, 0.845, 0.0) score=0.7825
+[C AT=24 AP=9 C=4 epoch=16] loss=5.3171 cal=(0.8075, 0.9775, 0.985, 0.865, 0.0) score=0.8075
+[C AT=24 AP=9 C=4 epoch=17] loss=5.2066 cal=(0.7925, 0.9775, 0.9875, 0.8375, 0.0) score=0.7925
+[C AT=24 AP=9 C=4 epoch=18] loss=5.1925 cal=(0.7825, 0.9825, 0.99, 0.8325, 0.0) score=0.7825
+[C AT=24 AP=9 C=4 epoch=19] loss=5.1002 cal=(0.8075, 0.9825, 0.99, 0.8475, 0.0) score=0.8075
+[C AT=24 AP=9 C=4 epoch=20] loss=4.9902 cal=(0.78, 0.98, 0.995, 0.8525, 0.0) score=0.7800
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L9__C_L4/das_c.pt
+[fit readout] C AT=24 AP=9 C=4 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=10 C=0 (missing checkpoint)
+[C AT=24 AP=10 C=0 epoch=01] loss=12.3244 cal=(0.72, 0.9975, 0.9975, 0.795, 0.0) score=0.7200
+[C AT=24 AP=10 C=0 epoch=02] loss=7.4912 cal=(0.7525, 0.9975, 0.9975, 0.83, 0.0) score=0.7525
+[C AT=24 AP=10 C=0 epoch=03] loss=6.4816 cal=(0.79, 0.9975, 0.9975, 0.8475, 0.0) score=0.7900
+[C AT=24 AP=10 C=0 epoch=04] loss=5.9385 cal=(0.79, 0.9975, 0.9975, 0.8525, 0.0) score=0.7900
+[C AT=24 AP=10 C=0 epoch=05] loss=5.5386 cal=(0.8175, 0.9975, 0.995, 0.8725, 0.0) score=0.8175
+[C AT=24 AP=10 C=0 epoch=06] loss=5.1730 cal=(0.8225, 0.9975, 0.9975, 0.855, 0.0) score=0.8225
+[C AT=24 AP=10 C=0 epoch=07] loss=5.0072 cal=(0.82, 0.9975, 0.995, 0.8625, 0.0) score=0.8200
+[C AT=24 AP=10 C=0 epoch=08] loss=4.9388 cal=(0.8325, 0.9975, 0.9975, 0.8725, 0.0) score=0.8325
+[C AT=24 AP=10 C=0 epoch=09] loss=4.6685 cal=(0.8275, 0.9975, 0.9975, 0.8625, 0.0) score=0.8275
+[C AT=24 AP=10 C=0 epoch=10] loss=4.1545 cal=(0.83, 0.9975, 0.9975, 0.8625, 0.0) score=0.8300
+[C AT=24 AP=10 C=0 epoch=11] loss=3.7914 cal=(0.8375, 0.9975, 0.995, 0.8725, 0.0) score=0.8375
+[C AT=24 AP=10 C=0 epoch=12] loss=3.7369 cal=(0.845, 0.9975, 0.9975, 0.8825, 0.0) score=0.8450
+[C AT=24 AP=10 C=0 epoch=13] loss=3.5982 cal=(0.8475, 0.9975, 0.9975, 0.8875, 0.0) score=0.8475
+[C AT=24 AP=10 C=0 epoch=14] loss=3.4192 cal=(0.8375, 0.9975, 0.9975, 0.8625, 0.0) score=0.8375
+[C AT=24 AP=10 C=0 epoch=15] loss=3.1914 cal=(0.845, 0.9975, 0.9975, 0.88, 0.0) score=0.8450
+[C AT=24 AP=10 C=0 epoch=16] loss=3.1406 cal=(0.8575, 0.9975, 0.995, 0.8825, 0.0) score=0.8575
+[C AT=24 AP=10 C=0 epoch=17] loss=3.3477 cal=(0.8275, 0.995, 0.9975, 0.8575, 0.0) score=0.8275
+[C AT=24 AP=10 C=0 epoch=18] loss=3.1789 cal=(0.8525, 0.9975, 0.9975, 0.8725, 0.0) score=0.8525
+[C AT=24 AP=10 C=0 epoch=19] loss=3.0718 cal=(0.8525, 0.995, 0.9975, 0.8825, 0.0) score=0.8525
+[C AT=24 AP=10 C=0 epoch=20] loss=2.9181 cal=(0.84, 1.0, 0.9975, 0.87, 0.0) score=0.8400
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L10__C_L0/das_c.pt
+[fit readout] C AT=24 AP=10 C=0 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=10 C=1 (missing checkpoint)
+[C AT=24 AP=10 C=1 epoch=01] loss=13.5842 cal=(0.6725, 0.9925, 0.9975, 0.78, 0.0) score=0.6725
+[C AT=24 AP=10 C=1 epoch=02] loss=8.0883 cal=(0.7425, 0.9975, 0.9975, 0.83, 0.0) score=0.7425
+[C AT=24 AP=10 C=1 epoch=03] loss=6.9562 cal=(0.7625, 0.9975, 0.9975, 0.845, 0.0) score=0.7625
+[C AT=24 AP=10 C=1 epoch=04] loss=6.3446 cal=(0.76, 0.9975, 0.995, 0.835, 0.0) score=0.7600
+[C AT=24 AP=10 C=1 epoch=05] loss=6.0944 cal=(0.77, 0.9975, 0.9925, 0.8225, 0.0) score=0.7700
+[C AT=24 AP=10 C=1 epoch=06] loss=5.8247 cal=(0.7875, 0.995, 0.995, 0.8375, 0.0) score=0.7875
+[C AT=24 AP=10 C=1 epoch=07] loss=5.4420 cal=(0.7925, 0.995, 0.9975, 0.85, 0.0) score=0.7925
+[C AT=24 AP=10 C=1 epoch=08] loss=5.0913 cal=(0.7925, 0.9975, 0.995, 0.8525, 0.0) score=0.7925
+[C AT=24 AP=10 C=1 epoch=09] loss=4.6639 cal=(0.805, 0.995, 0.995, 0.8575, 0.0) score=0.8050
+[C AT=24 AP=10 C=1 epoch=10] loss=4.3352 cal=(0.8025, 0.995, 0.9975, 0.8625, 0.0) score=0.8025
+[C AT=24 AP=10 C=1 epoch=11] loss=4.1665 cal=(0.8, 0.995, 0.995, 0.8425, 0.0) score=0.8000
+[C AT=24 AP=10 C=1 epoch=12] loss=4.0880 cal=(0.805, 0.9925, 0.9925, 0.85, 0.0) score=0.8050
+[C AT=24 AP=10 C=1 epoch=13] loss=4.0637 cal=(0.795, 0.995, 0.9975, 0.8575, 0.0) score=0.7950
+[C AT=24 AP=10 C=1 epoch=14] loss=3.8086 cal=(0.7975, 0.9925, 0.9925, 0.8575, 0.0) score=0.7975
+[C AT=24 AP=10 C=1 epoch=15] loss=3.7519 cal=(0.8025, 0.9925, 0.9925, 0.85, 0.0) score=0.8025
+[C AT=24 AP=10 C=1 epoch=16] loss=3.5443 cal=(0.795, 0.9925, 0.99, 0.84, 0.0) score=0.7950
+[C AT=24 AP=10 C=1 epoch=17] loss=3.3628 cal=(0.81, 0.9925, 0.99, 0.8525, 0.0) score=0.8100
+[C AT=24 AP=10 C=1 epoch=18] loss=3.1322 cal=(0.795, 0.9925, 0.9925, 0.8475, 0.0) score=0.7950
+[C AT=24 AP=10 C=1 epoch=19] loss=2.9258 cal=(0.8, 0.995, 0.99, 0.845, 0.0) score=0.8000
+[C AT=24 AP=10 C=1 epoch=20] loss=2.8424 cal=(0.795, 0.9925, 0.9925, 0.84, 0.0) score=0.7950
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L10__C_L1/das_c.pt
+[fit readout] C AT=24 AP=10 C=1 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=10 C=2 (missing checkpoint)
+[C AT=24 AP=10 C=2 epoch=01] loss=13.7176 cal=(0.6625, 0.99, 0.995, 0.7825, 0.0) score=0.6625
+[C AT=24 AP=10 C=2 epoch=02] loss=7.9062 cal=(0.7575, 0.9975, 0.9975, 0.8375, 0.0) score=0.7575
+[C AT=24 AP=10 C=2 epoch=03] loss=6.7976 cal=(0.7825, 0.9975, 0.9925, 0.855, 0.0) score=0.7825
+[C AT=24 AP=10 C=2 epoch=04] loss=6.1975 cal=(0.7725, 0.9975, 0.9975, 0.8375, 0.0) score=0.7725
+[C AT=24 AP=10 C=2 epoch=05] loss=6.0258 cal=(0.805, 0.9975, 0.9925, 0.8475, 0.0) score=0.8050
+[C AT=24 AP=10 C=2 epoch=06] loss=5.5966 cal=(0.8075, 0.995, 0.995, 0.8625, 0.0) score=0.8075
+[C AT=24 AP=10 C=2 epoch=07] loss=5.3476 cal=(0.805, 0.9925, 0.995, 0.8475, 0.0) score=0.8050
+[C AT=24 AP=10 C=2 epoch=08] loss=4.9877 cal=(0.8125, 0.995, 0.9925, 0.8475, 0.0) score=0.8125
+[C AT=24 AP=10 C=2 epoch=09] loss=4.7608 cal=(0.8125, 0.995, 0.9925, 0.8525, 0.0) score=0.8125
+[C AT=24 AP=10 C=2 epoch=10] loss=4.6013 cal=(0.785, 0.99, 0.99, 0.84, 0.0) score=0.7850
+[C AT=24 AP=10 C=2 epoch=11] loss=4.5142 cal=(0.81, 0.9925, 0.99, 0.8625, 0.0) score=0.8100
+[C AT=24 AP=10 C=2 epoch=12] loss=4.1727 cal=(0.8025, 0.9975, 0.99, 0.85, 0.0) score=0.8025
+[C AT=24 AP=10 C=2 epoch=13] loss=4.0012 cal=(0.81, 0.995, 0.9925, 0.86, 0.0) score=0.8100
+[C AT=24 AP=10 C=2 epoch=14] loss=3.7778 cal=(0.825, 0.995, 0.985, 0.865, 0.0) score=0.8250
+[C AT=24 AP=10 C=2 epoch=15] loss=3.6200 cal=(0.8025, 0.9925, 0.985, 0.855, 0.0) score=0.8025
+[C AT=24 AP=10 C=2 epoch=16] loss=3.4169 cal=(0.81, 0.995, 0.9875, 0.855, 0.0) score=0.8100
+[C AT=24 AP=10 C=2 epoch=17] loss=3.1861 cal=(0.8075, 0.995, 0.99, 0.8625, 0.0) score=0.8075
+[C AT=24 AP=10 C=2 epoch=18] loss=3.1303 cal=(0.8125, 0.995, 0.985, 0.8575, 0.0) score=0.8125
+[C AT=24 AP=10 C=2 epoch=19] loss=3.0983 cal=(0.7925, 0.995, 0.9875, 0.8425, 0.0) score=0.7925
+[C AT=24 AP=10 C=2 epoch=20] loss=3.1246 cal=(0.795, 0.995, 0.985, 0.8325, 0.0) score=0.7950
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L10__C_L2/das_c.pt
+[fit readout] C AT=24 AP=10 C=2 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=10 C=3 (missing checkpoint)
+[C AT=24 AP=10 C=3 epoch=01] loss=14.5285 cal=(0.6375, 0.99, 0.9925, 0.7325, 0.0) score=0.6375
+[C AT=24 AP=10 C=3 epoch=02] loss=8.4373 cal=(0.72, 0.995, 0.9925, 0.8075, 0.0) score=0.7200
+[C AT=24 AP=10 C=3 epoch=03] loss=7.3424 cal=(0.74, 0.9975, 0.9925, 0.825, 0.0) score=0.7400
+[C AT=24 AP=10 C=3 epoch=04] loss=6.7241 cal=(0.75, 0.9975, 0.99, 0.8325, 0.0) score=0.7500
+[C AT=24 AP=10 C=3 epoch=05] loss=6.5326 cal=(0.7675, 0.9975, 0.99, 0.8525, 0.0) score=0.7675
+[C AT=24 AP=10 C=3 epoch=06] loss=6.2817 cal=(0.75, 0.9975, 0.9925, 0.8425, 0.0) score=0.7500
+[C AT=24 AP=10 C=3 epoch=07] loss=5.9461 cal=(0.765, 0.995, 0.9925, 0.8525, 0.0) score=0.7650
+[C AT=24 AP=10 C=3 epoch=08] loss=5.6652 cal=(0.775, 0.9925, 0.9875, 0.8175, 0.0) score=0.7750
+[C AT=24 AP=10 C=3 epoch=09] loss=5.4831 cal=(0.7775, 0.9925, 0.99, 0.8375, 0.0) score=0.7775
+[C AT=24 AP=10 C=3 epoch=10] loss=5.3102 cal=(0.775, 0.9875, 0.99, 0.8325, 0.0) score=0.7750
+[C AT=24 AP=10 C=3 epoch=11] loss=5.2842 cal=(0.77, 0.9875, 0.985, 0.8325, 0.0) score=0.7700
+[C AT=24 AP=10 C=3 epoch=12] loss=5.0159 cal=(0.765, 0.9875, 0.9875, 0.8375, 0.0) score=0.7650
+[C AT=24 AP=10 C=3 epoch=13] loss=4.9446 cal=(0.7575, 0.9875, 0.985, 0.82, 0.0) score=0.7575
+[C AT=24 AP=10 C=3 epoch=14] loss=4.6941 cal=(0.7775, 0.985, 0.9925, 0.845, 0.0) score=0.7775
+[C AT=24 AP=10 C=3 epoch=15] loss=4.5720 cal=(0.775, 0.9825, 0.985, 0.8275, 0.0) score=0.7750
+[C AT=24 AP=10 C=3 epoch=16] loss=4.6520 cal=(0.79, 0.985, 0.9875, 0.84, 0.0) score=0.7900
+[C AT=24 AP=10 C=3 epoch=17] loss=4.4948 cal=(0.7725, 0.9825, 0.985, 0.835, 0.0) score=0.7725
+[C AT=24 AP=10 C=3 epoch=18] loss=4.2585 cal=(0.775, 0.985, 0.9875, 0.8325, 0.0) score=0.7750
+[C AT=24 AP=10 C=3 epoch=19] loss=4.1780 cal=(0.795, 0.9875, 0.9825, 0.825, 0.0) score=0.7950
+[C AT=24 AP=10 C=3 epoch=20] loss=4.0998 cal=(0.77, 0.98, 0.9925, 0.835, 0.0) score=0.7700
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L10__C_L3/das_c.pt
+[fit readout] C AT=24 AP=10 C=3 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=10 C=4 (missing checkpoint)
+[C AT=24 AP=10 C=4 epoch=01] loss=14.6387 cal=(0.65, 0.985, 0.99, 0.7325, 0.0) score=0.6500
+[C AT=24 AP=10 C=4 epoch=02] loss=8.2054 cal=(0.7275, 0.9925, 0.9925, 0.8125, 0.0) score=0.7275
+[C AT=24 AP=10 C=4 epoch=03] loss=7.1243 cal=(0.765, 0.995, 0.99, 0.8475, 0.0) score=0.7650
+[C AT=24 AP=10 C=4 epoch=04] loss=6.6084 cal=(0.785, 0.99, 0.99, 0.8475, 0.0) score=0.7850
+[C AT=24 AP=10 C=4 epoch=05] loss=6.3002 cal=(0.7775, 0.99, 0.99, 0.8525, 0.0) score=0.7775
+[C AT=24 AP=10 C=4 epoch=06] loss=6.0296 cal=(0.7675, 0.9875, 0.99, 0.8425, 0.0) score=0.7675
+[C AT=24 AP=10 C=4 epoch=07] loss=5.8517 cal=(0.7825, 0.99, 0.99, 0.84, 0.0) score=0.7825
+[C AT=24 AP=10 C=4 epoch=08] loss=5.6535 cal=(0.77, 0.985, 0.9875, 0.835, 0.0) score=0.7700
+[C AT=24 AP=10 C=4 epoch=09] loss=5.3454 cal=(0.7975, 0.9875, 0.9925, 0.8425, 0.0) score=0.7975
+[C AT=24 AP=10 C=4 epoch=10] loss=5.2164 cal=(0.7825, 0.99, 0.99, 0.845, 0.0) score=0.7825
+[C AT=24 AP=10 C=4 epoch=11] loss=5.0892 cal=(0.8, 0.99, 0.99, 0.86, 0.0) score=0.8000
+[C AT=24 AP=10 C=4 epoch=12] loss=4.8121 cal=(0.7975, 0.9875, 0.9925, 0.845, 0.0) score=0.7975
+[C AT=24 AP=10 C=4 epoch=13] loss=4.7182 cal=(0.7825, 0.9875, 0.9925, 0.835, 0.0) score=0.7825
+[C AT=24 AP=10 C=4 epoch=14] loss=4.4979 cal=(0.8, 0.985, 0.9875, 0.8425, 0.0) score=0.8000
+[C AT=24 AP=10 C=4 epoch=15] loss=4.3774 cal=(0.7925, 0.9875, 0.99, 0.85, 0.0) score=0.7925
+[C AT=24 AP=10 C=4 epoch=16] loss=4.2949 cal=(0.795, 0.9875, 0.9925, 0.8425, 0.0) score=0.7950
+[C AT=24 AP=10 C=4 epoch=17] loss=4.2694 cal=(0.775, 0.9875, 0.9825, 0.845, 0.0) score=0.7750
+[C AT=24 AP=10 C=4 epoch=18] loss=4.2456 cal=(0.77, 0.9875, 0.99, 0.85, 0.0) score=0.7700
+[C AT=24 AP=10 C=4 epoch=19] loss=4.1083 cal=(0.7825, 0.985, 0.9875, 0.8475, 0.0) score=0.7825
+[C AT=24 AP=10 C=4 epoch=20] loss=4.0754 cal=(0.7825, 0.99, 0.9875, 0.8425, 0.0) score=0.7825
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L10__C_L4/das_c.pt
+[fit readout] C AT=24 AP=10 C=4 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=11 C=0 (missing checkpoint)
+[C AT=24 AP=11 C=0 epoch=01] loss=12.2989 cal=(0.7225, 0.9975, 1.0, 0.8075, 0.0) score=0.7225
+[C AT=24 AP=11 C=0 epoch=02] loss=7.3941 cal=(0.755, 0.9975, 1.0, 0.8375, 0.0) score=0.7550
+[C AT=24 AP=11 C=0 epoch=03] loss=6.3709 cal=(0.795, 0.9975, 0.9975, 0.8625, 0.0) score=0.7950
+[C AT=24 AP=11 C=0 epoch=04] loss=5.8090 cal=(0.815, 0.9975, 0.995, 0.8575, 0.0) score=0.8150
+[C AT=24 AP=11 C=0 epoch=05] loss=5.5297 cal=(0.8425, 0.9975, 0.995, 0.895, 0.0) score=0.8425
+[C AT=24 AP=11 C=0 epoch=06] loss=4.9670 cal=(0.8475, 0.9975, 0.995, 0.885, 0.0) score=0.8475
+[C AT=24 AP=11 C=0 epoch=07] loss=4.5855 cal=(0.8625, 0.9975, 0.995, 0.8975, 0.0) score=0.8625
+[C AT=24 AP=11 C=0 epoch=08] loss=4.2535 cal=(0.8675, 0.9975, 0.9925, 0.8875, 0.0) score=0.8675
+[C AT=24 AP=11 C=0 epoch=09] loss=4.0341 cal=(0.885, 0.9975, 0.995, 0.91, 0.0) score=0.8850
+[C AT=24 AP=11 C=0 epoch=10] loss=3.8822 cal=(0.86, 0.9975, 0.9925, 0.89, 0.0) score=0.8600
+[C AT=24 AP=11 C=0 epoch=11] loss=4.3023 cal=(0.8775, 0.9975, 0.9925, 0.905, 0.0) score=0.8775
+[C AT=24 AP=11 C=0 epoch=12] loss=3.9457 cal=(0.875, 0.995, 0.995, 0.91, 0.0) score=0.8750
+[C AT=24 AP=11 C=0 epoch=13] loss=3.8000 cal=(0.8725, 0.9975, 0.9925, 0.9075, 0.0) score=0.8725
+[C AT=24 AP=11 C=0 epoch=14] loss=3.4889 cal=(0.885, 0.995, 0.995, 0.895, 0.0) score=0.8850
+[C AT=24 AP=11 C=0 epoch=15] loss=3.3152 cal=(0.9075, 0.9975, 0.9925, 0.9225, 0.0) score=0.9075
+[C AT=24 AP=11 C=0 epoch=16] loss=3.1009 cal=(0.89, 1.0, 0.995, 0.91, 0.0) score=0.8900
+[C AT=24 AP=11 C=0 epoch=17] loss=2.7846 cal=(0.88, 0.9975, 0.9925, 0.9075, 0.0) score=0.8800
+[C AT=24 AP=11 C=0 epoch=18] loss=2.6371 cal=(0.9025, 0.9975, 0.995, 0.9125, 0.0) score=0.9025
+[C AT=24 AP=11 C=0 epoch=19] loss=2.5355 cal=(0.88, 1.0, 0.9925, 0.915, 0.0) score=0.8800
+[C AT=24 AP=11 C=0 epoch=20] loss=2.4291 cal=(0.8625, 1.0, 0.995, 0.885, 0.0) score=0.8625
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L11__C_L0/das_c.pt
+[fit readout] C AT=24 AP=11 C=0 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=11 C=1 (missing checkpoint)
+[C AT=24 AP=11 C=1 epoch=01] loss=13.6077 cal=(0.6525, 0.995, 0.995, 0.785, 0.0) score=0.6525
+[C AT=24 AP=11 C=1 epoch=02] loss=8.0939 cal=(0.7425, 0.9975, 0.995, 0.8275, 0.0) score=0.7425
+[C AT=24 AP=11 C=1 epoch=03] loss=6.9427 cal=(0.745, 0.9975, 0.995, 0.8325, 0.0) score=0.7450
+[C AT=24 AP=11 C=1 epoch=04] loss=6.3532 cal=(0.78, 0.9975, 0.995, 0.845, 0.0) score=0.7800
+[C AT=24 AP=11 C=1 epoch=05] loss=6.0620 cal=(0.7875, 0.9975, 0.9925, 0.8375, 0.0) score=0.7875
+[C AT=24 AP=11 C=1 epoch=06] loss=5.6308 cal=(0.785, 0.9975, 0.9925, 0.85, 0.0) score=0.7850
+[C AT=24 AP=11 C=1 epoch=07] loss=5.2136 cal=(0.8, 0.9975, 0.9925, 0.865, 0.0) score=0.8000
+[C AT=24 AP=11 C=1 epoch=08] loss=4.8808 cal=(0.81, 0.9975, 0.9925, 0.8675, 0.0) score=0.8100
+[C AT=24 AP=11 C=1 epoch=09] loss=4.5350 cal=(0.84, 0.9975, 0.9925, 0.865, 0.0) score=0.8400
+[C AT=24 AP=11 C=1 epoch=10] loss=4.2084 cal=(0.815, 0.995, 0.99, 0.8775, 0.0) score=0.8150
+[C AT=24 AP=11 C=1 epoch=11] loss=4.1502 cal=(0.825, 0.9975, 0.9875, 0.8625, 0.0) score=0.8250
+[C AT=24 AP=11 C=1 epoch=12] loss=3.9159 cal=(0.8325, 0.9975, 0.995, 0.87, 0.0) score=0.8325
+[C AT=24 AP=11 C=1 epoch=13] loss=3.7388 cal=(0.8425, 0.9975, 0.9925, 0.865, 0.0) score=0.8425
+[C AT=24 AP=11 C=1 epoch=14] loss=3.9491 cal=(0.8, 0.995, 0.9875, 0.84, 0.0) score=0.8000
+[C AT=24 AP=11 C=1 epoch=15] loss=3.7840 cal=(0.82, 1.0, 0.9925, 0.875, 0.0) score=0.8200
+[C AT=24 AP=11 C=1 epoch=16] loss=3.3475 cal=(0.8375, 0.9975, 0.99, 0.865, 0.0) score=0.8375
+[C AT=24 AP=11 C=1 epoch=17] loss=3.1398 cal=(0.8175, 0.9975, 0.9875, 0.8525, 0.0) score=0.8175
+[C AT=24 AP=11 C=1 epoch=18] loss=3.2750 cal=(0.8225, 0.9975, 0.985, 0.865, 0.0) score=0.8225
+[C AT=24 AP=11 C=1 epoch=19] loss=3.3232 cal=(0.8175, 1.0, 0.9875, 0.8575, 0.0) score=0.8175
+[C AT=24 AP=11 C=1 epoch=20] loss=3.1021 cal=(0.84, 0.995, 0.9875, 0.8675, 0.0) score=0.8400
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L11__C_L1/das_c.pt
+[fit readout] C AT=24 AP=11 C=1 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=11 C=2 (missing checkpoint)
+[C AT=24 AP=11 C=2 epoch=01] loss=13.7906 cal=(0.68, 0.9975, 0.9975, 0.7775, 0.0) score=0.6800
+[C AT=24 AP=11 C=2 epoch=02] loss=7.8447 cal=(0.745, 0.995, 0.995, 0.8325, 0.0) score=0.7450
+[C AT=24 AP=11 C=2 epoch=03] loss=6.7437 cal=(0.7725, 0.9975, 0.995, 0.845, 0.0) score=0.7725
+[C AT=24 AP=11 C=2 epoch=04] loss=6.1686 cal=(0.78, 0.9975, 0.9925, 0.845, 0.0) score=0.7800
+[C AT=24 AP=11 C=2 epoch=05] loss=5.7186 cal=(0.785, 0.9975, 0.9925, 0.8575, 0.0) score=0.7850
+[C AT=24 AP=11 C=2 epoch=06] loss=5.4836 cal=(0.8025, 0.995, 0.9925, 0.85, 0.0) score=0.8025
+[C AT=24 AP=11 C=2 epoch=07] loss=5.4849 cal=(0.81, 0.995, 0.99, 0.8575, 0.0) score=0.8100
+[C AT=24 AP=11 C=2 epoch=08] loss=5.1889 cal=(0.8, 0.9975, 0.99, 0.8525, 0.0) score=0.8000
+[C AT=24 AP=11 C=2 epoch=09] loss=4.9719 cal=(0.8075, 0.9975, 0.99, 0.8625, 0.0) score=0.8075
+[C AT=24 AP=11 C=2 epoch=10] loss=4.4884 cal=(0.825, 0.9975, 0.9925, 0.8525, 0.0) score=0.8250
+[C AT=24 AP=11 C=2 epoch=11] loss=4.1692 cal=(0.81, 0.9975, 0.99, 0.855, 0.0) score=0.8100
+[C AT=24 AP=11 C=2 epoch=12] loss=3.9116 cal=(0.82, 0.9975, 0.99, 0.875, 0.0) score=0.8200
+[C AT=24 AP=11 C=2 epoch=13] loss=3.7456 cal=(0.8, 0.9975, 0.99, 0.8475, 0.0) score=0.8000
+[C AT=24 AP=11 C=2 epoch=14] loss=3.8342 cal=(0.82, 0.9975, 0.99, 0.8525, 0.0) score=0.8200
+[C AT=24 AP=11 C=2 epoch=15] loss=3.6426 cal=(0.815, 0.9975, 0.985, 0.8575, 0.0) score=0.8150
+[C AT=24 AP=11 C=2 epoch=16] loss=3.4671 cal=(0.8275, 0.995, 0.99, 0.86, 0.0) score=0.8275
+[C AT=24 AP=11 C=2 epoch=17] loss=3.1998 cal=(0.7875, 0.9975, 0.9875, 0.8275, 0.0) score=0.7875
+[C AT=24 AP=11 C=2 epoch=18] loss=3.0679 cal=(0.8075, 0.995, 0.9875, 0.85, 0.0) score=0.8075
+[C AT=24 AP=11 C=2 epoch=19] loss=3.0772 cal=(0.7925, 0.995, 0.985, 0.845, 0.0) score=0.7925
+[C AT=24 AP=11 C=2 epoch=20] loss=2.9890 cal=(0.79, 0.99, 0.9825, 0.8325, 0.0) score=0.7900
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L11__C_L2/das_c.pt
+[fit readout] C AT=24 AP=11 C=2 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=11 C=3 (missing checkpoint)
+[C AT=24 AP=11 C=3 epoch=01] loss=14.5436 cal=(0.64, 0.9925, 0.99, 0.7275, 0.0) score=0.6400
+[C AT=24 AP=11 C=3 epoch=02] loss=8.4413 cal=(0.695, 0.9925, 0.9925, 0.79, 0.0) score=0.6950
+[C AT=24 AP=11 C=3 epoch=03] loss=7.3576 cal=(0.7125, 0.9975, 0.995, 0.8225, 0.0) score=0.7125
+[C AT=24 AP=11 C=3 epoch=04] loss=6.6928 cal=(0.7475, 0.99, 0.99, 0.8225, 0.0) score=0.7475
+[C AT=24 AP=11 C=3 epoch=05] loss=6.3798 cal=(0.75, 0.9975, 0.99, 0.8275, 0.0) score=0.7500
+[C AT=24 AP=11 C=3 epoch=06] loss=6.0921 cal=(0.75, 0.9925, 0.9875, 0.8275, 0.0) score=0.7500
+[C AT=24 AP=11 C=3 epoch=07] loss=5.8726 cal=(0.7675, 0.9975, 0.9875, 0.8375, 0.0) score=0.7675
+[C AT=24 AP=11 C=3 epoch=08] loss=5.6808 cal=(0.765, 0.99, 0.975, 0.8375, 0.0) score=0.7650
+[C AT=24 AP=11 C=3 epoch=09] loss=5.4514 cal=(0.7575, 0.99, 0.98, 0.82, 0.0) score=0.7575
+[C AT=24 AP=11 C=3 epoch=10] loss=5.4485 cal=(0.7575, 0.9875, 0.975, 0.825, 0.0) score=0.7575
+[C AT=24 AP=11 C=3 epoch=11] loss=5.2682 cal=(0.7575, 0.9925, 0.9775, 0.8225, 0.0) score=0.7575
+[C AT=24 AP=11 C=3 epoch=12] loss=4.9050 cal=(0.7875, 0.995, 0.98, 0.835, 0.0) score=0.7875
+[C AT=24 AP=11 C=3 epoch=13] loss=4.7934 cal=(0.77, 0.9925, 0.9775, 0.84, 0.0) score=0.7700
+[C AT=24 AP=11 C=3 epoch=14] loss=4.5853 cal=(0.7775, 0.995, 0.985, 0.8375, 0.0) score=0.7775
+[C AT=24 AP=11 C=3 epoch=15] loss=4.4336 cal=(0.785, 0.9925, 0.9825, 0.835, 0.0) score=0.7850
+[C AT=24 AP=11 C=3 epoch=16] loss=4.3841 cal=(0.7675, 0.99, 0.9775, 0.8325, 0.0) score=0.7675
+[C AT=24 AP=11 C=3 epoch=17] loss=4.2991 cal=(0.79, 0.99, 0.9825, 0.84, 0.0) score=0.7900
+[C AT=24 AP=11 C=3 epoch=18] loss=4.1569 cal=(0.765, 0.995, 0.98, 0.8175, 0.0) score=0.7650
+[C AT=24 AP=11 C=3 epoch=19] loss=4.0765 cal=(0.7775, 0.9875, 0.98, 0.8325, 0.0) score=0.7775
+[C AT=24 AP=11 C=3 epoch=20] loss=4.0195 cal=(0.7775, 0.9875, 0.9725, 0.8325, 0.0) score=0.7775
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L11__C_L3/das_c.pt
+[fit readout] C AT=24 AP=11 C=3 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=11 C=4 (missing checkpoint)
+[C AT=24 AP=11 C=4 epoch=01] loss=14.8216 cal=(0.655, 0.985, 0.985, 0.76, 0.0) score=0.6550
+[C AT=24 AP=11 C=4 epoch=02] loss=8.2112 cal=(0.7225, 0.995, 0.99, 0.8175, 0.0) score=0.7225
+[C AT=24 AP=11 C=4 epoch=03] loss=7.0994 cal=(0.765, 0.9925, 0.9875, 0.85, 0.0) score=0.7650
+[C AT=24 AP=11 C=4 epoch=04] loss=6.5126 cal=(0.78, 0.9875, 0.9775, 0.855, 0.0) score=0.7800
+[C AT=24 AP=11 C=4 epoch=05] loss=6.2053 cal=(0.7875, 0.9925, 0.985, 0.85, 0.0) score=0.7875
+[C AT=24 AP=11 C=4 epoch=06] loss=5.9934 cal=(0.785, 0.99, 0.9775, 0.84, 0.0) score=0.7850
+[C AT=24 AP=11 C=4 epoch=07] loss=5.7384 cal=(0.7925, 0.985, 0.9825, 0.845, 0.0) score=0.7925
+[C AT=24 AP=11 C=4 epoch=08] loss=5.5687 cal=(0.795, 0.9875, 0.9775, 0.8575, 0.0) score=0.7950
+[C AT=24 AP=11 C=4 epoch=09] loss=5.2846 cal=(0.7975, 0.9825, 0.98, 0.86, 0.0) score=0.7975
+[C AT=24 AP=11 C=4 epoch=10] loss=5.1189 cal=(0.7725, 0.9925, 0.9725, 0.8475, 0.0) score=0.7725
+[C AT=24 AP=11 C=4 epoch=11] loss=5.0955 cal=(0.8025, 0.9825, 0.9725, 0.87, 0.0) score=0.8025
+[C AT=24 AP=11 C=4 epoch=12] loss=4.7888 cal=(0.8, 0.9825, 0.9725, 0.8725, 0.0) score=0.8000
+[C AT=24 AP=11 C=4 epoch=13] loss=4.6341 cal=(0.7925, 0.98, 0.9675, 0.8575, 0.0) score=0.7925
+[C AT=24 AP=11 C=4 epoch=14] loss=4.4108 cal=(0.8125, 0.985, 0.975, 0.8725, 0.0) score=0.8125
+[C AT=24 AP=11 C=4 epoch=15] loss=4.4246 cal=(0.795, 0.9825, 0.97, 0.85, 0.0) score=0.7950
+[C AT=24 AP=11 C=4 epoch=16] loss=4.3168 cal=(0.8, 0.9825, 0.97, 0.8475, 0.0) score=0.8000
+[C AT=24 AP=11 C=4 epoch=17] loss=4.1622 cal=(0.77, 0.985, 0.975, 0.85, 0.0) score=0.7700
+[C AT=24 AP=11 C=4 epoch=18] loss=4.2195 cal=(0.7725, 0.9875, 0.9675, 0.8525, 0.0) score=0.7725
+[C AT=24 AP=11 C=4 epoch=19] loss=4.2135 cal=(0.775, 0.985, 0.975, 0.8425, 0.0) score=0.7750
+[C AT=24 AP=11 C=4 epoch=20] loss=3.9897 cal=(0.79, 0.985, 0.97, 0.845, 0.0) score=0.7900
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L11__C_L4/das_c.pt
+[fit readout] C AT=24 AP=11 C=4 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=12 C=0 (missing checkpoint)
+[C AT=24 AP=12 C=0 epoch=01] loss=11.9120 cal=(0.7025, 0.995, 1.0, 0.7975, 0.0) score=0.7025
+[C AT=24 AP=12 C=0 epoch=02] loss=7.1824 cal=(0.77, 0.9975, 0.9975, 0.8425, 0.0) score=0.7700
+[C AT=24 AP=12 C=0 epoch=03] loss=6.0817 cal=(0.8, 1.0, 0.9975, 0.865, 0.0) score=0.8000
+[C AT=24 AP=12 C=0 epoch=04] loss=5.4476 cal=(0.81, 1.0, 1.0, 0.855, 0.0) score=0.8100
+[C AT=24 AP=12 C=0 epoch=05] loss=5.2021 cal=(0.825, 1.0, 0.995, 0.87, 0.0) score=0.8250
+[C AT=24 AP=12 C=0 epoch=06] loss=4.7620 cal=(0.82, 1.0, 0.9975, 0.8825, 0.0) score=0.8200
+[C AT=24 AP=12 C=0 epoch=07] loss=4.4202 cal=(0.85, 1.0, 0.9975, 0.8975, 0.0) score=0.8500
+[C AT=24 AP=12 C=0 epoch=08] loss=4.0717 cal=(0.855, 1.0, 0.995, 0.9, 0.0) score=0.8550
+[C AT=24 AP=12 C=0 epoch=09] loss=3.9738 cal=(0.85, 1.0, 1.0, 0.8975, 0.0) score=0.8500
+[C AT=24 AP=12 C=0 epoch=10] loss=3.7640 cal=(0.8425, 1.0, 0.9975, 0.885, 0.0) score=0.8425
+[C AT=24 AP=12 C=0 epoch=11] loss=3.6829 cal=(0.8675, 1.0, 0.9975, 0.8925, 0.0) score=0.8675
+[C AT=24 AP=12 C=0 epoch=12] loss=3.5395 cal=(0.87, 1.0, 0.9975, 0.89, 0.0) score=0.8700
+[C AT=24 AP=12 C=0 epoch=13] loss=3.2320 cal=(0.8775, 1.0, 0.9975, 0.915, 0.0) score=0.8775
+[C AT=24 AP=12 C=0 epoch=14] loss=3.0288 cal=(0.8725, 1.0, 0.995, 0.9125, 0.0) score=0.8725
+[C AT=24 AP=12 C=0 epoch=15] loss=2.8378 cal=(0.8825, 1.0, 0.9975, 0.9125, 0.0) score=0.8825
+[C AT=24 AP=12 C=0 epoch=16] loss=2.7472 cal=(0.8725, 1.0, 0.995, 0.9, 0.0) score=0.8725
+[C AT=24 AP=12 C=0 epoch=17] loss=2.5909 cal=(0.875, 1.0, 0.995, 0.905, 0.0) score=0.8750
+[C AT=24 AP=12 C=0 epoch=18] loss=2.4515 cal=(0.8925, 1.0, 0.9975, 0.9075, 0.0) score=0.8925
+[C AT=24 AP=12 C=0 epoch=19] loss=2.4208 cal=(0.8775, 1.0, 0.995, 0.9075, 0.0) score=0.8775
+[C AT=24 AP=12 C=0 epoch=20] loss=2.3131 cal=(0.8725, 1.0, 0.9975, 0.8975, 0.0) score=0.8725
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L12__C_L0/das_c.pt
+[fit readout] C AT=24 AP=12 C=0 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=12 C=1 (missing checkpoint)
+[C AT=24 AP=12 C=1 epoch=01] loss=13.4613 cal=(0.6625, 0.9875, 0.9925, 0.7825, 0.0) score=0.6625
+[C AT=24 AP=12 C=1 epoch=02] loss=7.9507 cal=(0.7325, 0.995, 0.9975, 0.8125, 0.0) score=0.7325
+[C AT=24 AP=12 C=1 epoch=03] loss=6.7527 cal=(0.76, 0.995, 0.995, 0.8525, 0.0) score=0.7600
+[C AT=24 AP=12 C=1 epoch=04] loss=6.1519 cal=(0.7875, 0.995, 0.9975, 0.865, 0.0) score=0.7875
+[C AT=24 AP=12 C=1 epoch=05] loss=5.8784 cal=(0.7825, 0.995, 0.9925, 0.8675, 0.0) score=0.7825
+[C AT=24 AP=12 C=1 epoch=06] loss=5.5013 cal=(0.79, 0.9925, 0.995, 0.8575, 0.0) score=0.7900
+[C AT=24 AP=12 C=1 epoch=07] loss=5.2222 cal=(0.8075, 0.9975, 0.995, 0.8625, 0.0) score=0.8075
+[C AT=24 AP=12 C=1 epoch=08] loss=4.7073 cal=(0.8075, 0.995, 0.9925, 0.86, 0.0) score=0.8075
+[C AT=24 AP=12 C=1 epoch=09] loss=4.3671 cal=(0.815, 0.995, 0.995, 0.845, 0.0) score=0.8150
+[C AT=24 AP=12 C=1 epoch=10] loss=4.1038 cal=(0.8025, 0.995, 0.995, 0.85, 0.0) score=0.8025
+[C AT=24 AP=12 C=1 epoch=11] loss=3.8989 cal=(0.7975, 0.995, 0.9975, 0.85, 0.0) score=0.7975
+[C AT=24 AP=12 C=1 epoch=12] loss=3.6775 cal=(0.8075, 0.9975, 0.9925, 0.85, 0.0) score=0.8075
+[C AT=24 AP=12 C=1 epoch=13] loss=3.4968 cal=(0.8075, 0.9975, 0.99, 0.855, 0.0) score=0.8075
+[C AT=24 AP=12 C=1 epoch=14] loss=3.2597 cal=(0.7975, 0.9925, 0.995, 0.8525, 0.0) score=0.7975
+[C AT=24 AP=12 C=1 epoch=15] loss=3.1240 cal=(0.8175, 0.9975, 0.9925, 0.8425, 0.0) score=0.8175
+[C AT=24 AP=12 C=1 epoch=16] loss=3.0106 cal=(0.79, 0.9925, 0.99, 0.8375, 0.0) score=0.7900
+[C AT=24 AP=12 C=1 epoch=17] loss=2.9602 cal=(0.8175, 0.995, 0.9875, 0.86, 0.0) score=0.8175
+[C AT=24 AP=12 C=1 epoch=18] loss=2.8363 cal=(0.8, 0.9925, 0.985, 0.8325, 0.0) score=0.8000
+[C AT=24 AP=12 C=1 epoch=19] loss=2.6824 cal=(0.7975, 0.9925, 0.985, 0.835, 0.0) score=0.7975
+[C AT=24 AP=12 C=1 epoch=20] loss=2.6013 cal=(0.8075, 0.995, 0.985, 0.845, 0.0) score=0.8075
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L12__C_L1/das_c.pt
+[fit readout] C AT=24 AP=12 C=1 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=12 C=2 (missing checkpoint)
+[C AT=24 AP=12 C=2 epoch=01] loss=13.6179 cal=(0.6625, 0.9925, 0.9975, 0.79, 0.0) score=0.6625
+[C AT=24 AP=12 C=2 epoch=02] loss=7.6720 cal=(0.75, 0.9975, 0.9975, 0.8375, 0.0) score=0.7500
+[C AT=24 AP=12 C=2 epoch=03] loss=6.5682 cal=(0.79, 0.9975, 0.9975, 0.8425, 0.0) score=0.7900
+[C AT=24 AP=12 C=2 epoch=04] loss=5.9926 cal=(0.765, 0.99, 0.995, 0.835, 0.0) score=0.7650
+[C AT=24 AP=12 C=2 epoch=05] loss=5.8426 cal=(0.7975, 0.9975, 0.995, 0.855, 0.0) score=0.7975
+[C AT=24 AP=12 C=2 epoch=06] loss=5.3476 cal=(0.805, 0.9875, 0.995, 0.8425, 0.0) score=0.8050
+[C AT=24 AP=12 C=2 epoch=07] loss=5.0645 cal=(0.805, 0.99, 0.995, 0.8425, 0.0) score=0.8050
+[C AT=24 AP=12 C=2 epoch=08] loss=4.9225 cal=(0.7925, 0.99, 0.9925, 0.855, 0.0) score=0.7925
+[C AT=24 AP=12 C=2 epoch=09] loss=4.5005 cal=(0.8125, 0.995, 0.9975, 0.855, 0.0) score=0.8125
+[C AT=24 AP=12 C=2 epoch=10] loss=4.2240 cal=(0.8225, 0.995, 0.995, 0.855, 0.0) score=0.8225
+[C AT=24 AP=12 C=2 epoch=11] loss=3.9541 cal=(0.8025, 0.9925, 0.995, 0.8475, 0.0) score=0.8025
+[C AT=24 AP=12 C=2 epoch=12] loss=3.7254 cal=(0.815, 0.9975, 0.9925, 0.8675, 0.0) score=0.8150
+[C AT=24 AP=12 C=2 epoch=13] loss=3.5294 cal=(0.795, 0.9975, 0.995, 0.85, 0.0) score=0.7950
+[C AT=24 AP=12 C=2 epoch=14] loss=3.3821 cal=(0.8175, 0.995, 0.9925, 0.8725, 0.0) score=0.8175
+[C AT=24 AP=12 C=2 epoch=15] loss=3.2243 cal=(0.795, 0.9975, 0.99, 0.8525, 0.0) score=0.7950
+[C AT=24 AP=12 C=2 epoch=16] loss=3.1715 cal=(0.8025, 0.9975, 0.99, 0.8575, 0.0) score=0.8025
+[C AT=24 AP=12 C=2 epoch=17] loss=3.0457 cal=(0.7875, 0.9925, 0.9875, 0.855, 0.0) score=0.7875
+[C AT=24 AP=12 C=2 epoch=18] loss=2.9489 cal=(0.81, 0.9975, 0.9875, 0.8525, 0.0) score=0.8100
+[C AT=24 AP=12 C=2 epoch=19] loss=2.7346 cal=(0.795, 0.9925, 0.99, 0.8575, 0.0) score=0.7950
+[C AT=24 AP=12 C=2 epoch=20] loss=2.6192 cal=(0.8, 0.9925, 0.99, 0.8475, 0.0) score=0.8000
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L12__C_L2/das_c.pt
+[fit readout] C AT=24 AP=12 C=2 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=12 C=3 (missing checkpoint)
+[C AT=24 AP=12 C=3 epoch=01] loss=14.3657 cal=(0.6525, 0.9875, 0.995, 0.73, 0.0) score=0.6525
+[C AT=24 AP=12 C=3 epoch=02] loss=8.2340 cal=(0.6975, 0.995, 0.995, 0.78, 0.0) score=0.6975
+[C AT=24 AP=12 C=3 epoch=03] loss=7.1462 cal=(0.745, 0.995, 0.995, 0.8225, 0.0) score=0.7450
+[C AT=24 AP=12 C=3 epoch=04] loss=6.5358 cal=(0.745, 0.9925, 0.9925, 0.83, 0.0) score=0.7450
+[C AT=24 AP=12 C=3 epoch=05] loss=6.2738 cal=(0.7725, 0.995, 0.995, 0.845, 0.0) score=0.7725
+[C AT=24 AP=12 C=3 epoch=06] loss=6.0562 cal=(0.745, 0.9925, 0.995, 0.8325, 0.0) score=0.7450
+[C AT=24 AP=12 C=3 epoch=07] loss=5.6916 cal=(0.775, 0.995, 0.9925, 0.84, 0.0) score=0.7750
+[C AT=24 AP=12 C=3 epoch=08] loss=5.3981 cal=(0.785, 0.9925, 0.995, 0.8275, 0.0) score=0.7850
+[C AT=24 AP=12 C=3 epoch=09] loss=5.1046 cal=(0.8, 0.9975, 0.9925, 0.8475, 0.0) score=0.8000
+[C AT=24 AP=12 C=3 epoch=10] loss=4.8535 cal=(0.785, 0.995, 0.9925, 0.8425, 0.0) score=0.7850
+[C AT=24 AP=12 C=3 epoch=11] loss=4.8388 cal=(0.77, 0.9925, 0.99, 0.84, 0.0) score=0.7700
+[C AT=24 AP=12 C=3 epoch=12] loss=4.6262 cal=(0.7975, 0.995, 0.9925, 0.85, 0.0) score=0.7975
+[C AT=24 AP=12 C=3 epoch=13] loss=4.4349 cal=(0.7975, 0.9975, 0.9875, 0.835, 0.0) score=0.7975
+[C AT=24 AP=12 C=3 epoch=14] loss=4.3328 cal=(0.795, 0.99, 0.9875, 0.85, 0.0) score=0.7950
+[C AT=24 AP=12 C=3 epoch=15] loss=4.2083 cal=(0.805, 0.99, 0.9825, 0.8475, 0.0) score=0.8050
+[C AT=24 AP=12 C=3 epoch=16] loss=4.1272 cal=(0.7925, 0.99, 0.9875, 0.84, 0.0) score=0.7925
+[C AT=24 AP=12 C=3 epoch=17] loss=3.9941 cal=(0.77, 0.99, 0.9875, 0.8275, 0.0) score=0.7700
+[C AT=24 AP=12 C=3 epoch=18] loss=4.1334 cal=(0.7825, 0.9875, 0.9875, 0.8225, 0.0) score=0.7825
+[C AT=24 AP=12 C=3 epoch=19] loss=3.8580 cal=(0.7725, 0.9875, 0.9875, 0.8425, 0.0) score=0.7725
+[C AT=24 AP=12 C=3 epoch=20] loss=3.6519 cal=(0.79, 0.99, 0.9875, 0.8325, 0.0) score=0.7900
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L12__C_L3/das_c.pt
+[fit readout] C AT=24 AP=12 C=3 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=12 C=4 (missing checkpoint)
+[C AT=24 AP=12 C=4 epoch=01] loss=14.5409 cal=(0.66, 0.9775, 0.9925, 0.7525, 0.0) score=0.6600
+[C AT=24 AP=12 C=4 epoch=02] loss=7.9760 cal=(0.73, 0.9925, 0.995, 0.8225, 0.0) score=0.7300
+[C AT=24 AP=12 C=4 epoch=03] loss=6.8730 cal=(0.7575, 0.99, 0.995, 0.8425, 0.0) score=0.7575
+[C AT=24 AP=12 C=4 epoch=04] loss=6.2733 cal=(0.7825, 0.9875, 0.9925, 0.85, 0.0) score=0.7825
+[C AT=24 AP=12 C=4 epoch=05] loss=5.9870 cal=(0.7825, 0.99, 0.9925, 0.8525, 0.0) score=0.7825
+[C AT=24 AP=12 C=4 epoch=06] loss=5.7486 cal=(0.7825, 0.99, 0.9925, 0.8525, 0.0) score=0.7825
+[C AT=24 AP=12 C=4 epoch=07] loss=5.4689 cal=(0.7875, 0.9875, 0.9925, 0.87, 0.0) score=0.7875
+[C AT=24 AP=12 C=4 epoch=08] loss=5.3278 cal=(0.7975, 0.99, 0.99, 0.8525, 0.0) score=0.7975
+[C AT=24 AP=12 C=4 epoch=09] loss=5.0671 cal=(0.7925, 0.985, 0.9875, 0.8575, 0.0) score=0.7925
+[C AT=24 AP=12 C=4 epoch=10] loss=4.8684 cal=(0.79, 0.99, 0.9875, 0.86, 0.0) score=0.7900
+[C AT=24 AP=12 C=4 epoch=11] loss=4.6914 cal=(0.8, 0.9875, 0.99, 0.8675, 0.0) score=0.8000
+[C AT=24 AP=12 C=4 epoch=12] loss=4.5524 cal=(0.7975, 0.99, 0.985, 0.8725, 0.0) score=0.7975
+[C AT=24 AP=12 C=4 epoch=13] loss=4.4677 cal=(0.815, 0.9875, 0.9875, 0.87, 0.0) score=0.8150
+[C AT=24 AP=12 C=4 epoch=14] loss=4.3268 cal=(0.8, 0.99, 0.99, 0.87, 0.0) score=0.8000
+[C AT=24 AP=12 C=4 epoch=15] loss=4.1724 cal=(0.82, 0.985, 0.985, 0.87, 0.0) score=0.8200
+[C AT=24 AP=12 C=4 epoch=16] loss=4.0235 cal=(0.81, 0.985, 0.985, 0.855, 0.0) score=0.8100
+[C AT=24 AP=12 C=4 epoch=17] loss=3.9166 cal=(0.78, 0.98, 0.9825, 0.8525, 0.0) score=0.7800
+[C AT=24 AP=12 C=4 epoch=18] loss=3.9609 cal=(0.8025, 0.9875, 0.9825, 0.8675, 0.0) score=0.8025
+[C AT=24 AP=12 C=4 epoch=19] loss=3.8237 cal=(0.825, 0.9875, 0.9825, 0.875, 0.0) score=0.8250
+[C AT=24 AP=12 C=4 epoch=20] loss=3.7038 cal=(0.81, 0.9875, 0.985, 0.8675, 0.0) score=0.8100
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L12__C_L4/das_c.pt
+[fit readout] C AT=24 AP=12 C=4 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=13 C=0 (missing checkpoint)
+[C AT=24 AP=13 C=0 epoch=01] loss=13.1067 cal=(0.6875, 0.9925, 1.0, 0.78, 0.0) score=0.6875
+[C AT=24 AP=13 C=0 epoch=02] loss=6.9858 cal=(0.7525, 0.9925, 1.0, 0.8425, 0.0) score=0.7525
+[C AT=24 AP=13 C=0 epoch=03] loss=5.9499 cal=(0.8025, 0.9925, 1.0, 0.855, 0.0) score=0.8025
+[C AT=24 AP=13 C=0 epoch=04] loss=5.3368 cal=(0.795, 0.995, 1.0, 0.86, 0.0) score=0.7950
+[C AT=24 AP=13 C=0 epoch=05] loss=4.9237 cal=(0.83, 0.9875, 1.0, 0.8675, 0.0) score=0.8300
+[C AT=24 AP=13 C=0 epoch=06] loss=4.7570 cal=(0.845, 0.995, 1.0, 0.8775, 0.0) score=0.8450
+[C AT=24 AP=13 C=0 epoch=07] loss=4.4180 cal=(0.8475, 0.9925, 1.0, 0.8925, 0.0) score=0.8475
+[C AT=24 AP=13 C=0 epoch=08] loss=3.9975 cal=(0.8675, 0.995, 1.0, 0.9125, 0.0) score=0.8675
+[C AT=24 AP=13 C=0 epoch=09] loss=3.6310 cal=(0.8675, 0.995, 1.0, 0.9075, 0.0) score=0.8675
+[C AT=24 AP=13 C=0 epoch=10] loss=3.4708 cal=(0.8725, 0.995, 1.0, 0.9125, 0.0) score=0.8725
+[C AT=24 AP=13 C=0 epoch=11] loss=3.2460 cal=(0.87, 0.9875, 1.0, 0.8975, 0.0) score=0.8700
+[C AT=24 AP=13 C=0 epoch=12] loss=3.0341 cal=(0.8775, 0.985, 1.0, 0.91, 0.0) score=0.8775
+[C AT=24 AP=13 C=0 epoch=13] loss=3.5228 cal=(0.8475, 0.9925, 1.0, 0.895, 0.0) score=0.8475
+[C AT=24 AP=13 C=0 epoch=14] loss=3.3905 cal=(0.8675, 0.995, 1.0, 0.8975, 0.0) score=0.8675
+[C AT=24 AP=13 C=0 epoch=15] loss=3.0865 cal=(0.875, 0.995, 1.0, 0.91, 0.0) score=0.8750
+[C AT=24 AP=13 C=0 epoch=16] loss=2.8765 cal=(0.8725, 0.99, 1.0, 0.89, 0.0) score=0.8725
+[C AT=24 AP=13 C=0 epoch=17] loss=2.6814 cal=(0.8725, 0.9925, 1.0, 0.8925, 0.0) score=0.8725
+[C AT=24 AP=13 C=0 epoch=18] loss=2.4019 cal=(0.8725, 0.9875, 1.0, 0.8975, 0.0) score=0.8725
+[C AT=24 AP=13 C=0 epoch=19] loss=2.2186 cal=(0.8675, 0.98, 1.0, 0.885, 0.0) score=0.8675
+[C AT=24 AP=13 C=0 epoch=20] loss=2.1082 cal=(0.87, 0.985, 1.0, 0.88, 0.0) score=0.8700
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L13__C_L0/das_c.pt
+[fit readout] C AT=24 AP=13 C=0 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=13 C=1 (missing checkpoint)
+[C AT=24 AP=13 C=1 epoch=01] loss=14.3536 cal=(0.6575, 0.9875, 1.0, 0.765, 0.0) score=0.6575
+[C AT=24 AP=13 C=1 epoch=02] loss=7.4234 cal=(0.7425, 0.9875, 1.0, 0.815, 0.0) score=0.7425
+[C AT=24 AP=13 C=1 epoch=03] loss=6.4099 cal=(0.7625, 0.9925, 1.0, 0.8375, 0.0) score=0.7625
+[C AT=24 AP=13 C=1 epoch=04] loss=5.7926 cal=(0.775, 0.9825, 1.0, 0.8475, 0.0) score=0.7750
+[C AT=24 AP=13 C=1 epoch=05] loss=5.4854 cal=(0.7875, 0.9875, 1.0, 0.8525, 0.0) score=0.7875
+[C AT=24 AP=13 C=1 epoch=06] loss=5.1163 cal=(0.8, 0.985, 1.0, 0.8475, 0.0) score=0.8000
+[C AT=24 AP=13 C=1 epoch=07] loss=4.8595 cal=(0.8, 0.99, 1.0, 0.8525, 0.0) score=0.8000
+[C AT=24 AP=13 C=1 epoch=08] loss=4.4966 cal=(0.8025, 0.9875, 1.0, 0.8475, 0.0) score=0.8025
+[C AT=24 AP=13 C=1 epoch=09] loss=4.1733 cal=(0.795, 0.9875, 1.0, 0.8525, 0.0) score=0.7950
+[C AT=24 AP=13 C=1 epoch=10] loss=3.8600 cal=(0.815, 0.9975, 1.0, 0.8725, 0.0) score=0.8150
+[C AT=24 AP=13 C=1 epoch=11] loss=3.5482 cal=(0.8175, 0.9875, 0.9975, 0.8625, 0.0) score=0.8175
+[C AT=24 AP=13 C=1 epoch=12] loss=3.4645 cal=(0.8025, 0.985, 0.9975, 0.8475, 0.0) score=0.8025
+[C AT=24 AP=13 C=1 epoch=13] loss=3.5097 cal=(0.8075, 0.9825, 1.0, 0.8575, 0.0) score=0.8075
+[C AT=24 AP=13 C=1 epoch=14] loss=3.3208 cal=(0.82, 0.9925, 1.0, 0.86, 0.0) score=0.8200
+[C AT=24 AP=13 C=1 epoch=15] loss=2.9689 cal=(0.8275, 0.9925, 1.0, 0.855, 0.0) score=0.8275
+[C AT=24 AP=13 C=1 epoch=16] loss=2.7360 cal=(0.8075, 0.9825, 0.995, 0.8625, 0.0) score=0.8075
+[C AT=24 AP=13 C=1 epoch=17] loss=2.6685 cal=(0.835, 0.9925, 1.0, 0.87, 0.0) score=0.8350
+[C AT=24 AP=13 C=1 epoch=18] loss=2.8562 cal=(0.82, 0.975, 1.0, 0.8375, 0.0) score=0.8200
+[C AT=24 AP=13 C=1 epoch=19] loss=2.9378 cal=(0.8175, 0.985, 0.9975, 0.845, 0.0) score=0.8175
+[C AT=24 AP=13 C=1 epoch=20] loss=2.7957 cal=(0.8175, 0.9825, 0.9975, 0.8475, 0.0) score=0.8175
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L13__C_L1/das_c.pt
+[fit readout] C AT=24 AP=13 C=1 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=13 C=2 (missing checkpoint)
+[C AT=24 AP=13 C=2 epoch=01] loss=15.0337 cal=(0.69, 0.9775, 1.0, 0.7825, 0.0) score=0.6900
+[C AT=24 AP=13 C=2 epoch=02] loss=7.3208 cal=(0.7525, 0.9925, 1.0, 0.83, 0.0) score=0.7525
+[C AT=24 AP=13 C=2 epoch=03] loss=6.1987 cal=(0.7875, 0.99, 1.0, 0.855, 0.0) score=0.7875
+[C AT=24 AP=13 C=2 epoch=04] loss=5.6365 cal=(0.77, 0.9825, 1.0, 0.8375, 0.0) score=0.7700
+[C AT=24 AP=13 C=2 epoch=05] loss=5.3432 cal=(0.7825, 0.985, 1.0, 0.8375, 0.0) score=0.7825
+[C AT=24 AP=13 C=2 epoch=06] loss=5.1283 cal=(0.8075, 0.9875, 0.9975, 0.8625, 0.0) score=0.8075
+[C AT=24 AP=13 C=2 epoch=07] loss=4.7303 cal=(0.81, 0.9825, 0.9975, 0.85, 0.0) score=0.8100
+[C AT=24 AP=13 C=2 epoch=08] loss=4.3122 cal=(0.8, 0.98, 0.9975, 0.86, 0.0) score=0.8000
+[C AT=24 AP=13 C=2 epoch=09] loss=4.0973 cal=(0.8125, 0.9775, 0.995, 0.845, 0.0) score=0.8125
+[C AT=24 AP=13 C=2 epoch=10] loss=3.9641 cal=(0.795, 0.98, 0.995, 0.85, 0.0) score=0.7950
+[C AT=24 AP=13 C=2 epoch=11] loss=3.7658 cal=(0.815, 0.9825, 0.995, 0.86, 0.0) score=0.8150
+[C AT=24 AP=13 C=2 epoch=12] loss=3.5358 cal=(0.8, 0.9825, 0.995, 0.86, 0.0) score=0.8000
+[C AT=24 AP=13 C=2 epoch=13] loss=3.3010 cal=(0.815, 0.9825, 0.9975, 0.8625, 0.0) score=0.8150
+[C AT=24 AP=13 C=2 epoch=14] loss=3.0776 cal=(0.7975, 0.985, 0.995, 0.855, 0.0) score=0.7975
+[C AT=24 AP=13 C=2 epoch=15] loss=3.0530 cal=(0.79, 0.975, 0.99, 0.865, 0.0) score=0.7900
+[C AT=24 AP=13 C=2 epoch=16] loss=2.8981 cal=(0.8025, 0.985, 0.995, 0.85, 0.0) score=0.8025
+[C AT=24 AP=13 C=2 epoch=17] loss=2.7532 cal=(0.7975, 0.9725, 0.9875, 0.845, 0.0) score=0.7975
+[C AT=24 AP=13 C=2 epoch=18] loss=2.5737 cal=(0.8025, 0.9775, 0.99, 0.8475, 0.0) score=0.8025
+[C AT=24 AP=13 C=2 epoch=19] loss=2.5628 cal=(0.7925, 0.9675, 0.99, 0.845, 0.0) score=0.7925
+[C AT=24 AP=13 C=2 epoch=20] loss=2.4912 cal=(0.785, 0.98, 0.99, 0.835, 0.0) score=0.7850
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L13__C_L2/das_c.pt
+[fit readout] C AT=24 AP=13 C=2 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=13 C=3 (missing checkpoint)
+[C AT=24 AP=13 C=3 epoch=01] loss=16.0165 cal=(0.6325, 0.98, 1.0, 0.705, 0.0) score=0.6325
+[C AT=24 AP=13 C=3 epoch=02] loss=7.8678 cal=(0.7025, 0.9825, 1.0, 0.8, 0.0) score=0.7025
+[C AT=24 AP=13 C=3 epoch=03] loss=6.8000 cal=(0.7475, 0.9875, 1.0, 0.8325, 0.0) score=0.7475
+[C AT=24 AP=13 C=3 epoch=04] loss=6.1600 cal=(0.755, 0.98, 1.0, 0.8425, 0.0) score=0.7550
+[C AT=24 AP=13 C=3 epoch=05] loss=5.7788 cal=(0.755, 0.9875, 1.0, 0.8475, 0.0) score=0.7550
+[C AT=24 AP=13 C=3 epoch=06] loss=5.6190 cal=(0.755, 0.98, 1.0, 0.8425, 0.0) score=0.7550
+[C AT=24 AP=13 C=3 epoch=07] loss=5.3522 cal=(0.7575, 0.9775, 1.0, 0.855, 0.0) score=0.7575
+[C AT=24 AP=13 C=3 epoch=08] loss=5.1767 cal=(0.7675, 0.98, 1.0, 0.8275, 0.0) score=0.7675
+[C AT=24 AP=13 C=3 epoch=09] loss=4.8119 cal=(0.785, 0.97, 0.9975, 0.8425, 0.0) score=0.7850
+[C AT=24 AP=13 C=3 epoch=10] loss=4.6193 cal=(0.7725, 0.98, 1.0, 0.8475, 0.0) score=0.7725
+[C AT=24 AP=13 C=3 epoch=11] loss=4.4058 cal=(0.775, 0.9725, 0.9975, 0.845, 0.0) score=0.7750
+[C AT=24 AP=13 C=3 epoch=12] loss=4.2084 cal=(0.785, 0.98, 0.9975, 0.85, 0.0) score=0.7850
+[C AT=24 AP=13 C=3 epoch=13] loss=3.9927 cal=(0.7775, 0.9725, 0.9975, 0.8325, 0.0) score=0.7775
+[C AT=24 AP=13 C=3 epoch=14] loss=3.8171 cal=(0.7775, 0.9675, 0.9975, 0.845, 0.0) score=0.7775
+[C AT=24 AP=13 C=3 epoch=15] loss=3.7065 cal=(0.785, 0.97, 1.0, 0.8425, 0.0) score=0.7850
+[C AT=24 AP=13 C=3 epoch=16] loss=3.7121 cal=(0.7575, 0.9725, 1.0, 0.83, 0.0) score=0.7575
+[C AT=24 AP=13 C=3 epoch=17] loss=3.6123 cal=(0.775, 0.9675, 1.0, 0.82, 0.0) score=0.7750
+[C AT=24 AP=13 C=3 epoch=18] loss=3.4711 cal=(0.78, 0.97, 1.0, 0.815, 0.0) score=0.7800
+[C AT=24 AP=13 C=3 epoch=19] loss=3.3575 cal=(0.7725, 0.9675, 0.995, 0.8175, 0.0) score=0.7725
+[C AT=24 AP=13 C=3 epoch=20] loss=3.2346 cal=(0.785, 0.965, 0.9975, 0.8175, 0.0) score=0.7850
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L13__C_L3/das_c.pt
+[fit readout] C AT=24 AP=13 C=3 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=13 C=4 (missing checkpoint)
+[C AT=24 AP=13 C=4 epoch=01] loss=16.3409 cal=(0.65, 0.965, 1.0, 0.7375, 0.0) score=0.6500
+[C AT=24 AP=13 C=4 epoch=02] loss=7.5298 cal=(0.7325, 0.98, 1.0, 0.7925, 0.0) score=0.7325
+[C AT=24 AP=13 C=4 epoch=03] loss=6.4105 cal=(0.7625, 0.985, 1.0, 0.8525, 0.0) score=0.7625
+[C AT=24 AP=13 C=4 epoch=04] loss=5.8515 cal=(0.7725, 0.9825, 1.0, 0.8525, 0.0) score=0.7725
+[C AT=24 AP=13 C=4 epoch=05] loss=5.5644 cal=(0.795, 0.985, 1.0, 0.86, 0.0) score=0.7950
+[C AT=24 AP=13 C=4 epoch=06] loss=5.3028 cal=(0.8, 0.975, 1.0, 0.8675, 0.0) score=0.8000
+[C AT=24 AP=13 C=4 epoch=07] loss=5.1047 cal=(0.8, 0.985, 0.9975, 0.85, 0.0) score=0.8000
+[C AT=24 AP=13 C=4 epoch=08] loss=4.8190 cal=(0.79, 0.9775, 1.0, 0.86, 0.0) score=0.7900
+[C AT=24 AP=13 C=4 epoch=09] loss=4.5996 cal=(0.7975, 0.975, 1.0, 0.865, 0.0) score=0.7975
+[C AT=24 AP=13 C=4 epoch=10] loss=4.4682 cal=(0.8, 0.98, 1.0, 0.865, 0.0) score=0.8000
+[C AT=24 AP=13 C=4 epoch=11] loss=4.3008 cal=(0.805, 0.975, 0.9975, 0.855, 0.0) score=0.8050
+[C AT=24 AP=13 C=4 epoch=12] loss=4.0883 cal=(0.805, 0.98, 0.9975, 0.87, 0.0) score=0.8050
+[C AT=24 AP=13 C=4 epoch=13] loss=3.9284 cal=(0.8225, 0.9775, 1.0, 0.8625, 0.0) score=0.8225
+[C AT=24 AP=13 C=4 epoch=14] loss=3.7604 cal=(0.8175, 0.975, 1.0, 0.8775, 0.0) score=0.8175
+[C AT=24 AP=13 C=4 epoch=15] loss=3.5772 cal=(0.8275, 0.9775, 0.9975, 0.86, 0.0) score=0.8275
+[C AT=24 AP=13 C=4 epoch=16] loss=3.4978 cal=(0.8, 0.97, 0.9975, 0.8625, 0.0) score=0.8000
+[C AT=24 AP=13 C=4 epoch=17] loss=3.4694 cal=(0.79, 0.9725, 0.995, 0.845, 0.0) score=0.7900
+[C AT=24 AP=13 C=4 epoch=18] loss=3.5771 cal=(0.78, 0.97, 0.9975, 0.845, 0.0) score=0.7800
+[C AT=24 AP=13 C=4 epoch=19] loss=3.9245 cal=(0.7975, 0.97, 0.9925, 0.8475, 0.0) score=0.7975
+[C AT=24 AP=13 C=4 epoch=20] loss=3.7180 cal=(0.8, 0.97, 1.0, 0.86, 0.0) score=0.8000
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L13__C_L4/das_c.pt
+[fit readout] C AT=24 AP=13 C=4 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=14 C=0 (missing checkpoint)
+[C AT=24 AP=14 C=0 epoch=01] loss=12.4712 cal=(0.705, 0.9925, 1.0, 0.79, 0.0) score=0.7050
+[C AT=24 AP=14 C=0 epoch=02] loss=7.2940 cal=(0.765, 0.995, 1.0, 0.855, 0.0) score=0.7650
+[C AT=24 AP=14 C=0 epoch=03] loss=6.2257 cal=(0.8, 0.9925, 0.9975, 0.8675, 0.0) score=0.8000
+[C AT=24 AP=14 C=0 epoch=04] loss=5.6560 cal=(0.8075, 0.9925, 0.995, 0.8475, 0.0) score=0.8075
+[C AT=24 AP=14 C=0 epoch=05] loss=5.4048 cal=(0.8175, 0.9925, 1.0, 0.8625, 0.0) score=0.8175
+[C AT=24 AP=14 C=0 epoch=06] loss=5.2170 cal=(0.8025, 0.985, 0.995, 0.86, 0.0) score=0.8025
+[C AT=24 AP=14 C=0 epoch=07] loss=5.1572 cal=(0.8325, 0.995, 0.9975, 0.8725, 0.0) score=0.8325
+[C AT=24 AP=14 C=0 epoch=08] loss=4.5937 cal=(0.8475, 0.995, 0.995, 0.885, 0.0) score=0.8475
+[C AT=24 AP=14 C=0 epoch=09] loss=4.2145 cal=(0.8725, 0.9925, 1.0, 0.8925, 0.0) score=0.8725
+[C AT=24 AP=14 C=0 epoch=10] loss=3.8493 cal=(0.8675, 0.9925, 0.995, 0.9025, 0.0) score=0.8675
+[C AT=24 AP=14 C=0 epoch=11] loss=3.8185 cal=(0.8575, 0.995, 0.9975, 0.905, 0.0) score=0.8575
+[C AT=24 AP=14 C=0 epoch=12] loss=3.5495 cal=(0.87, 0.995, 0.9975, 0.91, 0.0) score=0.8700
+[C AT=24 AP=14 C=0 epoch=13] loss=3.5307 cal=(0.86, 0.99, 0.9925, 0.905, 0.0) score=0.8600
+[C AT=24 AP=14 C=0 epoch=14] loss=3.2822 cal=(0.8825, 0.9925, 0.9925, 0.91, 0.0) score=0.8825
+[C AT=24 AP=14 C=0 epoch=15] loss=3.2223 cal=(0.86, 0.99, 0.9925, 0.9025, 0.0) score=0.8600
+[C AT=24 AP=14 C=0 epoch=16] loss=3.2904 cal=(0.8725, 0.99, 0.99, 0.9125, 0.0) score=0.8725
+[C AT=24 AP=14 C=0 epoch=17] loss=3.0263 cal=(0.875, 0.99, 0.99, 0.9025, 0.0) score=0.8750
+[C AT=24 AP=14 C=0 epoch=18] loss=3.1340 cal=(0.87, 0.9975, 0.9975, 0.9, 0.0) score=0.8700
+[C AT=24 AP=14 C=0 epoch=19] loss=2.8766 cal=(0.8825, 0.9875, 0.9925, 0.895, 0.0) score=0.8825
+[C AT=24 AP=14 C=0 epoch=20] loss=3.2257 cal=(0.8675, 0.995, 0.9975, 0.9, 0.0) score=0.8675
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L14__C_L0/das_c.pt
+[fit readout] C AT=24 AP=14 C=0 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=14 C=1 (missing checkpoint)
+[C AT=24 AP=14 C=1 epoch=01] loss=13.5275 cal=(0.6675, 0.9875, 1.0, 0.78, 0.0) score=0.6675
+[C AT=24 AP=14 C=1 epoch=02] loss=7.8384 cal=(0.745, 0.9925, 0.9975, 0.83, 0.0) score=0.7450
+[C AT=24 AP=14 C=1 epoch=03] loss=6.7775 cal=(0.775, 0.9925, 0.9975, 0.84, 0.0) score=0.7750
+[C AT=24 AP=14 C=1 epoch=04] loss=6.2809 cal=(0.7725, 0.9925, 0.9975, 0.8625, 0.0) score=0.7725
+[C AT=24 AP=14 C=1 epoch=05] loss=5.8277 cal=(0.7825, 0.9975, 0.995, 0.86, 0.0) score=0.7825
+[C AT=24 AP=14 C=1 epoch=06] loss=5.5053 cal=(0.7975, 0.985, 0.995, 0.8525, 0.0) score=0.7975
+[C AT=24 AP=14 C=1 epoch=07] loss=5.4216 cal=(0.8075, 0.985, 0.995, 0.86, 0.0) score=0.8075
+[C AT=24 AP=14 C=1 epoch=08] loss=5.1434 cal=(0.8125, 0.9875, 0.9975, 0.85, 0.0) score=0.8125
+[C AT=24 AP=14 C=1 epoch=09] loss=4.9352 cal=(0.81, 0.9875, 0.9925, 0.8675, 0.0) score=0.8100
+[C AT=24 AP=14 C=1 epoch=10] loss=4.4478 cal=(0.8175, 0.9875, 0.9925, 0.8825, 0.0) score=0.8175
+[C AT=24 AP=14 C=1 epoch=11] loss=4.0981 cal=(0.8275, 0.9875, 0.995, 0.87, 0.0) score=0.8275
+[C AT=24 AP=14 C=1 epoch=12] loss=3.7820 cal=(0.82, 0.9875, 0.995, 0.865, 0.0) score=0.8200
+[C AT=24 AP=14 C=1 epoch=13] loss=3.5502 cal=(0.8275, 0.9875, 0.9925, 0.86, 0.0) score=0.8275
+[C AT=24 AP=14 C=1 epoch=14] loss=3.3476 cal=(0.805, 0.9875, 0.9875, 0.8525, 0.0) score=0.8050
+[C AT=24 AP=14 C=1 epoch=15] loss=3.0951 cal=(0.8225, 0.985, 0.9925, 0.865, 0.0) score=0.8225
+[C AT=24 AP=14 C=1 epoch=16] loss=3.0102 cal=(0.795, 0.99, 0.9875, 0.8525, 0.0) score=0.7950
+[C AT=24 AP=14 C=1 epoch=17] loss=2.9856 cal=(0.805, 0.98, 0.9825, 0.84, 0.0) score=0.8050
+[C AT=24 AP=14 C=1 epoch=18] loss=2.8323 cal=(0.8175, 0.985, 0.9925, 0.855, 0.0) score=0.8175
+[C AT=24 AP=14 C=1 epoch=19] loss=2.6776 cal=(0.8075, 0.9825, 0.985, 0.8475, 0.0) score=0.8075
+[C AT=24 AP=14 C=1 epoch=20] loss=2.7249 cal=(0.7975, 0.9825, 0.9875, 0.835, 0.0) score=0.7975
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L14__C_L1/das_c.pt
+[fit readout] C AT=24 AP=14 C=1 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=14 C=2 (missing checkpoint)
+[C AT=24 AP=14 C=2 epoch=01] loss=14.0574 cal=(0.695, 0.99, 1.0, 0.8, 0.0) score=0.6950
+[C AT=24 AP=14 C=2 epoch=02] loss=7.7086 cal=(0.7525, 0.99, 1.0, 0.84, 0.0) score=0.7525
+[C AT=24 AP=14 C=2 epoch=03] loss=6.6659 cal=(0.7775, 0.99, 1.0, 0.8475, 0.0) score=0.7775
+[C AT=24 AP=14 C=2 epoch=04] loss=6.1457 cal=(0.78, 0.99, 1.0, 0.855, 0.0) score=0.7800
+[C AT=24 AP=14 C=2 epoch=05] loss=5.7868 cal=(0.8025, 0.9925, 0.995, 0.845, 0.0) score=0.8025
+[C AT=24 AP=14 C=2 epoch=06] loss=5.4814 cal=(0.8125, 0.985, 0.9925, 0.855, 0.0) score=0.8125
+[C AT=24 AP=14 C=2 epoch=07] loss=5.3166 cal=(0.8075, 0.985, 0.9925, 0.8575, 0.0) score=0.8075
+[C AT=24 AP=14 C=2 epoch=08] loss=4.9639 cal=(0.8225, 0.98, 0.9925, 0.855, 0.0) score=0.8225
+[C AT=24 AP=14 C=2 epoch=09] loss=4.5977 cal=(0.83, 0.9825, 0.9925, 0.87, 0.0) score=0.8300
+[C AT=24 AP=14 C=2 epoch=10] loss=4.2810 cal=(0.8275, 0.985, 0.9925, 0.865, 0.0) score=0.8275
+[C AT=24 AP=14 C=2 epoch=11] loss=4.1097 cal=(0.8175, 0.9875, 0.985, 0.8575, 0.0) score=0.8175
+[C AT=24 AP=14 C=2 epoch=12] loss=3.9393 cal=(0.8175, 0.985, 0.99, 0.8725, 0.0) score=0.8175
+[C AT=24 AP=14 C=2 epoch=13] loss=3.7868 cal=(0.815, 0.99, 0.99, 0.8625, 0.0) score=0.8150
+[C AT=24 AP=14 C=2 epoch=14] loss=3.5719 cal=(0.8225, 0.99, 0.9875, 0.86, 0.0) score=0.8225
+[C AT=24 AP=14 C=2 epoch=15] loss=3.2932 cal=(0.82, 0.9875, 0.9925, 0.8725, 0.0) score=0.8200
+[C AT=24 AP=14 C=2 epoch=16] loss=3.0912 cal=(0.8125, 0.9875, 0.9925, 0.8575, 0.0) score=0.8125
+[C AT=24 AP=14 C=2 epoch=17] loss=3.1032 cal=(0.8025, 0.9825, 0.985, 0.85, 0.0) score=0.8025
+[C AT=24 AP=14 C=2 epoch=18] loss=3.2485 cal=(0.8225, 0.9825, 0.99, 0.8725, 0.0) score=0.8225
+[C AT=24 AP=14 C=2 epoch=19] loss=3.1430 cal=(0.79, 0.985, 0.99, 0.8575, 0.0) score=0.7900
+[C AT=24 AP=14 C=2 epoch=20] loss=2.9647 cal=(0.8075, 0.985, 0.99, 0.865, 0.0) score=0.8075
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L14__C_L2/das_c.pt
+[fit readout] C AT=24 AP=14 C=2 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=14 C=3 (missing checkpoint)
+[C AT=24 AP=14 C=3 epoch=01] loss=14.8076 cal=(0.645, 0.9725, 0.9975, 0.73, 0.0) score=0.6450
+[C AT=24 AP=14 C=3 epoch=02] loss=8.2410 cal=(0.7175, 0.99, 1.0, 0.7975, 0.0) score=0.7175
+[C AT=24 AP=14 C=3 epoch=03] loss=7.1564 cal=(0.7575, 0.98, 0.9975, 0.8375, 0.0) score=0.7575
+[C AT=24 AP=14 C=3 epoch=04] loss=6.5617 cal=(0.755, 0.98, 0.995, 0.8425, 0.0) score=0.7550
+[C AT=24 AP=14 C=3 epoch=05] loss=6.2272 cal=(0.7575, 0.99, 0.9975, 0.8475, 0.0) score=0.7575
+[C AT=24 AP=14 C=3 epoch=06] loss=6.0000 cal=(0.755, 0.9825, 1.0, 0.8425, 0.0) score=0.7550
+[C AT=24 AP=14 C=3 epoch=07] loss=5.8846 cal=(0.7675, 0.9825, 0.995, 0.85, 0.0) score=0.7675
+[C AT=24 AP=14 C=3 epoch=08] loss=5.7529 cal=(0.7625, 0.98, 0.9925, 0.83, 0.0) score=0.7625
+[C AT=24 AP=14 C=3 epoch=09] loss=5.4323 cal=(0.7825, 0.9775, 0.995, 0.83, 0.0) score=0.7825
+[C AT=24 AP=14 C=3 epoch=10] loss=5.1244 cal=(0.775, 0.985, 0.9925, 0.835, 0.0) score=0.7750
+[C AT=24 AP=14 C=3 epoch=11] loss=4.8412 cal=(0.7975, 0.9875, 0.9925, 0.85, 0.0) score=0.7975
+[C AT=24 AP=14 C=3 epoch=12] loss=4.6377 cal=(0.7525, 0.9775, 0.9875, 0.815, 0.0) score=0.7525
+[C AT=24 AP=14 C=3 epoch=13] loss=4.6551 cal=(0.7775, 0.98, 0.9925, 0.8275, 0.0) score=0.7775
+[C AT=24 AP=14 C=3 epoch=14] loss=4.4931 cal=(0.785, 0.975, 0.99, 0.84, 0.0) score=0.7850
+[C AT=24 AP=14 C=3 epoch=15] loss=4.3690 cal=(0.7875, 0.975, 0.9875, 0.8525, 0.0) score=0.7875
+[C AT=24 AP=14 C=3 epoch=16] loss=4.3425 cal=(0.7725, 0.975, 0.985, 0.825, 0.0) score=0.7725
+[C AT=24 AP=14 C=3 epoch=17] loss=4.2243 cal=(0.77, 0.9775, 0.985, 0.81, 0.0) score=0.7700
+[C AT=24 AP=14 C=3 epoch=18] loss=4.0441 cal=(0.78, 0.98, 0.9875, 0.845, 0.0) score=0.7800
+[C AT=24 AP=14 C=3 epoch=19] loss=3.7952 cal=(0.7825, 0.9775, 0.9875, 0.83, 0.0) score=0.7825
+[C AT=24 AP=14 C=3 epoch=20] loss=3.6569 cal=(0.7775, 0.97, 0.985, 0.8275, 0.0) score=0.7775
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L14__C_L3/das_c.pt
+[fit readout] C AT=24 AP=14 C=3 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=14 C=4 (missing checkpoint)
+[C AT=24 AP=14 C=4 epoch=01] loss=14.9879 cal=(0.665, 0.9725, 0.995, 0.7675, 0.0) score=0.6650
+[C AT=24 AP=14 C=4 epoch=02] loss=7.9206 cal=(0.735, 0.995, 0.9975, 0.82, 0.0) score=0.7350
+[C AT=24 AP=14 C=4 epoch=03] loss=6.8353 cal=(0.77, 0.9875, 0.9975, 0.8575, 0.0) score=0.7700
+[C AT=24 AP=14 C=4 epoch=04] loss=6.2906 cal=(0.79, 0.9875, 0.9975, 0.845, 0.0) score=0.7900
+[C AT=24 AP=14 C=4 epoch=05] loss=6.0327 cal=(0.8025, 0.985, 0.995, 0.88, 0.0) score=0.8025
+[C AT=24 AP=14 C=4 epoch=06] loss=5.7424 cal=(0.7925, 0.985, 0.9975, 0.86, 0.0) score=0.7925
+[C AT=24 AP=14 C=4 epoch=07] loss=5.4876 cal=(0.8, 0.98, 0.99, 0.865, 0.0) score=0.8000
+[C AT=24 AP=14 C=4 epoch=08] loss=5.3416 cal=(0.8125, 0.975, 0.9875, 0.8575, 0.0) score=0.8125
+[C AT=24 AP=14 C=4 epoch=09] loss=5.0527 cal=(0.8025, 0.98, 0.99, 0.86, 0.0) score=0.8025
+[C AT=24 AP=14 C=4 epoch=10] loss=4.8929 cal=(0.7925, 0.9775, 0.99, 0.85, 0.0) score=0.7925
+[C AT=24 AP=14 C=4 epoch=11] loss=4.7926 cal=(0.815, 0.975, 0.99, 0.855, 0.0) score=0.8150
+[C AT=24 AP=14 C=4 epoch=12] loss=4.5206 cal=(0.81, 0.9825, 0.99, 0.865, 0.0) score=0.8100
+[C AT=24 AP=14 C=4 epoch=13] loss=4.3890 cal=(0.8075, 0.9675, 0.9875, 0.8575, 0.0) score=0.8075
+[C AT=24 AP=14 C=4 epoch=14] loss=4.1464 cal=(0.8, 0.985, 0.9875, 0.86, 0.0) score=0.8000
+[C AT=24 AP=14 C=4 epoch=15] loss=4.0042 cal=(0.8025, 0.98, 0.9875, 0.8625, 0.0) score=0.8025
+[C AT=24 AP=14 C=4 epoch=16] loss=3.8784 cal=(0.8075, 0.975, 0.9875, 0.855, 0.0) score=0.8075
+[C AT=24 AP=14 C=4 epoch=17] loss=3.7868 cal=(0.7975, 0.9775, 0.9825, 0.86, 0.0) score=0.7975
+[C AT=24 AP=14 C=4 epoch=18] loss=3.7098 cal=(0.7775, 0.9725, 0.99, 0.845, 0.0) score=0.7775
+[C AT=24 AP=14 C=4 epoch=19] loss=3.6823 cal=(0.7925, 0.97, 0.985, 0.85, 0.0) score=0.7925
+[C AT=24 AP=14 C=4 epoch=20] loss=3.6210 cal=(0.7925, 0.9825, 0.99, 0.865, 0.0) score=0.7925
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L14__C_L4/das_c.pt
+[fit readout] C AT=24 AP=14 C=4 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=15 C=0 (missing checkpoint)
+[C AT=24 AP=15 C=0 epoch=01] loss=12.6001 cal=(0.7125, 0.9875, 0.995, 0.79, 0.0) score=0.7125
+[C AT=24 AP=15 C=0 epoch=02] loss=7.7157 cal=(0.78, 0.9975, 0.9975, 0.86, 0.0) score=0.7800
+[C AT=24 AP=15 C=0 epoch=03] loss=6.5987 cal=(0.7875, 0.9975, 1.0, 0.8575, 0.0) score=0.7875
+[C AT=24 AP=15 C=0 epoch=04] loss=6.0790 cal=(0.8075, 0.9975, 0.995, 0.8725, 0.0) score=0.8075
+[C AT=24 AP=15 C=0 epoch=05] loss=5.6985 cal=(0.8275, 0.995, 1.0, 0.8825, 0.0) score=0.8275
+[C AT=24 AP=15 C=0 epoch=06] loss=5.3895 cal=(0.8525, 0.995, 0.9975, 0.8875, 0.0) score=0.8525
+[C AT=24 AP=15 C=0 epoch=07] loss=4.9010 cal=(0.84, 0.995, 0.9975, 0.875, 0.0) score=0.8400
+[C AT=24 AP=15 C=0 epoch=08] loss=4.6414 cal=(0.835, 0.995, 0.9975, 0.875, 0.0) score=0.8350
+[C AT=24 AP=15 C=0 epoch=09] loss=4.7578 cal=(0.84, 0.9925, 0.9925, 0.8825, 0.0) score=0.8400
+[C AT=24 AP=15 C=0 epoch=10] loss=4.3246 cal=(0.845, 0.9975, 0.995, 0.885, 0.0) score=0.8450
+[C AT=24 AP=15 C=0 epoch=11] loss=4.3461 cal=(0.855, 0.995, 0.995, 0.8825, 0.0) score=0.8550
+[C AT=24 AP=15 C=0 epoch=12] loss=3.8202 cal=(0.85, 0.9975, 0.995, 0.9025, 0.0) score=0.8500
+[C AT=24 AP=15 C=0 epoch=13] loss=3.4240 cal=(0.8775, 0.9975, 0.9975, 0.8975, 0.0) score=0.8775
+[C AT=24 AP=15 C=0 epoch=14] loss=3.3518 cal=(0.8675, 0.995, 0.9925, 0.9, 0.0) score=0.8675
+[C AT=24 AP=15 C=0 epoch=15] loss=3.2262 cal=(0.88, 1.0, 0.9975, 0.895, 0.0) score=0.8800
+[C AT=24 AP=15 C=0 epoch=16] loss=3.5241 cal=(0.8375, 0.995, 0.9875, 0.87, 0.0) score=0.8375
+[C AT=24 AP=15 C=0 epoch=17] loss=3.8102 cal=(0.855, 0.9975, 0.9925, 0.8925, 0.0) score=0.8550
+[C AT=24 AP=15 C=0 epoch=18] loss=3.3699 cal=(0.8725, 0.995, 0.9975, 0.885, 0.0) score=0.8725
+[C AT=24 AP=15 C=0 epoch=19] loss=2.9412 cal=(0.8725, 0.995, 0.99, 0.89, 0.0) score=0.8725
+[C AT=24 AP=15 C=0 epoch=20] loss=2.6512 cal=(0.88, 0.995, 0.9975, 0.8825, 0.0) score=0.8800
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L15__C_L0/das_c.pt
+[fit readout] C AT=24 AP=15 C=0 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=15 C=1 (missing checkpoint)
+[C AT=24 AP=15 C=1 epoch=01] loss=13.9536 cal=(0.6725, 0.9775, 0.99, 0.78, 0.0) score=0.6725
+[C AT=24 AP=15 C=1 epoch=02] loss=8.4065 cal=(0.735, 0.9925, 0.9875, 0.8425, 0.0) score=0.7350
+[C AT=24 AP=15 C=1 epoch=03] loss=7.2083 cal=(0.775, 0.9975, 0.9875, 0.85, 0.0) score=0.7750
+[C AT=24 AP=15 C=1 epoch=04] loss=6.6130 cal=(0.79, 0.995, 0.99, 0.845, 0.0) score=0.7900
+[C AT=24 AP=15 C=1 epoch=05] loss=6.1781 cal=(0.7775, 0.9925, 0.99, 0.8475, 0.0) score=0.7775
+[C AT=24 AP=15 C=1 epoch=06] loss=5.9423 cal=(0.795, 0.99, 0.9875, 0.8625, 0.0) score=0.7950
+[C AT=24 AP=15 C=1 epoch=07] loss=5.3548 cal=(0.8175, 0.995, 0.99, 0.8575, 0.0) score=0.8175
+[C AT=24 AP=15 C=1 epoch=08] loss=5.0231 cal=(0.8075, 0.99, 0.9775, 0.8625, 0.0) score=0.8075
+[C AT=24 AP=15 C=1 epoch=09] loss=4.8799 cal=(0.8375, 0.9825, 0.9875, 0.865, 0.0) score=0.8375
+[C AT=24 AP=15 C=1 epoch=10] loss=4.4635 cal=(0.81, 0.985, 0.98, 0.8625, 0.0) score=0.8100
+[C AT=24 AP=15 C=1 epoch=11] loss=4.1954 cal=(0.8425, 0.98, 0.98, 0.87, 0.0) score=0.8425
+[C AT=24 AP=15 C=1 epoch=12] loss=3.9743 cal=(0.845, 0.9875, 0.9775, 0.875, 0.0) score=0.8450
+[C AT=24 AP=15 C=1 epoch=13] loss=3.8122 cal=(0.8425, 0.9825, 0.9775, 0.87, 0.0) score=0.8425
+[C AT=24 AP=15 C=1 epoch=14] loss=3.6122 cal=(0.835, 0.9875, 0.9775, 0.86, 0.0) score=0.8350
+[C AT=24 AP=15 C=1 epoch=15] loss=3.6285 cal=(0.8225, 0.9825, 0.97, 0.875, 0.0) score=0.8225
+[C AT=24 AP=15 C=1 epoch=16] loss=3.7365 cal=(0.8225, 0.9825, 0.9775, 0.865, 0.0) score=0.8225
+[C AT=24 AP=15 C=1 epoch=17] loss=3.3068 cal=(0.835, 0.9825, 0.975, 0.865, 0.0) score=0.8350
+[C AT=24 AP=15 C=1 epoch=18] loss=3.0452 cal=(0.8225, 0.985, 0.975, 0.8525, 0.0) score=0.8225
+[C AT=24 AP=15 C=1 epoch=19] loss=2.9371 cal=(0.8275, 0.9825, 0.97, 0.87, 0.0) score=0.8275
+[C AT=24 AP=15 C=1 epoch=20] loss=2.8447 cal=(0.83, 0.9775, 0.9775, 0.8625, 0.0) score=0.8300
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L15__C_L1/das_c.pt
+[fit readout] C AT=24 AP=15 C=1 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=15 C=2 (missing checkpoint)
+[C AT=24 AP=15 C=2 epoch=01] loss=14.3595 cal=(0.695, 0.98, 0.9875, 0.7825, 0.0) score=0.6950
+[C AT=24 AP=15 C=2 epoch=02] loss=8.2498 cal=(0.7425, 0.9925, 0.9925, 0.83, 0.0) score=0.7425
+[C AT=24 AP=15 C=2 epoch=03] loss=7.0872 cal=(0.7975, 0.9925, 0.9875, 0.8525, 0.0) score=0.7975
+[C AT=24 AP=15 C=2 epoch=04] loss=6.4327 cal=(0.81, 0.99, 0.9875, 0.86, 0.0) score=0.8100
+[C AT=24 AP=15 C=2 epoch=05] loss=6.0982 cal=(0.795, 0.99, 0.99, 0.8475, 0.0) score=0.7950
+[C AT=24 AP=15 C=2 epoch=06] loss=5.8559 cal=(0.81, 0.9875, 0.9875, 0.86, 0.0) score=0.8100
+[C AT=24 AP=15 C=2 epoch=07] loss=5.4732 cal=(0.8275, 0.99, 0.99, 0.8575, 0.0) score=0.8275
+[C AT=24 AP=15 C=2 epoch=08] loss=5.0925 cal=(0.82, 0.99, 0.985, 0.8675, 0.0) score=0.8200
+[C AT=24 AP=15 C=2 epoch=09] loss=4.9190 cal=(0.8, 0.98, 0.975, 0.8475, 0.0) score=0.8000
+[C AT=24 AP=15 C=2 epoch=10] loss=4.7827 cal=(0.805, 0.98, 0.985, 0.86, 0.0) score=0.8050
+[C AT=24 AP=15 C=2 epoch=11] loss=4.4354 cal=(0.8175, 0.98, 0.9775, 0.8675, 0.0) score=0.8175
+[C AT=24 AP=15 C=2 epoch=12] loss=4.2023 cal=(0.8075, 0.98, 0.98, 0.8675, 0.0) score=0.8075
+[C AT=24 AP=15 C=2 epoch=13] loss=4.0079 cal=(0.8125, 0.9825, 0.975, 0.855, 0.0) score=0.8125
+[C AT=24 AP=15 C=2 epoch=14] loss=3.7553 cal=(0.8075, 0.9775, 0.9725, 0.86, 0.0) score=0.8075
+[C AT=24 AP=15 C=2 epoch=15] loss=3.5527 cal=(0.805, 0.98, 0.9725, 0.855, 0.0) score=0.8050
+[C AT=24 AP=15 C=2 epoch=16] loss=3.4058 cal=(0.81, 0.9725, 0.9725, 0.85, 0.0) score=0.8100
+[C AT=24 AP=15 C=2 epoch=17] loss=3.3231 cal=(0.83, 0.9825, 0.98, 0.8625, 0.0) score=0.8300
+[C AT=24 AP=15 C=2 epoch=18] loss=3.2662 cal=(0.82, 0.975, 0.975, 0.8575, 0.0) score=0.8200
+[C AT=24 AP=15 C=2 epoch=19] loss=3.1487 cal=(0.8075, 0.9775, 0.9725, 0.8525, 0.0) score=0.8075
+[C AT=24 AP=15 C=2 epoch=20] loss=3.2216 cal=(0.8, 0.9775, 0.9725, 0.855, 0.0) score=0.8000
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L15__C_L2/das_c.pt
+[fit readout] C AT=24 AP=15 C=2 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=15 C=3 (missing checkpoint)
+[C AT=24 AP=15 C=3 epoch=01] loss=15.3040 cal=(0.645, 0.965, 0.9825, 0.73, 0.0) score=0.6450
+[C AT=24 AP=15 C=3 epoch=02] loss=8.8581 cal=(0.7175, 0.9925, 0.985, 0.7875, 0.0) score=0.7175
+[C AT=24 AP=15 C=3 epoch=03] loss=7.6908 cal=(0.735, 0.985, 0.9875, 0.82, 0.0) score=0.7350
+[C AT=24 AP=15 C=3 epoch=04] loss=7.0609 cal=(0.73, 0.9875, 0.9825, 0.8225, 0.0) score=0.7300
+[C AT=24 AP=15 C=3 epoch=05] loss=6.7277 cal=(0.75, 0.985, 0.9825, 0.825, 0.0) score=0.7500
+[C AT=24 AP=15 C=3 epoch=06] loss=6.5064 cal=(0.7625, 0.98, 0.9775, 0.8375, 0.0) score=0.7625
+[C AT=24 AP=15 C=3 epoch=07] loss=6.1851 cal=(0.7825, 0.9875, 0.9825, 0.84, 0.0) score=0.7825
+[C AT=24 AP=15 C=3 epoch=08] loss=5.8733 cal=(0.755, 0.985, 0.9775, 0.8275, 0.0) score=0.7550
+[C AT=24 AP=15 C=3 epoch=09] loss=5.6641 cal=(0.79, 0.9825, 0.9825, 0.84, 0.0) score=0.7900
+[C AT=24 AP=15 C=3 epoch=10] loss=5.4286 cal=(0.7875, 0.985, 0.98, 0.84, 0.0) score=0.7875
+[C AT=24 AP=15 C=3 epoch=11] loss=5.2729 cal=(0.7775, 0.9875, 0.98, 0.84, 0.0) score=0.7775
+[C AT=24 AP=15 C=3 epoch=12] loss=5.1754 cal=(0.775, 0.9725, 0.975, 0.8225, 0.0) score=0.7750
+[C AT=24 AP=15 C=3 epoch=13] loss=5.0441 cal=(0.7875, 0.9825, 0.9725, 0.845, 0.0) score=0.7875
+[C AT=24 AP=15 C=3 epoch=14] loss=4.8365 cal=(0.7825, 0.9775, 0.9725, 0.835, 0.0) score=0.7825
+[C AT=24 AP=15 C=3 epoch=15] loss=4.6166 cal=(0.79, 0.9775, 0.9775, 0.8325, 0.0) score=0.7900
+[C AT=24 AP=15 C=3 epoch=16] loss=4.4349 cal=(0.79, 0.9775, 0.9775, 0.8325, 0.0) score=0.7900
+[C AT=24 AP=15 C=3 epoch=17] loss=4.3245 cal=(0.7875, 0.9725, 0.97, 0.8175, 0.0) score=0.7875
+[C AT=24 AP=15 C=3 epoch=18] loss=4.5481 cal=(0.7675, 0.975, 0.98, 0.825, 0.0) score=0.7675
+[C AT=24 AP=15 C=3 epoch=19] loss=4.3045 cal=(0.7725, 0.9725, 0.9775, 0.8375, 0.0) score=0.7725
+[C AT=24 AP=15 C=3 epoch=20] loss=4.1022 cal=(0.7875, 0.9725, 0.98, 0.8325, 0.0) score=0.7875
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L15__C_L3/das_c.pt
+[fit readout] C AT=24 AP=15 C=3 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=24 AP=15 C=4 (missing checkpoint)
+[C AT=24 AP=15 C=4 epoch=01] loss=15.2899 cal=(0.66, 0.9775, 0.98, 0.74, 0.0) score=0.6600
+[C AT=24 AP=15 C=4 epoch=02] loss=8.5666 cal=(0.72, 0.9925, 0.985, 0.81, 0.0) score=0.7200
+[C AT=24 AP=15 C=4 epoch=03] loss=7.4144 cal=(0.7625, 0.985, 0.985, 0.8475, 0.0) score=0.7625
+[C AT=24 AP=15 C=4 epoch=04] loss=6.7758 cal=(0.79, 0.98, 0.9875, 0.865, 0.0) score=0.7900
+[C AT=24 AP=15 C=4 epoch=05] loss=6.4666 cal=(0.7925, 0.985, 0.9875, 0.8675, 0.0) score=0.7925
+[C AT=24 AP=15 C=4 epoch=06] loss=6.2846 cal=(0.785, 0.9775, 0.985, 0.86, 0.0) score=0.7850
+[C AT=24 AP=15 C=4 epoch=07] loss=5.9934 cal=(0.8, 0.985, 0.9875, 0.8625, 0.0) score=0.8000
+[C AT=24 AP=15 C=4 epoch=08] loss=5.6966 cal=(0.795, 0.975, 0.985, 0.865, 0.0) score=0.7950
+[C AT=24 AP=15 C=4 epoch=09] loss=5.4338 cal=(0.805, 0.9775, 0.9825, 0.8575, 0.0) score=0.8050
+[C AT=24 AP=15 C=4 epoch=10] loss=5.1964 cal=(0.805, 0.975, 0.98, 0.87, 0.0) score=0.8050
+[C AT=24 AP=15 C=4 epoch=11] loss=5.1118 cal=(0.8, 0.9725, 0.9775, 0.86, 0.0) score=0.8000
+[C AT=24 AP=15 C=4 epoch=12] loss=4.9059 cal=(0.8, 0.975, 0.98, 0.8725, 0.0) score=0.8000
+[C AT=24 AP=15 C=4 epoch=13] loss=4.8362 cal=(0.795, 0.9725, 0.98, 0.8575, 0.0) score=0.7950
+[C AT=24 AP=15 C=4 epoch=14] loss=4.7344 cal=(0.8075, 0.975, 0.985, 0.86, 0.0) score=0.8075
+[C AT=24 AP=15 C=4 epoch=15] loss=4.4517 cal=(0.8, 0.97, 0.98, 0.865, 0.0) score=0.8000
+[C AT=24 AP=15 C=4 epoch=16] loss=4.2782 cal=(0.795, 0.97, 0.9825, 0.8525, 0.0) score=0.7950
+[C AT=24 AP=15 C=4 epoch=17] loss=4.1921 cal=(0.775, 0.97, 0.98, 0.83, 0.0) score=0.7750
+[C AT=24 AP=15 C=4 epoch=18] loss=4.1671 cal=(0.785, 0.9675, 0.9825, 0.8375, 0.0) score=0.7850
+[C AT=24 AP=15 C=4 epoch=19] loss=4.0834 cal=(0.7875, 0.96, 0.9775, 0.8375, 0.0) score=0.7875
+[C AT=24 AP=15 C=4 epoch=20] loss=3.9716 cal=(0.785, 0.9625, 0.97, 0.845, 0.0) score=0.7850
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L24__AP_L15__C_L4/das_c.pt
+[fit readout] C AT=24 AP=15 C=4 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=5 C=0 (missing checkpoint)
+[C AT=25 AP=5 C=0 epoch=01] loss=20.8260 cal=(0.6975, 0.25, 0.78, 0.78, 0.0) score=0.2500
+[C AT=25 AP=5 C=0 epoch=02] loss=15.9244 cal=(0.74, 0.2825, 0.8575, 0.805, 0.0) score=0.2825
+[C AT=25 AP=5 C=0 epoch=03] loss=14.7247 cal=(0.7275, 0.3375, 0.8725, 0.8075, 0.0) score=0.3375
+[C AT=25 AP=5 C=0 epoch=04] loss=14.2191 cal=(0.7475, 0.33, 0.8475, 0.8125, 0.0) score=0.3300
+[C AT=25 AP=5 C=0 epoch=05] loss=13.6436 cal=(0.74, 0.3825, 0.88, 0.8175, 0.0) score=0.3825
+[C AT=25 AP=5 C=0 epoch=06] loss=13.5234 cal=(0.735, 0.325, 0.8175, 0.8, 0.0) score=0.3250
+[C AT=25 AP=5 C=0 epoch=07] loss=13.4402 cal=(0.7425, 0.4025, 0.8525, 0.8225, 0.0) score=0.4025
+[C AT=25 AP=5 C=0 epoch=08] loss=12.9467 cal=(0.7475, 0.3625, 0.855, 0.8225, 0.0) score=0.3625
+[C AT=25 AP=5 C=0 epoch=09] loss=13.0228 cal=(0.7375, 0.37, 0.865, 0.8325, 0.0) score=0.3700
+[C AT=25 AP=5 C=0 epoch=10] loss=12.5679 cal=(0.7475, 0.39, 0.8625, 0.8325, 0.0) score=0.3900
+[C AT=25 AP=5 C=0 epoch=11] loss=12.2917 cal=(0.7425, 0.3725, 0.87, 0.8225, 0.0) score=0.3725
+[C AT=25 AP=5 C=0 epoch=12] loss=12.4629 cal=(0.755, 0.38, 0.8675, 0.8225, 0.0) score=0.3800
+[C AT=25 AP=5 C=0 epoch=13] loss=12.2605 cal=(0.745, 0.335, 0.83, 0.82, 0.0) score=0.3350
+[C AT=25 AP=5 C=0 epoch=14] loss=12.8315 cal=(0.7425, 0.3875, 0.8625, 0.82, 0.0) score=0.3875
+[C AT=25 AP=5 C=0 epoch=15] loss=12.7241 cal=(0.755, 0.385, 0.8625, 0.8125, 0.0) score=0.3850
+[C AT=25 AP=5 C=0 epoch=16] loss=12.5468 cal=(0.7425, 0.38, 0.8625, 0.8225, 0.0) score=0.3800
+[C AT=25 AP=5 C=0 epoch=17] loss=12.0031 cal=(0.7475, 0.39, 0.8475, 0.82, 0.0) score=0.3900
+[C AT=25 AP=5 C=0 epoch=18] loss=11.7841 cal=(0.72, 0.365, 0.8125, 0.8025, 0.0) score=0.3650
+[C AT=25 AP=5 C=0 epoch=19] loss=12.0169 cal=(0.755, 0.39, 0.835, 0.8, 0.0) score=0.3900
+[C AT=25 AP=5 C=0 epoch=20] loss=11.3805 cal=(0.745, 0.395, 0.86, 0.8075, 0.0) score=0.3950
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L5__C_L0/das_c.pt
+[fit readout] C AT=25 AP=5 C=0 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=5 C=1 (missing checkpoint)
+[C AT=25 AP=5 C=1 epoch=01] loss=25.2799 cal=(0.66, 0.085, 0.26, 0.7575, 0.0) score=0.0850
+[C AT=25 AP=5 C=1 epoch=02] loss=20.0133 cal=(0.675, 0.12, 0.41, 0.78, 0.0) score=0.1200
+[C AT=25 AP=5 C=1 epoch=03] loss=18.5825 cal=(0.68, 0.1425, 0.4525, 0.8, 0.0) score=0.1425
+[C AT=25 AP=5 C=1 epoch=04] loss=17.9458 cal=(0.69, 0.145, 0.4475, 0.785, 0.0) score=0.1450
+[C AT=25 AP=5 C=1 epoch=05] loss=17.5419 cal=(0.705, 0.1525, 0.4425, 0.7975, 0.0) score=0.1525
+[C AT=25 AP=5 C=1 epoch=06] loss=17.2673 cal=(0.6825, 0.1475, 0.4625, 0.79, 0.0) score=0.1475
+[C AT=25 AP=5 C=1 epoch=07] loss=17.1062 cal=(0.6775, 0.1525, 0.4275, 0.775, 0.0) score=0.1525
+[C AT=25 AP=5 C=1 epoch=08] loss=17.5170 cal=(0.69, 0.15, 0.43, 0.775, 0.0) score=0.1500
+[C AT=25 AP=5 C=1 epoch=09] loss=16.6678 cal=(0.705, 0.1525, 0.4725, 0.7775, 0.0) score=0.1525
+[C AT=25 AP=5 C=1 epoch=10] loss=16.1891 cal=(0.6875, 0.16, 0.465, 0.765, 0.0) score=0.1600
+[C AT=25 AP=5 C=1 epoch=11] loss=17.5014 cal=(0.6675, 0.135, 0.3775, 0.765, 0.0) score=0.1350
+[C AT=25 AP=5 C=1 epoch=12] loss=17.0308 cal=(0.6875, 0.1325, 0.3975, 0.7625, 0.0) score=0.1325
+[C AT=25 AP=5 C=1 epoch=13] loss=17.0390 cal=(0.68, 0.1275, 0.425, 0.755, 0.0) score=0.1275
+[C AT=25 AP=5 C=1 epoch=14] loss=16.4096 cal=(0.6925, 0.14, 0.4275, 0.7675, 0.0) score=0.1400
+[C AT=25 AP=5 C=1 epoch=15] loss=16.0431 cal=(0.6875, 0.14, 0.465, 0.785, 0.0) score=0.1400
+[C AT=25 AP=5 C=1 epoch=16] loss=16.0526 cal=(0.675, 0.13, 0.425, 0.7625, 0.0) score=0.1300
+[C AT=25 AP=5 C=1 epoch=17] loss=16.2087 cal=(0.685, 0.1325, 0.4125, 0.7775, 0.0) score=0.1325
+[C AT=25 AP=5 C=1 epoch=18] loss=16.6304 cal=(0.675, 0.135, 0.4, 0.7675, 0.0) score=0.1350
+[C AT=25 AP=5 C=1 epoch=19] loss=16.6369 cal=(0.675, 0.145, 0.415, 0.78, 0.0) score=0.1450
+[C AT=25 AP=5 C=1 epoch=20] loss=15.9282 cal=(0.69, 0.1575, 0.435, 0.7725, 0.0) score=0.1575
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L5__C_L1/das_c.pt
+[fit readout] C AT=25 AP=5 C=1 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=5 C=2 (missing checkpoint)
+[C AT=25 AP=5 C=2 epoch=01] loss=26.2198 cal=(0.63, 0.0725, 0.2625, 0.7525, 0.0) score=0.0725
+[C AT=25 AP=5 C=2 epoch=02] loss=21.0967 cal=(0.6375, 0.0725, 0.2925, 0.75, 0.0) score=0.0725
+[C AT=25 AP=5 C=2 epoch=03] loss=19.7563 cal=(0.66, 0.0775, 0.3225, 0.765, 0.0) score=0.0775
+[C AT=25 AP=5 C=2 epoch=04] loss=19.1270 cal=(0.665, 0.0725, 0.3275, 0.7625, 0.0) score=0.0725
+[C AT=25 AP=5 C=2 epoch=05] loss=18.8638 cal=(0.6675, 0.0775, 0.31, 0.7725, 0.0) score=0.0775
+[C AT=25 AP=5 C=2 epoch=06] loss=18.6342 cal=(0.675, 0.08, 0.325, 0.7675, 0.0) score=0.0800
+[C AT=25 AP=5 C=2 epoch=07] loss=18.1877 cal=(0.6775, 0.0925, 0.3325, 0.7575, 0.0) score=0.0925
+[C AT=25 AP=5 C=2 epoch=08] loss=17.9307 cal=(0.675, 0.08, 0.3325, 0.77, 0.0) score=0.0800
+[C AT=25 AP=5 C=2 epoch=09] loss=17.6836 cal=(0.6875, 0.095, 0.3125, 0.7825, 0.0) score=0.0950
+[C AT=25 AP=5 C=2 epoch=10] loss=17.7946 cal=(0.675, 0.0875, 0.3325, 0.7625, 0.0) score=0.0875
+[C AT=25 AP=5 C=2 epoch=11] loss=17.8490 cal=(0.665, 0.0825, 0.29, 0.7575, 0.0) score=0.0825
+[C AT=25 AP=5 C=2 epoch=12] loss=17.6341 cal=(0.675, 0.08, 0.3325, 0.7675, 0.0) score=0.0800
+[C AT=25 AP=5 C=2 epoch=13] loss=17.1075 cal=(0.675, 0.0975, 0.3225, 0.765, 0.0) score=0.0975
+[C AT=25 AP=5 C=2 epoch=14] loss=16.9811 cal=(0.675, 0.0925, 0.3125, 0.7525, 0.0) score=0.0925
+[C AT=25 AP=5 C=2 epoch=15] loss=16.9359 cal=(0.6825, 0.085, 0.3325, 0.77, 0.0) score=0.0850
+[C AT=25 AP=5 C=2 epoch=16] loss=16.7610 cal=(0.6725, 0.09, 0.34, 0.765, 0.0) score=0.0900
+[C AT=25 AP=5 C=2 epoch=17] loss=16.4426 cal=(0.675, 0.1, 0.335, 0.77, 0.0) score=0.1000
+[C AT=25 AP=5 C=2 epoch=18] loss=16.4057 cal=(0.665, 0.085, 0.325, 0.75, 0.0) score=0.0850
+[C AT=25 AP=5 C=2 epoch=19] loss=16.8796 cal=(0.67, 0.0825, 0.29, 0.76, 0.0) score=0.0825
+[C AT=25 AP=5 C=2 epoch=20] loss=16.9734 cal=(0.6525, 0.07, 0.2675, 0.7375, 0.0) score=0.0700
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L5__C_L2/das_c.pt
+[fit readout] C AT=25 AP=5 C=2 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=5 C=3 (missing checkpoint)
+[C AT=25 AP=5 C=3 epoch=01] loss=29.9833 cal=(0.615, 0.0225, 0.0225, 0.7025, 0.0) score=0.0225
+[C AT=25 AP=5 C=3 epoch=02] loss=25.3412 cal=(0.63, 0.0325, 0.0575, 0.72, 0.0) score=0.0325
+[C AT=25 AP=5 C=3 epoch=03] loss=23.8026 cal=(0.6275, 0.035, 0.1125, 0.735, 0.0) score=0.0350
+[C AT=25 AP=5 C=3 epoch=04] loss=22.8934 cal=(0.615, 0.0325, 0.1125, 0.7375, 0.0) score=0.0325
+[C AT=25 AP=5 C=3 epoch=05] loss=22.4116 cal=(0.62, 0.0325, 0.11, 0.73, 0.0) score=0.0325
+[C AT=25 AP=5 C=3 epoch=06] loss=22.2758 cal=(0.6125, 0.0425, 0.1175, 0.7475, 0.0) score=0.0425
+[C AT=25 AP=5 C=3 epoch=07] loss=21.7556 cal=(0.615, 0.0425, 0.125, 0.7225, 0.0) score=0.0425
+[C AT=25 AP=5 C=3 epoch=08] loss=21.5496 cal=(0.5975, 0.0375, 0.1175, 0.71, 0.0) score=0.0375
+[C AT=25 AP=5 C=3 epoch=09] loss=21.4312 cal=(0.635, 0.0425, 0.13, 0.73, 0.0) score=0.0425
+[C AT=25 AP=5 C=3 epoch=10] loss=21.1475 cal=(0.6275, 0.0475, 0.135, 0.715, 0.0) score=0.0475
+[C AT=25 AP=5 C=3 epoch=11] loss=20.9381 cal=(0.625, 0.045, 0.15, 0.7225, 0.0) score=0.0450
+[C AT=25 AP=5 C=3 epoch=12] loss=20.9501 cal=(0.6275, 0.045, 0.1425, 0.7225, 0.0) score=0.0450
+[C AT=25 AP=5 C=3 epoch=13] loss=20.8591 cal=(0.615, 0.045, 0.1425, 0.7125, 0.0) score=0.0450
+[C AT=25 AP=5 C=3 epoch=14] loss=20.6343 cal=(0.63, 0.0475, 0.145, 0.7275, 0.0) score=0.0475
+[C AT=25 AP=5 C=3 epoch=15] loss=20.4739 cal=(0.6425, 0.0425, 0.1425, 0.7275, 0.0) score=0.0425
+[C AT=25 AP=5 C=3 epoch=16] loss=20.3860 cal=(0.6375, 0.05, 0.1425, 0.7325, 0.0) score=0.0500
+[C AT=25 AP=5 C=3 epoch=17] loss=20.3035 cal=(0.6275, 0.045, 0.1425, 0.7325, 0.0) score=0.0450
+[C AT=25 AP=5 C=3 epoch=18] loss=20.4092 cal=(0.6075, 0.0475, 0.125, 0.725, 0.0) score=0.0475
+[C AT=25 AP=5 C=3 epoch=19] loss=20.3797 cal=(0.615, 0.0425, 0.14, 0.71, 0.0) score=0.0425
+[C AT=25 AP=5 C=3 epoch=20] loss=20.1586 cal=(0.6225, 0.0425, 0.14, 0.7275, 0.0) score=0.0425
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L5__C_L3/das_c.pt
+[fit readout] C AT=25 AP=5 C=3 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=5 C=4 (missing checkpoint)
+[C AT=25 AP=5 C=4 epoch=01] loss=29.8919 cal=(0.6175, 0.0275, 0.04, 0.7125, 0.0) score=0.0275
+[C AT=25 AP=5 C=4 epoch=02] loss=25.6921 cal=(0.66, 0.03, 0.0425, 0.755, 0.0) score=0.0300
+[C AT=25 AP=5 C=4 epoch=03] loss=24.6834 cal=(0.675, 0.03, 0.05, 0.7675, 0.0) score=0.0300
+[C AT=25 AP=5 C=4 epoch=04] loss=24.1417 cal=(0.69, 0.02, 0.05, 0.7825, 0.0) score=0.0200
+[C AT=25 AP=5 C=4 epoch=05] loss=23.7949 cal=(0.67, 0.025, 0.0525, 0.7825, 0.0) score=0.0250
+[C AT=25 AP=5 C=4 epoch=06] loss=23.6003 cal=(0.6875, 0.0325, 0.05, 0.78, 0.0) score=0.0325
+[C AT=25 AP=5 C=4 epoch=07] loss=23.4445 cal=(0.6925, 0.03, 0.05, 0.7825, 0.0) score=0.0300
+[C AT=25 AP=5 C=4 epoch=08] loss=23.2200 cal=(0.6675, 0.035, 0.0525, 0.7725, 0.0) score=0.0350
+[C AT=25 AP=5 C=4 epoch=09] loss=22.9564 cal=(0.7, 0.0225, 0.055, 0.7675, 0.0) score=0.0225
+[C AT=25 AP=5 C=4 epoch=10] loss=22.7806 cal=(0.695, 0.02, 0.0475, 0.7775, 0.0) score=0.0200
+[C AT=25 AP=5 C=4 epoch=11] loss=22.6873 cal=(0.7, 0.025, 0.055, 0.7925, 0.0) score=0.0250
+[C AT=25 AP=5 C=4 epoch=12] loss=22.4741 cal=(0.685, 0.0275, 0.055, 0.765, 0.0) score=0.0275
+[C AT=25 AP=5 C=4 epoch=13] loss=22.5360 cal=(0.6675, 0.0275, 0.0525, 0.775, 0.0) score=0.0275
+[C AT=25 AP=5 C=4 epoch=14] loss=22.4118 cal=(0.68, 0.0275, 0.055, 0.7625, 0.0) score=0.0275
+[C AT=25 AP=5 C=4 epoch=15] loss=22.1983 cal=(0.6925, 0.0325, 0.065, 0.77, 0.0) score=0.0325
+[C AT=25 AP=5 C=4 epoch=16] loss=22.0915 cal=(0.68, 0.0275, 0.0575, 0.7525, 0.0) score=0.0275
+[C AT=25 AP=5 C=4 epoch=17] loss=22.2617 cal=(0.665, 0.025, 0.0475, 0.745, 0.0) score=0.0250
+[C AT=25 AP=5 C=4 epoch=18] loss=22.2289 cal=(0.6875, 0.0225, 0.0575, 0.76, 0.0) score=0.0225
+[C AT=25 AP=5 C=4 epoch=19] loss=21.9301 cal=(0.6875, 0.0225, 0.05, 0.76, 0.0) score=0.0225
+[C AT=25 AP=5 C=4 epoch=20] loss=21.9410 cal=(0.6825, 0.0275, 0.055, 0.765, 0.0) score=0.0275
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L5__C_L4/das_c.pt
+[fit readout] C AT=25 AP=5 C=4 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=6 C=0 (missing checkpoint)
+[C AT=25 AP=6 C=0 epoch=01] loss=16.7714 cal=(0.675, 0.695, 0.9825, 0.765, 0.0) score=0.6750
+[C AT=25 AP=6 C=0 epoch=02] loss=11.3398 cal=(0.7275, 0.7775, 0.99, 0.81, 0.0) score=0.7275
+[C AT=25 AP=6 C=0 epoch=03] loss=9.9772 cal=(0.735, 0.7975, 0.9925, 0.8275, 0.0) score=0.7350
+[C AT=25 AP=6 C=0 epoch=04] loss=9.2820 cal=(0.75, 0.8, 0.9925, 0.83, 0.0) score=0.7500
+[C AT=25 AP=6 C=0 epoch=05] loss=8.9106 cal=(0.77, 0.8075, 0.99, 0.8425, 0.0) score=0.7700
+[C AT=25 AP=6 C=0 epoch=06] loss=8.7263 cal=(0.7525, 0.79, 0.99, 0.8275, 0.0) score=0.7525
+[C AT=25 AP=6 C=0 epoch=07] loss=8.6602 cal=(0.775, 0.76, 0.9875, 0.8425, 0.0) score=0.7600
+[C AT=25 AP=6 C=0 epoch=08] loss=9.6833 cal=(0.765, 0.765, 0.9875, 0.825, 0.0) score=0.7650
+[C AT=25 AP=6 C=0 epoch=09] loss=8.9480 cal=(0.7775, 0.7925, 0.995, 0.835, 0.0) score=0.7775
+[C AT=25 AP=6 C=0 epoch=10] loss=8.1079 cal=(0.805, 0.8, 0.9925, 0.8375, 0.0) score=0.8000
+[C AT=25 AP=6 C=0 epoch=11] loss=7.9592 cal=(0.7775, 0.7925, 0.9925, 0.825, 0.0) score=0.7775
+[C AT=25 AP=6 C=0 epoch=12] loss=8.4003 cal=(0.8, 0.815, 0.995, 0.8425, 0.0) score=0.8000
+[C AT=25 AP=6 C=0 epoch=13] loss=8.2584 cal=(0.785, 0.8025, 0.99, 0.835, 0.0) score=0.7850
+[C AT=25 AP=6 C=0 epoch=14] loss=8.1807 cal=(0.8075, 0.81, 0.9925, 0.8475, 0.0) score=0.8075
+[C AT=25 AP=6 C=0 epoch=15] loss=7.5331 cal=(0.8075, 0.8175, 0.9925, 0.855, 0.0) score=0.8075
+[C AT=25 AP=6 C=0 epoch=16] loss=7.2247 cal=(0.81, 0.815, 0.9925, 0.86, 0.0) score=0.8100
+[C AT=25 AP=6 C=0 epoch=17] loss=7.2995 cal=(0.795, 0.81, 0.9925, 0.8325, 0.0) score=0.7950
+[C AT=25 AP=6 C=0 epoch=18] loss=7.0335 cal=(0.8225, 0.82, 0.9925, 0.8575, 0.0) score=0.8200
+[C AT=25 AP=6 C=0 epoch=19] loss=6.7416 cal=(0.7925, 0.815, 0.9925, 0.8225, 0.0) score=0.7925
+[C AT=25 AP=6 C=0 epoch=20] loss=7.1063 cal=(0.8025, 0.8, 0.9925, 0.8425, 0.0) score=0.8000
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L6__C_L0/das_c.pt
+[fit readout] C AT=25 AP=6 C=0 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=6 C=1 (missing checkpoint)
+[C AT=25 AP=6 C=1 epoch=01] loss=19.0054 cal=(0.6675, 0.5025, 0.94, 0.76, 0.0) score=0.5025
+[C AT=25 AP=6 C=1 epoch=02] loss=13.8617 cal=(0.6975, 0.59, 0.9625, 0.7925, 0.0) score=0.5900
+[C AT=25 AP=6 C=1 epoch=03] loss=12.4465 cal=(0.71, 0.6425, 0.9675, 0.8125, 0.0) score=0.6425
+[C AT=25 AP=6 C=1 epoch=04] loss=11.6357 cal=(0.7425, 0.665, 0.9725, 0.8225, 0.0) score=0.6650
+[C AT=25 AP=6 C=1 epoch=05] loss=11.2966 cal=(0.715, 0.63, 0.9675, 0.82, 0.0) score=0.6300
+[C AT=25 AP=6 C=1 epoch=06] loss=11.1034 cal=(0.7375, 0.6525, 0.9725, 0.81, 0.0) score=0.6525
+[C AT=25 AP=6 C=1 epoch=07] loss=10.8904 cal=(0.725, 0.6375, 0.97, 0.8, 0.0) score=0.6375
+[C AT=25 AP=6 C=1 epoch=08] loss=10.7039 cal=(0.73, 0.61, 0.9675, 0.8125, 0.0) score=0.6100
+[C AT=25 AP=6 C=1 epoch=09] loss=11.0991 cal=(0.73, 0.64, 0.97, 0.835, 0.0) score=0.6400
+[C AT=25 AP=6 C=1 epoch=10] loss=10.3300 cal=(0.7375, 0.6475, 0.975, 0.81, 0.0) score=0.6475
+[C AT=25 AP=6 C=1 epoch=11] loss=10.1763 cal=(0.7425, 0.645, 0.9775, 0.82, 0.0) score=0.6450
+[C AT=25 AP=6 C=1 epoch=12] loss=9.7761 cal=(0.7275, 0.6625, 0.9775, 0.8275, 0.0) score=0.6625
+[C AT=25 AP=6 C=1 epoch=13] loss=9.7534 cal=(0.735, 0.6375, 0.97, 0.815, 0.0) score=0.6375
+[C AT=25 AP=6 C=1 epoch=14] loss=10.1447 cal=(0.7325, 0.63, 0.9675, 0.815, 0.0) score=0.6300
+[C AT=25 AP=6 C=1 epoch=15] loss=9.7536 cal=(0.73, 0.665, 0.9675, 0.81, 0.0) score=0.6650
+[C AT=25 AP=6 C=1 epoch=16] loss=9.3854 cal=(0.75, 0.68, 0.975, 0.8325, 0.0) score=0.6800
+[C AT=25 AP=6 C=1 epoch=17] loss=9.3172 cal=(0.735, 0.625, 0.9725, 0.82, 0.0) score=0.6250
+[C AT=25 AP=6 C=1 epoch=18] loss=9.8442 cal=(0.7275, 0.6425, 0.97, 0.805, 0.0) score=0.6425
+[C AT=25 AP=6 C=1 epoch=19] loss=9.4324 cal=(0.735, 0.675, 0.975, 0.81, 0.0) score=0.6750
+[C AT=25 AP=6 C=1 epoch=20] loss=8.8259 cal=(0.74, 0.6625, 0.9725, 0.81, 0.0) score=0.6625
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L6__C_L1/das_c.pt
+[fit readout] C AT=25 AP=6 C=1 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=6 C=2 (missing checkpoint)
+[C AT=25 AP=6 C=2 epoch=01] loss=19.2899 cal=(0.655, 0.47, 0.94, 0.7525, 0.0) score=0.4700
+[C AT=25 AP=6 C=2 epoch=02] loss=14.1964 cal=(0.6925, 0.565, 0.9525, 0.7925, 0.0) score=0.5650
+[C AT=25 AP=6 C=2 epoch=03] loss=12.7518 cal=(0.715, 0.6025, 0.9625, 0.8075, 0.0) score=0.6025
+[C AT=25 AP=6 C=2 epoch=04] loss=12.0341 cal=(0.73, 0.6125, 0.96, 0.7975, 0.0) score=0.6125
+[C AT=25 AP=6 C=2 epoch=05] loss=11.6519 cal=(0.7325, 0.6025, 0.965, 0.8125, 0.0) score=0.6025
+[C AT=25 AP=6 C=2 epoch=06] loss=11.5128 cal=(0.7125, 0.5925, 0.9625, 0.7925, 0.0) score=0.5925
+[C AT=25 AP=6 C=2 epoch=07] loss=11.4236 cal=(0.7375, 0.625, 0.975, 0.8175, 0.0) score=0.6250
+[C AT=25 AP=6 C=2 epoch=08] loss=10.7204 cal=(0.725, 0.63, 0.975, 0.81, 0.0) score=0.6300
+[C AT=25 AP=6 C=2 epoch=09] loss=10.3587 cal=(0.7225, 0.63, 0.975, 0.8075, 0.0) score=0.6300
+[C AT=25 AP=6 C=2 epoch=10] loss=10.3727 cal=(0.7225, 0.61, 0.97, 0.82, 0.0) score=0.6100
+[C AT=25 AP=6 C=2 epoch=11] loss=10.2699 cal=(0.725, 0.6275, 0.965, 0.825, 0.0) score=0.6275
+[C AT=25 AP=6 C=2 epoch=12] loss=9.8781 cal=(0.7125, 0.625, 0.9725, 0.8075, 0.0) score=0.6250
+[C AT=25 AP=6 C=2 epoch=13] loss=9.5676 cal=(0.72, 0.61, 0.9675, 0.795, 0.0) score=0.6100
+[C AT=25 AP=6 C=2 epoch=14] loss=9.7740 cal=(0.7175, 0.5625, 0.9525, 0.795, 0.0) score=0.5625
+[C AT=25 AP=6 C=2 epoch=15] loss=9.9081 cal=(0.7175, 0.5825, 0.97, 0.8075, 0.0) score=0.5825
+[C AT=25 AP=6 C=2 epoch=16] loss=9.4128 cal=(0.73, 0.605, 0.9725, 0.805, 0.0) score=0.6050
+[C AT=25 AP=6 C=2 epoch=17] loss=9.2365 cal=(0.73, 0.5875, 0.9675, 0.7975, 0.0) score=0.5875
+[C AT=25 AP=6 C=2 epoch=18] loss=9.3396 cal=(0.7175, 0.61, 0.975, 0.81, 0.0) score=0.6100
+[C AT=25 AP=6 C=2 epoch=19] loss=9.7032 cal=(0.7275, 0.585, 0.965, 0.7975, 0.0) score=0.5850
+[C AT=25 AP=6 C=2 epoch=20] loss=9.4172 cal=(0.7075, 0.605, 0.97, 0.7875, 0.0) score=0.6050
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L6__C_L2/das_c.pt
+[fit readout] C AT=25 AP=6 C=2 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=6 C=3 (missing checkpoint)
+[C AT=25 AP=6 C=3 epoch=01] loss=20.2681 cal=(0.6175, 0.3725, 0.8725, 0.7225, 0.0) score=0.3725
+[C AT=25 AP=6 C=3 epoch=02] loss=15.5184 cal=(0.6525, 0.455, 0.9125, 0.7425, 0.0) score=0.4550
+[C AT=25 AP=6 C=3 epoch=03] loss=14.1901 cal=(0.64, 0.4875, 0.935, 0.7675, 0.0) score=0.4875
+[C AT=25 AP=6 C=3 epoch=04] loss=13.4766 cal=(0.6475, 0.5, 0.93, 0.7575, 0.0) score=0.5000
+[C AT=25 AP=6 C=3 epoch=05] loss=13.1629 cal=(0.665, 0.4925, 0.915, 0.765, 0.0) score=0.4925
+[C AT=25 AP=6 C=3 epoch=06] loss=12.9953 cal=(0.6425, 0.4925, 0.9175, 0.765, 0.0) score=0.4925
+[C AT=25 AP=6 C=3 epoch=07] loss=12.5998 cal=(0.67, 0.53, 0.94, 0.775, 0.0) score=0.5300
+[C AT=25 AP=6 C=3 epoch=08] loss=12.1632 cal=(0.6675, 0.535, 0.9375, 0.78, 0.0) score=0.5350
+[C AT=25 AP=6 C=3 epoch=09] loss=11.8472 cal=(0.6725, 0.54, 0.945, 0.785, 0.0) score=0.5400
+[C AT=25 AP=6 C=3 epoch=10] loss=11.6986 cal=(0.67, 0.5475, 0.94, 0.78, 0.0) score=0.5475
+[C AT=25 AP=6 C=3 epoch=11] loss=11.6842 cal=(0.6825, 0.535, 0.9425, 0.7925, 0.0) score=0.5350
+[C AT=25 AP=6 C=3 epoch=12] loss=11.4357 cal=(0.69, 0.5375, 0.9525, 0.79, 0.0) score=0.5375
+[C AT=25 AP=6 C=3 epoch=13] loss=11.4100 cal=(0.6725, 0.5325, 0.9475, 0.78, 0.0) score=0.5325
+[C AT=25 AP=6 C=3 epoch=14] loss=11.2323 cal=(0.69, 0.5625, 0.9425, 0.79, 0.0) score=0.5625
+[C AT=25 AP=6 C=3 epoch=15] loss=11.0248 cal=(0.6875, 0.555, 0.9525, 0.7825, 0.0) score=0.5550
+[C AT=25 AP=6 C=3 epoch=16] loss=10.9417 cal=(0.685, 0.5475, 0.945, 0.7675, 0.0) score=0.5475
+[C AT=25 AP=6 C=3 epoch=17] loss=10.8565 cal=(0.695, 0.53, 0.95, 0.7825, 0.0) score=0.5300
+[C AT=25 AP=6 C=3 epoch=18] loss=10.8628 cal=(0.68, 0.535, 0.9475, 0.78, 0.0) score=0.5350
+[C AT=25 AP=6 C=3 epoch=19] loss=10.7658 cal=(0.6925, 0.5425, 0.9475, 0.785, 0.0) score=0.5425
+[C AT=25 AP=6 C=3 epoch=20] loss=10.6731 cal=(0.6775, 0.5525, 0.9575, 0.785, 0.0) score=0.5525
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L6__C_L3/das_c.pt
+[fit readout] C AT=25 AP=6 C=3 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=6 C=4 (missing checkpoint)
+[C AT=25 AP=6 C=4 epoch=01] loss=20.4428 cal=(0.6425, 0.3325, 0.825, 0.725, 0.0) score=0.3325
+[C AT=25 AP=6 C=4 epoch=02] loss=16.0032 cal=(0.665, 0.3775, 0.8475, 0.7825, 0.0) score=0.3775
+[C AT=25 AP=6 C=4 epoch=03] loss=15.0320 cal=(0.71, 0.385, 0.855, 0.805, 0.0) score=0.3850
+[C AT=25 AP=6 C=4 epoch=04] loss=14.4893 cal=(0.69, 0.3875, 0.8575, 0.81, 0.0) score=0.3875
+[C AT=25 AP=6 C=4 epoch=05] loss=14.2923 cal=(0.705, 0.3875, 0.84, 0.82, 0.0) score=0.3875
+[C AT=25 AP=6 C=4 epoch=06] loss=14.0131 cal=(0.74, 0.385, 0.86, 0.8225, 0.0) score=0.3850
+[C AT=25 AP=6 C=4 epoch=07] loss=13.6803 cal=(0.7275, 0.39, 0.85, 0.8225, 0.0) score=0.3900
+[C AT=25 AP=6 C=4 epoch=08] loss=13.4885 cal=(0.705, 0.38, 0.855, 0.825, 0.0) score=0.3800
+[C AT=25 AP=6 C=4 epoch=09] loss=13.2721 cal=(0.73, 0.395, 0.865, 0.82, 0.0) score=0.3950
+[C AT=25 AP=6 C=4 epoch=10] loss=13.2048 cal=(0.7175, 0.39, 0.85, 0.82, 0.0) score=0.3900
+[C AT=25 AP=6 C=4 epoch=11] loss=13.2921 cal=(0.7175, 0.3875, 0.835, 0.81, 0.0) score=0.3875
+[C AT=25 AP=6 C=4 epoch=12] loss=12.9251 cal=(0.71, 0.385, 0.8525, 0.8, 0.0) score=0.3850
+[C AT=25 AP=6 C=4 epoch=13] loss=12.8588 cal=(0.7075, 0.385, 0.85, 0.8075, 0.0) score=0.3850
+[C AT=25 AP=6 C=4 epoch=14] loss=12.8817 cal=(0.73, 0.375, 0.86, 0.8025, 0.0) score=0.3750
+[C AT=25 AP=6 C=4 epoch=15] loss=12.7173 cal=(0.725, 0.38, 0.8475, 0.81, 0.0) score=0.3800
+[C AT=25 AP=6 C=4 epoch=16] loss=12.7898 cal=(0.73, 0.375, 0.8475, 0.8125, 0.0) score=0.3750
+[C AT=25 AP=6 C=4 epoch=17] loss=12.5709 cal=(0.715, 0.3725, 0.8525, 0.8, 0.0) score=0.3725
+[C AT=25 AP=6 C=4 epoch=18] loss=12.4366 cal=(0.7025, 0.39, 0.8425, 0.81, 0.0) score=0.3900
+[C AT=25 AP=6 C=4 epoch=19] loss=12.2996 cal=(0.7325, 0.385, 0.85, 0.81, 0.0) score=0.3850
+[C AT=25 AP=6 C=4 epoch=20] loss=12.2066 cal=(0.73, 0.3775, 0.8475, 0.8075, 0.0) score=0.3775
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L6__C_L4/das_c.pt
+[fit readout] C AT=25 AP=6 C=4 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=7 C=0 (missing checkpoint)
+[C AT=25 AP=7 C=0 epoch=01] loss=15.0862 cal=(0.695, 0.925, 0.99, 0.7675, 0.0) score=0.6950
+[C AT=25 AP=7 C=0 epoch=02] loss=9.8195 cal=(0.735, 0.94, 0.985, 0.83, 0.0) score=0.7350
+[C AT=25 AP=7 C=0 epoch=03] loss=8.6765 cal=(0.7775, 0.9525, 0.9925, 0.855, 0.0) score=0.7775
+[C AT=25 AP=7 C=0 epoch=04] loss=8.0526 cal=(0.785, 0.95, 0.9925, 0.8425, 0.0) score=0.7850
+[C AT=25 AP=7 C=0 epoch=05] loss=8.1107 cal=(0.8025, 0.95, 0.99, 0.8525, 0.0) score=0.8025
+[C AT=25 AP=7 C=0 epoch=06] loss=7.8195 cal=(0.7775, 0.9325, 0.99, 0.8375, 0.0) score=0.7775
+[C AT=25 AP=7 C=0 epoch=07] loss=7.7758 cal=(0.76, 0.9275, 0.99, 0.825, 0.0) score=0.7600
+[C AT=25 AP=7 C=0 epoch=08] loss=8.0962 cal=(0.7775, 0.9325, 0.995, 0.8325, 0.0) score=0.7775
+[C AT=25 AP=7 C=0 epoch=09] loss=7.5633 cal=(0.81, 0.9475, 0.995, 0.85, 0.0) score=0.8100
+[C AT=25 AP=7 C=0 epoch=10] loss=7.1734 cal=(0.8075, 0.93, 0.99, 0.8525, 0.0) score=0.8075
+[C AT=25 AP=7 C=0 epoch=11] loss=6.9848 cal=(0.8225, 0.945, 0.995, 0.85, 0.0) score=0.8225
+[C AT=25 AP=7 C=0 epoch=12] loss=7.3096 cal=(0.7975, 0.9475, 0.99, 0.84, 0.0) score=0.7975
+[C AT=25 AP=7 C=0 epoch=13] loss=7.4757 cal=(0.8075, 0.93, 0.99, 0.85, 0.0) score=0.8075
+[C AT=25 AP=7 C=0 epoch=14] loss=7.4804 cal=(0.79, 0.945, 0.9925, 0.855, 0.0) score=0.7900
+[C AT=25 AP=7 C=0 epoch=15] loss=7.2753 cal=(0.795, 0.94, 0.99, 0.8575, 0.0) score=0.7950
+[C AT=25 AP=7 C=0 epoch=16] loss=6.7803 cal=(0.82, 0.9525, 0.9925, 0.8825, 0.0) score=0.8200
+[C AT=25 AP=7 C=0 epoch=17] loss=6.6790 cal=(0.815, 0.94, 0.99, 0.875, 0.0) score=0.8150
+[C AT=25 AP=7 C=0 epoch=18] loss=6.3456 cal=(0.8275, 0.945, 0.99, 0.8725, 0.0) score=0.8275
+[C AT=25 AP=7 C=0 epoch=19] loss=6.1080 cal=(0.8275, 0.95, 0.9925, 0.8725, 0.0) score=0.8275
+[C AT=25 AP=7 C=0 epoch=20] loss=6.0279 cal=(0.8025, 0.9275, 0.9825, 0.85, 0.0) score=0.8025
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L7__C_L0/das_c.pt
+[fit readout] C AT=25 AP=7 C=0 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=7 C=1 (missing checkpoint)
+[C AT=25 AP=7 C=1 epoch=01] loss=17.4878 cal=(0.675, 0.795, 0.94, 0.7575, 0.0) score=0.6750
+[C AT=25 AP=7 C=1 epoch=02] loss=11.6003 cal=(0.71, 0.8425, 0.965, 0.805, 0.0) score=0.7100
+[C AT=25 AP=7 C=1 epoch=03] loss=10.2390 cal=(0.7375, 0.8625, 0.965, 0.8325, 0.0) score=0.7375
+[C AT=25 AP=7 C=1 epoch=04] loss=9.7189 cal=(0.7275, 0.8625, 0.9575, 0.8325, 0.0) score=0.7275
+[C AT=25 AP=7 C=1 epoch=05] loss=9.5436 cal=(0.7175, 0.85, 0.9525, 0.82, 0.0) score=0.7175
+[C AT=25 AP=7 C=1 epoch=06] loss=9.1859 cal=(0.7375, 0.8425, 0.9575, 0.82, 0.0) score=0.7375
+[C AT=25 AP=7 C=1 epoch=07] loss=8.9423 cal=(0.745, 0.8225, 0.965, 0.8325, 0.0) score=0.7450
+[C AT=25 AP=7 C=1 epoch=08] loss=9.0072 cal=(0.7325, 0.85, 0.955, 0.8325, 0.0) score=0.7325
+[C AT=25 AP=7 C=1 epoch=09] loss=8.8627 cal=(0.73, 0.775, 0.94, 0.815, 0.0) score=0.7300
+[C AT=25 AP=7 C=1 epoch=10] loss=9.3627 cal=(0.7625, 0.835, 0.9575, 0.8375, 0.0) score=0.7625
+[C AT=25 AP=7 C=1 epoch=11] loss=8.5860 cal=(0.7675, 0.8475, 0.965, 0.8425, 0.0) score=0.7675
+[C AT=25 AP=7 C=1 epoch=12] loss=8.4393 cal=(0.7675, 0.8325, 0.9575, 0.8425, 0.0) score=0.7675
+[C AT=25 AP=7 C=1 epoch=13] loss=8.3626 cal=(0.7575, 0.845, 0.9625, 0.84, 0.0) score=0.7575
+[C AT=25 AP=7 C=1 epoch=14] loss=8.0419 cal=(0.77, 0.84, 0.9525, 0.85, 0.0) score=0.7700
+[C AT=25 AP=7 C=1 epoch=15] loss=7.9844 cal=(0.78, 0.8375, 0.9575, 0.8375, 0.0) score=0.7800
+[C AT=25 AP=7 C=1 epoch=16] loss=7.8761 cal=(0.7775, 0.8425, 0.955, 0.8325, 0.0) score=0.7775
+[C AT=25 AP=7 C=1 epoch=17] loss=7.9501 cal=(0.77, 0.795, 0.9425, 0.85, 0.0) score=0.7700
+[C AT=25 AP=7 C=1 epoch=18] loss=7.8307 cal=(0.755, 0.825, 0.9625, 0.845, 0.0) score=0.7550
+[C AT=25 AP=7 C=1 epoch=19] loss=7.5748 cal=(0.7425, 0.8125, 0.9475, 0.815, 0.0) score=0.7425
+[C AT=25 AP=7 C=1 epoch=20] loss=7.8843 cal=(0.765, 0.8325, 0.955, 0.8275, 0.0) score=0.7650
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L7__C_L1/das_c.pt
+[fit readout] C AT=25 AP=7 C=1 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=7 C=2 (missing checkpoint)
+[C AT=25 AP=7 C=2 epoch=01] loss=17.6795 cal=(0.64, 0.755, 0.925, 0.745, 0.0) score=0.6400
+[C AT=25 AP=7 C=2 epoch=02] loss=11.9004 cal=(0.6925, 0.815, 0.9425, 0.79, 0.0) score=0.6925
+[C AT=25 AP=7 C=2 epoch=03] loss=10.5864 cal=(0.725, 0.8475, 0.965, 0.81, 0.0) score=0.7250
+[C AT=25 AP=7 C=2 epoch=04] loss=9.9522 cal=(0.7275, 0.8425, 0.9625, 0.82, 0.0) score=0.7275
+[C AT=25 AP=7 C=2 epoch=05] loss=9.5777 cal=(0.7275, 0.8425, 0.96, 0.8225, 0.0) score=0.7275
+[C AT=25 AP=7 C=2 epoch=06] loss=9.4407 cal=(0.7075, 0.8325, 0.96, 0.81, 0.0) score=0.7075
+[C AT=25 AP=7 C=2 epoch=07] loss=9.3336 cal=(0.725, 0.825, 0.9575, 0.82, 0.0) score=0.7250
+[C AT=25 AP=7 C=2 epoch=08] loss=8.9617 cal=(0.7325, 0.8225, 0.96, 0.83, 0.0) score=0.7325
+[C AT=25 AP=7 C=2 epoch=09] loss=8.7971 cal=(0.7375, 0.815, 0.9575, 0.8175, 0.0) score=0.7375
+[C AT=25 AP=7 C=2 epoch=10] loss=8.5853 cal=(0.72, 0.825, 0.9575, 0.8225, 0.0) score=0.7200
+[C AT=25 AP=7 C=2 epoch=11] loss=8.3645 cal=(0.73, 0.8275, 0.96, 0.83, 0.0) score=0.7300
+[C AT=25 AP=7 C=2 epoch=12] loss=8.3268 cal=(0.72, 0.825, 0.96, 0.8025, 0.0) score=0.7200
+[C AT=25 AP=7 C=2 epoch=13] loss=8.0433 cal=(0.71, 0.7875, 0.9525, 0.8025, 0.0) score=0.7100
+[C AT=25 AP=7 C=2 epoch=14] loss=8.3638 cal=(0.725, 0.7875, 0.9475, 0.8075, 0.0) score=0.7250
+[C AT=25 AP=7 C=2 epoch=15] loss=8.4452 cal=(0.7325, 0.8125, 0.9525, 0.82, 0.0) score=0.7325
+[C AT=25 AP=7 C=2 epoch=16] loss=7.7383 cal=(0.7525, 0.815, 0.9525, 0.82, 0.0) score=0.7525
+[C AT=25 AP=7 C=2 epoch=17] loss=7.4373 cal=(0.7375, 0.8125, 0.955, 0.8175, 0.0) score=0.7375
+[C AT=25 AP=7 C=2 epoch=18] loss=7.5091 cal=(0.7325, 0.8, 0.955, 0.7825, 0.0) score=0.7325
+[C AT=25 AP=7 C=2 epoch=19] loss=7.7958 cal=(0.7375, 0.7725, 0.9425, 0.795, 0.0) score=0.7375
+[C AT=25 AP=7 C=2 epoch=20] loss=7.8063 cal=(0.7425, 0.7925, 0.9475, 0.8025, 0.0) score=0.7425
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L7__C_L2/das_c.pt
+[fit readout] C AT=25 AP=7 C=2 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=7 C=3 (missing checkpoint)
+[C AT=25 AP=7 C=3 epoch=01] loss=18.9257 cal=(0.615, 0.6575, 0.86, 0.715, 0.0) score=0.6150
+[C AT=25 AP=7 C=3 epoch=02] loss=13.3834 cal=(0.65, 0.7325, 0.91, 0.7575, 0.0) score=0.6500
+[C AT=25 AP=7 C=3 epoch=03] loss=12.1154 cal=(0.6625, 0.75, 0.915, 0.77, 0.0) score=0.6625
+[C AT=25 AP=7 C=3 epoch=04] loss=11.5235 cal=(0.655, 0.7475, 0.9125, 0.7725, 0.0) score=0.6550
+[C AT=25 AP=7 C=3 epoch=05] loss=11.2247 cal=(0.685, 0.7775, 0.92, 0.785, 0.0) score=0.6850
+[C AT=25 AP=7 C=3 epoch=06] loss=10.8619 cal=(0.69, 0.75, 0.905, 0.78, 0.0) score=0.6900
+[C AT=25 AP=7 C=3 epoch=07] loss=10.6802 cal=(0.68, 0.7675, 0.91, 0.7675, 0.0) score=0.6800
+[C AT=25 AP=7 C=3 epoch=08] loss=10.4957 cal=(0.67, 0.7625, 0.9125, 0.785, 0.0) score=0.6700
+[C AT=25 AP=7 C=3 epoch=09] loss=10.1913 cal=(0.6875, 0.7725, 0.915, 0.7925, 0.0) score=0.6875
+[C AT=25 AP=7 C=3 epoch=10] loss=10.0408 cal=(0.685, 0.765, 0.9175, 0.79, 0.0) score=0.6850
+[C AT=25 AP=7 C=3 epoch=11] loss=9.9251 cal=(0.6875, 0.7575, 0.925, 0.7925, 0.0) score=0.6875
+[C AT=25 AP=7 C=3 epoch=12] loss=9.7599 cal=(0.6925, 0.76, 0.9225, 0.7725, 0.0) score=0.6925
+[C AT=25 AP=7 C=3 epoch=13] loss=9.6729 cal=(0.705, 0.7475, 0.925, 0.7925, 0.0) score=0.7050
+[C AT=25 AP=7 C=3 epoch=14] loss=9.5484 cal=(0.685, 0.7625, 0.905, 0.7775, 0.0) score=0.6850
+[C AT=25 AP=7 C=3 epoch=15] loss=9.4943 cal=(0.7, 0.7625, 0.9225, 0.7875, 0.0) score=0.7000
+[C AT=25 AP=7 C=3 epoch=16] loss=9.3156 cal=(0.7, 0.7575, 0.92, 0.7875, 0.0) score=0.7000
+[C AT=25 AP=7 C=3 epoch=17] loss=9.2727 cal=(0.6925, 0.7425, 0.9025, 0.7875, 0.0) score=0.6925
+[C AT=25 AP=7 C=3 epoch=18] loss=9.4394 cal=(0.6925, 0.76, 0.915, 0.775, 0.0) score=0.6925
+[C AT=25 AP=7 C=3 epoch=19] loss=9.1694 cal=(0.7, 0.755, 0.9225, 0.795, 0.0) score=0.7000
+[C AT=25 AP=7 C=3 epoch=20] loss=9.0261 cal=(0.7, 0.765, 0.9075, 0.79, 0.0) score=0.7000
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L7__C_L3/das_c.pt
+[fit readout] C AT=25 AP=7 C=3 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=7 C=4 (missing checkpoint)
+[C AT=25 AP=7 C=4 epoch=01] loss=19.2335 cal=(0.6275, 0.6125, 0.8125, 0.7325, 0.0) score=0.6125
+[C AT=25 AP=7 C=4 epoch=02] loss=14.0419 cal=(0.68, 0.65, 0.835, 0.775, 0.0) score=0.6500
+[C AT=25 AP=7 C=4 epoch=03] loss=12.8557 cal=(0.705, 0.6675, 0.845, 0.7975, 0.0) score=0.6675
+[C AT=25 AP=7 C=4 epoch=04] loss=12.2467 cal=(0.6975, 0.6725, 0.85, 0.8075, 0.0) score=0.6725
+[C AT=25 AP=7 C=4 epoch=05] loss=11.9897 cal=(0.7275, 0.665, 0.85, 0.815, 0.0) score=0.6650
+[C AT=25 AP=7 C=4 epoch=06] loss=11.6956 cal=(0.71, 0.6725, 0.8525, 0.815, 0.0) score=0.6725
+[C AT=25 AP=7 C=4 epoch=07] loss=11.4852 cal=(0.71, 0.675, 0.8575, 0.81, 0.0) score=0.6750
+[C AT=25 AP=7 C=4 epoch=08] loss=11.3241 cal=(0.6975, 0.6675, 0.855, 0.8025, 0.0) score=0.6675
+[C AT=25 AP=7 C=4 epoch=09] loss=11.1929 cal=(0.7175, 0.685, 0.85, 0.815, 0.0) score=0.6850
+[C AT=25 AP=7 C=4 epoch=10] loss=11.0016 cal=(0.7275, 0.66, 0.8575, 0.8025, 0.0) score=0.6600
+[C AT=25 AP=7 C=4 epoch=11] loss=10.8321 cal=(0.7275, 0.6725, 0.855, 0.8225, 0.0) score=0.6725
+[C AT=25 AP=7 C=4 epoch=12] loss=10.7412 cal=(0.7175, 0.675, 0.855, 0.8025, 0.0) score=0.6750
+[C AT=25 AP=7 C=4 epoch=13] loss=10.7128 cal=(0.7325, 0.66, 0.8575, 0.81, 0.0) score=0.6600
+[C AT=25 AP=7 C=4 epoch=14] loss=10.6090 cal=(0.715, 0.67, 0.8575, 0.7925, 0.0) score=0.6700
+[C AT=25 AP=7 C=4 epoch=15] loss=10.5482 cal=(0.7075, 0.6425, 0.8525, 0.8, 0.0) score=0.6425
+[C AT=25 AP=7 C=4 epoch=16] loss=10.3734 cal=(0.72, 0.6825, 0.8475, 0.815, 0.0) score=0.6825
+[C AT=25 AP=7 C=4 epoch=17] loss=10.2421 cal=(0.725, 0.66, 0.85, 0.805, 0.0) score=0.6600
+[C AT=25 AP=7 C=4 epoch=18] loss=10.1914 cal=(0.7225, 0.67, 0.8675, 0.805, 0.0) score=0.6700
+[C AT=25 AP=7 C=4 epoch=19] loss=10.0584 cal=(0.7425, 0.6675, 0.855, 0.805, 0.0) score=0.6675
+[C AT=25 AP=7 C=4 epoch=20] loss=9.8660 cal=(0.735, 0.675, 0.855, 0.7975, 0.0) score=0.6750
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L7__C_L4/das_c.pt
+[fit readout] C AT=25 AP=7 C=4 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=8 C=0 (missing checkpoint)
+[C AT=25 AP=8 C=0 epoch=01] loss=13.7093 cal=(0.6975, 0.9625, 0.995, 0.775, 0.0) score=0.6975
+[C AT=25 AP=8 C=0 epoch=02] loss=8.7656 cal=(0.7475, 0.9775, 0.9975, 0.815, 0.0) score=0.7475
+[C AT=25 AP=8 C=0 epoch=03] loss=7.6244 cal=(0.775, 0.975, 0.995, 0.8425, 0.0) score=0.7750
+[C AT=25 AP=8 C=0 epoch=04] loss=7.1263 cal=(0.765, 0.9775, 0.995, 0.8375, 0.0) score=0.7650
+[C AT=25 AP=8 C=0 epoch=05] loss=6.9171 cal=(0.79, 0.975, 0.995, 0.8375, 0.0) score=0.7900
+[C AT=25 AP=8 C=0 epoch=06] loss=7.1006 cal=(0.79, 0.9675, 0.995, 0.8375, 0.0) score=0.7900
+[C AT=25 AP=8 C=0 epoch=07] loss=6.7937 cal=(0.7775, 0.9625, 0.9925, 0.8375, 0.0) score=0.7775
+[C AT=25 AP=8 C=0 epoch=08] loss=6.7634 cal=(0.785, 0.9725, 0.995, 0.8525, 0.0) score=0.7850
+[C AT=25 AP=8 C=0 epoch=09] loss=6.5670 cal=(0.795, 0.9675, 0.9925, 0.84, 0.0) score=0.7950
+[C AT=25 AP=8 C=0 epoch=10] loss=6.0932 cal=(0.805, 0.975, 0.995, 0.845, 0.0) score=0.8050
+[C AT=25 AP=8 C=0 epoch=11] loss=6.0865 cal=(0.76, 0.975, 0.9925, 0.8275, 0.0) score=0.7600
+[C AT=25 AP=8 C=0 epoch=12] loss=6.4272 cal=(0.7975, 0.9725, 0.995, 0.8625, 0.0) score=0.7975
+[C AT=25 AP=8 C=0 epoch=13] loss=6.0569 cal=(0.8125, 0.97, 0.995, 0.8525, 0.0) score=0.8125
+[C AT=25 AP=8 C=0 epoch=14] loss=5.5588 cal=(0.805, 0.9775, 0.995, 0.8675, 0.0) score=0.8050
+[C AT=25 AP=8 C=0 epoch=15] loss=5.4146 cal=(0.8, 0.975, 0.9925, 0.84, 0.0) score=0.8000
+[C AT=25 AP=8 C=0 epoch=16] loss=6.1178 cal=(0.785, 0.9625, 0.995, 0.8325, 0.0) score=0.7850
+[C AT=25 AP=8 C=0 epoch=17] loss=6.8826 cal=(0.785, 0.9675, 0.995, 0.8425, 0.0) score=0.7850
+[C AT=25 AP=8 C=0 epoch=18] loss=5.9621 cal=(0.8, 0.9775, 0.995, 0.8525, 0.0) score=0.8000
+[C AT=25 AP=8 C=0 epoch=19] loss=5.4111 cal=(0.8125, 0.9775, 0.995, 0.86, 0.0) score=0.8125
+[C AT=25 AP=8 C=0 epoch=20] loss=5.3119 cal=(0.7825, 0.98, 0.995, 0.855, 0.0) score=0.7825
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L8__C_L0/das_c.pt
+[fit readout] C AT=25 AP=8 C=0 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=8 C=1 (missing checkpoint)
+[C AT=25 AP=8 C=1 epoch=01] loss=15.3699 cal=(0.67, 0.9225, 0.9825, 0.77, 0.0) score=0.6700
+[C AT=25 AP=8 C=1 epoch=02] loss=9.8817 cal=(0.7, 0.9525, 0.99, 0.8125, 0.0) score=0.7000
+[C AT=25 AP=8 C=1 epoch=03] loss=8.6544 cal=(0.735, 0.96, 0.99, 0.8325, 0.0) score=0.7350
+[C AT=25 AP=8 C=1 epoch=04] loss=8.1048 cal=(0.735, 0.945, 0.9825, 0.8275, 0.0) score=0.7350
+[C AT=25 AP=8 C=1 epoch=05] loss=7.9474 cal=(0.755, 0.94, 0.9825, 0.8325, 0.0) score=0.7550
+[C AT=25 AP=8 C=1 epoch=06] loss=7.7951 cal=(0.755, 0.9425, 0.985, 0.8375, 0.0) score=0.7550
+[C AT=25 AP=8 C=1 epoch=07] loss=7.3465 cal=(0.75, 0.9425, 0.9875, 0.855, 0.0) score=0.7500
+[C AT=25 AP=8 C=1 epoch=08] loss=7.4239 cal=(0.75, 0.93, 0.9825, 0.82, 0.0) score=0.7500
+[C AT=25 AP=8 C=1 epoch=09] loss=7.1035 cal=(0.76, 0.9425, 0.985, 0.82, 0.0) score=0.7600
+[C AT=25 AP=8 C=1 epoch=10] loss=6.9468 cal=(0.7425, 0.935, 0.9825, 0.82, 0.0) score=0.7425
+[C AT=25 AP=8 C=1 epoch=11] loss=6.7585 cal=(0.76, 0.945, 0.9825, 0.8175, 0.0) score=0.7600
+[C AT=25 AP=8 C=1 epoch=12] loss=6.9845 cal=(0.7375, 0.925, 0.985, 0.8075, 0.0) score=0.7375
+[C AT=25 AP=8 C=1 epoch=13] loss=6.8904 cal=(0.755, 0.94, 0.9875, 0.81, 0.0) score=0.7550
+[C AT=25 AP=8 C=1 epoch=14] loss=6.9505 cal=(0.74, 0.9275, 0.9825, 0.8125, 0.0) score=0.7400
+[C AT=25 AP=8 C=1 epoch=15] loss=6.6656 cal=(0.7525, 0.9425, 0.9825, 0.81, 0.0) score=0.7525
+[C AT=25 AP=8 C=1 epoch=16] loss=6.5986 cal=(0.7575, 0.95, 0.98, 0.82, 0.0) score=0.7575
+[C AT=25 AP=8 C=1 epoch=17] loss=6.2995 cal=(0.76, 0.9475, 0.98, 0.8175, 0.0) score=0.7600
+[C AT=25 AP=8 C=1 epoch=18] loss=5.8313 cal=(0.77, 0.955, 0.9825, 0.825, 0.0) score=0.7700
+[C AT=25 AP=8 C=1 epoch=19] loss=5.4012 cal=(0.78, 0.945, 0.9825, 0.845, 0.0) score=0.7800
+[C AT=25 AP=8 C=1 epoch=20] loss=5.3928 cal=(0.78, 0.95, 0.985, 0.83, 0.0) score=0.7800
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L8__C_L1/das_c.pt
+[fit readout] C AT=25 AP=8 C=1 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=8 C=2 (missing checkpoint)
+[C AT=25 AP=8 C=2 epoch=01] loss=15.4912 cal=(0.6475, 0.92, 0.98, 0.76, 0.0) score=0.6475
+[C AT=25 AP=8 C=2 epoch=02] loss=9.7457 cal=(0.72, 0.95, 0.9875, 0.815, 0.0) score=0.7200
+[C AT=25 AP=8 C=2 epoch=03] loss=8.5611 cal=(0.755, 0.9475, 0.9875, 0.8275, 0.0) score=0.7550
+[C AT=25 AP=8 C=2 epoch=04] loss=8.0317 cal=(0.7625, 0.935, 0.9825, 0.8225, 0.0) score=0.7625
+[C AT=25 AP=8 C=2 epoch=05] loss=7.8143 cal=(0.7725, 0.9425, 0.985, 0.825, 0.0) score=0.7725
+[C AT=25 AP=8 C=2 epoch=06] loss=7.4945 cal=(0.7675, 0.9275, 0.98, 0.85, 0.0) score=0.7675
+[C AT=25 AP=8 C=2 epoch=07] loss=7.5861 cal=(0.7575, 0.94, 0.9775, 0.825, 0.0) score=0.7575
+[C AT=25 AP=8 C=2 epoch=08] loss=7.0594 cal=(0.765, 0.9275, 0.9725, 0.83, 0.0) score=0.7650
+[C AT=25 AP=8 C=2 epoch=09] loss=6.7378 cal=(0.7725, 0.9425, 0.9775, 0.8325, 0.0) score=0.7725
+[C AT=25 AP=8 C=2 epoch=10] loss=6.4678 cal=(0.775, 0.935, 0.9825, 0.835, 0.0) score=0.7750
+[C AT=25 AP=8 C=2 epoch=11] loss=6.7272 cal=(0.7775, 0.93, 0.98, 0.8375, 0.0) score=0.7775
+[C AT=25 AP=8 C=2 epoch=12] loss=6.3047 cal=(0.775, 0.9325, 0.98, 0.8375, 0.0) score=0.7750
+[C AT=25 AP=8 C=2 epoch=13] loss=6.0832 cal=(0.78, 0.93, 0.98, 0.8375, 0.0) score=0.7800
+[C AT=25 AP=8 C=2 epoch=14] loss=6.3923 cal=(0.75, 0.9175, 0.9775, 0.835, 0.0) score=0.7500
+[C AT=25 AP=8 C=2 epoch=15] loss=6.2570 cal=(0.7625, 0.9375, 0.98, 0.84, 0.0) score=0.7625
+[C AT=25 AP=8 C=2 epoch=16] loss=5.8661 cal=(0.7675, 0.9325, 0.9825, 0.8325, 0.0) score=0.7675
+[C AT=25 AP=8 C=2 epoch=17] loss=6.0934 cal=(0.7525, 0.9325, 0.9725, 0.83, 0.0) score=0.7525
+[C AT=25 AP=8 C=2 epoch=18] loss=5.9921 cal=(0.755, 0.9225, 0.98, 0.8275, 0.0) score=0.7550
+[C AT=25 AP=8 C=2 epoch=19] loss=5.6438 cal=(0.755, 0.9325, 0.98, 0.8225, 0.0) score=0.7550
+[C AT=25 AP=8 C=2 epoch=20] loss=5.4288 cal=(0.7575, 0.945, 0.9825, 0.8325, 0.0) score=0.7575
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L8__C_L2/das_c.pt
+[fit readout] C AT=25 AP=8 C=2 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=8 C=3 (missing checkpoint)
+[C AT=25 AP=8 C=3 epoch=01] loss=16.3228 cal=(0.64, 0.9, 0.9775, 0.7425, 0.0) score=0.6400
+[C AT=25 AP=8 C=3 epoch=02] loss=10.5862 cal=(0.675, 0.9225, 0.9825, 0.78, 0.0) score=0.6750
+[C AT=25 AP=8 C=3 epoch=03] loss=9.4631 cal=(0.705, 0.935, 0.9875, 0.805, 0.0) score=0.7050
+[C AT=25 AP=8 C=3 epoch=04] loss=8.9087 cal=(0.7175, 0.9275, 0.98, 0.8, 0.0) score=0.7175
+[C AT=25 AP=8 C=3 epoch=05] loss=8.5999 cal=(0.74, 0.9275, 0.975, 0.815, 0.0) score=0.7400
+[C AT=25 AP=8 C=3 epoch=06] loss=8.3018 cal=(0.7275, 0.9225, 0.98, 0.8175, 0.0) score=0.7275
+[C AT=25 AP=8 C=3 epoch=07] loss=8.0462 cal=(0.7425, 0.925, 0.9775, 0.8325, 0.0) score=0.7425
+[C AT=25 AP=8 C=3 epoch=08] loss=7.8257 cal=(0.745, 0.9225, 0.965, 0.8175, 0.0) score=0.7450
+[C AT=25 AP=8 C=3 epoch=09] loss=7.7059 cal=(0.7625, 0.925, 0.98, 0.83, 0.0) score=0.7625
+[C AT=25 AP=8 C=3 epoch=10] loss=7.4233 cal=(0.76, 0.9225, 0.9825, 0.835, 0.0) score=0.7600
+[C AT=25 AP=8 C=3 epoch=11] loss=7.4386 cal=(0.73, 0.925, 0.9725, 0.8175, 0.0) score=0.7300
+[C AT=25 AP=8 C=3 epoch=12] loss=7.3833 cal=(0.7625, 0.93, 0.97, 0.8175, 0.0) score=0.7625
+[C AT=25 AP=8 C=3 epoch=13] loss=7.3460 cal=(0.755, 0.925, 0.9775, 0.825, 0.0) score=0.7550
+[C AT=25 AP=8 C=3 epoch=14] loss=7.1566 cal=(0.7575, 0.9275, 0.9725, 0.83, 0.0) score=0.7575
+[C AT=25 AP=8 C=3 epoch=15] loss=6.8704 cal=(0.7425, 0.9175, 0.965, 0.825, 0.0) score=0.7425
+[C AT=25 AP=8 C=3 epoch=16] loss=7.3301 cal=(0.76, 0.9275, 0.9725, 0.835, 0.0) score=0.7600
+[C AT=25 AP=8 C=3 epoch=17] loss=6.8470 cal=(0.76, 0.93, 0.975, 0.815, 0.0) score=0.7600
+[C AT=25 AP=8 C=3 epoch=18] loss=6.7917 cal=(0.7325, 0.9325, 0.97, 0.8175, 0.0) score=0.7325
+[C AT=25 AP=8 C=3 epoch=19] loss=6.6079 cal=(0.74, 0.9325, 0.965, 0.835, 0.0) score=0.7400
+[C AT=25 AP=8 C=3 epoch=20] loss=6.3993 cal=(0.75, 0.9225, 0.9725, 0.8325, 0.0) score=0.7500
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L8__C_L3/das_c.pt
+[fit readout] C AT=25 AP=8 C=3 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=8 C=4 (missing checkpoint)
+[C AT=25 AP=8 C=4 epoch=01] loss=16.5198 cal=(0.645, 0.9025, 0.965, 0.7475, 0.0) score=0.6450
+[C AT=25 AP=8 C=4 epoch=02] loss=10.5566 cal=(0.6825, 0.91, 0.9725, 0.8, 0.0) score=0.6825
+[C AT=25 AP=8 C=4 epoch=03] loss=9.4257 cal=(0.715, 0.925, 0.975, 0.8075, 0.0) score=0.7150
+[C AT=25 AP=8 C=4 epoch=04] loss=8.8778 cal=(0.7425, 0.92, 0.975, 0.8275, 0.0) score=0.7425
+[C AT=25 AP=8 C=4 epoch=05] loss=8.5509 cal=(0.7475, 0.925, 0.9725, 0.815, 0.0) score=0.7475
+[C AT=25 AP=8 C=4 epoch=06] loss=8.2297 cal=(0.755, 0.915, 0.975, 0.825, 0.0) score=0.7550
+[C AT=25 AP=8 C=4 epoch=07] loss=8.0000 cal=(0.7525, 0.915, 0.9725, 0.8275, 0.0) score=0.7525
+[C AT=25 AP=8 C=4 epoch=08] loss=7.8118 cal=(0.76, 0.915, 0.9725, 0.8325, 0.0) score=0.7600
+[C AT=25 AP=8 C=4 epoch=09] loss=7.6354 cal=(0.7425, 0.92, 0.9725, 0.8375, 0.0) score=0.7425
+[C AT=25 AP=8 C=4 epoch=10] loss=7.4834 cal=(0.74, 0.9125, 0.9675, 0.83, 0.0) score=0.7400
+[C AT=25 AP=8 C=4 epoch=11] loss=7.5451 cal=(0.7375, 0.91, 0.975, 0.83, 0.0) score=0.7375
+[C AT=25 AP=8 C=4 epoch=12] loss=7.2192 cal=(0.74, 0.9275, 0.97, 0.8375, 0.0) score=0.7400
+[C AT=25 AP=8 C=4 epoch=13] loss=7.2204 cal=(0.7375, 0.915, 0.97, 0.8275, 0.0) score=0.7375
+[C AT=25 AP=8 C=4 epoch=14] loss=7.0777 cal=(0.73, 0.925, 0.9675, 0.8275, 0.0) score=0.7300
+[C AT=25 AP=8 C=4 epoch=15] loss=6.9105 cal=(0.7525, 0.9225, 0.97, 0.8325, 0.0) score=0.7525
+[C AT=25 AP=8 C=4 epoch=16] loss=6.7527 cal=(0.7275, 0.925, 0.97, 0.8225, 0.0) score=0.7275
+[C AT=25 AP=8 C=4 epoch=17] loss=6.6444 cal=(0.74, 0.9225, 0.965, 0.815, 0.0) score=0.7400
+[C AT=25 AP=8 C=4 epoch=18] loss=6.6442 cal=(0.74, 0.9075, 0.97, 0.8175, 0.0) score=0.7400
+[C AT=25 AP=8 C=4 epoch=19] loss=6.6382 cal=(0.7475, 0.915, 0.965, 0.8225, 0.0) score=0.7475
+[C AT=25 AP=8 C=4 epoch=20] loss=6.5171 cal=(0.7475, 0.915, 0.9725, 0.8375, 0.0) score=0.7475
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L8__C_L4/das_c.pt
+[fit readout] C AT=25 AP=8 C=4 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=9 C=0 (missing checkpoint)
+[C AT=25 AP=9 C=0 epoch=01] loss=12.7734 cal=(0.7125, 0.995, 1.0, 0.795, 0.0) score=0.7125
+[C AT=25 AP=9 C=0 epoch=02] loss=8.1088 cal=(0.7575, 0.9975, 1.0, 0.845, 0.0) score=0.7575
+[C AT=25 AP=9 C=0 epoch=03] loss=7.0977 cal=(0.7825, 0.9975, 1.0, 0.835, 0.0) score=0.7825
+[C AT=25 AP=9 C=0 epoch=04] loss=6.5368 cal=(0.795, 0.9975, 1.0, 0.8525, 0.0) score=0.7950
+[C AT=25 AP=9 C=0 epoch=05] loss=6.3571 cal=(0.7925, 0.9975, 1.0, 0.865, 0.0) score=0.7925
+[C AT=25 AP=9 C=0 epoch=06] loss=6.4542 cal=(0.785, 0.9975, 1.0, 0.865, 0.0) score=0.7850
+[C AT=25 AP=9 C=0 epoch=07] loss=6.1284 cal=(0.78, 0.995, 1.0, 0.84, 0.0) score=0.7800
+[C AT=25 AP=9 C=0 epoch=08] loss=5.9582 cal=(0.795, 0.9975, 1.0, 0.845, 0.0) score=0.7950
+[C AT=25 AP=9 C=0 epoch=09] loss=5.8760 cal=(0.7875, 0.995, 1.0, 0.8525, 0.0) score=0.7875
+[C AT=25 AP=9 C=0 epoch=10] loss=5.7067 cal=(0.8125, 0.995, 1.0, 0.87, 0.0) score=0.8125
+[C AT=25 AP=9 C=0 epoch=11] loss=5.1629 cal=(0.8125, 0.995, 1.0, 0.87, 0.0) score=0.8125
+[C AT=25 AP=9 C=0 epoch=12] loss=5.3073 cal=(0.79, 0.995, 0.9975, 0.84, 0.0) score=0.7900
+[C AT=25 AP=9 C=0 epoch=13] loss=5.5992 cal=(0.8125, 0.995, 1.0, 0.855, 0.0) score=0.8125
+[C AT=25 AP=9 C=0 epoch=14] loss=4.9784 cal=(0.8475, 0.995, 1.0, 0.8825, 0.0) score=0.8475
+[C AT=25 AP=9 C=0 epoch=15] loss=4.5314 cal=(0.8525, 0.995, 1.0, 0.875, 0.0) score=0.8525
+[C AT=25 AP=9 C=0 epoch=16] loss=4.6250 cal=(0.84, 0.995, 1.0, 0.885, 0.0) score=0.8400
+[C AT=25 AP=9 C=0 epoch=17] loss=4.6789 cal=(0.8125, 0.99, 0.995, 0.8625, 0.0) score=0.8125
+[C AT=25 AP=9 C=0 epoch=18] loss=5.1467 cal=(0.8175, 0.9975, 1.0, 0.865, 0.0) score=0.8175
+[C AT=25 AP=9 C=0 epoch=19] loss=5.0005 cal=(0.825, 0.9975, 0.9975, 0.875, 0.0) score=0.8250
+[C AT=25 AP=9 C=0 epoch=20] loss=4.6746 cal=(0.8025, 0.995, 1.0, 0.8725, 0.0) score=0.8025
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L9__C_L0/das_c.pt
+[fit readout] C AT=25 AP=9 C=0 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=9 C=1 (missing checkpoint)
+[C AT=25 AP=9 C=1 epoch=01] loss=14.2619 cal=(0.675, 0.9775, 0.9975, 0.7725, 0.0) score=0.6750
+[C AT=25 AP=9 C=1 epoch=02] loss=8.9130 cal=(0.73, 0.9875, 1.0, 0.82, 0.0) score=0.7300
+[C AT=25 AP=9 C=1 epoch=03] loss=7.8133 cal=(0.7525, 0.99, 1.0, 0.8475, 0.0) score=0.7525
+[C AT=25 AP=9 C=1 epoch=04] loss=7.2400 cal=(0.77, 0.995, 1.0, 0.84, 0.0) score=0.7700
+[C AT=25 AP=9 C=1 epoch=05] loss=7.1095 cal=(0.7525, 0.9925, 1.0, 0.825, 0.0) score=0.7525
+[C AT=25 AP=9 C=1 epoch=06] loss=6.7569 cal=(0.7825, 0.9925, 1.0, 0.8225, 0.0) score=0.7825
+[C AT=25 AP=9 C=1 epoch=07] loss=6.5233 cal=(0.7425, 0.985, 0.99, 0.8225, 0.0) score=0.7425
+[C AT=25 AP=9 C=1 epoch=08] loss=6.6916 cal=(0.7625, 0.9975, 1.0, 0.8275, 0.0) score=0.7625
+[C AT=25 AP=9 C=1 epoch=09] loss=6.3184 cal=(0.76, 0.995, 0.9975, 0.8325, 0.0) score=0.7600
+[C AT=25 AP=9 C=1 epoch=10] loss=5.8706 cal=(0.7775, 0.995, 0.9975, 0.84, 0.0) score=0.7775
+[C AT=25 AP=9 C=1 epoch=11] loss=5.3653 cal=(0.7925, 0.9975, 1.0, 0.85, 0.0) score=0.7925
+[C AT=25 AP=9 C=1 epoch=12] loss=5.4077 cal=(0.77, 0.9925, 0.995, 0.835, 0.0) score=0.7700
+[C AT=25 AP=9 C=1 epoch=13] loss=5.1335 cal=(0.785, 0.9975, 1.0, 0.8375, 0.0) score=0.7850
+[C AT=25 AP=9 C=1 epoch=14] loss=5.5017 cal=(0.7625, 0.99, 0.9925, 0.8325, 0.0) score=0.7625
+[C AT=25 AP=9 C=1 epoch=15] loss=5.5588 cal=(0.7675, 0.99, 0.995, 0.82, 0.0) score=0.7675
+[C AT=25 AP=9 C=1 epoch=16] loss=5.2893 cal=(0.7725, 0.99, 0.995, 0.82, 0.0) score=0.7725
+[C AT=25 AP=9 C=1 epoch=17] loss=5.2780 cal=(0.785, 0.99, 0.995, 0.8225, 0.0) score=0.7850
+[C AT=25 AP=9 C=1 epoch=18] loss=5.7230 cal=(0.77, 0.99, 0.995, 0.8375, 0.0) score=0.7700
+[C AT=25 AP=9 C=1 epoch=19] loss=5.5649 cal=(0.7575, 0.9825, 0.9925, 0.825, 0.0) score=0.7575
+[C AT=25 AP=9 C=1 epoch=20] loss=5.6596 cal=(0.7725, 0.995, 0.9925, 0.8275, 0.0) score=0.7725
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L9__C_L1/das_c.pt
+[fit readout] C AT=25 AP=9 C=1 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=9 C=2 (missing checkpoint)
+[C AT=25 AP=9 C=2 epoch=01] loss=14.3964 cal=(0.67, 0.9825, 1.0, 0.78, 0.0) score=0.6700
+[C AT=25 AP=9 C=2 epoch=02] loss=8.7167 cal=(0.75, 0.995, 1.0, 0.8225, 0.0) score=0.7500
+[C AT=25 AP=9 C=2 epoch=03] loss=7.6154 cal=(0.7675, 0.995, 1.0, 0.845, 0.0) score=0.7675
+[C AT=25 AP=9 C=2 epoch=04] loss=7.0761 cal=(0.7725, 0.995, 0.995, 0.845, 0.0) score=0.7725
+[C AT=25 AP=9 C=2 epoch=05] loss=6.9131 cal=(0.7825, 0.985, 0.9925, 0.835, 0.0) score=0.7825
+[C AT=25 AP=9 C=2 epoch=06] loss=6.9268 cal=(0.7825, 0.9875, 1.0, 0.815, 0.0) score=0.7825
+[C AT=25 AP=9 C=2 epoch=07] loss=6.4751 cal=(0.785, 0.995, 0.995, 0.84, 0.0) score=0.7850
+[C AT=25 AP=9 C=2 epoch=08] loss=5.9919 cal=(0.7975, 0.995, 0.9975, 0.8375, 0.0) score=0.7975
+[C AT=25 AP=9 C=2 epoch=09] loss=5.7482 cal=(0.785, 0.9925, 0.99, 0.84, 0.0) score=0.7850
+[C AT=25 AP=9 C=2 epoch=10] loss=5.7495 cal=(0.785, 0.9875, 0.995, 0.83, 0.0) score=0.7850
+[C AT=25 AP=9 C=2 epoch=11] loss=5.7518 cal=(0.7975, 0.9925, 0.99, 0.85, 0.0) score=0.7975
+[C AT=25 AP=9 C=2 epoch=12] loss=5.3690 cal=(0.805, 0.995, 0.9875, 0.83, 0.0) score=0.8050
+[C AT=25 AP=9 C=2 epoch=13] loss=5.3398 cal=(0.7875, 0.9875, 0.9875, 0.835, 0.0) score=0.7875
+[C AT=25 AP=9 C=2 epoch=14] loss=5.4519 cal=(0.8025, 0.9875, 0.99, 0.8575, 0.0) score=0.8025
+[C AT=25 AP=9 C=2 epoch=15] loss=5.1030 cal=(0.8025, 0.99, 0.9875, 0.85, 0.0) score=0.8025
+[C AT=25 AP=9 C=2 epoch=16] loss=5.1125 cal=(0.7975, 0.99, 0.9875, 0.84, 0.0) score=0.7975
+[C AT=25 AP=9 C=2 epoch=17] loss=4.9883 cal=(0.805, 0.99, 0.9925, 0.865, 0.0) score=0.8050
+[C AT=25 AP=9 C=2 epoch=18] loss=4.8791 cal=(0.7875, 0.99, 0.9825, 0.8325, 0.0) score=0.7875
+[C AT=25 AP=9 C=2 epoch=19] loss=5.0143 cal=(0.8, 0.9875, 0.9875, 0.8475, 0.0) score=0.8000
+[C AT=25 AP=9 C=2 epoch=20] loss=4.6954 cal=(0.8075, 0.9875, 0.99, 0.845, 0.0) score=0.8075
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L9__C_L2/das_c.pt
+[fit readout] C AT=25 AP=9 C=2 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=9 C=3 (missing checkpoint)
+[C AT=25 AP=9 C=3 epoch=01] loss=14.9791 cal=(0.6425, 0.9775, 0.995, 0.75, 0.0) score=0.6425
+[C AT=25 AP=9 C=3 epoch=02] loss=9.3187 cal=(0.7075, 0.9825, 1.0, 0.81, 0.0) score=0.7075
+[C AT=25 AP=9 C=3 epoch=03] loss=8.3295 cal=(0.73, 0.985, 1.0, 0.825, 0.0) score=0.7300
+[C AT=25 AP=9 C=3 epoch=04] loss=7.7138 cal=(0.735, 0.9875, 0.995, 0.8275, 0.0) score=0.7350
+[C AT=25 AP=9 C=3 epoch=05] loss=7.4226 cal=(0.75, 0.985, 0.995, 0.8375, 0.0) score=0.7500
+[C AT=25 AP=9 C=3 epoch=06] loss=7.2038 cal=(0.7225, 0.9825, 0.99, 0.8175, 0.0) score=0.7225
+[C AT=25 AP=9 C=3 epoch=07] loss=7.0260 cal=(0.7525, 0.9875, 0.9925, 0.845, 0.0) score=0.7525
+[C AT=25 AP=9 C=3 epoch=08] loss=6.7435 cal=(0.7575, 0.98, 0.99, 0.835, 0.0) score=0.7575
+[C AT=25 AP=9 C=3 epoch=09] loss=6.4924 cal=(0.7525, 0.9825, 0.995, 0.8475, 0.0) score=0.7525
+[C AT=25 AP=9 C=3 epoch=10] loss=6.3456 cal=(0.75, 0.985, 0.9925, 0.8275, 0.0) score=0.7500
+[C AT=25 AP=9 C=3 epoch=11] loss=6.2192 cal=(0.7375, 0.9825, 0.985, 0.825, 0.0) score=0.7375
+[C AT=25 AP=9 C=3 epoch=12] loss=6.1662 cal=(0.7425, 0.985, 0.985, 0.8375, 0.0) score=0.7425
+[C AT=25 AP=9 C=3 epoch=13] loss=5.9814 cal=(0.76, 0.975, 0.9875, 0.8275, 0.0) score=0.7600
+[C AT=25 AP=9 C=3 epoch=14] loss=5.7780 cal=(0.7625, 0.9775, 0.9875, 0.845, 0.0) score=0.7625
+[C AT=25 AP=9 C=3 epoch=15] loss=5.6718 cal=(0.755, 0.9725, 0.9875, 0.8325, 0.0) score=0.7550
+[C AT=25 AP=9 C=3 epoch=16] loss=5.8845 cal=(0.765, 0.9775, 0.99, 0.84, 0.0) score=0.7650
+[C AT=25 AP=9 C=3 epoch=17] loss=6.1675 cal=(0.765, 0.9825, 0.985, 0.83, 0.0) score=0.7650
+[C AT=25 AP=9 C=3 epoch=18] loss=5.8521 cal=(0.7725, 0.98, 0.9875, 0.83, 0.0) score=0.7725
+[C AT=25 AP=9 C=3 epoch=19] loss=5.5684 cal=(0.7775, 0.98, 0.985, 0.83, 0.0) score=0.7775
+[C AT=25 AP=9 C=3 epoch=20] loss=5.3332 cal=(0.755, 0.98, 0.9875, 0.8275, 0.0) score=0.7550
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L9__C_L3/das_c.pt
+[fit readout] C AT=25 AP=9 C=3 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=9 C=4 (missing checkpoint)
+[C AT=25 AP=9 C=4 epoch=01] loss=15.1802 cal=(0.645, 0.975, 0.99, 0.7575, 0.0) score=0.6450
+[C AT=25 AP=9 C=4 epoch=02] loss=9.2024 cal=(0.71, 0.9875, 0.995, 0.805, 0.0) score=0.7100
+[C AT=25 AP=9 C=4 epoch=03] loss=8.0894 cal=(0.7275, 0.99, 0.99, 0.8275, 0.0) score=0.7275
+[C AT=25 AP=9 C=4 epoch=04] loss=7.5956 cal=(0.75, 0.9875, 0.9875, 0.83, 0.0) score=0.7500
+[C AT=25 AP=9 C=4 epoch=05] loss=7.3031 cal=(0.7525, 0.9875, 0.9875, 0.8425, 0.0) score=0.7525
+[C AT=25 AP=9 C=4 epoch=06] loss=7.0250 cal=(0.75, 0.9875, 0.99, 0.8375, 0.0) score=0.7500
+[C AT=25 AP=9 C=4 epoch=07] loss=6.8172 cal=(0.7625, 0.99, 0.9875, 0.85, 0.0) score=0.7625
+[C AT=25 AP=9 C=4 epoch=08] loss=6.6262 cal=(0.7625, 0.9875, 0.9875, 0.835, 0.0) score=0.7625
+[C AT=25 AP=9 C=4 epoch=09] loss=6.6137 cal=(0.765, 0.985, 0.9875, 0.8375, 0.0) score=0.7650
+[C AT=25 AP=9 C=4 epoch=10] loss=6.3144 cal=(0.77, 0.985, 0.985, 0.8425, 0.0) score=0.7700
+[C AT=25 AP=9 C=4 epoch=11] loss=6.0853 cal=(0.7825, 0.985, 0.985, 0.84, 0.0) score=0.7825
+[C AT=25 AP=9 C=4 epoch=12] loss=5.9625 cal=(0.785, 0.9775, 0.985, 0.8475, 0.0) score=0.7850
+[C AT=25 AP=9 C=4 epoch=13] loss=6.4699 cal=(0.77, 0.98, 0.99, 0.845, 0.0) score=0.7700
+[C AT=25 AP=9 C=4 epoch=14] loss=6.3015 cal=(0.7775, 0.9875, 0.9875, 0.855, 0.0) score=0.7775
+[C AT=25 AP=9 C=4 epoch=15] loss=5.8512 cal=(0.775, 0.9875, 0.9875, 0.8325, 0.0) score=0.7750
+[C AT=25 AP=9 C=4 epoch=16] loss=5.8777 cal=(0.76, 0.9875, 0.985, 0.845, 0.0) score=0.7600
+[C AT=25 AP=9 C=4 epoch=17] loss=5.8690 cal=(0.7525, 0.9775, 0.9875, 0.825, 0.0) score=0.7525
+[C AT=25 AP=9 C=4 epoch=18] loss=5.9288 cal=(0.7725, 0.9825, 0.99, 0.8425, 0.0) score=0.7725
+[C AT=25 AP=9 C=4 epoch=19] loss=5.5623 cal=(0.77, 0.9875, 0.985, 0.84, 0.0) score=0.7700
+[C AT=25 AP=9 C=4 epoch=20] loss=5.8696 cal=(0.7725, 0.98, 0.985, 0.8425, 0.0) score=0.7725
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L9__C_L4/das_c.pt
+[fit readout] C AT=25 AP=9 C=4 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=10 C=0 (missing checkpoint)
+[C AT=25 AP=10 C=0 epoch=01] loss=12.5266 cal=(0.7025, 0.9975, 1.0, 0.785, 0.0) score=0.7025
+[C AT=25 AP=10 C=0 epoch=02] loss=7.7074 cal=(0.785, 0.9975, 0.9975, 0.8425, 0.0) score=0.7850
+[C AT=25 AP=10 C=0 epoch=03] loss=6.7189 cal=(0.8, 0.9975, 1.0, 0.855, 0.0) score=0.8000
+[C AT=25 AP=10 C=0 epoch=04] loss=6.2169 cal=(0.7975, 0.9975, 1.0, 0.8475, 0.0) score=0.7975
+[C AT=25 AP=10 C=0 epoch=05] loss=5.7289 cal=(0.7925, 0.9975, 1.0, 0.8525, 0.0) score=0.7925
+[C AT=25 AP=10 C=0 epoch=06] loss=5.6251 cal=(0.8025, 0.995, 1.0, 0.865, 0.0) score=0.8025
+[C AT=25 AP=10 C=0 epoch=07] loss=5.3243 cal=(0.82, 0.9975, 1.0, 0.8525, 0.0) score=0.8200
+[C AT=25 AP=10 C=0 epoch=08] loss=5.2261 cal=(0.8075, 0.9975, 0.9975, 0.865, 0.0) score=0.8075
+[C AT=25 AP=10 C=0 epoch=09] loss=4.9363 cal=(0.815, 0.9975, 1.0, 0.8575, 0.0) score=0.8150
+[C AT=25 AP=10 C=0 epoch=10] loss=5.1437 cal=(0.8125, 0.9975, 1.0, 0.8575, 0.0) score=0.8125
+[C AT=25 AP=10 C=0 epoch=11] loss=5.0497 cal=(0.805, 0.9975, 1.0, 0.845, 0.0) score=0.8050
+[C AT=25 AP=10 C=0 epoch=12] loss=5.0441 cal=(0.8075, 0.9975, 1.0, 0.8525, 0.0) score=0.8075
+[C AT=25 AP=10 C=0 epoch=13] loss=4.8965 cal=(0.8225, 0.9975, 0.9975, 0.8425, 0.0) score=0.8225
+[C AT=25 AP=10 C=0 epoch=14] loss=4.9792 cal=(0.8025, 0.9975, 1.0, 0.85, 0.0) score=0.8025
+[C AT=25 AP=10 C=0 epoch=15] loss=4.9297 cal=(0.8275, 0.9975, 1.0, 0.8675, 0.0) score=0.8275
+[C AT=25 AP=10 C=0 epoch=16] loss=4.5548 cal=(0.8375, 0.9975, 1.0, 0.8825, 0.0) score=0.8375
+[C AT=25 AP=10 C=0 epoch=17] loss=4.2006 cal=(0.8525, 0.9975, 1.0, 0.8925, 0.0) score=0.8525
+[C AT=25 AP=10 C=0 epoch=18] loss=4.1480 cal=(0.8575, 0.9975, 1.0, 0.88, 0.0) score=0.8575
+[C AT=25 AP=10 C=0 epoch=19] loss=3.7230 cal=(0.845, 0.9975, 0.9975, 0.87, 0.0) score=0.8450
+[C AT=25 AP=10 C=0 epoch=20] loss=4.1491 cal=(0.805, 0.9975, 0.9975, 0.86, 0.0) score=0.8050
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L10__C_L0/das_c.pt
+[fit readout] C AT=25 AP=10 C=0 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=10 C=1 (missing checkpoint)
+[C AT=25 AP=10 C=1 epoch=01] loss=13.7013 cal=(0.655, 0.9975, 1.0, 0.7725, 0.0) score=0.6550
+[C AT=25 AP=10 C=1 epoch=02] loss=8.4005 cal=(0.7275, 0.9975, 1.0, 0.8225, 0.0) score=0.7275
+[C AT=25 AP=10 C=1 epoch=03] loss=7.3050 cal=(0.74, 0.995, 1.0, 0.8375, 0.0) score=0.7400
+[C AT=25 AP=10 C=1 epoch=04] loss=6.8991 cal=(0.75, 0.9975, 0.9975, 0.8325, 0.0) score=0.7500
+[C AT=25 AP=10 C=1 epoch=05] loss=6.8298 cal=(0.7525, 0.9975, 0.9925, 0.845, 0.0) score=0.7525
+[C AT=25 AP=10 C=1 epoch=06] loss=6.4570 cal=(0.7575, 0.9975, 0.995, 0.8275, 0.0) score=0.7575
+[C AT=25 AP=10 C=1 epoch=07] loss=5.9270 cal=(0.785, 0.9975, 0.995, 0.8375, 0.0) score=0.7850
+[C AT=25 AP=10 C=1 epoch=08] loss=5.5952 cal=(0.7625, 0.995, 0.995, 0.8375, 0.0) score=0.7625
+[C AT=25 AP=10 C=1 epoch=09] loss=5.3688 cal=(0.7825, 0.995, 0.9925, 0.82, 0.0) score=0.7825
+[C AT=25 AP=10 C=1 epoch=10] loss=5.6345 cal=(0.7825, 0.995, 0.995, 0.8275, 0.0) score=0.7825
+[C AT=25 AP=10 C=1 epoch=11] loss=5.3566 cal=(0.7975, 0.995, 0.99, 0.84, 0.0) score=0.7975
+[C AT=25 AP=10 C=1 epoch=12] loss=4.9041 cal=(0.7825, 0.995, 0.99, 0.84, 0.0) score=0.7825
+[C AT=25 AP=10 C=1 epoch=13] loss=5.5360 cal=(0.78, 0.995, 0.9925, 0.83, 0.0) score=0.7800
+[C AT=25 AP=10 C=1 epoch=14] loss=4.9874 cal=(0.8025, 0.995, 0.99, 0.845, 0.0) score=0.8025
+[C AT=25 AP=10 C=1 epoch=15] loss=4.5808 cal=(0.8025, 0.9925, 0.9825, 0.86, 0.0) score=0.8025
+[C AT=25 AP=10 C=1 epoch=16] loss=4.5661 cal=(0.805, 0.9925, 0.985, 0.8575, 0.0) score=0.8050
+[C AT=25 AP=10 C=1 epoch=17] loss=4.3020 cal=(0.8, 0.995, 0.99, 0.8475, 0.0) score=0.8000
+[C AT=25 AP=10 C=1 epoch=18] loss=4.5523 cal=(0.785, 0.995, 0.9875, 0.835, 0.0) score=0.7850
+[C AT=25 AP=10 C=1 epoch=19] loss=4.4833 cal=(0.81, 0.995, 0.985, 0.8375, 0.0) score=0.8100
+[C AT=25 AP=10 C=1 epoch=20] loss=4.4665 cal=(0.755, 0.99, 0.985, 0.8175, 0.0) score=0.7550
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L10__C_L1/das_c.pt
+[fit readout] C AT=25 AP=10 C=1 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=10 C=2 (missing checkpoint)
+[C AT=25 AP=10 C=2 epoch=01] loss=13.8371 cal=(0.665, 0.9975, 0.9925, 0.78, 0.0) score=0.6650
+[C AT=25 AP=10 C=2 epoch=02] loss=8.0981 cal=(0.7475, 0.9975, 0.9975, 0.8325, 0.0) score=0.7475
+[C AT=25 AP=10 C=2 epoch=03] loss=7.0287 cal=(0.77, 0.995, 0.9975, 0.845, 0.0) score=0.7700
+[C AT=25 AP=10 C=2 epoch=04] loss=6.5521 cal=(0.77, 0.9975, 0.9975, 0.8375, 0.0) score=0.7700
+[C AT=25 AP=10 C=2 epoch=05] loss=6.1571 cal=(0.785, 0.995, 0.995, 0.835, 0.0) score=0.7850
+[C AT=25 AP=10 C=2 epoch=06] loss=6.1299 cal=(0.7675, 0.995, 0.9925, 0.8425, 0.0) score=0.7675
+[C AT=25 AP=10 C=2 epoch=07] loss=5.8952 cal=(0.785, 0.995, 0.9925, 0.8475, 0.0) score=0.7850
+[C AT=25 AP=10 C=2 epoch=08] loss=5.4791 cal=(0.785, 0.995, 0.9925, 0.835, 0.0) score=0.7850
+[C AT=25 AP=10 C=2 epoch=09] loss=5.6798 cal=(0.7925, 0.9925, 0.99, 0.8575, 0.0) score=0.7925
+[C AT=25 AP=10 C=2 epoch=10] loss=5.3707 cal=(0.79, 0.9925, 0.9925, 0.845, 0.0) score=0.7900
+[C AT=25 AP=10 C=2 epoch=11] loss=5.0403 cal=(0.81, 0.995, 0.9925, 0.87, 0.0) score=0.8100
+[C AT=25 AP=10 C=2 epoch=12] loss=4.9020 cal=(0.8, 0.995, 0.9875, 0.855, 0.0) score=0.8000
+[C AT=25 AP=10 C=2 epoch=13] loss=4.6482 cal=(0.81, 0.99, 0.995, 0.865, 0.0) score=0.8100
+[C AT=25 AP=10 C=2 epoch=14] loss=4.4600 cal=(0.795, 0.99, 0.99, 0.8575, 0.0) score=0.7950
+[C AT=25 AP=10 C=2 epoch=15] loss=4.4725 cal=(0.8125, 0.995, 0.9875, 0.87, 0.0) score=0.8125
+[C AT=25 AP=10 C=2 epoch=16] loss=4.6249 cal=(0.7975, 0.995, 0.9875, 0.865, 0.0) score=0.7975
+[C AT=25 AP=10 C=2 epoch=17] loss=4.3619 cal=(0.815, 0.995, 0.9925, 0.8525, 0.0) score=0.8150
+[C AT=25 AP=10 C=2 epoch=18] loss=4.0752 cal=(0.815, 0.995, 0.99, 0.8575, 0.0) score=0.8150
+[C AT=25 AP=10 C=2 epoch=19] loss=3.8963 cal=(0.8125, 0.995, 0.9875, 0.85, 0.0) score=0.8125
+[C AT=25 AP=10 C=2 epoch=20] loss=3.9472 cal=(0.815, 0.995, 0.9875, 0.8625, 0.0) score=0.8150
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L10__C_L2/das_c.pt
+[fit readout] C AT=25 AP=10 C=2 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=10 C=3 (missing checkpoint)
+[C AT=25 AP=10 C=3 epoch=01] loss=14.4978 cal=(0.6475, 0.9875, 0.985, 0.7375, 0.0) score=0.6475
+[C AT=25 AP=10 C=3 epoch=02] loss=8.6682 cal=(0.7075, 0.9975, 0.99, 0.805, 0.0) score=0.7075
+[C AT=25 AP=10 C=3 epoch=03] loss=7.6051 cal=(0.7325, 0.9975, 0.9925, 0.835, 0.0) score=0.7325
+[C AT=25 AP=10 C=3 epoch=04] loss=7.0325 cal=(0.74, 0.995, 0.99, 0.8325, 0.0) score=0.7400
+[C AT=25 AP=10 C=3 epoch=05] loss=6.7461 cal=(0.7775, 0.9925, 0.9875, 0.8525, 0.0) score=0.7775
+[C AT=25 AP=10 C=3 epoch=06] loss=6.5190 cal=(0.7525, 0.9875, 0.985, 0.835, 0.0) score=0.7525
+[C AT=25 AP=10 C=3 epoch=07] loss=6.4417 cal=(0.77, 0.9925, 0.9875, 0.845, 0.0) score=0.7700
+[C AT=25 AP=10 C=3 epoch=08] loss=6.1843 cal=(0.765, 0.99, 0.98, 0.8375, 0.0) score=0.7650
+[C AT=25 AP=10 C=3 epoch=09] loss=5.8721 cal=(0.76, 0.9925, 0.985, 0.845, 0.0) score=0.7600
+[C AT=25 AP=10 C=3 epoch=10] loss=5.7289 cal=(0.76, 0.99, 0.9725, 0.835, 0.0) score=0.7600
+[C AT=25 AP=10 C=3 epoch=11] loss=5.6619 cal=(0.785, 0.985, 0.9825, 0.8575, 0.0) score=0.7850
+[C AT=25 AP=10 C=3 epoch=12] loss=5.3166 cal=(0.775, 0.9875, 0.98, 0.855, 0.0) score=0.7750
+[C AT=25 AP=10 C=3 epoch=13] loss=5.1908 cal=(0.78, 0.99, 0.9775, 0.855, 0.0) score=0.7800
+[C AT=25 AP=10 C=3 epoch=14] loss=5.0698 cal=(0.765, 0.985, 0.965, 0.8425, 0.0) score=0.7650
+[C AT=25 AP=10 C=3 epoch=15] loss=5.2551 cal=(0.7375, 0.975, 0.965, 0.805, 0.0) score=0.7375
+[C AT=25 AP=10 C=3 epoch=16] loss=5.7329 cal=(0.7725, 0.9875, 0.9725, 0.8425, 0.0) score=0.7725
+[C AT=25 AP=10 C=3 epoch=17] loss=5.1461 cal=(0.7625, 0.9875, 0.9825, 0.8525, 0.0) score=0.7625
+[C AT=25 AP=10 C=3 epoch=18] loss=4.8315 cal=(0.7725, 0.9825, 0.9825, 0.8525, 0.0) score=0.7725
+[C AT=25 AP=10 C=3 epoch=19] loss=4.9790 cal=(0.775, 0.99, 0.9725, 0.825, 0.0) score=0.7750
+[C AT=25 AP=10 C=3 epoch=20] loss=4.6870 cal=(0.765, 0.9825, 0.9775, 0.8425, 0.0) score=0.7650
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L10__C_L3/das_c.pt
+[fit readout] C AT=25 AP=10 C=3 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=10 C=4 (missing checkpoint)
+[C AT=25 AP=10 C=4 epoch=01] loss=14.6995 cal=(0.6475, 0.9875, 0.9875, 0.76, 0.0) score=0.6475
+[C AT=25 AP=10 C=4 epoch=02] loss=8.3915 cal=(0.7325, 0.9925, 0.9925, 0.82, 0.0) score=0.7325
+[C AT=25 AP=10 C=4 epoch=03] loss=7.3924 cal=(0.7525, 0.99, 0.9925, 0.845, 0.0) score=0.7525
+[C AT=25 AP=10 C=4 epoch=04] loss=6.8676 cal=(0.7625, 0.99, 0.99, 0.85, 0.0) score=0.7625
+[C AT=25 AP=10 C=4 epoch=05] loss=6.6339 cal=(0.7675, 0.9925, 0.985, 0.86, 0.0) score=0.7675
+[C AT=25 AP=10 C=4 epoch=06] loss=6.5470 cal=(0.7575, 0.9875, 0.99, 0.835, 0.0) score=0.7575
+[C AT=25 AP=10 C=4 epoch=07] loss=6.3496 cal=(0.7675, 0.995, 0.98, 0.8475, 0.0) score=0.7675
+[C AT=25 AP=10 C=4 epoch=08] loss=6.0403 cal=(0.78, 0.99, 0.9875, 0.8375, 0.0) score=0.7800
+[C AT=25 AP=10 C=4 epoch=09] loss=5.8083 cal=(0.7775, 0.99, 0.985, 0.855, 0.0) score=0.7775
+[C AT=25 AP=10 C=4 epoch=10] loss=5.6782 cal=(0.7775, 0.99, 0.98, 0.845, 0.0) score=0.7775
+[C AT=25 AP=10 C=4 epoch=11] loss=5.5926 cal=(0.785, 0.9925, 0.9775, 0.86, 0.0) score=0.7850
+[C AT=25 AP=10 C=4 epoch=12] loss=5.3458 cal=(0.7925, 0.99, 0.9775, 0.855, 0.0) score=0.7925
+[C AT=25 AP=10 C=4 epoch=13] loss=5.1564 cal=(0.7675, 0.9925, 0.975, 0.85, 0.0) score=0.7675
+[C AT=25 AP=10 C=4 epoch=14] loss=5.2692 cal=(0.755, 0.99, 0.985, 0.835, 0.0) score=0.7550
+[C AT=25 AP=10 C=4 epoch=15] loss=5.3094 cal=(0.7925, 0.99, 0.985, 0.8675, 0.0) score=0.7925
+[C AT=25 AP=10 C=4 epoch=16] loss=5.1088 cal=(0.7825, 0.99, 0.9825, 0.8425, 0.0) score=0.7825
+[C AT=25 AP=10 C=4 epoch=17] loss=4.8912 cal=(0.7825, 0.9925, 0.9825, 0.8525, 0.0) score=0.7825
+[C AT=25 AP=10 C=4 epoch=18] loss=4.7232 cal=(0.7875, 0.9875, 0.9825, 0.855, 0.0) score=0.7875
+[C AT=25 AP=10 C=4 epoch=19] loss=4.7828 cal=(0.7875, 0.985, 0.9825, 0.8425, 0.0) score=0.7875
+[C AT=25 AP=10 C=4 epoch=20] loss=4.5313 cal=(0.785, 0.9875, 0.985, 0.85, 0.0) score=0.7850
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L10__C_L4/das_c.pt
+[fit readout] C AT=25 AP=10 C=4 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=11 C=0 (missing checkpoint)
+[C AT=25 AP=11 C=0 epoch=01] loss=12.3695 cal=(0.7025, 0.9975, 0.995, 0.8, 0.0) score=0.7025
+[C AT=25 AP=11 C=0 epoch=02] loss=7.5193 cal=(0.765, 0.9975, 0.995, 0.845, 0.0) score=0.7650
+[C AT=25 AP=11 C=0 epoch=03] loss=6.4430 cal=(0.7925, 0.9975, 0.9975, 0.8525, 0.0) score=0.7925
+[C AT=25 AP=11 C=0 epoch=04] loss=5.8103 cal=(0.8125, 0.9975, 0.99, 0.855, 0.0) score=0.8125
+[C AT=25 AP=11 C=0 epoch=05] loss=6.0375 cal=(0.7975, 0.9975, 0.9975, 0.8575, 0.0) score=0.7975
+[C AT=25 AP=11 C=0 epoch=06] loss=5.5598 cal=(0.815, 0.995, 0.9975, 0.8675, 0.0) score=0.8150
+[C AT=25 AP=11 C=0 epoch=07] loss=5.1926 cal=(0.81, 0.995, 0.9975, 0.8575, 0.0) score=0.8100
+[C AT=25 AP=11 C=0 epoch=08] loss=5.4432 cal=(0.795, 0.9975, 0.995, 0.8425, 0.0) score=0.7950
+[C AT=25 AP=11 C=0 epoch=09] loss=5.0773 cal=(0.835, 0.9975, 1.0, 0.8675, 0.0) score=0.8350
+[C AT=25 AP=11 C=0 epoch=10] loss=4.4664 cal=(0.8325, 1.0, 0.995, 0.8725, 0.0) score=0.8325
+[C AT=25 AP=11 C=0 epoch=11] loss=4.2530 cal=(0.8375, 1.0, 0.9975, 0.8925, 0.0) score=0.8375
+[C AT=25 AP=11 C=0 epoch=12] loss=4.1594 cal=(0.8075, 0.9975, 0.995, 0.8625, 0.0) score=0.8075
+[C AT=25 AP=11 C=0 epoch=13] loss=4.5928 cal=(0.83, 0.9975, 1.0, 0.8775, 0.0) score=0.8300
+[C AT=25 AP=11 C=0 epoch=14] loss=5.2359 cal=(0.8375, 1.0, 0.9975, 0.87, 0.0) score=0.8375
+[C AT=25 AP=11 C=0 epoch=15] loss=5.1707 cal=(0.815, 1.0, 0.995, 0.8875, 0.0) score=0.8150
+[C AT=25 AP=11 C=0 epoch=16] loss=4.6212 cal=(0.87, 1.0, 0.9975, 0.8975, 0.0) score=0.8700
+[C AT=25 AP=11 C=0 epoch=17] loss=4.4121 cal=(0.825, 0.995, 0.9975, 0.85, 0.0) score=0.8250
+[C AT=25 AP=11 C=0 epoch=18] loss=5.0470 cal=(0.855, 1.0, 1.0, 0.875, 0.0) score=0.8550
+[C AT=25 AP=11 C=0 epoch=19] loss=4.3893 cal=(0.86, 1.0, 1.0, 0.9075, 0.0) score=0.8600
+[C AT=25 AP=11 C=0 epoch=20] loss=4.0156 cal=(0.8775, 1.0, 1.0, 0.89, 0.0) score=0.8775
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L11__C_L0/das_c.pt
+[fit readout] C AT=25 AP=11 C=0 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=11 C=1 (missing checkpoint)
+[C AT=25 AP=11 C=1 epoch=01] loss=13.7894 cal=(0.655, 0.99, 0.9925, 0.77, 0.0) score=0.6550
+[C AT=25 AP=11 C=1 epoch=02] loss=8.3196 cal=(0.7225, 0.9975, 0.9975, 0.8175, 0.0) score=0.7225
+[C AT=25 AP=11 C=1 epoch=03] loss=7.1503 cal=(0.7475, 0.9975, 0.995, 0.83, 0.0) score=0.7475
+[C AT=25 AP=11 C=1 epoch=04] loss=6.6612 cal=(0.75, 0.9925, 0.99, 0.835, 0.0) score=0.7500
+[C AT=25 AP=11 C=1 epoch=05] loss=6.4209 cal=(0.7725, 0.9975, 0.995, 0.8425, 0.0) score=0.7725
+[C AT=25 AP=11 C=1 epoch=06] loss=6.0083 cal=(0.7725, 0.995, 0.9925, 0.8475, 0.0) score=0.7725
+[C AT=25 AP=11 C=1 epoch=07] loss=6.0377 cal=(0.7975, 0.9925, 0.9925, 0.8525, 0.0) score=0.7975
+[C AT=25 AP=11 C=1 epoch=08] loss=5.7908 cal=(0.7775, 0.9875, 0.99, 0.83, 0.0) score=0.7775
+[C AT=25 AP=11 C=1 epoch=09] loss=5.4854 cal=(0.7825, 0.9975, 0.99, 0.8525, 0.0) score=0.7825
+[C AT=25 AP=11 C=1 epoch=10] loss=5.3763 cal=(0.7625, 0.9925, 0.9925, 0.83, 0.0) score=0.7625
+[C AT=25 AP=11 C=1 epoch=11] loss=5.1524 cal=(0.79, 0.9925, 0.995, 0.8375, 0.0) score=0.7900
+[C AT=25 AP=11 C=1 epoch=12] loss=4.8808 cal=(0.79, 0.995, 0.995, 0.845, 0.0) score=0.7900
+[C AT=25 AP=11 C=1 epoch=13] loss=4.8140 cal=(0.8125, 0.9975, 0.9925, 0.8475, 0.0) score=0.8125
+[C AT=25 AP=11 C=1 epoch=14] loss=4.5513 cal=(0.77, 0.995, 0.9925, 0.8275, 0.0) score=0.7700
+[C AT=25 AP=11 C=1 epoch=15] loss=5.6551 cal=(0.7875, 0.9975, 0.9875, 0.855, 0.0) score=0.7875
+[C AT=25 AP=11 C=1 epoch=16] loss=5.2739 cal=(0.81, 0.995, 0.99, 0.85, 0.0) score=0.8100
+[C AT=25 AP=11 C=1 epoch=17] loss=4.6827 cal=(0.81, 0.9975, 0.99, 0.845, 0.0) score=0.8100
+[C AT=25 AP=11 C=1 epoch=18] loss=4.2732 cal=(0.795, 0.9975, 0.995, 0.8625, 0.0) score=0.7950
+[C AT=25 AP=11 C=1 epoch=19] loss=4.6055 cal=(0.7775, 0.97, 0.985, 0.8325, 0.0) score=0.7775
+[C AT=25 AP=11 C=1 epoch=20] loss=4.8231 cal=(0.775, 0.9975, 0.995, 0.8075, 0.0) score=0.7750
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L11__C_L1/das_c.pt
+[fit readout] C AT=25 AP=11 C=1 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=11 C=2 (missing checkpoint)
+[C AT=25 AP=11 C=2 epoch=01] loss=13.8863 cal=(0.6725, 0.995, 0.99, 0.77, 0.0) score=0.6725
+[C AT=25 AP=11 C=2 epoch=02] loss=8.0732 cal=(0.7425, 0.9975, 0.9925, 0.835, 0.0) score=0.7425
+[C AT=25 AP=11 C=2 epoch=03] loss=6.9671 cal=(0.78, 0.9975, 0.995, 0.8525, 0.0) score=0.7800
+[C AT=25 AP=11 C=2 epoch=04] loss=6.3220 cal=(0.7875, 0.995, 0.995, 0.8425, 0.0) score=0.7875
+[C AT=25 AP=11 C=2 epoch=05] loss=5.9732 cal=(0.76, 0.9925, 0.995, 0.83, 0.0) score=0.7600
+[C AT=25 AP=11 C=2 epoch=06] loss=6.0131 cal=(0.7675, 0.995, 0.9925, 0.8375, 0.0) score=0.7675
+[C AT=25 AP=11 C=2 epoch=07] loss=5.7126 cal=(0.8025, 0.995, 0.99, 0.855, 0.0) score=0.8025
+[C AT=25 AP=11 C=2 epoch=08] loss=5.3147 cal=(0.79, 0.99, 0.9925, 0.8425, 0.0) score=0.7900
+[C AT=25 AP=11 C=2 epoch=09] loss=5.1323 cal=(0.8025, 0.9875, 0.9875, 0.855, 0.0) score=0.8025
+[C AT=25 AP=11 C=2 epoch=10] loss=5.2940 cal=(0.7875, 0.995, 0.9925, 0.84, 0.0) score=0.7875
+[C AT=25 AP=11 C=2 epoch=11] loss=5.2413 cal=(0.7925, 0.99, 0.9875, 0.84, 0.0) score=0.7925
+[C AT=25 AP=11 C=2 epoch=12] loss=4.9387 cal=(0.82, 0.995, 0.9875, 0.8625, 0.0) score=0.8200
+[C AT=25 AP=11 C=2 epoch=13] loss=4.5162 cal=(0.8025, 0.9925, 0.9925, 0.855, 0.0) score=0.8025
+[C AT=25 AP=11 C=2 epoch=14] loss=4.2577 cal=(0.79, 0.995, 0.995, 0.8525, 0.0) score=0.7900
+[C AT=25 AP=11 C=2 epoch=15] loss=4.2921 cal=(0.7725, 0.9925, 0.9875, 0.845, 0.0) score=0.7725
+[C AT=25 AP=11 C=2 epoch=16] loss=4.5579 cal=(0.7975, 0.9975, 0.9925, 0.85, 0.0) score=0.7975
+[C AT=25 AP=11 C=2 epoch=17] loss=4.2700 cal=(0.7875, 0.99, 0.9825, 0.84, 0.0) score=0.7875
+[C AT=25 AP=11 C=2 epoch=18] loss=4.1478 cal=(0.8025, 0.9975, 0.9925, 0.855, 0.0) score=0.8025
+[C AT=25 AP=11 C=2 epoch=19] loss=3.9490 cal=(0.7925, 0.995, 0.99, 0.8625, 0.0) score=0.7925
+[C AT=25 AP=11 C=2 epoch=20] loss=4.1183 cal=(0.81, 0.995, 0.9925, 0.855, 0.0) score=0.8100
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L11__C_L2/das_c.pt
+[fit readout] C AT=25 AP=11 C=2 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=11 C=3 (missing checkpoint)
+[C AT=25 AP=11 C=3 epoch=01] loss=14.5370 cal=(0.64, 0.99, 0.99, 0.74, 0.0) score=0.6400
+[C AT=25 AP=11 C=3 epoch=02] loss=8.5269 cal=(0.705, 0.995, 0.9925, 0.8175, 0.0) score=0.7050
+[C AT=25 AP=11 C=3 epoch=03] loss=7.4286 cal=(0.72, 0.9975, 0.9925, 0.8325, 0.0) score=0.7200
+[C AT=25 AP=11 C=3 epoch=04] loss=6.9529 cal=(0.7225, 0.99, 0.9875, 0.8325, 0.0) score=0.7225
+[C AT=25 AP=11 C=3 epoch=05] loss=6.7102 cal=(0.7525, 0.9925, 0.985, 0.83, 0.0) score=0.7525
+[C AT=25 AP=11 C=3 epoch=06] loss=6.3665 cal=(0.7525, 0.9925, 0.99, 0.835, 0.0) score=0.7525
+[C AT=25 AP=11 C=3 epoch=07] loss=6.1920 cal=(0.7675, 0.995, 0.985, 0.84, 0.0) score=0.7675
+[C AT=25 AP=11 C=3 epoch=08] loss=5.8813 cal=(0.76, 0.9925, 0.985, 0.84, 0.0) score=0.7600
+[C AT=25 AP=11 C=3 epoch=09] loss=5.6441 cal=(0.76, 0.9925, 0.985, 0.85, 0.0) score=0.7600
+[C AT=25 AP=11 C=3 epoch=10] loss=5.6959 cal=(0.7775, 0.99, 0.98, 0.8425, 0.0) score=0.7775
+[C AT=25 AP=11 C=3 epoch=11] loss=5.4809 cal=(0.7775, 0.9875, 0.9825, 0.8375, 0.0) score=0.7775
+[C AT=25 AP=11 C=3 epoch=12] loss=5.1939 cal=(0.7875, 0.9925, 0.9825, 0.8525, 0.0) score=0.7875
+[C AT=25 AP=11 C=3 epoch=13] loss=5.0461 cal=(0.78, 0.99, 0.985, 0.8325, 0.0) score=0.7800
+[C AT=25 AP=11 C=3 epoch=14] loss=4.9064 cal=(0.7725, 0.99, 0.9825, 0.845, 0.0) score=0.7725
+[C AT=25 AP=11 C=3 epoch=15] loss=4.7800 cal=(0.765, 0.9875, 0.98, 0.8325, 0.0) score=0.7650
+[C AT=25 AP=11 C=3 epoch=16] loss=5.1457 cal=(0.7725, 0.99, 0.9775, 0.8425, 0.0) score=0.7725
+[C AT=25 AP=11 C=3 epoch=17] loss=4.8910 cal=(0.7775, 0.9875, 0.9825, 0.8325, 0.0) score=0.7775
+[C AT=25 AP=11 C=3 epoch=18] loss=4.5672 cal=(0.7625, 0.9875, 0.985, 0.8275, 0.0) score=0.7625
+[C AT=25 AP=11 C=3 epoch=19] loss=4.2917 cal=(0.7675, 0.9875, 0.985, 0.8425, 0.0) score=0.7675
+[C AT=25 AP=11 C=3 epoch=20] loss=4.3069 cal=(0.765, 0.99, 0.985, 0.82, 0.0) score=0.7650
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L11__C_L3/das_c.pt
+[fit readout] C AT=25 AP=11 C=3 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=11 C=4 (missing checkpoint)
+[C AT=25 AP=11 C=4 epoch=01] loss=14.8139 cal=(0.6375, 0.9825, 0.985, 0.7625, 0.0) score=0.6375
+[C AT=25 AP=11 C=4 epoch=02] loss=8.4231 cal=(0.715, 0.9875, 0.9925, 0.8175, 0.0) score=0.7150
+[C AT=25 AP=11 C=4 epoch=03] loss=7.3408 cal=(0.7725, 0.99, 0.9825, 0.84, 0.0) score=0.7725
+[C AT=25 AP=11 C=4 epoch=04] loss=6.7346 cal=(0.77, 0.9925, 0.99, 0.8425, 0.0) score=0.7700
+[C AT=25 AP=11 C=4 epoch=05] loss=6.4779 cal=(0.775, 0.9925, 0.99, 0.8575, 0.0) score=0.7750
+[C AT=25 AP=11 C=4 epoch=06] loss=6.2232 cal=(0.76, 0.9875, 0.9825, 0.8425, 0.0) score=0.7600
+[C AT=25 AP=11 C=4 epoch=07] loss=6.0337 cal=(0.78, 0.995, 0.9875, 0.8375, 0.0) score=0.7800
+[C AT=25 AP=11 C=4 epoch=08] loss=5.9053 cal=(0.7625, 0.99, 0.9825, 0.8425, 0.0) score=0.7625
+[C AT=25 AP=11 C=4 epoch=09] loss=5.7044 cal=(0.7625, 0.9875, 0.985, 0.8525, 0.0) score=0.7625
+[C AT=25 AP=11 C=4 epoch=10] loss=5.4424 cal=(0.8, 0.9875, 0.9875, 0.87, 0.0) score=0.8000
+[C AT=25 AP=11 C=4 epoch=11] loss=5.4650 cal=(0.7825, 0.99, 0.9825, 0.8625, 0.0) score=0.7825
+[C AT=25 AP=11 C=4 epoch=12] loss=5.3443 cal=(0.77, 0.9875, 0.9725, 0.84, 0.0) score=0.7700
+[C AT=25 AP=11 C=4 epoch=13] loss=5.1534 cal=(0.785, 0.9875, 0.9875, 0.86, 0.0) score=0.7850
+[C AT=25 AP=11 C=4 epoch=14] loss=4.8688 cal=(0.785, 0.9875, 0.9875, 0.8575, 0.0) score=0.7850
+[C AT=25 AP=11 C=4 epoch=15] loss=4.8013 cal=(0.79, 0.9875, 0.9825, 0.8575, 0.0) score=0.7900
+[C AT=25 AP=11 C=4 epoch=16] loss=4.7829 cal=(0.7675, 0.985, 0.98, 0.8525, 0.0) score=0.7675
+[C AT=25 AP=11 C=4 epoch=17] loss=4.7235 cal=(0.7875, 0.99, 0.985, 0.8525, 0.0) score=0.7875
+[C AT=25 AP=11 C=4 epoch=18] loss=4.4093 cal=(0.7825, 0.9875, 0.9825, 0.855, 0.0) score=0.7825
+[C AT=25 AP=11 C=4 epoch=19] loss=4.3595 cal=(0.78, 0.9875, 0.9775, 0.845, 0.0) score=0.7800
+[C AT=25 AP=11 C=4 epoch=20] loss=4.3088 cal=(0.7925, 0.9875, 0.985, 0.8725, 0.0) score=0.7925
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L11__C_L4/das_c.pt
+[fit readout] C AT=25 AP=11 C=4 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=12 C=0 (missing checkpoint)
+[C AT=25 AP=12 C=0 epoch=01] loss=12.0939 cal=(0.6975, 0.995, 0.9975, 0.7875, 0.0) score=0.6975
+[C AT=25 AP=12 C=0 epoch=02] loss=7.3201 cal=(0.755, 0.995, 1.0, 0.845, 0.0) score=0.7550
+[C AT=25 AP=12 C=0 epoch=03] loss=6.1526 cal=(0.7925, 1.0, 1.0, 0.865, 0.0) score=0.7925
+[C AT=25 AP=12 C=0 epoch=04] loss=5.4613 cal=(0.8025, 0.995, 0.9975, 0.875, 0.0) score=0.8025
+[C AT=25 AP=12 C=0 epoch=05] loss=5.4647 cal=(0.8225, 0.9975, 1.0, 0.8775, 0.0) score=0.8225
+[C AT=25 AP=12 C=0 epoch=06] loss=5.3145 cal=(0.82, 0.9975, 0.9975, 0.8775, 0.0) score=0.8200
+[C AT=25 AP=12 C=0 epoch=07] loss=5.0753 cal=(0.8125, 0.99, 0.9975, 0.865, 0.0) score=0.8125
+[C AT=25 AP=12 C=0 epoch=08] loss=4.7157 cal=(0.82, 0.9975, 0.9975, 0.8825, 0.0) score=0.8200
+[C AT=25 AP=12 C=0 epoch=09] loss=4.8024 cal=(0.795, 0.995, 1.0, 0.87, 0.0) score=0.7950
+[C AT=25 AP=12 C=0 epoch=10] loss=4.7511 cal=(0.8, 0.9975, 0.9975, 0.8625, 0.0) score=0.8000
+[C AT=25 AP=12 C=0 epoch=11] loss=4.5714 cal=(0.8225, 0.995, 0.995, 0.8775, 0.0) score=0.8225
+[C AT=25 AP=12 C=0 epoch=12] loss=4.0065 cal=(0.8325, 0.9975, 0.9975, 0.88, 0.0) score=0.8325
+[C AT=25 AP=12 C=0 epoch=13] loss=3.7353 cal=(0.845, 0.9975, 1.0, 0.8725, 0.0) score=0.8450
+[C AT=25 AP=12 C=0 epoch=14] loss=3.6053 cal=(0.84, 0.995, 0.9975, 0.8575, 0.0) score=0.8400
+[C AT=25 AP=12 C=0 epoch=15] loss=4.0661 cal=(0.82, 0.9925, 1.0, 0.8575, 0.0) score=0.8200
+[C AT=25 AP=12 C=0 epoch=16] loss=4.4513 cal=(0.815, 0.995, 1.0, 0.85, 0.0) score=0.8150
+[C AT=25 AP=12 C=0 epoch=17] loss=4.0095 cal=(0.7975, 0.995, 1.0, 0.86, 0.0) score=0.7975
+[C AT=25 AP=12 C=0 epoch=18] loss=4.2950 cal=(0.8125, 0.9975, 0.9975, 0.8525, 0.0) score=0.8125
+[C AT=25 AP=12 C=0 epoch=19] loss=4.1870 cal=(0.795, 0.9975, 0.9975, 0.8475, 0.0) score=0.7950
+[C AT=25 AP=12 C=0 epoch=20] loss=4.6491 cal=(0.81, 0.9975, 0.995, 0.8675, 0.0) score=0.8100
+[saved] results_gradual_2.04.00.0_selected_layers_controlled_seed0_no_distractor/trained_handles/AT_L25__AP_L12__C_L0/das_c.pt
+[fit readout] C AT=25 AP=12 C=0 (handle retrained)
+[C readout] val_acc=1.0000
+[train handle] C AT=25 AP=12 C=1 (missing checkpoint)
+[C AT=25 AP=12 C=1 epoch=01] loss=13.4095 cal=(0.66, 0.995, 0.995, 0.785, 0.0) score=0.6600
+[C AT=25 AP=12 C=1 epoch=02] loss=7.9082 cal=(0.7325, 0.9975, 1.0, 0.825, 0.0) score=0.7325
+[C AT=25 AP=12 C=1 epoch=03] loss=6.7409 cal=(0.745, 0.995, 0.9975, 0.8425, 0.0) score=0.7450

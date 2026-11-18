@@ -33,15 +33,21 @@ from mcqa_train_grid_standard_das import (
 # Each variable is evaluated on a BALANCED MIX of the selected pair types.
 # EVAL_SIZE is the total number of examples PER VARIABLE (default: 400).
 # ============================================================================
+ALL_PAIRS = ["AT_only", "AP_only", "C_only", "AP_AT", "C_AP_AT"]
+# EVAL_PAIR_TYPES = {
+#     "AT": ["AT_only"],                  # e.g. ["AT_only", "AP_AT", "C_AP_AT"]
+#     "AP": ["AP_only"],                  # e.g. ["AP_only", "AP_AT", "C_AP_AT"]
+#     "C": ["C_only"],                    # e.g. ["C_only", "C_AP_AT"]
+# }
 EVAL_PAIR_TYPES = {
-    "AT": ["AT_only", "C_AP_AT"],                  # e.g. ["AT_only", "AP_AT", "C_AP_AT"]
-    "AP": ["AP_only", "C_AP_AT"],                  # e.g. ["AP_only", "AP_AT", "C_AP_AT"]
-    "C": ["C_only", "C_AP_AT"],                    # e.g. ["C_only", "C_AP_AT"]
+    "AT": ALL_PAIRS,  # e.g. ["AT_only", "AP_AT", "C_AP_AT"]
+    "AP": ALL_PAIRS,  # e.g. ["AP_only", "AP_AT", "C_AP_AT"]
+    "C": ALL_PAIRS,   # e.g.
 }
 
 # True: test examples must change the expected answer under THIS intervention.
 # False: also include preservation examples.
-EVAL_CHANGING_ONLY = True
+EVAL_CHANGING_ONLY = False
 
 TARGET_BY_VARIABLE = {"AT": "Y_after_AT_intervene", "AP": "Y_after_AP_intervene", "C": "Y_after_C_intervene"}
 PAIR_SEEDS = {"AT_only": 3001, "AP_only": 3002, "C_only": 3004, "AP_AT": 3005, "C_AP_AT": 3006}
@@ -229,7 +235,7 @@ def rebuild_summary(root, eval_dir, args):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--result-dir", default="results_standard_all_layers_mixedall_seed0_no_distractor")
+    parser.add_argument("--result-dir", default="results_standard_all_layers_controlled_seed0_no_distractor")
     parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at_no_distractor")
     parser.add_argument("--threshold-pct", type=float, default=5.0, help="CAL IIA within x percentage points of variable max")
     parser.add_argument("--eval-size", type=int, default=400)

@@ -7,7 +7,7 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=20G
 #SBATCH --gpus-per-node=1
-#SBATCH --time=07:00:00
+#SBATCH --time=08:00:00
 #SBATCH --output=slurm_%j.out
 #SBATCH --error=slurm_%j.err
 
@@ -18,10 +18,10 @@ conda activate PLOT
 
 python3 -u mcqa_train_gradual_efficient_v2.py \
     --data-path randomized_copycolors_include_ap_at_no_distractor \
-    --result-dir results_gradual_2.02.04.0_selected_layers_controlled_seed0_no_distractor \
+    --result-dir results_gradual_222222_selected_layers_controlled_seed0_no_distractor \
     --ap-lambda-med 2 \
     --ap-lambda-readout 2 \
     --c-lambda-ap-med 2 \
     --c-lambda-ap-readout 2 \
-    --c-lambda-at-med 4 \
-    --c-lambda-at-readout 4
+    --c-lambda-at-med 2 \
+    --c-lambda-at-readout 2

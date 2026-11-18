@@ -41,7 +41,7 @@ from mcqa_train_grid_gradual_das import (
 # ============================================================================
 # EDIT SETTINGS HERE
 # ============================================================================
-RESULT_DIR = "results_gradual_2.02.04.0_selected_layers_mixedall_seed0_no_distractor"
+RESULT_DIR = "results_gradual_2.02.04.0_selected_layers_controlled_seed0_no_distractor"
 DATA_PATH = "randomized_copycolors_include_ap_at_no_distractor"
 EVAL_SIZE = 400  # total test examples PER variable, NOT per pair type
 BATCH_SIZE = 32
@@ -50,9 +50,9 @@ OUTPUT_SPACE = "full"  # "full" or "az"
 
 # Each variable can use its own (possibly mixed) test pair types.
 EVAL_PAIR_TYPES = {
-    "AT": ["AT_only", "C_AP_AT"],
-    "AP": ["AP_only", "C_AP_AT"],
-    "C": ["C_only", "C_AP_AT"],
+    "AT": ["AT_only"],
+    "AP": ["AP_only"],
+    "C": ["C_only"],
 }
 EVAL_CHANGING_ONLY = True  # require target Y_after_variable != base_Y
 
