@@ -1012,14 +1012,16 @@ def main():
     if not ap_token_positions:
         raise ValueError("AP token positions must be non-empty")
 
-    for at_layer in at_layers:
+    # Independent handle training allows any layer. Ordering matters only for full-chain eval.
+    if args.evaluate:
+        for at_layer in at_layers:
+            for ap_layer in ap_layers:
+                if ap_layer >= at_layer:
+                    raise ValueError(f"Need AP < AT, got AP={ap_layer}, AT={at_layer}")
         for ap_layer in ap_layers:
-            if ap_layer >= at_layer:
-                raise ValueError(f"Need AP < AT, got AP={ap_layer}, AT={at_layer}")
-    for ap_layer in ap_layers:
-        for c_layer in c_layers:
-            if c_layer >= ap_layer:
-                raise ValueError(f"Need C < AP, got C={c_layer}, AP={ap_layer}")
+            for c_layer in c_layers:
+                if c_layer >= ap_layer:
+                    raise ValueError(f"Need C < AP, got C={c_layer}, AP={ap_layer}")
 
     specs = make_specs(args.at_token_position, ap_token_positions, args.c_token_position)
 
@@ -1034,7 +1036,10 @@ def main():
     print(f"AP layers: {ap_layers}")
     print(f"C layers : {c_layers}")
     print(f"Train handles: {len(at_layers)} AT + {len(ap_layers)} AP + {len(c_layers)} C = {len(at_layers) + len(ap_layers) + len(c_layers)}")
-    print(f"Evaluation configs: {len(at_layers) * len(ap_layers) * len(c_layers)}")
+    if args.evaluate:
+        print(f"Evaluation configs: {len(at_layers) * len(ap_layers) * len(c_layers)}")
+    else:
+        print("Train-only: no full-chain evaluation (layer selection comes later)")
     print("Objective for every handle: direct counterfactual Y loss only")
 
     model, tokenizer = load_gemma_model()
