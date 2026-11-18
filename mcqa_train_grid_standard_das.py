@@ -1,5 +1,11 @@
 """Train independent fixed-layer Standard DAS handles and evaluate full-chain causal faithfulness.
 
+IMPORTANT: For controlled Standard-vs-GDAS comparison, train/cal/test banks,
+minibatch shuffling and the AT intervention path match mcqa_train_gradual_efficient_v2.
+Use --at-from-gradual to share EXACT AT checkpoints and readouts across methods.
+Always use a new --result-dir or --retrain when switching from legacy Standard.
+
+
 Default grid:
     AT: 23,24,25
     AP: 14,13
@@ -43,6 +49,7 @@ from mcqa_gradual_das import (
     output_iia,
     output_label_ids,
     output_targets,
+    run_das_intervention,
     set_seed,
 )
 from mcqa_gradual_das_ap_cross_tokens import run_ap_intervention_and_capture_at, run_frozen_at_mediator
@@ -171,6 +178,41 @@ def make_variable_banks(model, tokenizer, data_path, ft_size, cal_size, te_size,
     return banks, variable_components
 
 
+def make_gdas_aligned_banks(model, tokenizer, data_path, ft_size, cal_size, te_size, batch_size, seed, specs):
+    """Exactly reuse the controlled train/cal/test sampler of gradual efficient v2.
+
+    The legacy make_variable_banks above uses different pair-selection seeds
+    and must NOT be used for paired Standard-vs-GDAS comparisons.
+    Return the dict-of-dicts interface expected by the Standard trainer.
+    """
+    from mcqa_train_gradual_efficient_v2 import (
+        CAL_TEST_PAIR_TYPES,
+        CHANGING_ONLY_CAL_TEST,
+        TRAIN_PAIR_TYPES,
+        make_banks,
+    )
+
+    if not CHANGING_ONLY_CAL_TEST:
+        raise RuntimeError("Gradual v2 is not using changing-only cal/test; comparison protocol changed")
+    for variable, spec in specs.items():
+        if spec["pair_types"] != TRAIN_PAIR_TYPES[variable]:
+            raise ValueError(f"{variable}: Standard pair types differ from GDAS v2")
+        if CAL_TEST_PAIR_TYPES[variable] != [f"{variable}_only"]:
+            raise ValueError(f"{variable}: Gradual v2 controlled test setting changed")
+
+    gradual_banks = make_banks(
+        model, tokenizer, data_path, ft_size, cal_size,
+        te_size, batch_size, seed, with_test=True,
+    )
+    standard_banks = {}
+    for variable in specs:
+        train_bank, cal_bank, test_bank = gradual_banks[variable]
+        standard_banks[variable] = (
+            train_bank, {variable: cal_bank}, {variable: test_bank},
+        )
+    return standard_banks, {}
+
+
 # -----------------------------------------------------------------------------
 # Pure Standard DAS training at a fixed layer
 # -----------------------------------------------------------------------------
@@ -274,14 +316,34 @@ def run_das_intervention_generic(model, bank, source_states, Q, layer, output_id
 def evaluate_standard_direct(model, tokenizer, bank, source_states, Q, layer, token_position, target_name, batch_size, output_space):
     labels = answer_label_ids(tokenizer)
     output_ids = output_label_ids(labels, output_space)
-    logits = run_das_intervention_generic(model, bank, source_states, Q, layer, output_ids, token_position, batch_size, False)
+    if token_position == "last_token":
+        logits = run_das_intervention(model, bank, source_states, Q, layer, output_ids, token_position, batch_size, False)
+    else:
+        logits = run_das_intervention_generic(model, bank, source_states, Q, layer, output_ids, token_position, batch_size, False)
     target = bank["intervention_targets"][target_name]
     return output_iia(logits, target, tokenizer, output_space)
 
 
 def train_standard_fixed(model, tokenizer, banks, variable, layer, token_position, target_name, subspace_dim, epochs, lr, train_batch_size, eval_batch_size, seed, checkpoint_path, output_space, retrain):
+    protocol = "controlled_gdas_v2_aligned_v1"
     if checkpoint_path.exists() and not retrain:
-        print(f"[reuse {variable} checkpoint] {checkpoint_path}")
+        previous = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
+        expected = {
+            "alignment_protocol": protocol,
+            "seed": seed,
+            "epochs": epochs,
+            "lr": lr,
+            "subspace_dim": subspace_dim,
+            "train_batch_size": train_batch_size,
+            "eval_batch_size": eval_batch_size,
+            "output_space": output_space,
+        }
+        if any(previous.get(k) != v for k, v in expected.items()):
+            raise RuntimeError(
+                f"Unaligned/stale {variable} checkpoint: {checkpoint_path}. "
+                "Use --retrain or choose a NEW --result-dir."
+            )
+        print(f"[reuse aligned {variable} checkpoint] {checkpoint_path}")
         return
 
     set_seed(seed)
@@ -340,26 +402,28 @@ def train_standard_fixed(model, tokenizer, banks, variable, layer, token_positio
     best_epoch = None
 
     for epoch in range(1, epochs + 1):
-        permutation = torch.randperm(len(train_bank["base_input_ids"]))
+        permutation = torch.randperm(
+            len(train_bank["base_input_ids"]),
+            generator=torch.Generator().manual_seed(seed + epoch),
+        )
         total_loss = 0.0
 
         for start in range(0, len(permutation), train_batch_size):
             idx = permutation[start:start + train_batch_size]
             mini = subset_base_bank(train_bank, idx)
 
-            optimizer.zero_grad()
+            optimizer.zero_grad(set_to_none=True)
             Q = alignment.basis()
-            logits = run_das_intervention_generic(
-                model,
-                mini,
-                train_source[idx],
-                Q,
-                layer,
-                output_ids,
-                token_position,
-                len(idx),
-                True,
-            )
+            if variable == "AT":
+                logits = run_das_intervention(
+                    model, mini, train_source[idx], Q, layer,
+                    output_ids, token_position, len(idx), True,
+                )
+            else:
+                logits = run_das_intervention_generic(
+                    model, mini, train_source[idx], Q, layer,
+                    output_ids, token_position, len(idx), True,
+                )
             target = output_targets(train_target[idx], labels, output_space, device)
             loss = F.cross_entropy(logits, target)
             loss.backward()
@@ -407,6 +471,13 @@ def train_standard_fixed(model, tokenizer, banks, variable, layer, token_positio
         "cal_iia": float(best_iia),
         "test_iia": float(test_iia),
         "best_epoch": int(best_epoch),
+        "alignment_protocol": protocol,
+        "seed": seed,
+        "epochs": epochs,
+        "lr": lr,
+        "train_batch_size": train_batch_size,
+        "eval_batch_size": eval_batch_size,
+        "output_space": output_space,
     }
     torch.save(result, checkpoint_path)
     print(f"[{variable} L{layer} BEST] epoch={best_epoch} cal={best_iia:.4f} test={test_iia:.4f}")
@@ -867,7 +938,9 @@ def write_config_report(config_dir, at_layer, ap_layer, c_layer, clean, at_metri
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at_no_distractor")
-    parser.add_argument("--result-dir", default="results_standard_das_layer_grid_seed0_mixed_dataset")
+    parser.add_argument("--result-dir", default="results_standard_controlled_gdas_aligned_seed0_no_distractor")
+    parser.add_argument("--at-from-gradual", default=None,
+                        help="Gradual v2 result directory; reuse its exact AT handles/readouts")
 
     parser.add_argument("--at-layers", default="23,24,25")
     parser.add_argument("--ap-layers", default="14,13")
@@ -901,6 +974,8 @@ def main():
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--retrain", action="store_true")
     args = parser.parse_args()
+    if args.eval_size != args.te_size:
+        parser.error("--eval-size must equal --te-size in aligned controlled comparisons")
 
     set_seed(args.seed)
 
@@ -943,7 +1018,7 @@ def main():
     device = next(model.parameters()).device
 
     print("\n=== BUILD CONTROLLED-ONLY TRAIN/CAL/TEST BANKS ===")
-    banks, _ = make_variable_banks(
+    banks, _ = make_gdas_aligned_banks(
         model,
         tokenizer,
         args.data_path,
@@ -979,29 +1054,57 @@ def main():
         checkpoint_path = handle_dir / "das_at.pt"
         readout_path = handle_dir / "at_readout_LogisticRegression.pt"
 
-        train_standard_fixed(
-            model=model,
-            tokenizer=tokenizer,
-            banks=banks,
-            variable="AT",
-            layer=at_layer,
-            token_position=args.at_token_position,
-            target_name="Y_after_AT_intervene",
-            subspace_dim=args.at_dim,
-            epochs=args.at_epochs,
-            lr=args.lr,
-            train_batch_size=args.train_batch_size,
-            eval_batch_size=args.eval_batch_size,
-            seed=args.seed,
-            checkpoint_path=checkpoint_path,
-            output_space=args.output_space,
-            retrain=args.retrain,
-        )
+        if args.at_from_gradual:
+            from mcqa_train_gradual_efficient_v2 import dataset_stamp
+            source_dir = Path(args.at_from_gradual) / "trained_handles" / f"AT_L{at_layer}"
+            source_ckpt = source_dir / "das_at.pt"
+            source_readout = source_dir / "at_readout_LogisticRegression.pt"
+            if not source_ckpt.is_file() or not source_readout.is_file():
+                raise FileNotFoundError(f"Missing Gradual v2 AT handle/readout in {source_dir}")
+            info = torch.load(source_ckpt, map_location="cpu", weights_only=False)
+            hp = info.get("hyperparameters", {})
+            expected = {
+                "variable": "AT", "layer": at_layer,
+                "seed": args.seed, "dim": args.at_dim,
+                "train_size": args.ft_size, "cal_size": args.cal_size,
+                "train_batch_size": args.train_batch_size,
+                "batch_size": args.eval_batch_size,
+                "epochs": args.at_epochs, "lr": args.lr,
+                "output_space": args.output_space,
+                "token_position": args.at_token_position,
+                "dataset": dataset_stamp(args.data_path),
+            }
+            mismatches = [name for name, value in expected.items() if hp.get(name) != value]
+            if mismatches:
+                raise ValueError(
+                    f"Gradual AT L{at_layer} incompatible with Standard run: {mismatches}"
+                )
+            shutil.copy2(source_ckpt, checkpoint_path)
+            shutil.copy2(source_readout, readout_path)
+            print(f"[shared exact Gradual AT L{at_layer}] {source_dir}")
+        else:
+            train_standard_fixed(
+                model=model,
+                tokenizer=tokenizer,
+                banks=banks,
+                variable="AT",
+                layer=at_layer,
+                token_position=args.at_token_position,
+                target_name="Y_after_AT_intervene",
+                subspace_dim=args.at_dim,
+                epochs=args.at_epochs,
+                lr=args.lr,
+                train_batch_size=args.train_batch_size,
+                eval_batch_size=args.eval_batch_size,
+                seed=args.seed,
+                checkpoint_path=checkpoint_path,
+                output_space=args.output_space,
+                retrain=args.retrain,
+            )
 
-        if args.retrain and readout_path.exists():
-            readout_path.unlink()
-
-        fit_one_readout(model, checkpoint_path, readout_path, "AT", shared_readout, args.at_token_position, args.eval_batch_size, args.seed)
+            if args.retrain and readout_path.exists():
+                readout_path.unlink()
+            fit_one_readout(model, checkpoint_path, readout_path, "AT", shared_readout, args.at_token_position, args.eval_batch_size, args.seed)
         at_checkpoint_paths[at_layer] = checkpoint_path
         at_readout_paths[at_layer] = readout_path
 
@@ -1069,10 +1172,10 @@ def main():
         c_checkpoint_paths[c_layer] = checkpoint_path
         c_readout_paths[c_layer] = readout_path
 
-    print("\n=== BUILD FIXED ONLY EVAL BANKS ===")
-    at_only = build_pair_bank(model, tokenizer, args.data_path, "test", "AT_only", args.eval_size, args.eval_batch_size, args.seed + 3001)
-    ap_only = build_pair_bank(model, tokenizer, args.data_path, "test", "AP_only", args.eval_size, args.eval_batch_size, args.seed + 3002)
-    c_only = build_pair_bank(model, tokenizer, args.data_path, "test", "C_only", args.eval_size, args.eval_batch_size, args.seed + 3004)
+    print("\n=== REUSE THE EXACT GDAS v2 CONTROLLED TEST BANKS ===")
+    at_only = banks["AT"][2]["AT"]
+    ap_only = banks["AP"][2]["AP"]
+    c_only = banks["C"][2]["C"]
 
     at_handles = {}
     ap_handles = {}
