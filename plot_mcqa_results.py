@@ -61,6 +61,30 @@ DIMS = {
     "AP": ("at_layer", "ap_layer"),
     "C": ("at_layer", "ap_layer", "c_layer"),
 }
+
+# Column names written by mcqa_train_grid_standard_das.py (legacy Standard eval).
+# Normalize them to the existing plotting schema; Gradual eval columns are untouched.
+STANDARD_METRIC_COLUMNS = {
+    "AT_only_joint": "AT_Joint_AT_Y_after_AT",
+    "AT_only_AT": "AT_AT_after_AT",
+    "AT_only_Y": "AT_Y_after_AT",
+    "AP_only_joint": "AP_Joint_AP_AT_Y_after_AP",
+    "AP_only_AP": "AP_AP_after_AP",
+    "AP_only_AT": "AP_AT_after_AP",
+    "AP_only_Y": "AP_Y_after_AP",
+    "AP_only_mediator": "AP_Y_via_AT_replay",
+    "AP_only_restoration": "AP_Y_restored_via_AT",
+    "C_only_joint": "C_Joint_C_AP_AT_Y_after_C",
+    "C_only_C": "C_C_after_C",
+    "C_only_AP": "C_AP_after_C",
+    "C_only_AT": "C_AT_after_C",
+    "C_only_Y": "C_Y_after_C",
+    "C_only_AP_mediator": "C_Y_via_AP_replay",
+    "C_only_AT_mediator": "C_Y_via_AT_replay",
+    "C_only_AP_restoration": "C_Y_restored_via_AP",
+    "C_only_AT_restoration": "C_Y_restored_via_AT",
+}
+
 LAYERS = ("at_layer", "ap_layer", "c_layer")
 NORM = Normalize(vmin=0.0, vmax=1.0, clip=True)
 COLORMAP = plt.get_cmap("Blues").copy()
@@ -133,6 +157,12 @@ def read_json_records(folder):
 def load_records(folder):
     csv_file = folder / "config_summary.csv"
     records = read_csv_records(csv_file) if csv_file.is_file() else []
+    if records and any(name in records[0] for name in STANDARD_METRIC_COLUMNS):
+        print("[info] Standard DAS summary column format detected; mapping metrics for plotting")
+        for row in records:
+            for source, dest in STANDARD_METRIC_COLUMNS.items():
+                if source in row and dest not in row:
+                    row[dest] = row[source]
     expected = {f"{variable}_{name}" for variable, name in SPECS}
     columns = set().union(*(set(row) for row in records)) if records else set()
 
@@ -157,6 +187,12 @@ def load_records(folder):
     records.sort(key=lambda row: tuple(row[layer] for layer in LAYERS))
     present = {f"{var}_{name}" for var, name in SPECS if any(f"{var}_{name}" in row for row in records)}
     missing = sorted(expected - present)
+    if not present:
+        raise ValueError(
+            f"No supported intervention metrics found in {folder}. "
+            "Expected a completed eval config_summary.csv or metrics.json; "
+            "training_summary.csv cannot be plotted as full-chain results."
+        )
     if missing:
         print(f"[warning] {len(missing)} selected metrics missing; affected plots will show N/A")
         for name in missing:
