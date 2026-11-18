@@ -1051,6 +1051,7 @@ def main():
     print("\n=== STAGE 1: TRAIN INDEPENDENT AT HANDLES ===")
     for at_layer in at_layers:
         handle_dir = trained_dir / f"AT_L{at_layer}"
+        handle_dir.mkdir(parents=True, exist_ok=True)
         checkpoint_path = handle_dir / "das_at.pt"
         readout_path = handle_dir / "at_readout_LogisticRegression.pt"
 
