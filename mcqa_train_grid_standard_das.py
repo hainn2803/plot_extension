@@ -893,6 +893,27 @@ def save_csv(rows, path):
         writer.writerows(rows)
 
 
+def write_training_summary(trained_dir, at_layers, ap_layers, c_layers, summary_path):
+    """Persist one row per completed handle; safe to call after every stage item."""
+    rows = []
+    for variable, layers in (("AT", at_layers), ("AP", ap_layers), ("C", c_layers)):
+        for layer in layers:
+            checkpoint_path = trained_dir / f"{variable}_L{layer}" / f"das_{variable.lower()}.pt"
+            if not checkpoint_path.is_file():
+                continue
+            checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
+            row = {
+                "variable": variable,
+                "layer": int(layer),
+                "cal_iia": checkpoint.get("cal_iia"),
+                "test_iia": checkpoint.get("test_iia"),
+                "best_epoch": checkpoint.get("best_epoch"),
+                "checkpoint": str(checkpoint_path),
+            }
+            rows.append(row)
+    save_csv(rows, summary_path)
+
+
 def write_config_report(config_dir, at_layer, ap_layer, c_layer, clean, at_metrics, ap_metrics, c_metrics):
     lines = []
     lines.append(f"CONFIG: AT=L{at_layer} AP=L{ap_layer} C=L{c_layer}")
@@ -973,6 +994,8 @@ def main():
     parser.add_argument("--output-space", choices=("full", "az"), default="full")
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--retrain", action="store_true")
+    parser.add_argument("--evaluate", action="store_true",
+                        help="Opt in to full-chain evaluation AFTER selecting layers; default is train only")
     args = parser.parse_args()
     if args.eval_size != args.te_size:
         parser.error("--eval-size must equal --te-size in aligned controlled comparisons")
@@ -1108,6 +1131,8 @@ def main():
             fit_one_readout(model, checkpoint_path, readout_path, "AT", shared_readout, args.at_token_position, args.eval_batch_size, args.seed)
         at_checkpoint_paths[at_layer] = checkpoint_path
         at_readout_paths[at_layer] = readout_path
+        write_training_summary(trained_dir, at_layers, ap_layers, c_layers,
+                               result_dir / "training_summary.csv")
 
     print("\n=== STAGE 2: TRAIN INDEPENDENT AP HANDLES ===")
     for ap_layer in ap_layers:
@@ -1140,6 +1165,8 @@ def main():
         fit_one_readout(model, checkpoint_path, readout_path, "AP", shared_readout, ap_token_positions, args.eval_batch_size, args.seed)
         ap_checkpoint_paths[ap_layer] = checkpoint_path
         ap_readout_paths[ap_layer] = readout_path
+        write_training_summary(trained_dir, at_layers, ap_layers, c_layers,
+                               result_dir / "training_summary.csv")
 
     print("\n=== STAGE 3: TRAIN INDEPENDENT C HANDLES ===")
     for c_layer in c_layers:
@@ -1172,6 +1199,13 @@ def main():
         fit_one_readout(model, checkpoint_path, readout_path, "C", shared_readout, args.c_token_position, args.eval_batch_size, args.seed)
         c_checkpoint_paths[c_layer] = checkpoint_path
         c_readout_paths[c_layer] = readout_path
+        write_training_summary(trained_dir, at_layers, ap_layers, c_layers,
+                               result_dir / "training_summary.csv")
+
+    print(f"\nTraining summary: {result_dir / 'training_summary.csv'}")
+    if not args.evaluate:
+        print("Training complete. Full-chain evaluation skipped (default).")
+        return
 
     print("\n=== REUSE THE EXACT GDAS v2 CONTROLLED TEST BANKS ===")
     at_only = banks["AT"][2]["AT"]
