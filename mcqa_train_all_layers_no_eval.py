@@ -1,5 +1,8 @@
 """Train independent Standard DAS handles and readouts at every layer; no chain evaluation.
 
+GDAS-v2 aligned controlled banks and seeded minibatch order. Old checkpoints
+require a new result-dir or --retrain to prevent silent reuse.
+
 AT: last_token, AT_only
 AP: color_0/color_1/color_2/color_3 (joint), AP_only
 C:  color, C_only
@@ -22,7 +25,7 @@ from mcqa_train_grid_standard_das import (
     fit_one_readout,
     load_ckpt,
     load_readout,
-    make_variable_banks,
+    make_gdas_aligned_banks,
     readout_prediction,
     train_standard_fixed,
 )
@@ -38,7 +41,7 @@ SPECS = {
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at_no_distractor")
-    parser.add_argument("--result-dir", default="results_standard_all_layers_controlled_seed0_no_distractor")
+    parser.add_argument("--result-dir", default="results_standard_all_layers_gdas_aligned_seed0_no_distractor")
     parser.add_argument("--variables", default="AT,AP,C", help="AT, AP, C or a subset")
     parser.add_argument("--layers", default="all", help="all or comma-separated layer indices")
     parser.add_argument("--ft-size", type=int, default=800)
@@ -73,7 +76,7 @@ def main():
     for variable in variables:
         specs[variable] = SPECS[variable]
 
-    banks, _ = make_variable_banks(model, tokenizer, args.data_path, args.ft_size, args.cal_size, args.te_size, args.eval_batch_size, args.seed, specs)
+    banks, _ = make_gdas_aligned_banks(model, tokenizer, args.data_path, args.ft_size, args.cal_size, args.te_size, args.eval_batch_size, args.seed, specs)
     shared_readout = build_shared_readout_banks(model, tokenizer, args.data_path, args.readout_train_size, args.readout_val_size, args.eval_batch_size, args.seed)
 
     result_dir = Path(args.result_dir)
