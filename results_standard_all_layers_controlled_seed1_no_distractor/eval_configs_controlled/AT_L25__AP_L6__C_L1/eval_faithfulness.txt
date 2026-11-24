@@ -1,0 +1,57 @@
+CONFIG: AT=L25 AP=L6 C=L1
+
+EVAL_CHANGING_ONLY = True
+AT evaluation pairs = AT_only
+AP evaluation pairs = AP_only
+C evaluation pairs = C_only
+
+=== AT INTERVENTION ===
+Clean base/source: 0.8300 / 0.8200
+Joint_AT_Y_after_AT = 0.8200
+AT_after_AT = 0.8200
+Y_after_AT = 0.9975
+
+=== AP INTERVENTION ===
+Clean base/source: 1.0000 / 1.0000
+Joint_AP_AT_Y_after_AP = 0.9850
+AP_after_AP = 1.0000
+AT_after_AP = 0.9850
+Y_after_AP = 0.9950
+Y_via_AT_replay = 0.9725
+Y_restored_via_AT = 0.8125
+
+=== C INTERVENTION ===
+Clean base/source: 1.0000 / 1.0000
+Joint_C_AP_AT_Y_after_C = 0.4475
+C_after_C = 1.0000
+AP_after_C = 0.6525
+AT_after_C = 0.7400
+Y_after_C = 0.7775
+Y_via_AP_replay = 0.1400
+Y_via_AT_replay = 0.7875
+Y_restored_via_AP = 0.7100
+Y_restored_via_AT = 0.8350
+
+=== RECIPIENT TRANSFER — AP_only ===
+AT_after_AT_replay_recipient_same = 0.9850
+Y_after_AT_replay_recipient_same = 0.9300
+Joint_AT_Y_after_AT_replay_recipient_same = 0.9250
+AT_after_AT_replay_recipient_different = 0.9850
+Y_after_AT_replay_recipient_different = 0.9750
+Joint_AT_Y_after_AT_replay_recipient_different = 0.9675
+
+=== RECIPIENT TRANSFER — C_only ===
+AP_after_AP_replay_recipient_same = 0.6525
+AT_after_AP_replay_recipient_same = 0.4600
+Y_after_AP_replay_recipient_same = 0.5600
+Joint_AP_AT_Y_after_AP_replay_recipient_same = 0.2875
+AT_after_AT_replay_recipient_same = 0.7400
+Y_after_AT_replay_recipient_same = 0.5625
+Joint_AT_Y_after_AT_replay_recipient_same = 0.5175
+AP_after_AP_replay_recipient_different = 0.6525
+AT_after_AP_replay_recipient_different = 0.4450
+Y_after_AP_replay_recipient_different = 0.4425
+Joint_AP_AT_Y_after_AP_replay_recipient_different = 0.2550
+AT_after_AT_replay_recipient_different = 0.7400
+Y_after_AT_replay_recipient_different = 0.7300
+Joint_AT_Y_after_AT_replay_recipient_different = 0.6275
