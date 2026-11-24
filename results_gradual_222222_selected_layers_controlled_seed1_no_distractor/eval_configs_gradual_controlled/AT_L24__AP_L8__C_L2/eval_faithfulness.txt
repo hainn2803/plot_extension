@@ -1,0 +1,50 @@
+CONFIG: AT=L24 AP=L8 C=L2
+
+Evaluation: changing_only=True, size=400 per variable
+Test pairs AT: AT_only
+Test pairs AP: AP_only
+Test pairs C: C_only
+
+=== AT INTERVENTION ===
+clean_base=0.8800 clean_source=0.8775
+Joint_AT_Y_after_AT=0.8775
+AT_after_AT=0.8775
+Y_after_AT=0.9925
+
+=== AP INTERVENTION ===
+clean_base=1.0000 clean_source=0.9950
+Joint_AP_AT_Y_after_AP=0.9875
+AP_after_AP=0.9950
+AT_after_AP=0.9925
+Y_after_AP=0.9975
+Y_via_AT_replay=1.0000
+Y_restored_via_AT=0.9475
+
+=== C INTERVENTION ===
+clean_base=1.0000 clean_source=1.0000
+Joint_C_AP_AT_Y_after_C=0.7225
+C_after_C=1.0000
+AP_after_C=0.9650
+AT_after_C=0.8000
+Y_after_C=0.7875
+Y_via_AP_replay=0.9250
+Y_via_AT_replay=0.8525
+Y_restored_via_AP=0.9775
+Y_restored_via_AT=0.9675
+
+Recipient donors: AP_only and C_only, sensitivity-only
+Recipient different: natural recipient mediator != induced mediator target
+
+=== RECIPIENT TRANSFER — AP_only ===
+AT_after_AT_replay_recipient_different=0.9925
+Y_after_AT_replay_recipient_different=1.0000
+Joint_AT_Y_after_AT_replay_recipient_different=0.9925
+
+=== RECIPIENT TRANSFER — C_only ===
+AP_after_AP_replay_recipient_different=0.9650
+AT_after_AP_replay_recipient_different=0.9450
+Y_after_AP_replay_recipient_different=0.9575
+Joint_AP_AT_Y_after_AP_replay_recipient_different=0.9025
+AT_after_AT_replay_recipient_different=0.8000
+Y_after_AT_replay_recipient_different=0.8050
+Joint_AT_Y_after_AT_replay_recipient_different=0.7575

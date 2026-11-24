@@ -1,0 +1,16 @@
+intervention,metric,best_score,at_layer,ap_layer,c_layer
+AT,Joint_AT_Y_after_AT,0.840000,23,,
+AT,AT_after_AT,0.872500,24,,
+AT,Y_after_AT,0.955000,24,,
+AP,Joint_AP_AT_Y_after_AP,0.967500,23,14,
+AP,AP_after_AP,1.000000,23,4,
+AP,Y_after_AP,0.987500,23,8,
+AP,Y_via_AT_replay,0.990000,24,13,
+AP,Y_restored_via_AT,0.985000,23,4,
+C,Joint_C_AP_AT_Y_after_C,0.915000,23,12,0
+C,C_after_C,1.000000,23,4,0
+C,Y_after_C,0.975000,23,8,0
+C,Y_via_AP_replay,0.985000,23,10,0
+C,Y_via_AT_replay,0.982500,23,8,0
+C,Y_restored_via_AP,0.985000,23,9,2
+C,Y_restored_via_AT,0.980000,23,13,0
