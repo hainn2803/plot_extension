@@ -1,0 +1,57 @@
+{
+  "at_layer": 23,
+  "ap_layer": 4,
+  "c_layer": 2,
+  "metrics": {
+    "AT": {
+      "Joint_AT_Y_after_AT": 0.8799999952316284,
+      "AT_after_AT": 0.8824999928474426,
+      "Y_after_AT": 0.9925000071525574
+    },
+    "AP": {
+      "Joint_AP_AT_Y_after_AP": 0.9300000071525574,
+      "AP_after_AP": 1.0,
+      "AT_after_AP": 0.9399999976158142,
+      "Y_after_AP": 0.9574999809265137,
+      "Y_via_AT_replay": 0.9674999713897705,
+      "Y_restored_via_AT": 0.9775000214576721
+    },
+    "C": {
+      "Joint_C_AP_AT_Y_after_C": 0.007499999832361937,
+      "C_after_C": 0.9950000047683716,
+      "AP_after_C": 0.009999999776482582,
+      "AT_after_C": 0.762499988079071,
+      "Y_after_C": 0.7425000071525574,
+      "Y_via_AP_replay": 0.0024999999441206455,
+      "Y_via_AT_replay": 0.7774999737739563,
+      "Y_restored_via_AP": 0.13750000298023224,
+      "Y_restored_via_AT": 0.9624999761581421
+    }
+  },
+  "clean": {
+    "AT_base": 0.8849999904632568,
+    "AT_source": 0.8824999928474426,
+    "AP_base": 0.9950000047683716,
+    "AP_source": 1.0,
+    "C_base": 0.9975000023841858,
+    "C_source": 0.9950000047683716
+  },
+  "recipient": {
+    "AP_only": {
+      "AT_after_AT_replay_recipient_different": 0.9399999976158142,
+      "Y_after_AT_replay_recipient_different": 0.9549999833106995,
+      "Joint_AT_Y_after_AT_replay_recipient_different": 0.9300000071525574
+    },
+    "C_only": {
+      "AP_after_AP_replay_recipient_different": 0.009999999776482582,
+      "AT_after_AP_replay_recipient_different": 0.13249999284744263,
+      "Y_after_AP_replay_recipient_different": 0.12250000238418579,
+      "Joint_AP_AT_Y_after_AP_replay_recipient_different": 0.0024999999441206455,
+      "AT_after_AT_replay_recipient_different": 0.762499988079071,
+      "Y_after_AT_replay_recipient_different": 0.75,
+      "Joint_AT_Y_after_AT_replay_recipient_different": 0.7149999737739563
+    }
+  },
+  "recipient_version": 2,
+  "signature": "b34b8eb1a5e17357bfd88f5209abcea8d973d8509371ddc1cdd64ba1decb9b85"
+}
