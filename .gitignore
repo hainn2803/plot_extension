@@ -11,3 +11,8 @@ jacobian-lens/
 aa_results_scan_all_layers/
 .venv/
 core.python3.*
+# Old experimental results
+/results_all/
+/results_gradual_2.02.04.0_*/
+/results_gradual_2.04.00.0_*/
+/results_standard_all_layers_mixedall_*/
