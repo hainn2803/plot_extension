@@ -1,0 +1,57 @@
+{
+  "at_layer": 24,
+  "ap_layer": 7,
+  "c_layer": 1,
+  "metrics": {
+    "AT": {
+      "Joint_AT_Y_after_AT": 0.9075000286102295,
+      "AT_after_AT": 0.9075000286102295,
+      "Y_after_AT": 0.9975000023841858
+    },
+    "AP": {
+      "Joint_AP_AT_Y_after_AP": 0.987500011920929,
+      "AP_after_AP": 1.0,
+      "AT_after_AP": 0.9925000071525574,
+      "Y_after_AP": 0.9900000095367432,
+      "Y_via_AT_replay": 0.9950000047683716,
+      "Y_restored_via_AT": 0.9599999785423279
+    },
+    "C": {
+      "Joint_C_AP_AT_Y_after_C": 0.7250000238418579,
+      "C_after_C": 0.9975000023841858,
+      "AP_after_C": 0.9449999928474426,
+      "AT_after_C": 0.8349999785423279,
+      "Y_after_C": 0.8025000095367432,
+      "Y_via_AP_replay": 0.7724999785423279,
+      "Y_via_AT_replay": 0.8575000166893005,
+      "Y_restored_via_AP": 0.9225000143051147,
+      "Y_restored_via_AT": 0.9574999809265137
+    }
+  },
+  "clean": {
+    "AT_base": 0.9125000238418579,
+    "AT_source": 0.9075000286102295,
+    "AP_base": 0.9975000023841858,
+    "AP_source": 1.0,
+    "C_base": 0.9975000023841858,
+    "C_source": 0.9975000023841858
+  },
+  "recipient": {
+    "AP_only": {
+      "AT_after_AT_replay_recipient_different": 0.9925000071525574,
+      "Y_after_AT_replay_recipient_different": 0.9950000047683716,
+      "Joint_AT_Y_after_AT_replay_recipient_different": 0.9925000071525574
+    },
+    "C_only": {
+      "AP_after_AP_replay_recipient_different": 0.9449999928474426,
+      "AT_after_AP_replay_recipient_different": 0.8500000238418579,
+      "Y_after_AP_replay_recipient_different": 0.8374999761581421,
+      "Joint_AP_AT_Y_after_AP_replay_recipient_different": 0.7649999856948853,
+      "AT_after_AT_replay_recipient_different": 0.8349999785423279,
+      "Y_after_AT_replay_recipient_different": 0.8199999928474426,
+      "Joint_AT_Y_after_AT_replay_recipient_different": 0.7825000286102295
+    }
+  },
+  "recipient_version": 2,
+  "signature": "394fa8905b03e2ad9de6f34a2e54ac8b308ba08749f63610391f92cd0e93f27d"
+}
