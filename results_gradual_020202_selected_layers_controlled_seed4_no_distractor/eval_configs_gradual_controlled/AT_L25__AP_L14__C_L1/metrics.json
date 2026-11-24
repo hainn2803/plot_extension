@@ -1,0 +1,57 @@
+{
+  "at_layer": 25,
+  "ap_layer": 14,
+  "c_layer": 1,
+  "metrics": {
+    "AT": {
+      "Joint_AT_Y_after_AT": 0.8374999761581421,
+      "AT_after_AT": 0.8399999737739563,
+      "Y_after_AT": 0.9975000023841858
+    },
+    "AP": {
+      "Joint_AP_AT_Y_after_AP": 0.9900000095367432,
+      "AP_after_AP": 0.9950000047683716,
+      "AT_after_AP": 0.9975000023841858,
+      "Y_after_AP": 0.9950000047683716,
+      "Y_via_AT_replay": 0.9800000190734863,
+      "Y_restored_via_AT": 0.6775000095367432
+    },
+    "C": {
+      "Joint_C_AP_AT_Y_after_C": 0.7350000143051147,
+      "C_after_C": 0.9975000023841858,
+      "AP_after_C": 0.9674999713897705,
+      "AT_after_C": 0.8224999904632568,
+      "Y_after_C": 0.8224999904632568,
+      "Y_via_AP_replay": 0.9775000214576721,
+      "Y_via_AT_replay": 0.875,
+      "Y_restored_via_AP": 0.9524999856948853,
+      "Y_restored_via_AT": 0.8924999833106995
+    }
+  },
+  "clean": {
+    "AT_base": 0.824999988079071,
+    "AT_source": 0.8399999737739563,
+    "AP_base": 0.9950000047683716,
+    "AP_source": 0.9950000047683716,
+    "C_base": 0.9975000023841858,
+    "C_source": 0.9975000023841858
+  },
+  "recipient": {
+    "AP_only": {
+      "AT_after_AT_replay_recipient_different": 0.9975000023841858,
+      "Y_after_AT_replay_recipient_different": 0.9775000214576721,
+      "Joint_AT_Y_after_AT_replay_recipient_different": 0.9775000214576721
+    },
+    "C_only": {
+      "AP_after_AP_replay_recipient_different": 0.9674999713897705,
+      "AT_after_AP_replay_recipient_different": 0.9674999713897705,
+      "Y_after_AP_replay_recipient_different": 0.9775000214576721,
+      "Joint_AP_AT_Y_after_AP_replay_recipient_different": 0.9275000095367432,
+      "AT_after_AT_replay_recipient_different": 0.8224999904632568,
+      "Y_after_AT_replay_recipient_different": 0.8199999928474426,
+      "Joint_AT_Y_after_AT_replay_recipient_different": 0.7400000095367432
+    }
+  },
+  "recipient_version": 2,
+  "signature": "61a05965ac05e6559e97240147c57ad56bfbff92c47a5777b784fcaeb4df7aee"
+}

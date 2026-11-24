@@ -1,0 +1,57 @@
+{
+  "at_layer": 25,
+  "ap_layer": 12,
+  "c_layer": 2,
+  "metrics": {
+    "AT": {
+      "Joint_AT_Y_after_AT": 0.8374999761581421,
+      "AT_after_AT": 0.8399999737739563,
+      "Y_after_AT": 0.9975000023841858
+    },
+    "AP": {
+      "Joint_AP_AT_Y_after_AP": 0.9900000095367432,
+      "AP_after_AP": 0.9950000047683716,
+      "AT_after_AP": 0.9975000023841858,
+      "Y_after_AP": 0.9950000047683716,
+      "Y_via_AT_replay": 0.9674999713897705,
+      "Y_restored_via_AT": 0.6150000095367432
+    },
+    "C": {
+      "Joint_C_AP_AT_Y_after_C": 0.7749999761581421,
+      "C_after_C": 0.9975000023841858,
+      "AP_after_C": 0.9975000023841858,
+      "AT_after_C": 0.8224999904632568,
+      "Y_after_C": 0.8349999785423279,
+      "Y_via_AP_replay": 0.9850000143051147,
+      "Y_via_AT_replay": 0.8650000095367432,
+      "Y_restored_via_AP": 0.9950000047683716,
+      "Y_restored_via_AT": 0.8550000190734863
+    }
+  },
+  "clean": {
+    "AT_base": 0.824999988079071,
+    "AT_source": 0.8399999737739563,
+    "AP_base": 1.0,
+    "AP_source": 0.9950000047683716,
+    "C_base": 0.987500011920929,
+    "C_source": 0.9975000023841858
+  },
+  "recipient": {
+    "AP_only": {
+      "AT_after_AT_replay_recipient_different": 0.9975000023841858,
+      "Y_after_AT_replay_recipient_different": 0.9775000214576721,
+      "Joint_AT_Y_after_AT_replay_recipient_different": 0.9750000238418579
+    },
+    "C_only": {
+      "AP_after_AP_replay_recipient_different": 0.9975000023841858,
+      "AT_after_AP_replay_recipient_different": 0.987500011920929,
+      "Y_after_AP_replay_recipient_different": 0.9925000071525574,
+      "Joint_AP_AT_Y_after_AP_replay_recipient_different": 0.9825000166893005,
+      "AT_after_AT_replay_recipient_different": 0.8224999904632568,
+      "Y_after_AT_replay_recipient_different": 0.7975000143051147,
+      "Joint_AT_Y_after_AT_replay_recipient_different": 0.7450000047683716
+    }
+  },
+  "recipient_version": 2,
+  "signature": "cda411f4f2fb016ce41227a9bb76725e6835414c45037eb17aa169c8fcf101b4"
+}
