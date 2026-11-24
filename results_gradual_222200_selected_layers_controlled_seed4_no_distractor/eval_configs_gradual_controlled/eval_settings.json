@@ -1,0 +1,33 @@
+{
+  "version": 3,
+  "data_path": "/u/hnguyen23/plot_extension/randomized_copycolors_include_ap_at_no_distractor",
+  "data_stamp": "57ce3745d8c1dbc92699aa94c0b3447913af11885fab0846794fce7eaf61f670",
+  "pair_types": {
+    "AT": [
+      "AT_only"
+    ],
+    "AP": [
+      "AP_only"
+    ],
+    "C": [
+      "C_only"
+    ]
+  },
+  "changing_only": true,
+  "eval_size": 400,
+  "batch_size": 32,
+  "seed": 4,
+  "output_space": "full",
+  "recipient_version": 2,
+  "recipient_conditions": [
+    "different"
+  ],
+  "recipient_donors": {
+    "AP": "AP_only",
+    "C": "C_only",
+    "AT": "AT_only"
+  },
+  "recipient_donors_changing_only": true,
+  "recipient_size": 400,
+  "recipient_seed": 4
+}
