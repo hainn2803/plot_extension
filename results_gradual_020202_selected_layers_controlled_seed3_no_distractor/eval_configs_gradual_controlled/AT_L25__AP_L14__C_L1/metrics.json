@@ -1,0 +1,57 @@
+{
+  "at_layer": 25,
+  "ap_layer": 14,
+  "c_layer": 1,
+  "metrics": {
+    "AT": {
+      "Joint_AT_Y_after_AT": 0.8550000190734863,
+      "AT_after_AT": 0.8550000190734863,
+      "Y_after_AT": 1.0
+    },
+    "AP": {
+      "Joint_AP_AT_Y_after_AP": 0.9750000238418579,
+      "AP_after_AP": 0.9975000023841858,
+      "AT_after_AP": 0.9775000214576721,
+      "Y_after_AP": 0.9925000071525574,
+      "Y_via_AT_replay": 0.9775000214576721,
+      "Y_restored_via_AT": 0.8075000047683716
+    },
+    "C": {
+      "Joint_C_AP_AT_Y_after_C": 0.7475000023841858,
+      "C_after_C": 0.9975000023841858,
+      "AP_after_C": 0.9800000190734863,
+      "AT_after_C": 0.8274999856948853,
+      "Y_after_C": 0.8299999833106995,
+      "Y_via_AP_replay": 0.9674999713897705,
+      "Y_via_AT_replay": 0.8600000143051147,
+      "Y_restored_via_AP": 0.9624999761581421,
+      "Y_restored_via_AT": 0.8700000047683716
+    }
+  },
+  "clean": {
+    "AT_base": 0.8224999904632568,
+    "AT_source": 0.8550000190734863,
+    "AP_base": 0.9975000023841858,
+    "AP_source": 0.9975000023841858,
+    "C_base": 0.9900000095367432,
+    "C_source": 0.9975000023841858
+  },
+  "recipient": {
+    "AP_only": {
+      "AT_after_AT_replay_recipient_different": 0.9775000214576721,
+      "Y_after_AT_replay_recipient_different": 0.9700000286102295,
+      "Joint_AT_Y_after_AT_replay_recipient_different": 0.9624999761581421
+    },
+    "C_only": {
+      "AP_after_AP_replay_recipient_different": 0.9800000190734863,
+      "AT_after_AP_replay_recipient_different": 0.9399999976158142,
+      "Y_after_AP_replay_recipient_different": 0.9549999833106995,
+      "Joint_AP_AT_Y_after_AP_replay_recipient_different": 0.9125000238418579,
+      "AT_after_AT_replay_recipient_different": 0.8274999856948853,
+      "Y_after_AT_replay_recipient_different": 0.8174999952316284,
+      "Joint_AT_Y_after_AT_replay_recipient_different": 0.7524999976158142
+    }
+  },
+  "recipient_version": 2,
+  "signature": "a9eceed4e9b345239501425865c967159981c5a3ebd1cbb9506b7042789c8962"
+}
