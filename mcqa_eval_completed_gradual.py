@@ -41,24 +41,29 @@ from mcqa_train_grid_gradual_das import (
 # ============================================================================
 # EDIT SETTINGS HERE
 # ============================================================================
-RESULT_DIR = "results_gradual_2.02.04.0_selected_layers_controlled_seed0_no_distractor"
+RESULT_DIR = "results_gradual_222222_selected_layers_controlled_seed0_no_distractor"
 DATA_PATH = "randomized_copycolors_include_ap_at_no_distractor"
 EVAL_SIZE = 400  # total test examples PER variable, NOT per pair type
 BATCH_SIZE = 32
 SEED = 0
 OUTPUT_SPACE = "full"  # "full" or "az"
-
+ALL_PAIRS = ["AT_only", "AP_only", "C_only", "AP_AT", "C_AP_AT"]
 # Each variable can use its own (possibly mixed) test pair types.
+# EVAL_PAIR_TYPES = {
+#     "AT": ["AT_only"],
+#     "AP": ["AP_only"],
+#     "C": ["C_only"],
+# }
 EVAL_PAIR_TYPES = {
-    "AT": ["AT_only"],
-    "AP": ["AP_only"],
-    "C": ["C_only"],
+    "AT": ALL_PAIRS,
+    "AP": ALL_PAIRS,
+    "C": ALL_PAIRS
 }
-EVAL_CHANGING_ONLY = True  # require target Y_after_variable != base_Y
+EVAL_CHANGING_ONLY = False  # require target Y_after_variable != base_Y
 
 # Optional: skip candidates whose saved v2 metadata does not match upstream
 # checkpoints/readouts. Legacy checkpoints without metadata remain evaluable.
-VERIFY_SAVED_DEPENDENCIES = True
+VERIFY_SAVED_DEPENDENCIES = False
 
 TARGETS = {"AT": "Y_after_AT_intervene", "AP": "Y_after_AP_intervene", "C": "Y_after_C_intervene"}
 PAIR_SEEDS = {"AT_only": 3001, "AP_only": 3002, "C_only": 3004, "AP_AT": 3005, "C_AP_AT": 3006}

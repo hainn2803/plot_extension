@@ -1,0 +1,151 @@
+Evaluation pairs: {'AT': ['AT_only'], 'AP': ['AP_only'], 'C': ['C_only']}; changing_only=True
+Selected layers: {'AT': [23, 24, 25], 'AP': [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], 'C': [0, 1, 2]}
+[skip cached] AT_L23__AP_L4__C_L0
+[skip cached] AT_L23__AP_L4__C_L1
+[skip cached] AT_L23__AP_L4__C_L2
+[skip cached] AT_L23__AP_L5__C_L0
+[skip cached] AT_L23__AP_L5__C_L1
+[skip cached] AT_L23__AP_L5__C_L2
+[skip cached] AT_L23__AP_L6__C_L0
+[skip cached] AT_L23__AP_L6__C_L1
+[skip cached] AT_L23__AP_L6__C_L2
+[skip cached] AT_L23__AP_L7__C_L0
+[skip cached] AT_L23__AP_L7__C_L1
+[skip cached] AT_L23__AP_L7__C_L2
+[skip cached] AT_L23__AP_L8__C_L0
+[skip cached] AT_L23__AP_L8__C_L1
+[skip cached] AT_L23__AP_L8__C_L2
+[skip cached] AT_L23__AP_L9__C_L0
+[skip cached] AT_L23__AP_L9__C_L1
+[skip cached] AT_L23__AP_L9__C_L2
+[skip cached] AT_L23__AP_L10__C_L0
+[skip cached] AT_L23__AP_L10__C_L1
+[skip cached] AT_L23__AP_L10__C_L2
+[skip cached] AT_L23__AP_L11__C_L0
+[skip cached] AT_L23__AP_L11__C_L1
+[skip cached] AT_L23__AP_L11__C_L2
+[skip cached] AT_L23__AP_L12__C_L0
+[skip cached] AT_L23__AP_L12__C_L1
+[skip cached] AT_L23__AP_L12__C_L2
+[skip cached] AT_L23__AP_L13__C_L0
+[skip cached] AT_L23__AP_L13__C_L1
+[skip cached] AT_L23__AP_L13__C_L2
+[skip cached] AT_L23__AP_L14__C_L0
+[skip cached] AT_L23__AP_L14__C_L1
+[skip cached] AT_L23__AP_L14__C_L2
+[skip cached] AT_L23__AP_L15__C_L0
+[skip cached] AT_L23__AP_L15__C_L1
+[skip cached] AT_L23__AP_L15__C_L2
+[skip cached] AT_L24__AP_L4__C_L0
+[skip cached] AT_L24__AP_L4__C_L1
+[skip cached] AT_L24__AP_L4__C_L2
+[skip cached] AT_L24__AP_L5__C_L0
+[skip cached] AT_L24__AP_L5__C_L1
+[skip cached] AT_L24__AP_L5__C_L2
+[skip cached] AT_L24__AP_L6__C_L0
+[skip cached] AT_L24__AP_L6__C_L1
+[skip cached] AT_L24__AP_L6__C_L2
+[skip cached] AT_L24__AP_L7__C_L0
+[skip cached] AT_L24__AP_L7__C_L1
+[skip cached] AT_L24__AP_L7__C_L2
+[skip cached] AT_L24__AP_L8__C_L0
+[skip cached] AT_L24__AP_L8__C_L1
+[skip cached] AT_L24__AP_L8__C_L2
+[skip cached] AT_L24__AP_L9__C_L0
+[skip cached] AT_L24__AP_L9__C_L1
+[skip cached] AT_L24__AP_L9__C_L2
+[skip cached] AT_L24__AP_L10__C_L0
+[skip cached] AT_L24__AP_L10__C_L1
+[skip cached] AT_L24__AP_L10__C_L2
+[skip cached] AT_L24__AP_L11__C_L0
+[skip cached] AT_L24__AP_L11__C_L1
+[skip cached] AT_L24__AP_L11__C_L2
+[skip cached] AT_L24__AP_L12__C_L0
+[skip cached] AT_L24__AP_L12__C_L1
+[skip cached] AT_L24__AP_L12__C_L2
+[skip cached] AT_L24__AP_L13__C_L0
+[skip cached] AT_L24__AP_L13__C_L1
+[skip cached] AT_L24__AP_L13__C_L2
+[skip cached] AT_L24__AP_L14__C_L0
+[skip cached] AT_L24__AP_L14__C_L1
+[skip cached] AT_L24__AP_L14__C_L2
+[skip cached] AT_L24__AP_L15__C_L0
+[skip cached] AT_L24__AP_L15__C_L1
+[skip cached] AT_L24__AP_L15__C_L2
+[skip cached] AT_L25__AP_L4__C_L0
+[skip cached] AT_L25__AP_L4__C_L1
+[skip cached] AT_L25__AP_L4__C_L2
+[skip cached] AT_L25__AP_L5__C_L0
+[skip cached] AT_L25__AP_L5__C_L1
+[skip cached] AT_L25__AP_L5__C_L2
+[skip cached] AT_L25__AP_L6__C_L0
+[skip cached] AT_L25__AP_L6__C_L1
+[skip cached] AT_L25__AP_L6__C_L2
+[skip cached] AT_L25__AP_L7__C_L0
+[skip cached] AT_L25__AP_L7__C_L1
+[skip cached] AT_L25__AP_L7__C_L2
+[skip cached] AT_L25__AP_L8__C_L0
+[skip cached] AT_L25__AP_L8__C_L1
+[skip cached] AT_L25__AP_L8__C_L2
+[skip cached] AT_L25__AP_L9__C_L0
+[skip cached] AT_L25__AP_L9__C_L1
+[skip cached] AT_L25__AP_L9__C_L2
+[skip cached] AT_L25__AP_L10__C_L0
+[skip cached] AT_L25__AP_L10__C_L1
+[skip cached] AT_L25__AP_L10__C_L2
+Selected 108 valid configs; 15 require evaluation
+CUDA available: True
+GPU: NVIDIA A100-SXM4-40GB
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/288 [00:00<?, ?it/s]Loading weights:   0%|          | 1/288 [00:10<50:36, 10.58s/it]Loading weights:  70%|██████▉   | 201/288 [00:10<00:03, 26.04it/s]Loading weights:  93%|█████████▎| 268/288 [00:13<00:00, 25.72it/s]Loading weights: 100%|██████████| 288/288 [00:13<00:00, 20.63it/s]
+[eval bank] AT/AT_only: 400 examples
+[eval bank] AP/AP_only: 400 examples
+[eval bank] C/C_only: 400 examples
+[recipient] 2162 unique model-correct TEST prompts
+
+=== EVAL 1/15: AT_L25__AP_L11__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed3_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L11__C_L0/metrics.json
+
+=== EVAL 2/15: AT_L25__AP_L11__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed3_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L11__C_L1/metrics.json
+
+=== EVAL 3/15: AT_L25__AP_L11__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed3_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L11__C_L2/metrics.json
+
+=== EVAL 4/15: AT_L25__AP_L12__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed3_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L12__C_L0/metrics.json
+
+=== EVAL 5/15: AT_L25__AP_L12__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed3_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L12__C_L1/metrics.json
+
+=== EVAL 6/15: AT_L25__AP_L12__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed3_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L12__C_L2/metrics.json
+
+=== EVAL 7/15: AT_L25__AP_L13__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed3_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L13__C_L0/metrics.json
+
+=== EVAL 8/15: AT_L25__AP_L13__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed3_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L13__C_L1/metrics.json
+
+=== EVAL 9/15: AT_L25__AP_L13__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed3_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L13__C_L2/metrics.json
+
+=== EVAL 10/15: AT_L25__AP_L14__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed3_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L14__C_L0/metrics.json
+
+=== EVAL 11/15: AT_L25__AP_L14__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed3_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L14__C_L1/metrics.json
+
+=== EVAL 12/15: AT_L25__AP_L14__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed3_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L14__C_L2/metrics.json
+
+=== EVAL 13/15: AT_L25__AP_L15__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed3_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L15__C_L0/metrics.json
+
+=== EVAL 14/15: AT_L25__AP_L15__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed3_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L15__C_L1/metrics.json
+
+=== EVAL 15/15: AT_L25__AP_L15__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed3_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L15__C_L2/metrics.json
+
+Done. Cumulative results: results_standard_all_layers_controlled_seed3_no_distractor/eval_configs_0942ce7209/config_summary.csv

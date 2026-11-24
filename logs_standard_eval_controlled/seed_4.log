@@ -1,0 +1,337 @@
+Evaluation pairs: {'AT': ['AT_only'], 'AP': ['AP_only'], 'C': ['C_only']}; changing_only=True
+Selected layers: {'AT': [23, 24, 25], 'AP': [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], 'C': [0, 1, 2]}
+Selected 108 valid configs; 108 require evaluation
+CUDA available: True
+GPU: NVIDIA A100-SXM4-40GB
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/288 [00:00<?, ?it/s]Loading weights:   0%|          | 1/288 [00:01<06:03,  1.27s/it]Loading weights:  70%|██████▉   | 201/288 [00:01<00:00, 194.44it/s]Loading weights:  98%|█████████▊| 282/288 [00:01<00:00, 197.93it/s]Loading weights: 100%|██████████| 288/288 [00:01<00:00, 159.24it/s]
+[eval bank] AT/AT_only: 400 examples
+[eval bank] AP/AP_only: 400 examples
+[eval bank] C/C_only: 400 examples
+[recipient] 2173 unique model-correct TEST prompts
+
+=== EVAL 1/108: AT_L23__AP_L4__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L4__C_L0/metrics.json
+
+=== EVAL 2/108: AT_L23__AP_L4__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L4__C_L1/metrics.json
+
+=== EVAL 3/108: AT_L23__AP_L4__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L4__C_L2/metrics.json
+
+=== EVAL 4/108: AT_L23__AP_L5__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L5__C_L0/metrics.json
+
+=== EVAL 5/108: AT_L23__AP_L5__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L5__C_L1/metrics.json
+
+=== EVAL 6/108: AT_L23__AP_L5__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L5__C_L2/metrics.json
+
+=== EVAL 7/108: AT_L23__AP_L6__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L6__C_L0/metrics.json
+
+=== EVAL 8/108: AT_L23__AP_L6__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L6__C_L1/metrics.json
+
+=== EVAL 9/108: AT_L23__AP_L6__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L6__C_L2/metrics.json
+
+=== EVAL 10/108: AT_L23__AP_L7__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L7__C_L0/metrics.json
+
+=== EVAL 11/108: AT_L23__AP_L7__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L7__C_L1/metrics.json
+
+=== EVAL 12/108: AT_L23__AP_L7__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L7__C_L2/metrics.json
+
+=== EVAL 13/108: AT_L23__AP_L8__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L8__C_L0/metrics.json
+
+=== EVAL 14/108: AT_L23__AP_L8__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L8__C_L1/metrics.json
+
+=== EVAL 15/108: AT_L23__AP_L8__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L8__C_L2/metrics.json
+
+=== EVAL 16/108: AT_L23__AP_L9__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L9__C_L0/metrics.json
+
+=== EVAL 17/108: AT_L23__AP_L9__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L9__C_L1/metrics.json
+
+=== EVAL 18/108: AT_L23__AP_L9__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L9__C_L2/metrics.json
+
+=== EVAL 19/108: AT_L23__AP_L10__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L10__C_L0/metrics.json
+
+=== EVAL 20/108: AT_L23__AP_L10__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L10__C_L1/metrics.json
+
+=== EVAL 21/108: AT_L23__AP_L10__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L10__C_L2/metrics.json
+
+=== EVAL 22/108: AT_L23__AP_L11__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L11__C_L0/metrics.json
+
+=== EVAL 23/108: AT_L23__AP_L11__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L11__C_L1/metrics.json
+
+=== EVAL 24/108: AT_L23__AP_L11__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L11__C_L2/metrics.json
+
+=== EVAL 25/108: AT_L23__AP_L12__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L12__C_L0/metrics.json
+
+=== EVAL 26/108: AT_L23__AP_L12__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L12__C_L1/metrics.json
+
+=== EVAL 27/108: AT_L23__AP_L12__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L12__C_L2/metrics.json
+
+=== EVAL 28/108: AT_L23__AP_L13__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L13__C_L0/metrics.json
+
+=== EVAL 29/108: AT_L23__AP_L13__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L13__C_L1/metrics.json
+
+=== EVAL 30/108: AT_L23__AP_L13__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L13__C_L2/metrics.json
+
+=== EVAL 31/108: AT_L23__AP_L14__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L14__C_L0/metrics.json
+
+=== EVAL 32/108: AT_L23__AP_L14__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L14__C_L1/metrics.json
+
+=== EVAL 33/108: AT_L23__AP_L14__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L14__C_L2/metrics.json
+
+=== EVAL 34/108: AT_L23__AP_L15__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L15__C_L0/metrics.json
+
+=== EVAL 35/108: AT_L23__AP_L15__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L15__C_L1/metrics.json
+
+=== EVAL 36/108: AT_L23__AP_L15__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L23__AP_L15__C_L2/metrics.json
+
+=== EVAL 37/108: AT_L24__AP_L4__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L4__C_L0/metrics.json
+
+=== EVAL 38/108: AT_L24__AP_L4__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L4__C_L1/metrics.json
+
+=== EVAL 39/108: AT_L24__AP_L4__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L4__C_L2/metrics.json
+
+=== EVAL 40/108: AT_L24__AP_L5__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L5__C_L0/metrics.json
+
+=== EVAL 41/108: AT_L24__AP_L5__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L5__C_L1/metrics.json
+
+=== EVAL 42/108: AT_L24__AP_L5__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L5__C_L2/metrics.json
+
+=== EVAL 43/108: AT_L24__AP_L6__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L6__C_L0/metrics.json
+
+=== EVAL 44/108: AT_L24__AP_L6__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L6__C_L1/metrics.json
+
+=== EVAL 45/108: AT_L24__AP_L6__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L6__C_L2/metrics.json
+
+=== EVAL 46/108: AT_L24__AP_L7__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L7__C_L0/metrics.json
+
+=== EVAL 47/108: AT_L24__AP_L7__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L7__C_L1/metrics.json
+
+=== EVAL 48/108: AT_L24__AP_L7__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L7__C_L2/metrics.json
+
+=== EVAL 49/108: AT_L24__AP_L8__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L8__C_L0/metrics.json
+
+=== EVAL 50/108: AT_L24__AP_L8__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L8__C_L1/metrics.json
+
+=== EVAL 51/108: AT_L24__AP_L8__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L8__C_L2/metrics.json
+
+=== EVAL 52/108: AT_L24__AP_L9__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L9__C_L0/metrics.json
+
+=== EVAL 53/108: AT_L24__AP_L9__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L9__C_L1/metrics.json
+
+=== EVAL 54/108: AT_L24__AP_L9__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L9__C_L2/metrics.json
+
+=== EVAL 55/108: AT_L24__AP_L10__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L10__C_L0/metrics.json
+
+=== EVAL 56/108: AT_L24__AP_L10__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L10__C_L1/metrics.json
+
+=== EVAL 57/108: AT_L24__AP_L10__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L10__C_L2/metrics.json
+
+=== EVAL 58/108: AT_L24__AP_L11__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L11__C_L0/metrics.json
+
+=== EVAL 59/108: AT_L24__AP_L11__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L11__C_L1/metrics.json
+
+=== EVAL 60/108: AT_L24__AP_L11__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L11__C_L2/metrics.json
+
+=== EVAL 61/108: AT_L24__AP_L12__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L12__C_L0/metrics.json
+
+=== EVAL 62/108: AT_L24__AP_L12__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L12__C_L1/metrics.json
+
+=== EVAL 63/108: AT_L24__AP_L12__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L12__C_L2/metrics.json
+
+=== EVAL 64/108: AT_L24__AP_L13__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L13__C_L0/metrics.json
+
+=== EVAL 65/108: AT_L24__AP_L13__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L13__C_L1/metrics.json
+
+=== EVAL 66/108: AT_L24__AP_L13__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L13__C_L2/metrics.json
+
+=== EVAL 67/108: AT_L24__AP_L14__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L14__C_L0/metrics.json
+
+=== EVAL 68/108: AT_L24__AP_L14__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L14__C_L1/metrics.json
+
+=== EVAL 69/108: AT_L24__AP_L14__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L14__C_L2/metrics.json
+
+=== EVAL 70/108: AT_L24__AP_L15__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L15__C_L0/metrics.json
+
+=== EVAL 71/108: AT_L24__AP_L15__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L15__C_L1/metrics.json
+
+=== EVAL 72/108: AT_L24__AP_L15__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L24__AP_L15__C_L2/metrics.json
+
+=== EVAL 73/108: AT_L25__AP_L4__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L4__C_L0/metrics.json
+
+=== EVAL 74/108: AT_L25__AP_L4__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L4__C_L1/metrics.json
+
+=== EVAL 75/108: AT_L25__AP_L4__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L4__C_L2/metrics.json
+
+=== EVAL 76/108: AT_L25__AP_L5__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L5__C_L0/metrics.json
+
+=== EVAL 77/108: AT_L25__AP_L5__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L5__C_L1/metrics.json
+
+=== EVAL 78/108: AT_L25__AP_L5__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L5__C_L2/metrics.json
+
+=== EVAL 79/108: AT_L25__AP_L6__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L6__C_L0/metrics.json
+
+=== EVAL 80/108: AT_L25__AP_L6__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L6__C_L1/metrics.json
+
+=== EVAL 81/108: AT_L25__AP_L6__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L6__C_L2/metrics.json
+
+=== EVAL 82/108: AT_L25__AP_L7__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L7__C_L0/metrics.json
+
+=== EVAL 83/108: AT_L25__AP_L7__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L7__C_L1/metrics.json
+
+=== EVAL 84/108: AT_L25__AP_L7__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L7__C_L2/metrics.json
+
+=== EVAL 85/108: AT_L25__AP_L8__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L8__C_L0/metrics.json
+
+=== EVAL 86/108: AT_L25__AP_L8__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L8__C_L1/metrics.json
+
+=== EVAL 87/108: AT_L25__AP_L8__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L8__C_L2/metrics.json
+
+=== EVAL 88/108: AT_L25__AP_L9__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L9__C_L0/metrics.json
+
+=== EVAL 89/108: AT_L25__AP_L9__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L9__C_L1/metrics.json
+
+=== EVAL 90/108: AT_L25__AP_L9__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L9__C_L2/metrics.json
+
+=== EVAL 91/108: AT_L25__AP_L10__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L10__C_L0/metrics.json
+
+=== EVAL 92/108: AT_L25__AP_L10__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L10__C_L1/metrics.json
+
+=== EVAL 93/108: AT_L25__AP_L10__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L10__C_L2/metrics.json
+
+=== EVAL 94/108: AT_L25__AP_L11__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L11__C_L0/metrics.json
+
+=== EVAL 95/108: AT_L25__AP_L11__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L11__C_L1/metrics.json
+
+=== EVAL 96/108: AT_L25__AP_L11__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L11__C_L2/metrics.json
+
+=== EVAL 97/108: AT_L25__AP_L12__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L12__C_L0/metrics.json
+
+=== EVAL 98/108: AT_L25__AP_L12__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L12__C_L1/metrics.json
+
+=== EVAL 99/108: AT_L25__AP_L12__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L12__C_L2/metrics.json
+
+=== EVAL 100/108: AT_L25__AP_L13__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L13__C_L0/metrics.json
+
+=== EVAL 101/108: AT_L25__AP_L13__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L13__C_L1/metrics.json
+
+=== EVAL 102/108: AT_L25__AP_L13__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L13__C_L2/metrics.json
+
+=== EVAL 103/108: AT_L25__AP_L14__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L14__C_L0/metrics.json
+
+=== EVAL 104/108: AT_L25__AP_L14__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L14__C_L1/metrics.json
+
+=== EVAL 105/108: AT_L25__AP_L14__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L14__C_L2/metrics.json
+
+=== EVAL 106/108: AT_L25__AP_L15__C_L0 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L15__C_L0/metrics.json
+
+=== EVAL 107/108: AT_L25__AP_L15__C_L1 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L15__C_L1/metrics.json
+
+=== EVAL 108/108: AT_L25__AP_L15__C_L2 ===
+[saved] results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/AT_L25__AP_L15__C_L2/metrics.json
+
+Done. Cumulative results: results_standard_all_layers_controlled_seed4_no_distractor/eval_configs_0942ce7209/config_summary.csv

@@ -1,10 +1,7 @@
-"""Train independent fixed-layer Standard DAS handles and evaluate full-chain causal faithfulness.
+"""Train independent fixed-layer Standard DAS handles. Default is train-only.
 
-IMPORTANT: For controlled Standard-vs-GDAS comparison, train/cal/test banks,
-minibatch shuffling and the AT intervention path match mcqa_train_gradual_efficient_v2.
-Use --at-from-gradual to share EXACT AT checkpoints and readouts across methods.
-Always use a new --result-dir or --retrain when switching from legacy Standard.
-
+Controlled GDAS-v2 train/cal/test examples and seed-aligned minibatches.
+Results use original all-layer summary.csv schema; chain evaluation is opt-in.
 
 Default grid:
     AT: 23,24,25
@@ -104,17 +101,17 @@ def balanced_counts(total, names):
 def make_specs(at_token_position, ap_token_positions, c_token_position):
     return {
         "AT": {
-            "pair_types": ["AT_only"],
+            "pair_types": ["AT_only", "C_AP_AT"],
             "token_position": at_token_position,
             "target": "Y_after_AT_intervene",
         },
         "AP": {
-            "pair_types": ["AP_only"],
+            "pair_types": ["AP_only", "C_AP_AT"],
             "token_position": ap_token_positions,
             "target": "Y_after_AP_intervene",
         },
         "C": {
-            "pair_types": ["C_only"],
+            "pair_types": ["C_only", "C_AP_AT"],
             "token_position": c_token_position,
             "target": "Y_after_C_intervene",
         },
@@ -179,38 +176,27 @@ def make_variable_banks(model, tokenizer, data_path, ft_size, cal_size, te_size,
 
 
 def make_gdas_aligned_banks(model, tokenizer, data_path, ft_size, cal_size, te_size, batch_size, seed, specs):
-    """Exactly reuse the controlled train/cal/test sampler of gradual efficient v2.
-
-    The legacy make_variable_banks above uses different pair-selection seeds
-    and must NOT be used for paired Standard-vs-GDAS comparisons.
-    Return the dict-of-dicts interface expected by the Standard trainer.
-    """
+    """Use the controlled GDAS-v2 bank builder so samples and seeds match exactly."""
     from mcqa_train_gradual_efficient_v2 import (
-        CAL_TEST_PAIR_TYPES,
-        CHANGING_ONLY_CAL_TEST,
-        TRAIN_PAIR_TYPES,
-        make_banks,
+        CAL_TEST_PAIR_TYPES, CHANGING_ONLY_CAL_TEST,
+        TRAIN_PAIR_TYPES, make_banks,
     )
-
     if not CHANGING_ONLY_CAL_TEST:
-        raise RuntimeError("Gradual v2 is not using changing-only cal/test; comparison protocol changed")
+        raise RuntimeError("GDAS-v2 calibration/test must be changing-only for this comparison")
     for variable, spec in specs.items():
-        if spec["pair_types"] != TRAIN_PAIR_TYPES[variable]:
-            raise ValueError(f"{variable}: Standard pair types differ from GDAS v2")
+        if list(spec["pair_types"]) != list(TRAIN_PAIR_TYPES[variable]):
+            raise ValueError(f"{variable}: training pair types do not match GDAS v2")
         if CAL_TEST_PAIR_TYPES[variable] != [f"{variable}_only"]:
-            raise ValueError(f"{variable}: Gradual v2 controlled test setting changed")
-
-    gradual_banks = make_banks(
-        model, tokenizer, data_path, ft_size, cal_size,
-        te_size, batch_size, seed, with_test=True,
+            raise ValueError(f"{variable}: test pair types do not match controlled GDAS v2")
+    banks = make_banks(
+        model, tokenizer, data_path, ft_size, cal_size, te_size,
+        batch_size, seed, with_test=True,
     )
-    standard_banks = {}
+    result = {}
     for variable in specs:
-        train_bank, cal_bank, test_bank = gradual_banks[variable]
-        standard_banks[variable] = (
-            train_bank, {variable: cal_bank}, {variable: test_bank},
-        )
-    return standard_banks, {}
+        train, calibration, test = banks[variable]
+        result[variable] = (train, {variable: calibration}, {variable: test})
+    return result, {}
 
 
 # -----------------------------------------------------------------------------
@@ -327,7 +313,7 @@ def evaluate_standard_direct(model, tokenizer, bank, source_states, Q, layer, to
 def train_standard_fixed(model, tokenizer, banks, variable, layer, token_position, target_name, subspace_dim, epochs, lr, train_batch_size, eval_batch_size, seed, checkpoint_path, output_space, retrain):
     protocol = "controlled_gdas_v2_aligned_v1"
     if checkpoint_path.exists() and not retrain:
-        previous = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
+        saved = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
         expected = {
             "alignment_protocol": protocol,
             "seed": seed,
@@ -338,10 +324,11 @@ def train_standard_fixed(model, tokenizer, banks, variable, layer, token_positio
             "eval_batch_size": eval_batch_size,
             "output_space": output_space,
         }
-        if any(previous.get(k) != v for k, v in expected.items()):
+        invalid = [k for k, val in expected.items() if saved.get(k) != val]
+        if invalid:
             raise RuntimeError(
-                f"Unaligned/stale {variable} checkpoint: {checkpoint_path}. "
-                "Use --retrain or choose a NEW --result-dir."
+                f"Unaligned/stale {variable} checkpoint {checkpoint_path}: {invalid}. "
+                "Choose a new --result-dir or use --retrain."
             )
         print(f"[reuse aligned {variable} checkpoint] {checkpoint_path}")
         return
@@ -893,25 +880,85 @@ def save_csv(rows, path):
         writer.writerows(rows)
 
 
-def write_training_summary(trained_dir, at_layers, ap_layers, c_layers, summary_path):
-    """Persist one row per completed handle; safe to call after every stage item."""
-    rows = []
-    for variable, layers in (("AT", at_layers), ("AP", ap_layers), ("C", c_layers)):
-        for layer in layers:
-            checkpoint_path = trained_dir / f"{variable}_L{layer}" / f"das_{variable.lower()}.pt"
-            if not checkpoint_path.is_file():
-                continue
-            checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
-            row = {
-                "variable": variable,
-                "layer": int(layer),
-                "cal_iia": checkpoint.get("cal_iia"),
-                "test_iia": checkpoint.get("test_iia"),
-                "best_epoch": checkpoint.get("best_epoch"),
-                "checkpoint": str(checkpoint_path),
-            }
-            rows.append(row)
-    save_csv(rows, summary_path)
+SUMMARY_FIELDS = [
+    "variable", "layer", "cal_iia", "test_iia", "best_epoch",
+    "readout_val_acc", "clean_base_acc", "clean_source_acc",
+]
+
+
+def update_training_summary(model, result_dir, variable, layer, token_position,
+                            banks, shared_readout, batch_size):
+    """Update one independent handle in original summary.csv format.
+
+    Keeps completed layers from previous submissions and writes atomically.
+    Does NOT run any full-chain evaluation.
+    """
+    handle_dir = result_dir / "trained_handles" / f"{variable}_L{layer}"
+    ckpt_path = handle_dir / f"das_{variable.lower()}.pt"
+    readout_path = handle_dir / f"{variable.lower()}_readout_LogisticRegression.pt"
+    checkpoint = torch.load(ckpt_path, map_location="cpu", weights_only=False)
+    device = next(model.parameters()).device
+    Q, _, _ = load_ckpt(ckpt_path, device)
+    W, b, readout_info = load_readout(readout_path, variable, device)
+
+    val_bank = shared_readout[1]
+    val_states = collect_states(
+        model, val_bank["input_ids"], val_bank["attention_mask"],
+        val_bank["position_by_id"], layer, token_position, batch_size,
+    )
+    prediction = readout_prediction(val_states, Q, W, b)
+    readout_val_acc = float(
+        (prediction == val_bank[f"{variable}_target_ids"].cpu()).float().mean()
+    )
+
+    test_bank = banks[variable][2][variable]
+    if variable == "AT":
+        base_target = test_bank["base_answer_label_ids"]
+        source_target = test_bank["source_answer_label_ids"]
+    elif variable == "AP":
+        base_target = test_bank["base_answer_pointer_ids"]
+        source_target = test_bank["source_answer_pointer_ids"]
+    else:
+        color_map = readout_info["color_to_class"]
+        base_target = color_targets(test_bank, color_map, "base")
+        source_target = color_targets(test_bank, color_map, "source")
+    clean_base = clean_readout_accuracy(
+        model, test_bank, Q, layer, token_position, W, b,
+        base_target, batch_size, "base",
+    )
+    clean_source = clean_readout_accuracy(
+        model, test_bank, Q, layer, token_position, W, b,
+        source_target, batch_size, "source",
+    )
+
+    new_row = {
+        "variable": variable,
+        "layer": int(layer),
+        "cal_iia": checkpoint.get("cal_iia"),
+        "test_iia": checkpoint.get("test_iia"),
+        "best_epoch": checkpoint.get("best_epoch"),
+        "readout_val_acc": readout_val_acc,
+        "clean_base_acc": clean_base,
+        "clean_source_acc": clean_source,
+    }
+    path = result_dir / "summary.csv"
+    rows = {}
+    if path.is_file():
+        with path.open(newline="") as f:
+            for item in csv.DictReader(f):
+                if item.get("variable") and item.get("layer"):
+                    key = (item["variable"], int(item["layer"]))
+                    rows[key] = {field: item.get(field, "") for field in SUMMARY_FIELDS}
+    rows[(variable, int(layer))] = new_row
+    order = {"AT": 0, "AP": 1, "C": 2}
+    ordered = [rows[k] for k in sorted(rows, key=lambda k: (order.get(k[0], 99), k[1]))]
+    temp = path.with_suffix(".csv.tmp")
+    with temp.open("w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=SUMMARY_FIELDS)
+        writer.writeheader()
+        writer.writerows(ordered)
+    temp.replace(path)
+    print(f"[summary] {variable} L{layer}: cal_iia={new_row['cal_iia']} saved to {path}")
 
 
 def write_config_report(config_dir, at_layer, ap_layer, c_layer, clean, at_metrics, ap_metrics, c_metrics):
@@ -959,9 +1006,9 @@ def write_config_report(config_dir, at_layer, ap_layer, c_layer, clean, at_metri
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at_no_distractor")
-    parser.add_argument("--result-dir", default="results_standard_controlled_gdas_aligned_seed0_no_distractor")
+    parser.add_argument("--result-dir", default="results_standard_controlled_aligned_seed0")
     parser.add_argument("--at-from-gradual", default=None,
-                        help="Gradual v2 result directory; reuse its exact AT handles/readouts")
+                        help="Optional Gradual v2 root: share exact AT checkpoints/readouts")
 
     parser.add_argument("--at-layers", default="23,24,25")
     parser.add_argument("--ap-layers", default="14,13")
@@ -995,10 +1042,8 @@ def main():
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--retrain", action="store_true")
     parser.add_argument("--evaluate", action="store_true",
-                        help="Opt in to full-chain evaluation AFTER selecting layers; default is train only")
+                        help="Explicitly run full-chain evaluation after training; default train-only")
     args = parser.parse_args()
-    if args.eval_size != args.te_size:
-        parser.error("--eval-size must equal --te-size in aligned controlled comparisons")
 
     set_seed(args.seed)
 
@@ -1012,8 +1057,9 @@ def main():
     if not ap_token_positions:
         raise ValueError("AP token positions must be non-empty")
 
-    # Independent handle training allows any layer. Ordering matters only for full-chain eval.
     if args.evaluate:
+        if args.eval_size != args.te_size:
+            raise ValueError("--eval-size must match --te-size in aligned evaluation")
         for at_layer in at_layers:
             for ap_layer in ap_layers:
                 if ap_layer >= at_layer:
@@ -1029,7 +1075,8 @@ def main():
     trained_dir = result_dir / "trained_handles"
     configs_dir = result_dir / "configs"
     trained_dir.mkdir(parents=True, exist_ok=True)
-    configs_dir.mkdir(parents=True, exist_ok=True)
+    if args.evaluate:
+        configs_dir.mkdir(parents=True, exist_ok=True)
 
     print("=== STANDARD DAS CONTROLLED-ONLY GRID ===")
     print(f"AT layers: {at_layers}")
@@ -1039,7 +1086,7 @@ def main():
     if args.evaluate:
         print(f"Evaluation configs: {len(at_layers) * len(ap_layers) * len(c_layers)}")
     else:
-        print("Train-only: no full-chain evaluation (layer selection comes later)")
+        print("Train-only; full-chain evaluation is disabled by default")
     print("Objective for every handle: direct counterfactual Y loss only")
 
     model, tokenizer = load_gemma_model()
@@ -1089,55 +1136,44 @@ def main():
             source_ckpt = source_dir / "das_at.pt"
             source_readout = source_dir / "at_readout_LogisticRegression.pt"
             if not source_ckpt.is_file() or not source_readout.is_file():
-                raise FileNotFoundError(f"Missing Gradual v2 AT handle/readout in {source_dir}")
-            info = torch.load(source_ckpt, map_location="cpu", weights_only=False)
-            hp = info.get("hyperparameters", {})
+                raise FileNotFoundError(f"Missing Gradual v2 AT handle/readout: {source_dir}")
+            hp = torch.load(source_ckpt, map_location="cpu", weights_only=False).get("hyperparameters", {})
             expected = {
-                "variable": "AT", "layer": at_layer,
-                "seed": args.seed, "dim": args.at_dim,
-                "train_size": args.ft_size, "cal_size": args.cal_size,
-                "train_batch_size": args.train_batch_size,
-                "batch_size": args.eval_batch_size,
-                "epochs": args.at_epochs, "lr": args.lr,
-                "output_space": args.output_space,
+                "variable": "AT", "layer": at_layer, "seed": args.seed,
+                "dim": args.at_dim, "train_size": args.ft_size,
+                "cal_size": args.cal_size, "train_batch_size": args.train_batch_size,
+                "batch_size": args.eval_batch_size, "epochs": args.at_epochs,
+                "lr": args.lr, "output_space": args.output_space,
                 "token_position": args.at_token_position,
                 "dataset": dataset_stamp(args.data_path),
             }
-            mismatches = [name for name, value in expected.items() if hp.get(name) != value]
-            if mismatches:
-                raise ValueError(
-                    f"Gradual AT L{at_layer} incompatible with Standard run: {mismatches}"
-                )
+            differences = [key for key, value in expected.items() if hp.get(key) != value]
+            if differences:
+                raise ValueError(f"Gradual AT L{at_layer} incompatible: {differences}")
             shutil.copy2(source_ckpt, checkpoint_path)
             shutil.copy2(source_readout, readout_path)
-            print(f"[shared exact Gradual AT L{at_layer}] {source_dir}")
         else:
             train_standard_fixed(
-                model=model,
-                tokenizer=tokenizer,
-                banks=banks,
-                variable="AT",
-                layer=at_layer,
-                token_position=args.at_token_position,
-                target_name="Y_after_AT_intervene",
-                subspace_dim=args.at_dim,
-                epochs=args.at_epochs,
-                lr=args.lr,
-                train_batch_size=args.train_batch_size,
-                eval_batch_size=args.eval_batch_size,
-                seed=args.seed,
-                checkpoint_path=checkpoint_path,
-                output_space=args.output_space,
-                retrain=args.retrain,
+                model=model, tokenizer=tokenizer, banks=banks,
+                variable="AT", layer=at_layer, token_position=args.at_token_position,
+                target_name="Y_after_AT_intervene", subspace_dim=args.at_dim,
+                epochs=args.at_epochs, lr=args.lr,
+                train_batch_size=args.train_batch_size, eval_batch_size=args.eval_batch_size,
+                seed=args.seed, checkpoint_path=checkpoint_path,
+                output_space=args.output_space, retrain=args.retrain,
             )
-
             if args.retrain and readout_path.exists():
                 readout_path.unlink()
-            fit_one_readout(model, checkpoint_path, readout_path, "AT", shared_readout, args.at_token_position, args.eval_batch_size, args.seed)
+            fit_one_readout(
+                model, checkpoint_path, readout_path, "AT", shared_readout,
+                args.at_token_position, args.eval_batch_size, args.seed,
+            )
         at_checkpoint_paths[at_layer] = checkpoint_path
         at_readout_paths[at_layer] = readout_path
-        write_training_summary(trained_dir, at_layers, ap_layers, c_layers,
-                               result_dir / "training_summary.csv")
+        update_training_summary(
+            model, result_dir, "AT", at_layer, args.at_token_position,
+            banks, shared_readout, args.eval_batch_size,
+        )
 
     print("\n=== STAGE 2: TRAIN INDEPENDENT AP HANDLES ===")
     for ap_layer in ap_layers:
@@ -1170,8 +1206,10 @@ def main():
         fit_one_readout(model, checkpoint_path, readout_path, "AP", shared_readout, ap_token_positions, args.eval_batch_size, args.seed)
         ap_checkpoint_paths[ap_layer] = checkpoint_path
         ap_readout_paths[ap_layer] = readout_path
-        write_training_summary(trained_dir, at_layers, ap_layers, c_layers,
-                               result_dir / "training_summary.csv")
+        update_training_summary(
+            model, result_dir, "AP", ap_layer, ap_token_positions,
+            banks, shared_readout, args.eval_batch_size,
+        )
 
     print("\n=== STAGE 3: TRAIN INDEPENDENT C HANDLES ===")
     for c_layer in c_layers:
@@ -1204,15 +1242,17 @@ def main():
         fit_one_readout(model, checkpoint_path, readout_path, "C", shared_readout, args.c_token_position, args.eval_batch_size, args.seed)
         c_checkpoint_paths[c_layer] = checkpoint_path
         c_readout_paths[c_layer] = readout_path
-        write_training_summary(trained_dir, at_layers, ap_layers, c_layers,
-                               result_dir / "training_summary.csv")
+        update_training_summary(
+            model, result_dir, "C", c_layer, args.c_token_position,
+            banks, shared_readout, args.eval_batch_size,
+        )
 
-    print(f"\nTraining summary: {result_dir / 'training_summary.csv'}")
+    print(f"\nTraining summary: {result_dir / 'summary.csv'}")
     if not args.evaluate:
-        print("Training complete. Full-chain evaluation skipped (default).")
+        print("Finished training. No full-chain evaluation was run.")
         return
 
-    print("\n=== REUSE THE EXACT GDAS v2 CONTROLLED TEST BANKS ===")
+    print("\n=== REUSE SAME CONTROLLED TEST BANKS ===")
     at_only = banks["AT"][2]["AT"]
     ap_only = banks["AP"][2]["AP"]
     c_only = banks["C"][2]["C"]

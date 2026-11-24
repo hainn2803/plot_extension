@@ -1,0 +1,1445 @@
+CUDA available: True
+GPU: NVIDIA A100-SXM4-40GB
+[bank] train AT AT_only: 800
+[bank] train AP AP_only: 800
+[bank] train C C_only: 800
+[bank] validation AT AT_only: 400
+[bank] validation AP AP_only: 400
+[bank] validation C C_only: 400
+[bank] test AT AT_only: 400
+[bank] test AP AP_only: 400
+[bank] test C C_only: 400
+[readout] train: 1300 shared factual prompts
+[readout] validation: 520 shared factual prompts
+
+================ TRAIN STANDARD AT L0 ================
+[AT L0 epoch 01] loss=6.4074 cal_iia=0.0000
+[AT L0 epoch 02] loss=6.3977 cal_iia=0.0000
+[AT L0 epoch 03] loss=6.4003 cal_iia=0.0000
+[AT L0 epoch 04] loss=6.3909 cal_iia=0.0000
+[AT L0 epoch 05] loss=6.3989 cal_iia=0.0000
+[AT L0 epoch 06] loss=6.3906 cal_iia=0.0000
+[AT L0 epoch 07] loss=6.3897 cal_iia=0.0000
+[AT L0 epoch 08] loss=6.3874 cal_iia=0.0000
+[AT L0 epoch 09] loss=6.3896 cal_iia=0.0000
+[AT L0 epoch 10] loss=6.3858 cal_iia=0.0000
+[AT L0 BEST] epoch=1 cal=0.0000 test=0.0000
+[AT readout] val_acc=0.2808
+[AT L0] cal_iia=0.0000 test_iia=0.0 readout_val=0.2808 clean=0.2600/0.3250
+
+================ TRAIN STANDARD AT L1 ================
+[AT L1 epoch 01] loss=6.3990 cal_iia=0.0000
+[AT L1 epoch 02] loss=6.3791 cal_iia=0.0000
+[AT L1 epoch 03] loss=6.3819 cal_iia=0.0000
+[AT L1 epoch 04] loss=6.3733 cal_iia=0.0000
+[AT L1 epoch 05] loss=6.3797 cal_iia=0.0000
+[AT L1 epoch 06] loss=6.3721 cal_iia=0.0000
+[AT L1 epoch 07] loss=6.3722 cal_iia=0.0000
+[AT L1 epoch 08] loss=6.3671 cal_iia=0.0000
+[AT L1 epoch 09] loss=6.3649 cal_iia=0.0000
+[AT L1 epoch 10] loss=6.3662 cal_iia=0.0000
+[AT L1 BEST] epoch=1 cal=0.0000 test=0.0000
+[AT readout] val_acc=0.3096
+[AT L1] cal_iia=0.0000 test_iia=0.0 readout_val=0.3096 clean=0.3375/0.3450
+
+================ TRAIN STANDARD AT L2 ================
+[AT L2 epoch 01] loss=6.3727 cal_iia=0.0000
+[AT L2 epoch 02] loss=6.3408 cal_iia=0.0000
+[AT L2 epoch 03] loss=6.3313 cal_iia=0.0000
+[AT L2 epoch 04] loss=6.3285 cal_iia=0.0000
+[AT L2 epoch 05] loss=6.3275 cal_iia=0.0000
+[AT L2 epoch 06] loss=6.3209 cal_iia=0.0000
+[AT L2 epoch 07] loss=6.3237 cal_iia=0.0000
+[AT L2 epoch 08] loss=6.3193 cal_iia=0.0000
+[AT L2 epoch 09] loss=6.3071 cal_iia=0.0000
+[AT L2 epoch 10] loss=6.3133 cal_iia=0.0000
+[AT L2 BEST] epoch=1 cal=0.0000 test=0.0000
+[AT readout] val_acc=0.3173
+[AT L2] cal_iia=0.0000 test_iia=0.0 readout_val=0.3173 clean=0.3200/0.3325
+
+================ TRAIN STANDARD AT L3 ================
+[AT L3 epoch 01] loss=6.3532 cal_iia=0.0000
+[AT L3 epoch 02] loss=6.3019 cal_iia=0.0025
+[AT L3 epoch 03] loss=6.2962 cal_iia=0.0000
+[AT L3 epoch 04] loss=6.2801 cal_iia=0.0000
+[AT L3 epoch 05] loss=6.2739 cal_iia=0.0000
+[AT L3 epoch 06] loss=6.2721 cal_iia=0.0000
+[AT L3 epoch 07] loss=6.2613 cal_iia=0.0000
+[AT L3 epoch 08] loss=6.2685 cal_iia=0.0000
+[AT L3 epoch 09] loss=6.2531 cal_iia=0.0000
+[AT L3 epoch 10] loss=6.2678 cal_iia=0.0000
+[AT L3 BEST] epoch=2 cal=0.0025 test=0.0000
+[AT readout] val_acc=0.2904
+[AT L3] cal_iia=0.0025 test_iia=0.0 readout_val=0.2904 clean=0.3300/0.3075
+
+================ TRAIN STANDARD AT L4 ================
+[AT L4 epoch 01] loss=6.3452 cal_iia=0.0000
+[AT L4 epoch 02] loss=6.2883 cal_iia=0.0000
+[AT L4 epoch 03] loss=6.2720 cal_iia=0.0000
+[AT L4 epoch 04] loss=6.2599 cal_iia=0.0000
+[AT L4 epoch 05] loss=6.2638 cal_iia=0.0000
+[AT L4 epoch 06] loss=6.2500 cal_iia=0.0000
+[AT L4 epoch 07] loss=6.2550 cal_iia=0.0000
+[AT L4 epoch 08] loss=6.2464 cal_iia=0.0000
+[AT L4 epoch 09] loss=6.2444 cal_iia=0.0000
+[AT L4 epoch 10] loss=6.2458 cal_iia=0.0025
+[AT L4 BEST] epoch=10 cal=0.0025 test=0.0000
+[AT readout] val_acc=0.3000
+[AT L4] cal_iia=0.0025 test_iia=0.0 readout_val=0.3000 clean=0.2950/0.3150
+
+================ TRAIN STANDARD AT L5 ================
+[AT L5 epoch 01] loss=6.3411 cal_iia=0.0000
+[AT L5 epoch 02] loss=6.2751 cal_iia=0.0000
+[AT L5 epoch 03] loss=6.2628 cal_iia=0.0000
+[AT L5 epoch 04] loss=6.2460 cal_iia=0.0000
+[AT L5 epoch 05] loss=6.2388 cal_iia=0.0000
+[AT L5 epoch 06] loss=6.2341 cal_iia=0.0000
+[AT L5 epoch 07] loss=6.2306 cal_iia=0.0000
+[AT L5 epoch 08] loss=6.2197 cal_iia=0.0025
+[AT L5 epoch 09] loss=6.2327 cal_iia=0.0000
+[AT L5 epoch 10] loss=6.2257 cal_iia=0.0025
+[AT L5 BEST] epoch=8 cal=0.0025 test=0.0025
+[AT readout] val_acc=0.2942
+[AT L5] cal_iia=0.0025 test_iia=0.0025 readout_val=0.2942 clean=0.3150/0.3075
+
+================ TRAIN STANDARD AT L6 ================
+[AT L6 epoch 01] loss=6.3451 cal_iia=0.0000
+[AT L6 epoch 02] loss=6.2849 cal_iia=0.0000
+[AT L6 epoch 03] loss=6.2675 cal_iia=0.0000
+[AT L6 epoch 04] loss=6.2556 cal_iia=0.0000
+[AT L6 epoch 05] loss=6.2478 cal_iia=0.0025
+[AT L6 epoch 06] loss=6.2439 cal_iia=0.0025
+[AT L6 epoch 07] loss=6.2372 cal_iia=0.0025
+[AT L6 epoch 08] loss=6.2397 cal_iia=0.0025
+[AT L6 epoch 09] loss=6.2334 cal_iia=0.0050
+[AT L6 epoch 10] loss=6.2293 cal_iia=0.0025
+[AT L6 BEST] epoch=9 cal=0.0050 test=0.0025
+[AT readout] val_acc=0.2865
+[AT L6] cal_iia=0.0050 test_iia=0.0025 readout_val=0.2865 clean=0.2550/0.2650
+
+================ TRAIN STANDARD AT L7 ================
+[AT L7 epoch 01] loss=6.3073 cal_iia=0.0000
+[AT L7 epoch 02] loss=6.2179 cal_iia=0.0000
+[AT L7 epoch 03] loss=6.1984 cal_iia=0.0000
+[AT L7 epoch 04] loss=6.1787 cal_iia=0.0000
+[AT L7 epoch 05] loss=6.1664 cal_iia=0.0000
+[AT L7 epoch 06] loss=6.1526 cal_iia=0.0000
+[AT L7 epoch 07] loss=6.1510 cal_iia=0.0000
+[AT L7 epoch 08] loss=6.1466 cal_iia=0.0000
+[AT L7 epoch 09] loss=6.1355 cal_iia=0.0000
+[AT L7 epoch 10] loss=6.1408 cal_iia=0.0000
+[AT L7 BEST] epoch=1 cal=0.0000 test=0.0000
+[AT readout] val_acc=0.2942
+[AT L7] cal_iia=0.0000 test_iia=0.0 readout_val=0.2942 clean=0.2575/0.2175
+
+================ TRAIN STANDARD AT L8 ================
+[AT L8 epoch 01] loss=6.2956 cal_iia=0.0000
+[AT L8 epoch 02] loss=6.2043 cal_iia=0.0000
+[AT L8 epoch 03] loss=6.1786 cal_iia=0.0000
+[AT L8 epoch 04] loss=6.1636 cal_iia=0.0000
+[AT L8 epoch 05] loss=6.1479 cal_iia=0.0000
+[AT L8 epoch 06] loss=6.1371 cal_iia=0.0000
+[AT L8 epoch 07] loss=6.1284 cal_iia=0.0000
+[AT L8 epoch 08] loss=6.1214 cal_iia=0.0000
+[AT L8 epoch 09] loss=6.1104 cal_iia=0.0000
+[AT L8 epoch 10] loss=6.1256 cal_iia=0.0000
+[AT L8 BEST] epoch=1 cal=0.0000 test=0.0000
+[AT readout] val_acc=0.2827
+[AT L8] cal_iia=0.0000 test_iia=0.0 readout_val=0.2827 clean=0.2175/0.2450
+
+================ TRAIN STANDARD AT L9 ================
+[AT L9 epoch 01] loss=6.2844 cal_iia=0.0000
+[AT L9 epoch 02] loss=6.1807 cal_iia=0.0000
+[AT L9 epoch 03] loss=6.1471 cal_iia=0.0000
+[AT L9 epoch 04] loss=6.1306 cal_iia=0.0000
+[AT L9 epoch 05] loss=6.1203 cal_iia=0.0000
+[AT L9 epoch 06] loss=6.1110 cal_iia=0.0000
+[AT L9 epoch 07] loss=6.1034 cal_iia=0.0000
+[AT L9 epoch 08] loss=6.1046 cal_iia=0.0000
+[AT L9 epoch 09] loss=6.1025 cal_iia=0.0000
+[AT L9 epoch 10] loss=6.0940 cal_iia=0.0000
+[AT L9 BEST] epoch=1 cal=0.0000 test=0.0000
+[AT readout] val_acc=0.2750
+[AT L9] cal_iia=0.0000 test_iia=0.0 readout_val=0.2750 clean=0.2525/0.2450
+
+================ TRAIN STANDARD AT L10 ================
+[AT L10 epoch 01] loss=6.2779 cal_iia=0.0000
+[AT L10 epoch 02] loss=6.1682 cal_iia=0.0000
+[AT L10 epoch 03] loss=6.1344 cal_iia=0.0000
+[AT L10 epoch 04] loss=6.1156 cal_iia=0.0000
+[AT L10 epoch 05] loss=6.1077 cal_iia=0.0000
+[AT L10 epoch 06] loss=6.0963 cal_iia=0.0000
+[AT L10 epoch 07] loss=6.0877 cal_iia=0.0000
+[AT L10 epoch 08] loss=6.0879 cal_iia=0.0000
+[AT L10 epoch 09] loss=6.0808 cal_iia=0.0000
+[AT L10 epoch 10] loss=6.0797 cal_iia=0.0000
+[AT L10 BEST] epoch=1 cal=0.0000 test=0.0000
+[AT readout] val_acc=0.2788
+[AT L10] cal_iia=0.0000 test_iia=0.0 readout_val=0.2788 clean=0.2125/0.2225
+
+================ TRAIN STANDARD AT L11 ================
+[AT L11 epoch 01] loss=6.2546 cal_iia=0.0000
+[AT L11 epoch 02] loss=6.1242 cal_iia=0.0000
+[AT L11 epoch 03] loss=6.0807 cal_iia=0.0000
+[AT L11 epoch 04] loss=6.0639 cal_iia=0.0000
+[AT L11 epoch 05] loss=6.0547 cal_iia=0.0000
+[AT L11 epoch 06] loss=6.0406 cal_iia=0.0000
+[AT L11 epoch 07] loss=6.0304 cal_iia=0.0000
+[AT L11 epoch 08] loss=6.0267 cal_iia=0.0000
+[AT L11 epoch 09] loss=6.0228 cal_iia=0.0000
+[AT L11 epoch 10] loss=6.0204 cal_iia=0.0000
+[AT L11 BEST] epoch=1 cal=0.0000 test=0.0000
+[AT readout] val_acc=0.2885
+[AT L11] cal_iia=0.0000 test_iia=0.0 readout_val=0.2885 clean=0.2375/0.2550
+
+================ TRAIN STANDARD AT L12 ================
+[AT L12 epoch 01] loss=6.2390 cal_iia=0.0000
+[AT L12 epoch 02] loss=6.1024 cal_iia=0.0000
+[AT L12 epoch 03] loss=6.0560 cal_iia=0.0000
+[AT L12 epoch 04] loss=6.0381 cal_iia=0.0000
+[AT L12 epoch 05] loss=6.0232 cal_iia=0.0000
+[AT L12 epoch 06] loss=6.0114 cal_iia=0.0000
+[AT L12 epoch 07] loss=6.0003 cal_iia=0.0000
+[AT L12 epoch 08] loss=5.9994 cal_iia=0.0000
+[AT L12 epoch 09] loss=5.9935 cal_iia=0.0000
+[AT L12 epoch 10] loss=5.9890 cal_iia=0.0000
+[AT L12 BEST] epoch=1 cal=0.0000 test=0.0000
+[AT readout] val_acc=0.2923
+[AT L12] cal_iia=0.0000 test_iia=0.0 readout_val=0.2923 clean=0.2550/0.2175
+
+================ TRAIN STANDARD AT L13 ================
+[AT L13 epoch 01] loss=6.2069 cal_iia=0.0000
+[AT L13 epoch 02] loss=6.0459 cal_iia=0.0000
+[AT L13 epoch 03] loss=5.9928 cal_iia=0.0000
+[AT L13 epoch 04] loss=5.9690 cal_iia=0.0000
+[AT L13 epoch 05] loss=5.9535 cal_iia=0.0000
+[AT L13 epoch 06] loss=5.9383 cal_iia=0.0000
+[AT L13 epoch 07] loss=5.9285 cal_iia=0.0000
+[AT L13 epoch 08] loss=5.9244 cal_iia=0.0000
+[AT L13 epoch 09] loss=5.9192 cal_iia=0.0000
+[AT L13 epoch 10] loss=5.9126 cal_iia=0.0000
+[AT L13 BEST] epoch=1 cal=0.0000 test=0.0000
+[AT readout] val_acc=0.2942
+[AT L13] cal_iia=0.0000 test_iia=0.0 readout_val=0.2942 clean=0.2825/0.2650
+
+================ TRAIN STANDARD AT L14 ================
+[AT L14 epoch 01] loss=6.1482 cal_iia=0.0000
+[AT L14 epoch 02] loss=5.9593 cal_iia=0.0000
+[AT L14 epoch 03] loss=5.9017 cal_iia=0.0000
+[AT L14 epoch 04] loss=5.8737 cal_iia=0.0000
+[AT L14 epoch 05] loss=5.8590 cal_iia=0.0000
+[AT L14 epoch 06] loss=5.8418 cal_iia=0.0000
+[AT L14 epoch 07] loss=5.8297 cal_iia=0.0000
+[AT L14 epoch 08] loss=5.8273 cal_iia=0.0000
+[AT L14 epoch 09] loss=5.8176 cal_iia=0.0000
+[AT L14 epoch 10] loss=5.8136 cal_iia=0.0000
+[AT L14 BEST] epoch=1 cal=0.0000 test=0.0025
+[AT readout] val_acc=0.3750
+[AT L14] cal_iia=0.0000 test_iia=0.0025 readout_val=0.3750 clean=0.4050/0.3525
+
+================ TRAIN STANDARD AT L15 ================
+[AT L15 epoch 01] loss=6.1291 cal_iia=0.0000
+[AT L15 epoch 02] loss=5.9300 cal_iia=0.0025
+[AT L15 epoch 03] loss=5.8739 cal_iia=0.0025
+[AT L15 epoch 04] loss=5.8440 cal_iia=0.0025
+[AT L15 epoch 05] loss=5.8297 cal_iia=0.0025
+[AT L15 epoch 06] loss=5.8127 cal_iia=0.0025
+[AT L15 epoch 07] loss=5.7998 cal_iia=0.0025
+[AT L15 epoch 08] loss=5.7970 cal_iia=0.0025
+[AT L15 epoch 09] loss=5.7882 cal_iia=0.0025
+[AT L15 epoch 10] loss=5.7841 cal_iia=0.0025
+[AT L15 BEST] epoch=2 cal=0.0025 test=0.0025
+[AT readout] val_acc=0.3577
+[AT L15] cal_iia=0.0025 test_iia=0.0025 readout_val=0.3577 clean=0.3825/0.3475
+
+================ TRAIN STANDARD AT L16 ================
+[AT L16 epoch 01] loss=5.9919 cal_iia=0.0025
+[AT L16 epoch 02] loss=5.7328 cal_iia=0.0050
+[AT L16 epoch 03] loss=5.6620 cal_iia=0.0025
+[AT L16 epoch 04] loss=5.6314 cal_iia=0.0025
+[AT L16 epoch 05] loss=5.6076 cal_iia=0.0025
+[AT L16 epoch 06] loss=5.5896 cal_iia=0.0050
+[AT L16 epoch 07] loss=5.5787 cal_iia=0.0050
+[AT L16 epoch 08] loss=5.5711 cal_iia=0.0075
+[AT L16 epoch 09] loss=5.5628 cal_iia=0.0025
+[AT L16 epoch 10] loss=5.5539 cal_iia=0.0075
+[AT L16 BEST] epoch=8 cal=0.0075 test=0.0075
+[AT readout] val_acc=0.4673
+[AT L16] cal_iia=0.0075 test_iia=0.0075 readout_val=0.4673 clean=0.4975/0.4400
+
+================ TRAIN STANDARD AT L17 ================
+[AT L17 epoch 01] loss=5.1243 cal_iia=0.0400
+[AT L17 epoch 02] loss=4.6973 cal_iia=0.0400
+[AT L17 epoch 03] loss=4.6125 cal_iia=0.0450
+[AT L17 epoch 04] loss=4.5786 cal_iia=0.0450
+[AT L17 epoch 05] loss=4.5535 cal_iia=0.0450
+[AT L17 epoch 06] loss=4.5315 cal_iia=0.0475
+[AT L17 epoch 07] loss=4.5101 cal_iia=0.0475
+[AT L17 epoch 08] loss=4.5050 cal_iia=0.0425
+[AT L17 epoch 09] loss=4.4894 cal_iia=0.0450
+[AT L17 epoch 10] loss=4.4839 cal_iia=0.0450
+[AT L17 BEST] epoch=6 cal=0.0475 test=0.0750
+[AT readout] val_acc=0.9135
+[AT L17] cal_iia=0.0475 test_iia=0.075 readout_val=0.9135 clean=0.9200/0.9050
+
+================ TRAIN STANDARD AT L18 ================
+[AT L18 epoch 01] loss=3.5552 cal_iia=0.2075
+[AT L18 epoch 02] loss=2.8925 cal_iia=0.2450
+[AT L18 epoch 03] loss=2.8175 cal_iia=0.2425
+[AT L18 epoch 04] loss=2.7820 cal_iia=0.2375
+[AT L18 epoch 05] loss=2.7675 cal_iia=0.2450
+[AT L18 epoch 06] loss=2.7461 cal_iia=0.2450
+[AT L18 epoch 07] loss=2.7325 cal_iia=0.2375
+[AT L18 epoch 08] loss=2.7237 cal_iia=0.2450
+[AT L18 epoch 09] loss=2.7125 cal_iia=0.2425
+[AT L18 epoch 10] loss=2.7039 cal_iia=0.2400
+[AT L18 BEST] epoch=2 cal=0.2450 test=0.2275
+[AT readout] val_acc=0.9327
+[AT L18] cal_iia=0.2450 test_iia=0.2275 readout_val=0.9327 clean=0.9450/0.9650
+
+================ TRAIN STANDARD AT L19 ================
+[AT L19 epoch 01] loss=2.5291 cal_iia=0.5275
+[AT L19 epoch 02] loss=1.8512 cal_iia=0.5600
+[AT L19 epoch 03] loss=1.7977 cal_iia=0.5600
+[AT L19 epoch 04] loss=1.7770 cal_iia=0.5675
+[AT L19 epoch 05] loss=1.7729 cal_iia=0.5725
+[AT L19 epoch 06] loss=1.7573 cal_iia=0.5700
+[AT L19 epoch 07] loss=1.7451 cal_iia=0.5800
+[AT L19 epoch 08] loss=1.7387 cal_iia=0.5650
+[AT L19 epoch 09] loss=1.7299 cal_iia=0.5675
+[AT L19 epoch 10] loss=1.7224 cal_iia=0.5750
+[AT L19 BEST] epoch=7 cal=0.5800 test=0.5350
+[AT readout] val_acc=0.9231
+[AT L19] cal_iia=0.5800 test_iia=0.535 readout_val=0.9231 clean=0.9350/0.9475
+
+================ TRAIN STANDARD AT L20 ================
+[AT L20 epoch 01] loss=2.3591 cal_iia=0.5850
+[AT L20 epoch 02] loss=1.7348 cal_iia=0.6175
+[AT L20 epoch 03] loss=1.6910 cal_iia=0.6175
+[AT L20 epoch 04] loss=1.6752 cal_iia=0.6150
+[AT L20 epoch 05] loss=1.6690 cal_iia=0.6150
+[AT L20 epoch 06] loss=1.6558 cal_iia=0.6175
+[AT L20 epoch 07] loss=1.6467 cal_iia=0.6275
+[AT L20 epoch 08] loss=1.6407 cal_iia=0.6275
+[AT L20 epoch 09] loss=1.6347 cal_iia=0.6225
+[AT L20 epoch 10] loss=1.6295 cal_iia=0.6225
+[AT L20 BEST] epoch=7 cal=0.6275 test=0.5725
+[AT readout] val_acc=0.9077
+[AT L20] cal_iia=0.6275 test_iia=0.5725 readout_val=0.9077 clean=0.9250/0.9250
+
+================ TRAIN STANDARD AT L21 ================
+[AT L21 epoch 01] loss=2.3697 cal_iia=0.5800
+[AT L21 epoch 02] loss=1.7300 cal_iia=0.6225
+[AT L21 epoch 03] loss=1.6824 cal_iia=0.6200
+[AT L21 epoch 04] loss=1.6656 cal_iia=0.6250
+[AT L21 epoch 05] loss=1.6617 cal_iia=0.6200
+[AT L21 epoch 06] loss=1.6488 cal_iia=0.6200
+[AT L21 epoch 07] loss=1.6385 cal_iia=0.6250
+[AT L21 epoch 08] loss=1.6333 cal_iia=0.6175
+[AT L21 epoch 09] loss=1.6266 cal_iia=0.6175
+[AT L21 epoch 10] loss=1.6205 cal_iia=0.6150
+[AT L21 BEST] epoch=4 cal=0.6250 test=0.5725
+[AT readout] val_acc=0.9077
+[AT L21] cal_iia=0.6250 test_iia=0.5725 readout_val=0.9077 clean=0.9125/0.9150
+
+================ TRAIN STANDARD AT L22 ================
+[AT L22 epoch 01] loss=2.0034 cal_iia=0.7850
+[AT L22 epoch 02] loss=1.3726 cal_iia=0.8325
+[AT L22 epoch 03] loss=1.3260 cal_iia=0.8475
+[AT L22 epoch 04] loss=1.3143 cal_iia=0.8375
+[AT L22 epoch 05] loss=1.3122 cal_iia=0.8300
+[AT L22 epoch 06] loss=1.3004 cal_iia=0.8450
+[AT L22 epoch 07] loss=1.2908 cal_iia=0.8325
+[AT L22 epoch 08] loss=1.2887 cal_iia=0.8350
+[AT L22 epoch 09] loss=1.2830 cal_iia=0.8375
+[AT L22 epoch 10] loss=1.2771 cal_iia=0.8375
+[AT L22 BEST] epoch=3 cal=0.8475 test=0.7850
+[AT readout] val_acc=0.8923
+[AT L22] cal_iia=0.8475 test_iia=0.785 readout_val=0.8923 clean=0.9225/0.9225
+
+================ TRAIN STANDARD AT L23 ================
+[AT L23 epoch 01] loss=1.6102 cal_iia=0.9850
+[AT L23 epoch 02] loss=1.0806 cal_iia=0.9925
+[AT L23 epoch 03] loss=1.0436 cal_iia=0.9975
+[AT L23 epoch 04] loss=1.0334 cal_iia=0.9950
+[AT L23 epoch 05] loss=1.0324 cal_iia=0.9950
+[AT L23 epoch 06] loss=1.0230 cal_iia=0.9925
+[AT L23 epoch 07] loss=1.0172 cal_iia=0.9950
+[AT L23 epoch 08] loss=1.0137 cal_iia=0.9975
+[AT L23 epoch 09] loss=1.0113 cal_iia=0.9950
+[AT L23 epoch 10] loss=1.0062 cal_iia=0.9950
+[AT L23 BEST] epoch=3 cal=0.9975 test=0.9950
+[AT readout] val_acc=0.8827
+[AT L23] cal_iia=0.9975 test_iia=0.995 readout_val=0.8827 clean=0.9375/0.9225
+
+================ TRAIN STANDARD AT L24 ================
+[AT L24 epoch 01] loss=1.5805 cal_iia=1.0000
+[AT L24 epoch 02] loss=1.0360 cal_iia=1.0000
+[AT L24 epoch 03] loss=0.9935 cal_iia=1.0000
+[AT L24 epoch 04] loss=0.9817 cal_iia=1.0000
+[AT L24 epoch 05] loss=0.9798 cal_iia=1.0000
+[AT L24 epoch 06] loss=0.9693 cal_iia=1.0000
+[AT L24 epoch 07] loss=0.9634 cal_iia=1.0000
+[AT L24 epoch 08] loss=0.9591 cal_iia=1.0000
+[AT L24 epoch 09] loss=0.9571 cal_iia=1.0000
+[AT L24 epoch 10] loss=0.9519 cal_iia=1.0000
+[AT L24 BEST] epoch=1 cal=1.0000 test=0.9900
+[AT readout] val_acc=0.8827
+[AT L24] cal_iia=1.0000 test_iia=0.99 readout_val=0.8827 clean=0.9225/0.9150
+
+================ TRAIN STANDARD AT L25 ================
+[AT L25 epoch 01] loss=1.5679 cal_iia=0.9975
+[AT L25 epoch 02] loss=0.9950 cal_iia=0.9975
+[AT L25 epoch 03] loss=0.9603 cal_iia=1.0000
+[AT L25 epoch 04] loss=0.9523 cal_iia=0.9975
+[AT L25 epoch 05] loss=0.9520 cal_iia=0.9975
+[AT L25 epoch 06] loss=0.9442 cal_iia=1.0000
+[AT L25 epoch 07] loss=0.9405 cal_iia=0.9975
+[AT L25 epoch 08] loss=0.9403 cal_iia=0.9975
+[AT L25 epoch 09] loss=0.9392 cal_iia=0.9975
+[AT L25 epoch 10] loss=0.9355 cal_iia=1.0000
+[AT L25 BEST] epoch=3 cal=1.0000 test=1.0000
+[AT readout] val_acc=0.8212
+[AT L25] cal_iia=1.0000 test_iia=1.0 readout_val=0.8212 clean=0.8675/0.8400
+
+================ TRAIN STANDARD AP L0 ================
+[AP L0 epoch 01] loss=1.9134 cal_iia=0.7125
+[AP L0 epoch 02] loss=1.0086 cal_iia=0.8225
+[AP L0 epoch 03] loss=0.6195 cal_iia=0.8300
+[AP L0 epoch 04] loss=0.4165 cal_iia=0.8475
+[AP L0 epoch 05] loss=0.2760 cal_iia=0.8250
+[AP L0 epoch 06] loss=0.1852 cal_iia=0.8225
+[AP L0 epoch 07] loss=0.1340 cal_iia=0.8175
+[AP L0 epoch 08] loss=0.0975 cal_iia=0.8300
+[AP L0 epoch 09] loss=0.0708 cal_iia=0.8325
+[AP L0 epoch 10] loss=0.0530 cal_iia=0.8275
+[AP L0 BEST] epoch=4 cal=0.8475 test=0.8150
+[AP readout] val_acc=1.0000
+[AP L0] cal_iia=0.8475 test_iia=0.815 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD AP L1 ================
+[AP L1 epoch 01] loss=1.8324 cal_iia=0.7800
+[AP L1 epoch 02] loss=0.9307 cal_iia=0.8575
+[AP L1 epoch 03] loss=0.5638 cal_iia=0.8675
+[AP L1 epoch 04] loss=0.3727 cal_iia=0.8600
+[AP L1 epoch 05] loss=0.2753 cal_iia=0.8575
+[AP L1 epoch 06] loss=0.2217 cal_iia=0.8500
+[AP L1 epoch 07] loss=0.1638 cal_iia=0.8475
+[AP L1 epoch 08] loss=0.1192 cal_iia=0.8200
+[AP L1 epoch 09] loss=0.0905 cal_iia=0.8275
+[AP L1 epoch 10] loss=0.0639 cal_iia=0.8250
+[AP L1 BEST] epoch=3 cal=0.8675 test=0.8750
+[AP readout] val_acc=1.0000
+[AP L1] cal_iia=0.8675 test_iia=0.875 readout_val=1.0000 clean=0.9975/0.9975
+
+================ TRAIN STANDARD AP L2 ================
+[AP L2 epoch 01] loss=1.8788 cal_iia=0.7875
+[AP L2 epoch 02] loss=0.9045 cal_iia=0.8950
+[AP L2 epoch 03] loss=0.4985 cal_iia=0.8975
+[AP L2 epoch 04] loss=0.2969 cal_iia=0.9100
+[AP L2 epoch 05] loss=0.2046 cal_iia=0.9150
+[AP L2 epoch 06] loss=0.1422 cal_iia=0.8900
+[AP L2 epoch 07] loss=0.1218 cal_iia=0.9000
+[AP L2 epoch 08] loss=0.1048 cal_iia=0.8575
+[AP L2 epoch 09] loss=0.1066 cal_iia=0.8475
+[AP L2 epoch 10] loss=0.1151 cal_iia=0.8550
+[AP L2 BEST] epoch=5 cal=0.9150 test=0.8775
+[AP readout] val_acc=1.0000
+[AP L2] cal_iia=0.9150 test_iia=0.8775 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD AP L3 ================
+[AP L3 epoch 01] loss=1.8261 cal_iia=0.8075
+[AP L3 epoch 02] loss=0.8634 cal_iia=0.8975
+[AP L3 epoch 03] loss=0.4867 cal_iia=0.9125
+[AP L3 epoch 04] loss=0.3035 cal_iia=0.9025
+[AP L3 epoch 05] loss=0.2047 cal_iia=0.8875
+[AP L3 epoch 06] loss=0.1489 cal_iia=0.8800
+[AP L3 epoch 07] loss=0.1193 cal_iia=0.8850
+[AP L3 epoch 08] loss=0.0990 cal_iia=0.8750
+[AP L3 epoch 09] loss=0.0852 cal_iia=0.8675
+[AP L3 epoch 10] loss=0.0711 cal_iia=0.8675
+[AP L3 BEST] epoch=3 cal=0.9125 test=0.8800
+[AP readout] val_acc=1.0000
+[AP L3] cal_iia=0.9125 test_iia=0.88 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD AP L4 ================
+[AP L4 epoch 01] loss=1.6577 cal_iia=0.8875
+[AP L4 epoch 02] loss=0.6741 cal_iia=0.9500
+[AP L4 epoch 03] loss=0.3578 cal_iia=0.9475
+[AP L4 epoch 04] loss=0.2141 cal_iia=0.9400
+[AP L4 epoch 05] loss=0.1461 cal_iia=0.9350
+[AP L4 epoch 06] loss=0.0998 cal_iia=0.9275
+[AP L4 epoch 07] loss=0.0706 cal_iia=0.9200
+[AP L4 epoch 08] loss=0.0572 cal_iia=0.9100
+[AP L4 epoch 09] loss=0.0609 cal_iia=0.9150
+[AP L4 epoch 10] loss=0.0565 cal_iia=0.8975
+[AP L4 BEST] epoch=2 cal=0.9500 test=0.9225
+[AP readout] val_acc=1.0000
+[AP L4] cal_iia=0.9500 test_iia=0.9225 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD AP L5 ================
+[AP L5 epoch 01] loss=1.4843 cal_iia=0.9300
+[AP L5 epoch 02] loss=0.5206 cal_iia=0.9575
+[AP L5 epoch 03] loss=0.2598 cal_iia=0.9625
+[AP L5 epoch 04] loss=0.1571 cal_iia=0.9500
+[AP L5 epoch 05] loss=0.1029 cal_iia=0.9350
+[AP L5 epoch 06] loss=0.0718 cal_iia=0.9275
+[AP L5 epoch 07] loss=0.0500 cal_iia=0.9150
+[AP L5 epoch 08] loss=0.0383 cal_iia=0.8975
+[AP L5 epoch 09] loss=0.0380 cal_iia=0.9225
+[AP L5 epoch 10] loss=0.0372 cal_iia=0.9150
+[AP L5 BEST] epoch=3 cal=0.9625 test=0.9625
+[AP readout] val_acc=1.0000
+[AP L5] cal_iia=0.9625 test_iia=0.9625 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD AP L6 ================
+[AP L6 epoch 01] loss=1.0230 cal_iia=0.9825
+[AP L6 epoch 02] loss=0.3054 cal_iia=0.9900
+[AP L6 epoch 03] loss=0.1541 cal_iia=0.9900
+[AP L6 epoch 04] loss=0.0939 cal_iia=0.9875
+[AP L6 epoch 05] loss=0.0603 cal_iia=0.9800
+[AP L6 epoch 06] loss=0.0383 cal_iia=0.9725
+[AP L6 epoch 07] loss=0.0240 cal_iia=0.9650
+[AP L6 epoch 08] loss=0.0176 cal_iia=0.9625
+[AP L6 epoch 09] loss=0.0170 cal_iia=0.9650
+[AP L6 epoch 10] loss=0.0200 cal_iia=0.9675
+[AP L6 BEST] epoch=2 cal=0.9900 test=0.9900
+[AP readout] val_acc=1.0000
+[AP L6] cal_iia=0.9900 test_iia=0.99 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD AP L7 ================
+[AP L7 epoch 01] loss=1.0061 cal_iia=0.9800
+[AP L7 epoch 02] loss=0.3198 cal_iia=0.9900
+[AP L7 epoch 03] loss=0.1747 cal_iia=0.9925
+[AP L7 epoch 04] loss=0.1120 cal_iia=0.9825
+[AP L7 epoch 05] loss=0.0807 cal_iia=0.9825
+[AP L7 epoch 06] loss=0.0553 cal_iia=0.9825
+[AP L7 epoch 07] loss=0.0396 cal_iia=0.9750
+[AP L7 epoch 08] loss=0.0305 cal_iia=0.9700
+[AP L7 epoch 09] loss=0.0254 cal_iia=0.9750
+[AP L7 epoch 10] loss=0.0277 cal_iia=0.9725
+[AP L7 BEST] epoch=3 cal=0.9925 test=0.9925
+[AP readout] val_acc=1.0000
+[AP L7] cal_iia=0.9925 test_iia=0.9925 readout_val=1.0000 clean=1.0000/0.9975
+
+================ TRAIN STANDARD AP L8 ================
+[AP L8 epoch 01] loss=0.7415 cal_iia=1.0000
+[AP L8 epoch 02] loss=0.2148 cal_iia=1.0000
+[AP L8 epoch 03] loss=0.1153 cal_iia=1.0000
+[AP L8 epoch 04] loss=0.0641 cal_iia=0.9950
+[AP L8 epoch 05] loss=0.0383 cal_iia=0.9900
+[AP L8 epoch 06] loss=0.0223 cal_iia=0.9850
+[AP L8 epoch 07] loss=0.0247 cal_iia=0.9800
+[AP L8 epoch 08] loss=0.0236 cal_iia=0.9825
+[AP L8 epoch 09] loss=0.0180 cal_iia=0.9925
+[AP L8 epoch 10] loss=0.0095 cal_iia=0.9775
+[AP L8 BEST] epoch=1 cal=1.0000 test=0.9975
+[AP readout] val_acc=1.0000
+[AP L8] cal_iia=1.0000 test_iia=0.9975 readout_val=1.0000 clean=0.9975/0.9975
+
+================ TRAIN STANDARD AP L9 ================
+[AP L9 epoch 01] loss=0.6488 cal_iia=1.0000
+[AP L9 epoch 02] loss=0.1793 cal_iia=1.0000
+[AP L9 epoch 03] loss=0.0990 cal_iia=1.0000
+[AP L9 epoch 04] loss=0.0539 cal_iia=1.0000
+[AP L9 epoch 05] loss=0.0311 cal_iia=0.9900
+[AP L9 epoch 06] loss=0.0260 cal_iia=0.9950
+[AP L9 epoch 07] loss=0.0237 cal_iia=0.9900
+[AP L9 epoch 08] loss=0.0309 cal_iia=0.9975
+[AP L9 epoch 09] loss=0.0536 cal_iia=0.9925
+[AP L9 epoch 10] loss=0.0378 cal_iia=0.9875
+[AP L9 BEST] epoch=1 cal=1.0000 test=0.9975
+[AP readout] val_acc=1.0000
+[AP L9] cal_iia=1.0000 test_iia=0.9975 readout_val=1.0000 clean=0.9975/1.0000
+
+================ TRAIN STANDARD AP L10 ================
+[AP L10 epoch 01] loss=0.5312 cal_iia=1.0000
+[AP L10 epoch 02] loss=0.1188 cal_iia=0.9975
+[AP L10 epoch 03] loss=0.0643 cal_iia=0.9975
+[AP L10 epoch 04] loss=0.0441 cal_iia=0.9975
+[AP L10 epoch 05] loss=0.0289 cal_iia=0.9975
+[AP L10 epoch 06] loss=0.0142 cal_iia=0.9900
+[AP L10 epoch 07] loss=0.0115 cal_iia=0.9950
+[AP L10 epoch 08] loss=0.0067 cal_iia=0.9950
+[AP L10 epoch 09] loss=0.0106 cal_iia=0.9925
+[AP L10 epoch 10] loss=0.0130 cal_iia=0.9950
+[AP L10 BEST] epoch=1 cal=1.0000 test=0.9975
+[AP readout] val_acc=1.0000
+[AP L10] cal_iia=1.0000 test_iia=0.9975 readout_val=1.0000 clean=1.0000/0.9975
+
+================ TRAIN STANDARD AP L11 ================
+[AP L11 epoch 01] loss=0.5411 cal_iia=1.0000
+[AP L11 epoch 02] loss=0.1176 cal_iia=1.0000
+[AP L11 epoch 03] loss=0.0598 cal_iia=1.0000
+[AP L11 epoch 04] loss=0.0386 cal_iia=1.0000
+[AP L11 epoch 05] loss=0.0243 cal_iia=0.9950
+[AP L11 epoch 06] loss=0.0137 cal_iia=0.9900
+[AP L11 epoch 07] loss=0.0143 cal_iia=0.9925
+[AP L11 epoch 08] loss=0.0173 cal_iia=0.9925
+[AP L11 epoch 09] loss=0.0099 cal_iia=0.9875
+[AP L11 epoch 10] loss=0.0119 cal_iia=0.9800
+[AP L11 BEST] epoch=1 cal=1.0000 test=0.9950
+[AP readout] val_acc=1.0000
+[AP L11] cal_iia=1.0000 test_iia=0.995 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD AP L12 ================
+[AP L12 epoch 01] loss=0.4975 cal_iia=0.9975
+[AP L12 epoch 02] loss=0.0739 cal_iia=0.9950
+[AP L12 epoch 03] loss=0.0336 cal_iia=0.9950
+[AP L12 epoch 04] loss=0.0221 cal_iia=0.9875
+[AP L12 epoch 05] loss=0.0163 cal_iia=0.9900
+[AP L12 epoch 06] loss=0.0127 cal_iia=0.9800
+[AP L12 epoch 07] loss=0.0118 cal_iia=0.9875
+[AP L12 epoch 08] loss=0.0188 cal_iia=0.9800
+[AP L12 epoch 09] loss=0.0174 cal_iia=0.9825
+[AP L12 epoch 10] loss=0.0052 cal_iia=0.9825
+[AP L12 BEST] epoch=1 cal=0.9975 test=0.9975
+[AP readout] val_acc=1.0000
+[AP L12] cal_iia=0.9975 test_iia=0.9975 readout_val=1.0000 clean=1.0000/0.9975
+
+================ TRAIN STANDARD AP L13 ================
+[AP L13 epoch 01] loss=0.5647 cal_iia=0.9950
+[AP L13 epoch 02] loss=0.0941 cal_iia=0.9975
+[AP L13 epoch 03] loss=0.0416 cal_iia=0.9900
+[AP L13 epoch 04] loss=0.0179 cal_iia=0.9850
+[AP L13 epoch 05] loss=0.0073 cal_iia=0.9800
+[AP L13 epoch 06] loss=0.0030 cal_iia=0.9675
+[AP L13 epoch 07] loss=0.0015 cal_iia=0.9600
+[AP L13 epoch 08] loss=0.0007 cal_iia=0.9525
+[AP L13 epoch 09] loss=0.0005 cal_iia=0.9475
+[AP L13 epoch 10] loss=0.0003 cal_iia=0.9425
+[AP L13 BEST] epoch=2 cal=0.9975 test=0.9950
+[AP readout] val_acc=1.0000
+[AP L13] cal_iia=0.9975 test_iia=0.995 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD AP L14 ================
+[AP L14 epoch 01] loss=0.7091 cal_iia=0.9925
+[AP L14 epoch 02] loss=0.1835 cal_iia=0.9950
+[AP L14 epoch 03] loss=0.1142 cal_iia=0.9950
+[AP L14 epoch 04] loss=0.0867 cal_iia=0.9925
+[AP L14 epoch 05] loss=0.0693 cal_iia=0.9925
+[AP L14 epoch 06] loss=0.0552 cal_iia=0.9850
+[AP L14 epoch 07] loss=0.0466 cal_iia=0.9850
+[AP L14 epoch 08] loss=0.0397 cal_iia=0.9800
+[AP L14 epoch 09] loss=0.0345 cal_iia=0.9800
+[AP L14 epoch 10] loss=0.0297 cal_iia=0.9725
+[AP L14 BEST] epoch=2 cal=0.9950 test=0.9925
+[AP readout] val_acc=1.0000
+[AP L14] cal_iia=0.9950 test_iia=0.9925 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD AP L15 ================
+[AP L15 epoch 01] loss=0.7943 cal_iia=0.9875
+[AP L15 epoch 02] loss=0.2676 cal_iia=0.9925
+[AP L15 epoch 03] loss=0.1748 cal_iia=0.9900
+[AP L15 epoch 04] loss=0.1367 cal_iia=0.9900
+[AP L15 epoch 05] loss=0.1181 cal_iia=0.9925
+[AP L15 epoch 06] loss=0.1038 cal_iia=0.9925
+[AP L15 epoch 07] loss=0.0902 cal_iia=0.9850
+[AP L15 epoch 08] loss=0.0789 cal_iia=0.9900
+[AP L15 epoch 09] loss=0.0715 cal_iia=0.9875
+[AP L15 epoch 10] loss=0.0658 cal_iia=0.9825
+[AP L15 BEST] epoch=2 cal=0.9925 test=0.9850
+[AP readout] val_acc=1.0000
+[AP L15] cal_iia=0.9925 test_iia=0.985 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD AP L16 ================
+[AP L16 epoch 01] loss=1.2540 cal_iia=0.7950
+[AP L16 epoch 02] loss=0.6464 cal_iia=0.8275
+[AP L16 epoch 03] loss=0.4410 cal_iia=0.8525
+[AP L16 epoch 04] loss=0.3374 cal_iia=0.8575
+[AP L16 epoch 05] loss=0.2825 cal_iia=0.8775
+[AP L16 epoch 06] loss=0.2460 cal_iia=0.8750
+[AP L16 epoch 07] loss=0.2190 cal_iia=0.8625
+[AP L16 epoch 08] loss=0.1986 cal_iia=0.8675
+[AP L16 epoch 09] loss=0.1852 cal_iia=0.8700
+[AP L16 epoch 10] loss=0.1738 cal_iia=0.8650
+[AP L16 BEST] epoch=5 cal=0.8775 test=0.8675
+[AP readout] val_acc=1.0000
+[AP L16] cal_iia=0.8775 test_iia=0.8675 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD AP L17 ================
+[AP L17 epoch 01] loss=2.2678 cal_iia=0.1775
+[AP L17 epoch 02] loss=1.7278 cal_iia=0.2175
+[AP L17 epoch 03] loss=1.4737 cal_iia=0.2450
+[AP L17 epoch 04] loss=1.3198 cal_iia=0.2325
+[AP L17 epoch 05] loss=1.2247 cal_iia=0.2500
+[AP L17 epoch 06] loss=1.1567 cal_iia=0.2550
+[AP L17 epoch 07] loss=1.0815 cal_iia=0.2350
+[AP L17 epoch 08] loss=1.0183 cal_iia=0.2425
+[AP L17 epoch 09] loss=0.9724 cal_iia=0.2425
+[AP L17 epoch 10] loss=0.9222 cal_iia=0.2425
+[AP L17 BEST] epoch=6 cal=0.2550 test=0.2225
+[AP readout] val_acc=1.0000
+[AP L17] cal_iia=0.2550 test_iia=0.2225 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD AP L18 ================
+[AP L18 epoch 01] loss=2.2936 cal_iia=0.1500
+[AP L18 epoch 02] loss=1.7685 cal_iia=0.2025
+[AP L18 epoch 03] loss=1.5072 cal_iia=0.2375
+[AP L18 epoch 04] loss=1.3523 cal_iia=0.2425
+[AP L18 epoch 05] loss=1.2651 cal_iia=0.2500
+[AP L18 epoch 06] loss=1.1845 cal_iia=0.2500
+[AP L18 epoch 07] loss=1.1000 cal_iia=0.2700
+[AP L18 epoch 08] loss=1.0292 cal_iia=0.2500
+[AP L18 epoch 09] loss=0.9831 cal_iia=0.2675
+[AP L18 epoch 10] loss=0.9350 cal_iia=0.2650
+[AP L18 BEST] epoch=7 cal=0.2700 test=0.2000
+[AP readout] val_acc=1.0000
+[AP L18] cal_iia=0.2700 test_iia=0.2 readout_val=1.0000 clean=1.0000/0.9925
+
+================ TRAIN STANDARD AP L19 ================
+[AP L19 epoch 01] loss=2.2978 cal_iia=0.1250
+[AP L19 epoch 02] loss=1.7770 cal_iia=0.1475
+[AP L19 epoch 03] loss=1.5145 cal_iia=0.1975
+[AP L19 epoch 04] loss=1.3500 cal_iia=0.2125
+[AP L19 epoch 05] loss=1.2446 cal_iia=0.2425
+[AP L19 epoch 06] loss=1.1500 cal_iia=0.2100
+[AP L19 epoch 07] loss=1.0774 cal_iia=0.2775
+[AP L19 epoch 08] loss=1.0183 cal_iia=0.2700
+[AP L19 epoch 09] loss=0.9701 cal_iia=0.2700
+[AP L19 epoch 10] loss=0.9291 cal_iia=0.2825
+[AP L19 BEST] epoch=10 cal=0.2825 test=0.2625
+[AP readout] val_acc=1.0000
+[AP L19] cal_iia=0.2825 test_iia=0.2625 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD AP L20 ================
+[AP L20 epoch 01] loss=2.2941 cal_iia=0.1100
+[AP L20 epoch 02] loss=1.8402 cal_iia=0.1575
+[AP L20 epoch 03] loss=1.6056 cal_iia=0.1675
+[AP L20 epoch 04] loss=1.4654 cal_iia=0.1650
+[AP L20 epoch 05] loss=1.3682 cal_iia=0.1775
+[AP L20 epoch 06] loss=1.2882 cal_iia=0.1725
+[AP L20 epoch 07] loss=1.2437 cal_iia=0.1850
+[AP L20 epoch 08] loss=1.1718 cal_iia=0.1925
+[AP L20 epoch 09] loss=1.1269 cal_iia=0.2075
+[AP L20 epoch 10] loss=1.0916 cal_iia=0.1975
+[AP L20 BEST] epoch=9 cal=0.2075 test=0.2100
+[AP readout] val_acc=1.0000
+[AP L20] cal_iia=0.2075 test_iia=0.21 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD AP L21 ================
+[AP L21 epoch 01] loss=2.4473 cal_iia=0.0650
+[AP L21 epoch 02] loss=1.9035 cal_iia=0.1325
+[AP L21 epoch 03] loss=1.5349 cal_iia=0.1825
+[AP L21 epoch 04] loss=1.3121 cal_iia=0.2250
+[AP L21 epoch 05] loss=1.1664 cal_iia=0.2050
+[AP L21 epoch 06] loss=1.0648 cal_iia=0.2525
+[AP L21 epoch 07] loss=0.9802 cal_iia=0.2525
+[AP L21 epoch 08] loss=0.9185 cal_iia=0.2500
+[AP L21 epoch 09] loss=0.8606 cal_iia=0.2625
+[AP L21 epoch 10] loss=0.8193 cal_iia=0.2825
+[AP L21 BEST] epoch=10 cal=0.2825 test=0.2625
+[AP readout] val_acc=1.0000
+[AP L21] cal_iia=0.2825 test_iia=0.2625 readout_val=1.0000 clean=1.0000/0.9975
+
+================ TRAIN STANDARD AP L22 ================
+[AP L22 epoch 01] loss=2.5386 cal_iia=0.0350
+[AP L22 epoch 02] loss=2.0375 cal_iia=0.1375
+[AP L22 epoch 03] loss=1.6643 cal_iia=0.1925
+[AP L22 epoch 04] loss=1.4638 cal_iia=0.2400
+[AP L22 epoch 05] loss=1.3352 cal_iia=0.2475
+[AP L22 epoch 06] loss=1.2437 cal_iia=0.2775
+[AP L22 epoch 07] loss=1.1667 cal_iia=0.2775
+[AP L22 epoch 08] loss=1.1133 cal_iia=0.3025
+[AP L22 epoch 09] loss=1.0722 cal_iia=0.2925
+[AP L22 epoch 10] loss=1.0307 cal_iia=0.3050
+[AP L22 BEST] epoch=10 cal=0.3050 test=0.2750
+[AP readout] val_acc=1.0000
+[AP L22] cal_iia=0.3050 test_iia=0.275 readout_val=1.0000 clean=1.0000/0.9975
+
+================ TRAIN STANDARD AP L23 ================
+[AP L23 epoch 01] loss=2.5317 cal_iia=0.0275
+[AP L23 epoch 02] loss=2.2003 cal_iia=0.0550
+[AP L23 epoch 03] loss=1.9464 cal_iia=0.0825
+[AP L23 epoch 04] loss=1.7846 cal_iia=0.0950
+[AP L23 epoch 05] loss=1.6844 cal_iia=0.1125
+[AP L23 epoch 06] loss=1.6276 cal_iia=0.1200
+[AP L23 epoch 07] loss=1.5690 cal_iia=0.1375
+[AP L23 epoch 08] loss=1.5279 cal_iia=0.1375
+[AP L23 epoch 09] loss=1.4937 cal_iia=0.1300
+[AP L23 epoch 10] loss=1.4626 cal_iia=0.1450
+[AP L23 BEST] epoch=10 cal=0.1450 test=0.1050
+[AP readout] val_acc=1.0000
+[AP L23] cal_iia=0.1450 test_iia=0.105 readout_val=1.0000 clean=1.0000/0.9975
+
+================ TRAIN STANDARD AP L24 ================
+[AP L24 epoch 01] loss=2.5418 cal_iia=0.0400
+[AP L24 epoch 02] loss=2.2386 cal_iia=0.0650
+[AP L24 epoch 03] loss=1.9961 cal_iia=0.1150
+[AP L24 epoch 04] loss=1.8189 cal_iia=0.1275
+[AP L24 epoch 05] loss=1.7476 cal_iia=0.1250
+[AP L24 epoch 06] loss=1.7055 cal_iia=0.1425
+[AP L24 epoch 07] loss=1.6387 cal_iia=0.1500
+[AP L24 epoch 08] loss=1.6116 cal_iia=0.1375
+[AP L24 epoch 09] loss=1.5836 cal_iia=0.1550
+[AP L24 epoch 10] loss=1.5589 cal_iia=0.1675
+[AP L24 BEST] epoch=10 cal=0.1675 test=0.1575
+[AP readout] val_acc=0.9981
+[AP L24] cal_iia=0.1675 test_iia=0.1575 readout_val=0.9981 clean=1.0000/1.0000
+
+================ TRAIN STANDARD AP L25 ================
+[AP L25 epoch 01] loss=2.6306 cal_iia=0.0025
+[AP L25 epoch 02] loss=2.6306 cal_iia=0.0025
+[AP L25 epoch 03] loss=2.6306 cal_iia=0.0025
+[AP L25 epoch 04] loss=2.6306 cal_iia=0.0025
+[AP L25 epoch 05] loss=2.6306 cal_iia=0.0025
+[AP L25 epoch 06] loss=2.6306 cal_iia=0.0025
+[AP L25 epoch 07] loss=2.6306 cal_iia=0.0025
+[AP L25 epoch 08] loss=2.6306 cal_iia=0.0025
+[AP L25 epoch 09] loss=2.6306 cal_iia=0.0025
+[AP L25 epoch 10] loss=2.6306 cal_iia=0.0025
+[AP L25 BEST] epoch=1 cal=0.0025 test=0.0100
+[AP readout] val_acc=0.8558
+[AP L25] cal_iia=0.0025 test_iia=0.01 readout_val=0.8558 clean=0.8525/0.8500
+
+================ TRAIN STANDARD C L0 ================
+[C L0 epoch 01] loss=1.7961 cal_iia=0.7250
+[C L0 epoch 02] loss=1.2179 cal_iia=0.7900
+[C L0 epoch 03] loss=0.9946 cal_iia=0.8050
+[C L0 epoch 04] loss=0.8681 cal_iia=0.8350
+[C L0 epoch 05] loss=0.7510 cal_iia=0.8175
+[C L0 epoch 06] loss=0.6599 cal_iia=0.8225
+[C L0 epoch 07] loss=0.6025 cal_iia=0.8075
+[C L0 epoch 08] loss=0.6452 cal_iia=0.8100
+[C L0 epoch 09] loss=0.6142 cal_iia=0.8150
+[C L0 epoch 10] loss=0.4738 cal_iia=0.8400
+[C L0 epoch 11] loss=0.3441 cal_iia=0.8450
+[C L0 epoch 12] loss=0.3112 cal_iia=0.8350
+[C L0 epoch 13] loss=0.2787 cal_iia=0.8375
+[C L0 epoch 14] loss=0.3037 cal_iia=0.8100
+[C L0 epoch 15] loss=0.3432 cal_iia=0.8275
+[C L0 epoch 16] loss=0.3366 cal_iia=0.8475
+[C L0 epoch 17] loss=0.2497 cal_iia=0.8350
+[C L0 epoch 18] loss=0.2430 cal_iia=0.8175
+[C L0 epoch 19] loss=0.2494 cal_iia=0.8300
+[C L0 epoch 20] loss=0.2063 cal_iia=0.8475
+[C L0 BEST] epoch=16 cal=0.8475 test=0.8200
+[C readout] val_acc=1.0000
+[C L0] cal_iia=0.8475 test_iia=0.82 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD C L1 ================
+[C L1 epoch 01] loss=1.8442 cal_iia=0.6850
+[C L1 epoch 02] loss=1.3132 cal_iia=0.7425
+[C L1 epoch 03] loss=1.1115 cal_iia=0.7450
+[C L1 epoch 04] loss=0.9933 cal_iia=0.7475
+[C L1 epoch 05] loss=0.8723 cal_iia=0.7575
+[C L1 epoch 06] loss=0.8090 cal_iia=0.7425
+[C L1 epoch 07] loss=0.7302 cal_iia=0.7625
+[C L1 epoch 08] loss=0.6331 cal_iia=0.7850
+[C L1 epoch 09] loss=0.5815 cal_iia=0.7600
+[C L1 epoch 10] loss=0.5765 cal_iia=0.7725
+[C L1 epoch 11] loss=0.5078 cal_iia=0.7475
+[C L1 epoch 12] loss=0.4542 cal_iia=0.7375
+[C L1 epoch 13] loss=0.4208 cal_iia=0.7800
+[C L1 epoch 14] loss=0.3537 cal_iia=0.7825
+[C L1 epoch 15] loss=0.3239 cal_iia=0.7475
+[C L1 epoch 16] loss=0.3727 cal_iia=0.7675
+[C L1 epoch 17] loss=0.3131 cal_iia=0.7450
+[C L1 epoch 18] loss=0.2318 cal_iia=0.7500
+[C L1 epoch 19] loss=0.1798 cal_iia=0.7650
+[C L1 epoch 20] loss=0.1475 cal_iia=0.7525
+[C L1 BEST] epoch=8 cal=0.7850 test=0.8000
+[C readout] val_acc=1.0000
+[C L1] cal_iia=0.7850 test_iia=0.8 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD C L2 ================
+[C L2 epoch 01] loss=1.9441 cal_iia=0.6925
+[C L2 epoch 02] loss=1.3381 cal_iia=0.7325
+[C L2 epoch 03] loss=1.1340 cal_iia=0.7400
+[C L2 epoch 04] loss=0.9929 cal_iia=0.7450
+[C L2 epoch 05] loss=0.8624 cal_iia=0.7625
+[C L2 epoch 06] loss=0.8205 cal_iia=0.7525
+[C L2 epoch 07] loss=0.7273 cal_iia=0.7675
+[C L2 epoch 08] loss=0.6125 cal_iia=0.7950
+[C L2 epoch 09] loss=0.5024 cal_iia=0.8000
+[C L2 epoch 10] loss=0.4779 cal_iia=0.8075
+[C L2 epoch 11] loss=0.4667 cal_iia=0.7875
+[C L2 epoch 12] loss=0.4498 cal_iia=0.7975
+[C L2 epoch 13] loss=0.3979 cal_iia=0.7900
+[C L2 epoch 14] loss=0.3235 cal_iia=0.7650
+[C L2 epoch 15] loss=0.3229 cal_iia=0.7800
+[C L2 epoch 16] loss=0.2398 cal_iia=0.7775
+[C L2 epoch 17] loss=0.3043 cal_iia=0.7575
+[C L2 epoch 18] loss=0.2851 cal_iia=0.7500
+[C L2 epoch 19] loss=0.2201 cal_iia=0.7650
+[C L2 epoch 20] loss=0.1756 cal_iia=0.7825
+[C L2 BEST] epoch=10 cal=0.8075 test=0.8000
+[C readout] val_acc=1.0000
+[C L2] cal_iia=0.8075 test_iia=0.8 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD C L3 ================
+[C L3 epoch 01] loss=1.9762 cal_iia=0.6525
+[C L3 epoch 02] loss=1.3754 cal_iia=0.7225
+[C L3 epoch 03] loss=1.1525 cal_iia=0.7300
+[C L3 epoch 04] loss=1.0467 cal_iia=0.7275
+[C L3 epoch 05] loss=0.9020 cal_iia=0.7575
+[C L3 epoch 06] loss=0.7766 cal_iia=0.7250
+[C L3 epoch 07] loss=0.7954 cal_iia=0.7050
+[C L3 epoch 08] loss=0.8013 cal_iia=0.7225
+[C L3 epoch 09] loss=0.6551 cal_iia=0.7500
+[C L3 epoch 10] loss=0.5959 cal_iia=0.7300
+[C L3 epoch 11] loss=0.5458 cal_iia=0.7525
+[C L3 epoch 12] loss=0.5052 cal_iia=0.7350
+[C L3 epoch 13] loss=0.5037 cal_iia=0.7100
+[C L3 epoch 14] loss=0.4294 cal_iia=0.7425
+[C L3 epoch 15] loss=0.3807 cal_iia=0.7575
+[C L3 epoch 16] loss=0.3930 cal_iia=0.7125
+[C L3 epoch 17] loss=0.3642 cal_iia=0.7375
+[C L3 epoch 18] loss=0.3560 cal_iia=0.7175
+[C L3 epoch 19] loss=0.3037 cal_iia=0.7200
+[C L3 epoch 20] loss=0.2610 cal_iia=0.6875
+[C L3 BEST] epoch=5 cal=0.7575 test=0.7600
+[C readout] val_acc=1.0000
+[C L3] cal_iia=0.7575 test_iia=0.76 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD C L4 ================
+[C L4 epoch 01] loss=2.0003 cal_iia=0.6600
+[C L4 epoch 02] loss=1.3301 cal_iia=0.7175
+[C L4 epoch 03] loss=1.1010 cal_iia=0.7500
+[C L4 epoch 04] loss=0.9747 cal_iia=0.7225
+[C L4 epoch 05] loss=0.8980 cal_iia=0.7425
+[C L4 epoch 06] loss=0.7764 cal_iia=0.7425
+[C L4 epoch 07] loss=0.7174 cal_iia=0.7375
+[C L4 epoch 08] loss=0.6498 cal_iia=0.7775
+[C L4 epoch 09] loss=0.5783 cal_iia=0.7425
+[C L4 epoch 10] loss=0.6221 cal_iia=0.7200
+[C L4 epoch 11] loss=0.6399 cal_iia=0.7425
+[C L4 epoch 12] loss=0.5388 cal_iia=0.7575
+[C L4 epoch 13] loss=0.4399 cal_iia=0.7300
+[C L4 epoch 14] loss=0.3843 cal_iia=0.7500
+[C L4 epoch 15] loss=0.3367 cal_iia=0.7550
+[C L4 epoch 16] loss=0.2851 cal_iia=0.7175
+[C L4 epoch 17] loss=0.2448 cal_iia=0.7275
+[C L4 epoch 18] loss=0.2239 cal_iia=0.7225
+[C L4 epoch 19] loss=0.2073 cal_iia=0.7275
+[C L4 epoch 20] loss=0.2082 cal_iia=0.6875
+[C L4 BEST] epoch=8 cal=0.7775 test=0.7725
+[C readout] val_acc=1.0000
+[C L4] cal_iia=0.7775 test_iia=0.7725 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD C L5 ================
+[C L5 epoch 01] loss=2.2251 cal_iia=0.3475
+[C L5 epoch 02] loss=1.6654 cal_iia=0.4575
+[C L5 epoch 03] loss=1.4269 cal_iia=0.5125
+[C L5 epoch 04] loss=1.2377 cal_iia=0.5675
+[C L5 epoch 05] loss=1.1090 cal_iia=0.5475
+[C L5 epoch 06] loss=1.0788 cal_iia=0.5600
+[C L5 epoch 07] loss=0.9848 cal_iia=0.5875
+[C L5 epoch 08] loss=0.9278 cal_iia=0.5575
+[C L5 epoch 09] loss=0.9029 cal_iia=0.5750
+[C L5 epoch 10] loss=0.7831 cal_iia=0.5575
+[C L5 epoch 11] loss=0.7740 cal_iia=0.5425
+[C L5 epoch 12] loss=0.7361 cal_iia=0.5700
+[C L5 epoch 13] loss=0.6572 cal_iia=0.5650
+[C L5 epoch 14] loss=0.5732 cal_iia=0.5475
+[C L5 epoch 15] loss=0.5466 cal_iia=0.5575
+[C L5 epoch 16] loss=0.5631 cal_iia=0.5425
+[C L5 epoch 17] loss=0.5525 cal_iia=0.5525
+[C L5 epoch 18] loss=0.4853 cal_iia=0.5175
+[C L5 epoch 19] loss=0.4723 cal_iia=0.5275
+[C L5 epoch 20] loss=0.4169 cal_iia=0.5250
+[C L5 BEST] epoch=7 cal=0.5875 test=0.5825
+[C readout] val_acc=1.0000
+[C L5] cal_iia=0.5875 test_iia=0.5825 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD C L6 ================
+[C L6 epoch 01] loss=2.1905 cal_iia=0.3800
+[C L6 epoch 02] loss=1.6175 cal_iia=0.5300
+[C L6 epoch 03] loss=1.3501 cal_iia=0.5625
+[C L6 epoch 04] loss=1.2058 cal_iia=0.5525
+[C L6 epoch 05] loss=1.1409 cal_iia=0.5600
+[C L6 epoch 06] loss=1.0357 cal_iia=0.5550
+[C L6 epoch 07] loss=0.9949 cal_iia=0.5675
+[C L6 epoch 08] loss=0.9356 cal_iia=0.5450
+[C L6 epoch 09] loss=0.9283 cal_iia=0.5375
+[C L6 epoch 10] loss=0.8539 cal_iia=0.5550
+[C L6 epoch 11] loss=0.8414 cal_iia=0.5450
+[C L6 epoch 12] loss=0.8480 cal_iia=0.5550
+[C L6 epoch 13] loss=0.8381 cal_iia=0.5150
+[C L6 epoch 14] loss=0.8076 cal_iia=0.5575
+[C L6 epoch 15] loss=0.7021 cal_iia=0.5475
+[C L6 epoch 16] loss=0.6348 cal_iia=0.5525
+[C L6 epoch 17] loss=0.5748 cal_iia=0.5550
+[C L6 epoch 18] loss=0.5597 cal_iia=0.5450
+[C L6 epoch 19] loss=0.5671 cal_iia=0.5250
+[C L6 epoch 20] loss=0.6405 cal_iia=0.4950
+[C L6 BEST] epoch=7 cal=0.5675 test=0.5950
+[C readout] val_acc=1.0000
+[C L6] cal_iia=0.5675 test_iia=0.595 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD C L7 ================
+[C L7 epoch 01] loss=2.2451 cal_iia=0.3425
+[C L7 epoch 02] loss=1.7675 cal_iia=0.4750
+[C L7 epoch 03] loss=1.5025 cal_iia=0.5100
+[C L7 epoch 04] loss=1.3593 cal_iia=0.5175
+[C L7 epoch 05] loss=1.2661 cal_iia=0.5100
+[C L7 epoch 06] loss=1.2003 cal_iia=0.5025
+[C L7 epoch 07] loss=1.1267 cal_iia=0.5550
+[C L7 epoch 08] loss=1.0282 cal_iia=0.5325
+[C L7 epoch 09] loss=0.9919 cal_iia=0.5075
+[C L7 epoch 10] loss=0.9859 cal_iia=0.4700
+[C L7 epoch 11] loss=1.0178 cal_iia=0.4875
+[C L7 epoch 12] loss=0.9243 cal_iia=0.5050
+[C L7 epoch 13] loss=0.8833 cal_iia=0.5125
+[C L7 epoch 14] loss=0.7894 cal_iia=0.5075
+[C L7 epoch 15] loss=0.7468 cal_iia=0.4775
+[C L7 epoch 16] loss=0.7092 cal_iia=0.4725
+[C L7 epoch 17] loss=0.6672 cal_iia=0.4800
+[C L7 epoch 18] loss=0.6684 cal_iia=0.4575
+[C L7 epoch 19] loss=0.6550 cal_iia=0.4550
+[C L7 epoch 20] loss=0.6531 cal_iia=0.4575
+[C L7 BEST] epoch=7 cal=0.5550 test=0.4925
+[C readout] val_acc=1.0000
+[C L7] cal_iia=0.5550 test_iia=0.4925 readout_val=1.0000 clean=0.9800/0.9725
+
+================ TRAIN STANDARD C L8 ================
+[C L8 epoch 01] loss=2.3385 cal_iia=0.2025
+[C L8 epoch 02] loss=2.0041 cal_iia=0.2725
+[C L8 epoch 03] loss=1.8189 cal_iia=0.2475
+[C L8 epoch 04] loss=1.7074 cal_iia=0.2650
+[C L8 epoch 05] loss=1.6776 cal_iia=0.2600
+[C L8 epoch 06] loss=1.5828 cal_iia=0.2800
+[C L8 epoch 07] loss=1.4666 cal_iia=0.2825
+[C L8 epoch 08] loss=1.4045 cal_iia=0.2650
+[C L8 epoch 09] loss=1.4102 cal_iia=0.2375
+[C L8 epoch 10] loss=1.3717 cal_iia=0.2500
+[C L8 epoch 11] loss=1.3430 cal_iia=0.2125
+[C L8 epoch 12] loss=1.3657 cal_iia=0.2300
+[C L8 epoch 13] loss=1.2747 cal_iia=0.2450
+[C L8 epoch 14] loss=1.2133 cal_iia=0.2525
+[C L8 epoch 15] loss=1.1332 cal_iia=0.2475
+[C L8 epoch 16] loss=1.1072 cal_iia=0.2525
+[C L8 epoch 17] loss=1.0688 cal_iia=0.2500
+[C L8 epoch 18] loss=1.0935 cal_iia=0.2375
+[C L8 epoch 19] loss=1.2563 cal_iia=0.2250
+[C L8 epoch 20] loss=1.1489 cal_iia=0.2475
+[C L8 BEST] epoch=7 cal=0.2825 test=0.3150
+[C readout] val_acc=1.0000
+[C L8] cal_iia=0.2825 test_iia=0.315 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD C L9 ================
+[C L9 epoch 01] loss=2.4349 cal_iia=0.0600
+[C L9 epoch 02] loss=2.2088 cal_iia=0.0700
+[C L9 epoch 03] loss=2.0974 cal_iia=0.0700
+[C L9 epoch 04] loss=2.0134 cal_iia=0.0725
+[C L9 epoch 05] loss=1.9605 cal_iia=0.0750
+[C L9 epoch 06] loss=1.8959 cal_iia=0.0700
+[C L9 epoch 07] loss=1.8409 cal_iia=0.0850
+[C L9 epoch 08] loss=1.7590 cal_iia=0.0875
+[C L9 epoch 09] loss=1.6828 cal_iia=0.0800
+[C L9 epoch 10] loss=1.6201 cal_iia=0.0875
+[C L9 epoch 11] loss=1.6015 cal_iia=0.1025
+[C L9 epoch 12] loss=1.5772 cal_iia=0.0975
+[C L9 epoch 13] loss=1.5414 cal_iia=0.0875
+[C L9 epoch 14] loss=1.4820 cal_iia=0.1075
+[C L9 epoch 15] loss=1.4152 cal_iia=0.0925
+[C L9 epoch 16] loss=1.3919 cal_iia=0.1075
+[C L9 epoch 17] loss=1.3991 cal_iia=0.0925
+[C L9 epoch 18] loss=1.4230 cal_iia=0.0925
+[C L9 epoch 19] loss=1.4004 cal_iia=0.0800
+[C L9 epoch 20] loss=1.3592 cal_iia=0.0975
+[C L9 BEST] epoch=14 cal=0.1075 test=0.0900
+[C readout] val_acc=1.0000
+[C L9] cal_iia=0.1075 test_iia=0.09 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD C L10 ================
+[C L10 epoch 01] loss=2.4787 cal_iia=0.0350
+[C L10 epoch 02] loss=2.2906 cal_iia=0.0350
+[C L10 epoch 03] loss=2.1916 cal_iia=0.0400
+[C L10 epoch 04] loss=2.1194 cal_iia=0.0475
+[C L10 epoch 05] loss=2.0940 cal_iia=0.0350
+[C L10 epoch 06] loss=2.0477 cal_iia=0.0450
+[C L10 epoch 07] loss=1.9949 cal_iia=0.0400
+[C L10 epoch 08] loss=1.9539 cal_iia=0.0375
+[C L10 epoch 09] loss=1.9036 cal_iia=0.0275
+[C L10 epoch 10] loss=1.8900 cal_iia=0.0425
+[C L10 epoch 11] loss=1.8171 cal_iia=0.0325
+[C L10 epoch 12] loss=1.7677 cal_iia=0.0400
+[C L10 epoch 13] loss=1.7278 cal_iia=0.0400
+[C L10 epoch 14] loss=1.6882 cal_iia=0.0350
+[C L10 epoch 15] loss=1.6564 cal_iia=0.0325
+[C L10 epoch 16] loss=1.6447 cal_iia=0.0525
+[C L10 epoch 17] loss=1.6343 cal_iia=0.0450
+[C L10 epoch 18] loss=1.6219 cal_iia=0.0325
+[C L10 epoch 19] loss=1.6220 cal_iia=0.0450
+[C L10 epoch 20] loss=1.6382 cal_iia=0.0300
+[C L10 BEST] epoch=16 cal=0.0525 test=0.0600
+[C readout] val_acc=1.0000
+[C L10] cal_iia=0.0525 test_iia=0.06 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD C L11 ================
+[C L11 epoch 01] loss=2.4897 cal_iia=0.0425
+[C L11 epoch 02] loss=2.3059 cal_iia=0.0400
+[C L11 epoch 03] loss=2.1993 cal_iia=0.0425
+[C L11 epoch 04] loss=2.1215 cal_iia=0.0375
+[C L11 epoch 05] loss=2.0517 cal_iia=0.0400
+[C L11 epoch 06] loss=2.0092 cal_iia=0.0475
+[C L11 epoch 07] loss=1.9566 cal_iia=0.0375
+[C L11 epoch 08] loss=1.8895 cal_iia=0.0475
+[C L11 epoch 09] loss=1.8431 cal_iia=0.0450
+[C L11 epoch 10] loss=1.8225 cal_iia=0.0450
+[C L11 epoch 11] loss=1.8139 cal_iia=0.0500
+[C L11 epoch 12] loss=1.7619 cal_iia=0.0425
+[C L11 epoch 13] loss=1.7135 cal_iia=0.0375
+[C L11 epoch 14] loss=1.6806 cal_iia=0.0500
+[C L11 epoch 15] loss=1.6478 cal_iia=0.0425
+[C L11 epoch 16] loss=1.6362 cal_iia=0.0525
+[C L11 epoch 17] loss=1.6821 cal_iia=0.0500
+[C L11 epoch 18] loss=1.6574 cal_iia=0.0525
+[C L11 epoch 19] loss=1.6325 cal_iia=0.0525
+[C L11 epoch 20] loss=1.6075 cal_iia=0.0575
+[C L11 BEST] epoch=20 cal=0.0575 test=0.0425
+[C readout] val_acc=1.0000
+[C L11] cal_iia=0.0575 test_iia=0.0425 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD C L12 ================
+[C L12 epoch 01] loss=2.5412 cal_iia=0.0125
+[C L12 epoch 02] loss=2.3677 cal_iia=0.0225
+[C L12 epoch 03] loss=2.2669 cal_iia=0.0225
+[C L12 epoch 04] loss=2.1874 cal_iia=0.0375
+[C L12 epoch 05] loss=2.1095 cal_iia=0.0350
+[C L12 epoch 06] loss=2.0442 cal_iia=0.0350
+[C L12 epoch 07] loss=1.9875 cal_iia=0.0350
+[C L12 epoch 08] loss=1.9502 cal_iia=0.0350
+[C L12 epoch 09] loss=1.9122 cal_iia=0.0325
+[C L12 epoch 10] loss=1.9093 cal_iia=0.0375
+[C L12 epoch 11] loss=1.8680 cal_iia=0.0425
+[C L12 epoch 12] loss=1.8274 cal_iia=0.0425
+[C L12 epoch 13] loss=1.7924 cal_iia=0.0400
+[C L12 epoch 14] loss=1.7476 cal_iia=0.0375
+[C L12 epoch 15] loss=1.7200 cal_iia=0.0350
+[C L12 epoch 16] loss=1.6933 cal_iia=0.0375
+[C L12 epoch 17] loss=1.6718 cal_iia=0.0400
+[C L12 epoch 18] loss=1.6732 cal_iia=0.0475
+[C L12 epoch 19] loss=1.7017 cal_iia=0.0500
+[C L12 epoch 20] loss=1.7267 cal_iia=0.0525
+[C L12 BEST] epoch=20 cal=0.0525 test=0.0425
+[C readout] val_acc=1.0000
+[C L12] cal_iia=0.0525 test_iia=0.0425 readout_val=1.0000 clean=0.9925/0.9975
+
+================ TRAIN STANDARD C L13 ================
+[C L13 epoch 01] loss=2.5398 cal_iia=0.0125
+[C L13 epoch 02] loss=2.3692 cal_iia=0.0150
+[C L13 epoch 03] loss=2.2726 cal_iia=0.0175
+[C L13 epoch 04] loss=2.1866 cal_iia=0.0275
+[C L13 epoch 05] loss=2.1046 cal_iia=0.0150
+[C L13 epoch 06] loss=2.0560 cal_iia=0.0350
+[C L13 epoch 07] loss=2.0021 cal_iia=0.0325
+[C L13 epoch 08] loss=1.9343 cal_iia=0.0275
+[C L13 epoch 09] loss=1.9133 cal_iia=0.0350
+[C L13 epoch 10] loss=1.9017 cal_iia=0.0450
+[C L13 epoch 11] loss=1.8805 cal_iia=0.0400
+[C L13 epoch 12] loss=1.8536 cal_iia=0.0275
+[C L13 epoch 13] loss=1.8166 cal_iia=0.0375
+[C L13 epoch 14] loss=1.7891 cal_iia=0.0300
+[C L13 epoch 15] loss=1.7626 cal_iia=0.0300
+[C L13 epoch 16] loss=1.7411 cal_iia=0.0425
+[C L13 epoch 17] loss=1.7472 cal_iia=0.0450
+[C L13 epoch 18] loss=1.7707 cal_iia=0.0450
+[C L13 epoch 19] loss=1.7465 cal_iia=0.0350
+[C L13 epoch 20] loss=1.7139 cal_iia=0.0450
+[C L13 BEST] epoch=10 cal=0.0450 test=0.0450
+[C readout] val_acc=1.0000
+[C L13] cal_iia=0.0450 test_iia=0.045 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD C L14 ================
+[C L14 epoch 01] loss=2.5153 cal_iia=0.0250
+[C L14 epoch 02] loss=2.3482 cal_iia=0.0225
+[C L14 epoch 03] loss=2.2343 cal_iia=0.0175
+[C L14 epoch 04] loss=2.1752 cal_iia=0.0275
+[C L14 epoch 05] loss=2.1047 cal_iia=0.0300
+[C L14 epoch 06] loss=2.0562 cal_iia=0.0475
+[C L14 epoch 07] loss=1.9942 cal_iia=0.0425
+[C L14 epoch 08] loss=1.9546 cal_iia=0.0425
+[C L14 epoch 09] loss=1.9329 cal_iia=0.0300
+[C L14 epoch 10] loss=1.9004 cal_iia=0.0525
+[C L14 epoch 11] loss=1.8793 cal_iia=0.0375
+[C L14 epoch 12] loss=1.8685 cal_iia=0.0450
+[C L14 epoch 13] loss=1.8431 cal_iia=0.0425
+[C L14 epoch 14] loss=1.8320 cal_iia=0.0450
+[C L14 epoch 15] loss=1.8098 cal_iia=0.0475
+[C L14 epoch 16] loss=1.8028 cal_iia=0.0400
+[C L14 epoch 17] loss=1.7857 cal_iia=0.0550
+[C L14 epoch 18] loss=1.7805 cal_iia=0.0475
+[C L14 epoch 19] loss=1.7649 cal_iia=0.0425
+[C L14 epoch 20] loss=1.7553 cal_iia=0.0475
+[C L14 BEST] epoch=17 cal=0.0550 test=0.0400
+[C readout] val_acc=1.0000
+[C L14] cal_iia=0.0550 test_iia=0.04 readout_val=1.0000 clean=0.9975/0.9975
+
+================ TRAIN STANDARD C L15 ================
+[C L15 epoch 01] loss=2.5207 cal_iia=0.0200
+[C L15 epoch 02] loss=2.3547 cal_iia=0.0375
+[C L15 epoch 03] loss=2.2475 cal_iia=0.0375
+[C L15 epoch 04] loss=2.1679 cal_iia=0.0300
+[C L15 epoch 05] loss=2.1020 cal_iia=0.0425
+[C L15 epoch 06] loss=2.0554 cal_iia=0.0500
+[C L15 epoch 07] loss=2.0167 cal_iia=0.0525
+[C L15 epoch 08] loss=1.9827 cal_iia=0.0550
+[C L15 epoch 09] loss=1.9608 cal_iia=0.0575
+[C L15 epoch 10] loss=1.9238 cal_iia=0.0575
+[C L15 epoch 11] loss=1.9095 cal_iia=0.0625
+[C L15 epoch 12] loss=1.9087 cal_iia=0.0550
+[C L15 epoch 13] loss=1.8825 cal_iia=0.0575
+[C L15 epoch 14] loss=1.8599 cal_iia=0.0600
+[C L15 epoch 15] loss=1.8363 cal_iia=0.0625
+[C L15 epoch 16] loss=1.8273 cal_iia=0.0575
+[C L15 epoch 17] loss=1.8348 cal_iia=0.0575
+[C L15 epoch 18] loss=1.8355 cal_iia=0.0675
+[C L15 epoch 19] loss=1.8411 cal_iia=0.0550
+[C L15 epoch 20] loss=1.8429 cal_iia=0.0625
+[C L15 BEST] epoch=18 cal=0.0675 test=0.0475
+[C readout] val_acc=1.0000
+[C L15] cal_iia=0.0675 test_iia=0.0475 readout_val=1.0000 clean=0.9975/0.9975
+
+================ TRAIN STANDARD C L16 ================
+[C L16 epoch 01] loss=2.5190 cal_iia=0.0175
+[C L16 epoch 02] loss=2.3641 cal_iia=0.0375
+[C L16 epoch 03] loss=2.2491 cal_iia=0.0425
+[C L16 epoch 04] loss=2.1749 cal_iia=0.0300
+[C L16 epoch 05] loss=2.1329 cal_iia=0.0375
+[C L16 epoch 06] loss=2.0935 cal_iia=0.0500
+[C L16 epoch 07] loss=2.0685 cal_iia=0.0400
+[C L16 epoch 08] loss=2.0236 cal_iia=0.0450
+[C L16 epoch 09] loss=1.9936 cal_iia=0.0425
+[C L16 epoch 10] loss=1.9702 cal_iia=0.0500
+[C L16 epoch 11] loss=1.9485 cal_iia=0.0425
+[C L16 epoch 12] loss=1.9372 cal_iia=0.0475
+[C L16 epoch 13] loss=1.9310 cal_iia=0.0350
+[C L16 epoch 14] loss=1.8935 cal_iia=0.0500
+[C L16 epoch 15] loss=1.8810 cal_iia=0.0425
+[C L16 epoch 16] loss=1.8831 cal_iia=0.0400
+[C L16 epoch 17] loss=1.8722 cal_iia=0.0500
+[C L16 epoch 18] loss=1.8792 cal_iia=0.0475
+[C L16 epoch 19] loss=1.8592 cal_iia=0.0400
+[C L16 epoch 20] loss=1.8395 cal_iia=0.0425
+[C L16 BEST] epoch=6 cal=0.0500 test=0.0400
+[C readout] val_acc=1.0000
+[C L16] cal_iia=0.0500 test_iia=0.04 readout_val=1.0000 clean=0.9975/0.9975
+
+================ TRAIN STANDARD C L17 ================
+[C L17 epoch 01] loss=2.5310 cal_iia=0.0150
+[C L17 epoch 02] loss=2.3900 cal_iia=0.0175
+[C L17 epoch 03] loss=2.3096 cal_iia=0.0175
+[C L17 epoch 04] loss=2.2511 cal_iia=0.0125
+[C L17 epoch 05] loss=2.1986 cal_iia=0.0125
+[C L17 epoch 06] loss=2.1634 cal_iia=0.0150
+[C L17 epoch 07] loss=2.1269 cal_iia=0.0150
+[C L17 epoch 08] loss=2.1058 cal_iia=0.0150
+[C L17 epoch 09] loss=2.1048 cal_iia=0.0125
+[C L17 epoch 10] loss=2.0691 cal_iia=0.0175
+[C L17 epoch 11] loss=2.0413 cal_iia=0.0125
+[C L17 epoch 12] loss=2.0196 cal_iia=0.0150
+[C L17 epoch 13] loss=2.0089 cal_iia=0.0150
+[C L17 epoch 14] loss=1.9970 cal_iia=0.0150
+[C L17 epoch 15] loss=1.9865 cal_iia=0.0150
+[C L17 epoch 16] loss=1.9985 cal_iia=0.0125
+[C L17 epoch 17] loss=1.9793 cal_iia=0.0100
+[C L17 epoch 18] loss=1.9601 cal_iia=0.0200
+[C L17 epoch 19] loss=1.9504 cal_iia=0.0125
+[C L17 epoch 20] loss=1.9361 cal_iia=0.0150
+[C L17 BEST] epoch=18 cal=0.0200 test=0.0175
+[C readout] val_acc=1.0000
+[C L17] cal_iia=0.0200 test_iia=0.0175 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD C L18 ================
+[C L18 epoch 01] loss=2.5206 cal_iia=0.0175
+[C L18 epoch 02] loss=2.3630 cal_iia=0.0175
+[C L18 epoch 03] loss=2.2766 cal_iia=0.0175
+[C L18 epoch 04] loss=2.2172 cal_iia=0.0175
+[C L18 epoch 05] loss=2.1763 cal_iia=0.0225
+[C L18 epoch 06] loss=2.1454 cal_iia=0.0200
+[C L18 epoch 07] loss=2.1106 cal_iia=0.0200
+[C L18 epoch 08] loss=2.0771 cal_iia=0.0250
+[C L18 epoch 09] loss=2.0829 cal_iia=0.0250
+[C L18 epoch 10] loss=2.0658 cal_iia=0.0225
+[C L18 epoch 11] loss=2.0261 cal_iia=0.0175
+[C L18 epoch 12] loss=2.0185 cal_iia=0.0250
+[C L18 epoch 13] loss=2.0040 cal_iia=0.0150
+[C L18 epoch 14] loss=1.9834 cal_iia=0.0200
+[C L18 epoch 15] loss=1.9642 cal_iia=0.0150
+[C L18 epoch 16] loss=1.9596 cal_iia=0.0150
+[C L18 epoch 17] loss=1.9675 cal_iia=0.0200
+[C L18 epoch 18] loss=1.9686 cal_iia=0.0150
+[C L18 epoch 19] loss=1.9302 cal_iia=0.0200
+[C L18 epoch 20] loss=1.9075 cal_iia=0.0200
+[C L18 BEST] epoch=8 cal=0.0250 test=0.0175
+[C readout] val_acc=1.0000
+[C L18] cal_iia=0.0250 test_iia=0.0175 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD C L19 ================
+[C L19 epoch 01] loss=2.5068 cal_iia=0.0125
+[C L19 epoch 02] loss=2.3355 cal_iia=0.0200
+[C L19 epoch 03] loss=2.2408 cal_iia=0.0200
+[C L19 epoch 04] loss=2.1744 cal_iia=0.0250
+[C L19 epoch 05] loss=2.1264 cal_iia=0.0200
+[C L19 epoch 06] loss=2.0971 cal_iia=0.0175
+[C L19 epoch 07] loss=2.0544 cal_iia=0.0175
+[C L19 epoch 08] loss=2.0197 cal_iia=0.0250
+[C L19 epoch 09] loss=2.0103 cal_iia=0.0150
+[C L19 epoch 10] loss=1.9800 cal_iia=0.0225
+[C L19 epoch 11] loss=1.9536 cal_iia=0.0175
+[C L19 epoch 12] loss=1.9463 cal_iia=0.0125
+[C L19 epoch 13] loss=1.9417 cal_iia=0.0200
+[C L19 epoch 14] loss=1.9207 cal_iia=0.0150
+[C L19 epoch 15] loss=1.9175 cal_iia=0.0175
+[C L19 epoch 16] loss=1.8982 cal_iia=0.0175
+[C L19 epoch 17] loss=1.8825 cal_iia=0.0175
+[C L19 epoch 18] loss=1.8645 cal_iia=0.0150
+[C L19 epoch 19] loss=1.8666 cal_iia=0.0150
+[C L19 epoch 20] loss=1.8726 cal_iia=0.0200
+[C L19 BEST] epoch=4 cal=0.0250 test=0.0125
+[C readout] val_acc=1.0000
+[C L19] cal_iia=0.0250 test_iia=0.0125 readout_val=1.0000 clean=1.0000/1.0000
+
+================ TRAIN STANDARD C L20 ================
+[C L20 epoch 01] loss=2.5166 cal_iia=0.0175
+[C L20 epoch 02] loss=2.3705 cal_iia=0.0275
+[C L20 epoch 03] loss=2.2626 cal_iia=0.0225
+[C L20 epoch 04] loss=2.2106 cal_iia=0.0250
+[C L20 epoch 05] loss=2.1595 cal_iia=0.0200
+[C L20 epoch 06] loss=2.1220 cal_iia=0.0200
+[C L20 epoch 07] loss=2.0815 cal_iia=0.0200
+[C L20 epoch 08] loss=2.0542 cal_iia=0.0250
+[C L20 epoch 09] loss=2.0321 cal_iia=0.0175
+[C L20 epoch 10] loss=2.0073 cal_iia=0.0150
+[C L20 epoch 11] loss=1.9721 cal_iia=0.0250
+[C L20 epoch 12] loss=1.9688 cal_iia=0.0175
+[C L20 epoch 13] loss=1.9539 cal_iia=0.0225
+[C L20 epoch 14] loss=1.9261 cal_iia=0.0175
+[C L20 epoch 15] loss=1.9013 cal_iia=0.0150
+[C L20 epoch 16] loss=1.8784 cal_iia=0.0125
+[C L20 epoch 17] loss=1.8740 cal_iia=0.0125
+[C L20 epoch 18] loss=1.8531 cal_iia=0.0125
+[C L20 epoch 19] loss=1.8464 cal_iia=0.0100
+[C L20 epoch 20] loss=1.8387 cal_iia=0.0100
+[C L20 BEST] epoch=2 cal=0.0275 test=0.0175
+[C readout] val_acc=1.0000
+[C L20] cal_iia=0.0275 test_iia=0.0175 readout_val=1.0000 clean=1.0000/0.9975
+
+================ TRAIN STANDARD C L21 ================
+[C L21 epoch 01] loss=2.5435 cal_iia=0.0100
+[C L21 epoch 02] loss=2.3495 cal_iia=0.0175
+[C L21 epoch 03] loss=2.2292 cal_iia=0.0125
+[C L21 epoch 04] loss=2.1398 cal_iia=0.0150
+[C L21 epoch 05] loss=2.0824 cal_iia=0.0150
+[C L21 epoch 06] loss=2.0394 cal_iia=0.0175
+[C L21 epoch 07] loss=1.9962 cal_iia=0.0250
+[C L21 epoch 08] loss=1.9748 cal_iia=0.0175
+[C L21 epoch 09] loss=1.9579 cal_iia=0.0200
+[C L21 epoch 10] loss=1.9366 cal_iia=0.0225
+[C L21 epoch 11] loss=1.9164 cal_iia=0.0200
+[C L21 epoch 12] loss=1.8995 cal_iia=0.0175
+[C L21 epoch 13] loss=1.8876 cal_iia=0.0175
+[C L21 epoch 14] loss=1.8761 cal_iia=0.0275
+[C L21 epoch 15] loss=1.8616 cal_iia=0.0250
+[C L21 epoch 16] loss=1.8582 cal_iia=0.0250
+[C L21 epoch 17] loss=1.8495 cal_iia=0.0275
+[C L21 epoch 18] loss=1.8389 cal_iia=0.0250
+[C L21 epoch 19] loss=1.8419 cal_iia=0.0250
+[C L21 epoch 20] loss=1.8218 cal_iia=0.0175
+[C L21 BEST] epoch=14 cal=0.0275 test=0.0275
+[C readout] val_acc=1.0000
+[C L21] cal_iia=0.0275 test_iia=0.0275 readout_val=1.0000 clean=1.0000/0.9925
+
+================ TRAIN STANDARD C L22 ================
+[C L22 epoch 01] loss=2.6081 cal_iia=0.0100
+[C L22 epoch 02] loss=2.5037 cal_iia=0.0150
+[C L22 epoch 03] loss=2.4323 cal_iia=0.0125
+[C L22 epoch 04] loss=2.3587 cal_iia=0.0200
+[C L22 epoch 05] loss=2.3201 cal_iia=0.0175
+[C L22 epoch 06] loss=2.2899 cal_iia=0.0200
+[C L22 epoch 07] loss=2.2520 cal_iia=0.0175
+[C L22 epoch 08] loss=2.2093 cal_iia=0.0250
+[C L22 epoch 09] loss=2.1724 cal_iia=0.0225
+[C L22 epoch 10] loss=2.1599 cal_iia=0.0250
+[C L22 epoch 11] loss=2.1253 cal_iia=0.0350
+[C L22 epoch 12] loss=2.0941 cal_iia=0.0250
+[C L22 epoch 13] loss=2.0663 cal_iia=0.0300
+[C L22 epoch 14] loss=2.0372 cal_iia=0.0250
+[C L22 epoch 15] loss=2.0185 cal_iia=0.0325
+[C L22 epoch 16] loss=2.0044 cal_iia=0.0300
+[C L22 epoch 17] loss=1.9896 cal_iia=0.0300
+[C L22 epoch 18] loss=1.9692 cal_iia=0.0350
+[C L22 epoch 19] loss=1.9571 cal_iia=0.0325
+[C L22 epoch 20] loss=1.9520 cal_iia=0.0275
+[C L22 BEST] epoch=11 cal=0.0350 test=0.0250
+[C readout] val_acc=1.0000
+[C L22] cal_iia=0.0350 test_iia=0.025 readout_val=1.0000 clean=1.0000/0.9975
+
+================ TRAIN STANDARD C L23 ================
+[C L23 epoch 01] loss=2.5943 cal_iia=0.0125
+[C L23 epoch 02] loss=2.5191 cal_iia=0.0125
+[C L23 epoch 03] loss=2.4500 cal_iia=0.0150
+[C L23 epoch 04] loss=2.3879 cal_iia=0.0125
+[C L23 epoch 05] loss=2.3241 cal_iia=0.0075
+[C L23 epoch 06] loss=2.2702 cal_iia=0.0125
+[C L23 epoch 07] loss=2.2391 cal_iia=0.0150
+[C L23 epoch 08] loss=2.1985 cal_iia=0.0175
+[C L23 epoch 09] loss=2.1649 cal_iia=0.0150
+[C L23 epoch 10] loss=2.1465 cal_iia=0.0275
+[C L23 epoch 11] loss=2.1306 cal_iia=0.0225
+[C L23 epoch 12] loss=2.1170 cal_iia=0.0150
+[C L23 epoch 13] loss=2.1182 cal_iia=0.0175
+[C L23 epoch 14] loss=2.1144 cal_iia=0.0175
+[C L23 epoch 15] loss=2.0942 cal_iia=0.0175
+[C L23 epoch 16] loss=2.0877 cal_iia=0.0150
+[C L23 epoch 17] loss=2.0797 cal_iia=0.0200
+[C L23 epoch 18] loss=2.0692 cal_iia=0.0175
+[C L23 epoch 19] loss=2.0588 cal_iia=0.0200
+[C L23 epoch 20] loss=2.0540 cal_iia=0.0200
+[C L23 BEST] epoch=10 cal=0.0275 test=0.0125
+[C readout] val_acc=1.0000
+[C L23] cal_iia=0.0275 test_iia=0.0125 readout_val=1.0000 clean=1.0000/0.9975
+
+================ TRAIN STANDARD C L24 ================
+[C L24 epoch 01] loss=2.5922 cal_iia=0.0125
+[C L24 epoch 02] loss=2.5324 cal_iia=0.0100
+[C L24 epoch 03] loss=2.4750 cal_iia=0.0075
+[C L24 epoch 04] loss=2.4149 cal_iia=0.0175
+[C L24 epoch 05] loss=2.3687 cal_iia=0.0150
+[C L24 epoch 06] loss=2.3285 cal_iia=0.0200
+[C L24 epoch 07] loss=2.3027 cal_iia=0.0150
+[C L24 epoch 08] loss=2.2873 cal_iia=0.0100
+[C L24 epoch 09] loss=2.2750 cal_iia=0.0050
+[C L24 epoch 10] loss=2.2611 cal_iia=0.0125
+[C L24 epoch 11] loss=2.2465 cal_iia=0.0075
+[C L24 epoch 12] loss=2.2324 cal_iia=0.0150
+[C L24 epoch 13] loss=2.2241 cal_iia=0.0150
+[C L24 epoch 14] loss=2.2268 cal_iia=0.0150
+[C L24 epoch 15] loss=2.2189 cal_iia=0.0150
+[C L24 epoch 16] loss=2.2081 cal_iia=0.0175
+[C L24 epoch 17] loss=2.1975 cal_iia=0.0150
+[C L24 epoch 18] loss=2.1904 cal_iia=0.0100
+[C L24 epoch 19] loss=2.1836 cal_iia=0.0175
+[C L24 epoch 20] loss=2.1802 cal_iia=0.0175
+[C L24 BEST] epoch=6 cal=0.0200 test=0.0175
+[C readout] val_acc=1.0000
+[C L24] cal_iia=0.0200 test_iia=0.0175 readout_val=1.0000 clean=0.9975/0.9950
+
+================ TRAIN STANDARD C L25 ================
+[C L25 epoch 01] loss=2.6258 cal_iia=0.0125
+[C L25 epoch 02] loss=2.6258 cal_iia=0.0125
+[C L25 epoch 03] loss=2.6258 cal_iia=0.0125
+[C L25 epoch 04] loss=2.6258 cal_iia=0.0125
+[C L25 epoch 05] loss=2.6258 cal_iia=0.0125
+[C L25 epoch 06] loss=2.6258 cal_iia=0.0125
+[C L25 epoch 07] loss=2.6258 cal_iia=0.0125
+[C L25 epoch 08] loss=2.6258 cal_iia=0.0125
+[C L25 epoch 09] loss=2.6258 cal_iia=0.0125
+[C L25 epoch 10] loss=2.6258 cal_iia=0.0125
+[C L25 epoch 11] loss=2.6258 cal_iia=0.0125
+[C L25 epoch 12] loss=2.6258 cal_iia=0.0125
+[C L25 epoch 13] loss=2.6258 cal_iia=0.0125
+[C L25 epoch 14] loss=2.6258 cal_iia=0.0125
+[C L25 epoch 15] loss=2.6258 cal_iia=0.0125
+[C L25 epoch 16] loss=2.6258 cal_iia=0.0125
+[C L25 epoch 17] loss=2.6258 cal_iia=0.0125
+[C L25 epoch 18] loss=2.6258 cal_iia=0.0125
+[C L25 epoch 19] loss=2.6258 cal_iia=0.0125
+[C L25 epoch 20] loss=2.6258 cal_iia=0.0125
+[C L25 BEST] epoch=1 cal=0.0125 test=0.0075
+[C readout] val_acc=1.0000
+[C L25] cal_iia=0.0125 test_iia=0.0075 readout_val=1.0000 clean=0.9975/0.9950
+Training complete (no chain evaluation). Saved results_standard_all_layers_controlled_seed2_no_distractor/summary.csv
+Checkpoints/readouts: results_standard_all_layers_controlled_seed2_no_distractor/trained_handles
