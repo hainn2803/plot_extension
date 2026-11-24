@@ -1,0 +1,57 @@
+{
+  "at_layer": 25,
+  "ap_layer": 6,
+  "c_layer": 0,
+  "metrics": {
+    "AT": {
+      "Joint_AT_Y_after_AT": 0.8199999928474426,
+      "AT_after_AT": 0.8199999928474426,
+      "Y_after_AT": 0.9975000023841858
+    },
+    "AP": {
+      "Joint_AP_AT_Y_after_AP": 0.987500011920929,
+      "AP_after_AP": 1.0,
+      "AT_after_AP": 0.9900000095367432,
+      "Y_after_AP": 0.9975000023841858,
+      "Y_via_AT_replay": 0.9825000166893005,
+      "Y_restored_via_AT": 0.8199999928474426
+    },
+    "C": {
+      "Joint_C_AP_AT_Y_after_C": 0.7799999713897705,
+      "C_after_C": 1.0,
+      "AP_after_C": 0.987500011920929,
+      "AT_after_C": 0.8349999785423279,
+      "Y_after_C": 0.8475000262260437,
+      "Y_via_AP_replay": 0.75,
+      "Y_via_AT_replay": 0.8899999856948853,
+      "Y_restored_via_AP": 0.9200000166893005,
+      "Y_restored_via_AT": 0.8424999713897705
+    }
+  },
+  "clean": {
+    "AT_base": 0.8299999833106995,
+    "AT_source": 0.8199999928474426,
+    "AP_base": 0.9975000023841858,
+    "AP_source": 1.0,
+    "C_base": 1.0,
+    "C_source": 1.0
+  },
+  "recipient": {
+    "AP_only": {
+      "AT_after_AT_replay_recipient_different": 0.9900000095367432,
+      "Y_after_AT_replay_recipient_different": 0.9850000143051147,
+      "Joint_AT_Y_after_AT_replay_recipient_different": 0.9775000214576721
+    },
+    "C_only": {
+      "AP_after_AP_replay_recipient_different": 0.987500011920929,
+      "AT_after_AP_replay_recipient_different": 0.8550000190734863,
+      "Y_after_AP_replay_recipient_different": 0.8924999833106995,
+      "Joint_AP_AT_Y_after_AP_replay_recipient_different": 0.8374999761581421,
+      "AT_after_AT_replay_recipient_different": 0.8349999785423279,
+      "Y_after_AT_replay_recipient_different": 0.8374999761581421,
+      "Joint_AT_Y_after_AT_replay_recipient_different": 0.7649999856948853
+    }
+  },
+  "recipient_version": 2,
+  "signature": "6c3957ca0de19d98b1e6d99a6547d712ddd4032cb3b59a8de82be06c6067744d"
+}

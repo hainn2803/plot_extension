@@ -1,0 +1,57 @@
+{
+  "at_layer": 23,
+  "ap_layer": 5,
+  "c_layer": 2,
+  "metrics": {
+    "AT": {
+      "Joint_AT_Y_after_AT": 0.8799999952316284,
+      "AT_after_AT": 0.8824999928474426,
+      "Y_after_AT": 0.9925000071525574
+    },
+    "AP": {
+      "Joint_AP_AT_Y_after_AP": 0.9524999856948853,
+      "AP_after_AP": 0.9975000023841858,
+      "AT_after_AP": 0.9574999809265137,
+      "Y_after_AP": 0.9725000262260437,
+      "Y_via_AT_replay": 0.9800000190734863,
+      "Y_restored_via_AT": 0.9800000190734863
+    },
+    "C": {
+      "Joint_C_AP_AT_Y_after_C": 0.22750000655651093,
+      "C_after_C": 1.0,
+      "AP_after_C": 0.3449999988079071,
+      "AT_after_C": 0.7174999713897705,
+      "Y_after_C": 0.7200000286102295,
+      "Y_via_AP_replay": 0.08250000327825546,
+      "Y_via_AT_replay": 0.7825000286102295,
+      "Y_restored_via_AP": 0.41499999165534973,
+      "Y_restored_via_AT": 0.9649999737739563
+    }
+  },
+  "clean": {
+    "AT_base": 0.8849999904632568,
+    "AT_source": 0.8824999928474426,
+    "AP_base": 0.9975000023841858,
+    "AP_source": 0.9975000023841858,
+    "C_base": 1.0,
+    "C_source": 1.0
+  },
+  "recipient": {
+    "AP_only": {
+      "AT_after_AT_replay_recipient_different": 0.9574999809265137,
+      "Y_after_AT_replay_recipient_different": 0.9624999761581421,
+      "Joint_AT_Y_after_AT_replay_recipient_different": 0.9474999904632568
+    },
+    "C_only": {
+      "AP_after_AP_replay_recipient_different": 0.3449999988079071,
+      "AT_after_AP_replay_recipient_different": 0.36500000953674316,
+      "Y_after_AP_replay_recipient_different": 0.35249999165534973,
+      "Joint_AP_AT_Y_after_AP_replay_recipient_different": 0.13750000298023224,
+      "AT_after_AT_replay_recipient_different": 0.7174999713897705,
+      "Y_after_AT_replay_recipient_different": 0.7450000047683716,
+      "Joint_AT_Y_after_AT_replay_recipient_different": 0.6675000190734863
+    }
+  },
+  "recipient_version": 2,
+  "signature": "69228c7fcf152ecbd2e0de6c22e2a76ff23729e60f7642ac1166bc10ed683d64"
+}
