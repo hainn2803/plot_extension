@@ -1,0 +1,57 @@
+{
+  "at_layer": 24,
+  "ap_layer": 6,
+  "c_layer": 1,
+  "metrics": {
+    "AT": {
+      "Joint_AT_Y_after_AT": 0.8899999856948853,
+      "AT_after_AT": 0.8899999856948853,
+      "Y_after_AT": 1.0
+    },
+    "AP": {
+      "Joint_AP_AT_Y_after_AP": 0.9775000214576721,
+      "AP_after_AP": 0.9975000023841858,
+      "AT_after_AP": 0.9825000166893005,
+      "Y_after_AP": 0.9850000143051147,
+      "Y_via_AT_replay": 0.9925000071525574,
+      "Y_restored_via_AT": 0.9750000238418579
+    },
+    "C": {
+      "Joint_C_AP_AT_Y_after_C": 0.6725000143051147,
+      "C_after_C": 0.9975000023841858,
+      "AP_after_C": 0.9800000190734863,
+      "AT_after_C": 0.7674999833106995,
+      "Y_after_C": 0.7774999737739563,
+      "Y_via_AP_replay": 0.8349999785423279,
+      "Y_via_AT_replay": 0.8349999785423279,
+      "Y_restored_via_AP": 0.9325000047683716,
+      "Y_restored_via_AT": 0.9775000214576721
+    }
+  },
+  "clean": {
+    "AT_base": 0.8774999976158142,
+    "AT_source": 0.8899999856948853,
+    "AP_base": 1.0,
+    "AP_source": 0.9975000023841858,
+    "C_base": 1.0,
+    "C_source": 0.9975000023841858
+  },
+  "recipient": {
+    "AP_only": {
+      "AT_after_AT_replay_recipient_different": 0.9825000166893005,
+      "Y_after_AT_replay_recipient_different": 0.9925000071525574,
+      "Joint_AT_Y_after_AT_replay_recipient_different": 0.9800000190734863
+    },
+    "C_only": {
+      "AP_after_AP_replay_recipient_different": 0.9800000190734863,
+      "AT_after_AP_replay_recipient_different": 0.9150000214576721,
+      "Y_after_AP_replay_recipient_different": 0.9275000095367432,
+      "Joint_AP_AT_Y_after_AP_replay_recipient_different": 0.8849999904632568,
+      "AT_after_AT_replay_recipient_different": 0.7674999833106995,
+      "Y_after_AT_replay_recipient_different": 0.7825000286102295,
+      "Joint_AT_Y_after_AT_replay_recipient_different": 0.7099999785423279
+    }
+  },
+  "recipient_version": 2,
+  "signature": "cd778716abf0ab8085f1cf6bc72324e2b08336ab5a7e088cf528819382d67d4e"
+}

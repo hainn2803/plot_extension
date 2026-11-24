@@ -1,0 +1,19 @@
+{
+  "file_sha256": "c41decc35edee0a3d5330d854349bc9f206dec7d96640b950af4d5de49d32ce6",
+  "hyperparameters": {
+    "batch_size": 32,
+    "dataset": "bb4066175e6c57f844ba8e22a35ecd14c2722b77286b8561462808f4c8e1614c",
+    "handle": {
+      "basis_sha256": "b91eb6c679a6aec46490c0c1a9001b1f44b58cbe19d045c2c3503c50f175c245",
+      "training_signature": "827c64aa0857aa6cf15ddf1efb045213d383b94213a07d5c9fd975430ff6bd6c"
+    },
+    "model_id": "google/gemma-2-2b",
+    "readout_train_size": 1300,
+    "readout_val_size": 520,
+    "readout_version": 2,
+    "seed": 3,
+    "token_position": "color",
+    "variable": "C"
+  },
+  "readout_signature": "1cc7f28801f4adf4d6c5e372e54156c5b28c2702bd3646914c3c3aba37b233f3"
+}
