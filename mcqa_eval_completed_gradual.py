@@ -41,7 +41,7 @@ from mcqa_train_grid_gradual_das import (
 # ============================================================================
 # EDIT SETTINGS HERE
 # ============================================================================
-RESULT_DIR = "results_gradual_222222_selected_layers_controlled_seed0_no_distractor"
+RESULT_DIR = "results_gradual_222222_selected_layers_mixedall_seed0_no_distractor_cornellcac"
 DATA_PATH = "randomized_copycolors_include_ap_at_no_distractor"
 EVAL_SIZE = 400  # total test examples PER variable, NOT per pair type
 BATCH_SIZE = 32
@@ -55,11 +55,11 @@ ALL_PAIRS = ["AT_only", "AP_only", "C_only", "AP_AT", "C_AP_AT"]
 #     "C": ["C_only"],
 # }
 EVAL_PAIR_TYPES = {
-    "AT": ALL_PAIRS,
-    "AP": ALL_PAIRS,
-    "C": ALL_PAIRS
+    "AT": ["AT_only", "C_AP_AT"],
+    "AP": ["AP_only", "C_AP_AT"],
+    "C": ["C_only", "C_AP_AT"]
 }
-EVAL_CHANGING_ONLY = False  # require target Y_after_variable != base_Y
+EVAL_CHANGING_ONLY = True  # require target Y_after_variable != base_Y
 
 # Optional: skip candidates whose saved v2 metadata does not match upstream
 # checkpoints/readouts. Legacy checkpoints without metadata remain evaluable.

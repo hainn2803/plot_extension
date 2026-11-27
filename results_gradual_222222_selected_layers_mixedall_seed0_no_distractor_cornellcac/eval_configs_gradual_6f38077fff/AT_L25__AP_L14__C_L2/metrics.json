@@ -1,0 +1,40 @@
+{
+  "at_layer": 25,
+  "ap_layer": 14,
+  "c_layer": 2,
+  "metrics": {
+    "AT": {
+      "Joint_AT_Y_after_AT": 0.8025000095367432,
+      "AT_after_AT": 0.8224999904632568,
+      "Y_after_AT": 0.9674999713897705
+    },
+    "AP": {
+      "Joint_AP_AT_Y_after_AP": 0.9825000166893005,
+      "AP_after_AP": 1.0,
+      "AT_after_AP": 0.9850000143051147,
+      "Y_after_AP": 0.987500011920929,
+      "Y_via_AT_replay": 0.987500011920929,
+      "Y_restored_via_AT": 0.824999988079071
+    },
+    "C": {
+      "Joint_C_AP_AT_Y_after_C": 0.7425000071525574,
+      "C_after_C": 1.0,
+      "AP_after_C": 0.9900000095367432,
+      "AT_after_C": 0.8075000047683716,
+      "Y_after_C": 0.8424999713897705,
+      "Y_via_AP_replay": 0.9649999737739563,
+      "Y_via_AT_replay": 0.8899999856948853,
+      "Y_restored_via_AP": 0.9850000143051147,
+      "Y_restored_via_AT": 0.9125000238418579
+    }
+  },
+  "clean": {
+    "AT_base": 0.8149999976158142,
+    "AT_source": 0.8224999904632568,
+    "AP_base": 1.0,
+    "AP_source": 1.0,
+    "C_base": 1.0,
+    "C_source": 1.0
+  },
+  "signature": "87bc7b325b836b5e8b191914b438197fca378f46a5156119a7735b80ce61e6f1"
+}

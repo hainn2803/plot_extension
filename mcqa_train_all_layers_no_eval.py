@@ -1,16 +1,16 @@
-"""Train independent Standard DAS handles across all selected layers; NO chain eval.
+"""Train independent Standard DAS handles across selected layers; NO chain eval.
 
-Data sampling and minibatch seeds are aligned with controlled Gradual DAS v2.
-Saves `summary.csv` using the ORIGINAL controlled Standard all-layer schema:
-variable,layer,cal_iia,test_iia,best_epoch,readout_val_acc,clean_base_acc,clean_source_acc
+Training: mixed pairs (all five pair types).
+Calibration/test: controlled, output-changing pairs only.
 
-AT: last_token, AT_only
-AP: joint color_0..color_3, AP_only
-C: color, C_only
+AT: last_token; calibration/test on AT_only.
+AP: joint color_0..color_3; calibration/test on AP_only.
+C: color; calibration/test on C_only.
 
-Complete independent layer sweeps first; select layers by calibration IIA (max-5%)
-using `mcqa_eval_completed_standard.py` later. A restart preserves existing
-summary rows for other variables and layers.
+Data sampling and minibatch seeds use the GDAS v2 aligned bank builder.
+Saves summary.csv using the original Standard all-layer schema.
+Select layers by calibration IIA (max-5%) in later chain evaluation.
+A restart preserves existing summary rows for other variables and layers.
 """
 
 import argparse
@@ -19,6 +19,7 @@ from pathlib import Path
 
 import torch
 
+import mcqa_train_gradual_efficient_v2 as gdas_config
 from mcqa_gradual_das import set_seed
 from mcqa_load_randomized_ap_at_c import build_shared_readout_banks
 from mcqa_neural_net import load_gemma_model
@@ -34,16 +35,33 @@ from mcqa_train_grid_standard_das import (
     train_standard_fixed,
 )
 
+ALL_PAIRS = ["AT_only", "AP_only", "C_only", "AP_AT", "C_AP_AT"]
+
 SPECS = {
-    "AT": {"pair_types": ["AT_only"], "token_position": "last_token", "target": "Y_after_AT_intervene"},
-    "AP": {"pair_types": ["AP_only"], "token_position": ["color_0", "color_1", "color_2", "color_3"], "target": "Y_after_AP_intervene"},
-    "C": {"pair_types": ["C_only"], "token_position": "color", "target": "Y_after_C_intervene"},
+    "AT": {"pair_types": list(ALL_PAIRS), "token_position": "last_token", "target": "Y_after_AT_intervene"},
+    "AP": {"pair_types": list(ALL_PAIRS), "token_position": ["color_0", "color_1", "color_2", "color_3"], "target": "Y_after_AP_intervene"},
+    "C": {"pair_types": list(ALL_PAIRS), "token_position": "color", "target": "Y_after_C_intervene"},
 }
 
 SUMMARY_FIELDS = [
     "variable", "layer", "cal_iia", "test_iia", "best_epoch",
     "readout_val_acc", "clean_base_acc", "clean_source_acc",
 ]
+
+
+def configure_pair_types():
+    # Override GDAS bank-builder settings only in this running process.
+    gdas_config.TRAIN_PAIR_TYPES = {
+        "AT": list(ALL_PAIRS),
+        "AP": list(ALL_PAIRS),
+        "C": list(ALL_PAIRS),
+    }
+    gdas_config.CAL_TEST_PAIR_TYPES = {
+        "AT": ["AT_only"],
+        "AP": ["AP_only"],
+        "C": ["C_only"],
+    }
+    gdas_config.CHANGING_ONLY_CAL_TEST = True
 
 
 def save_summary(summary_path, saved):
@@ -72,7 +90,7 @@ def load_summary(summary_path):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at_no_distractor")
-    parser.add_argument("--result-dir", default="results_standard_all_layers_gdas_aligned_seed0_no_distractor")
+    parser.add_argument("--result-dir", default=None)
     parser.add_argument("--variables", default="AT,AP,C", help="AT, AP, C or unique subset")
     parser.add_argument("--layers", default="all", help="all or comma-separated layer indices")
     parser.add_argument("--ft-size", type=int, default=800)
@@ -91,6 +109,14 @@ def main():
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--retrain", action="store_true")
     args = parser.parse_args()
+
+    if args.result_dir is None:
+        args.result_dir = f"results_standard_all_layers_mixed_train_controlled_cal_test_seed{args.seed}_no_distractor"
+
+    configure_pair_types()
+    print(f"Train pair types: {gdas_config.TRAIN_PAIR_TYPES}", flush=True)
+    print(f"Cal/test pair types: {gdas_config.CAL_TEST_PAIR_TYPES}", flush=True)
+    print(f"Changing-only cal/test: {gdas_config.CHANGING_ONLY_CAL_TEST}", flush=True)
 
     set_seed(args.seed)
     variables = [name.strip().upper() for name in args.variables.split(",") if name.strip()]

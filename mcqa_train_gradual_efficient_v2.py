@@ -61,9 +61,9 @@ AP_LAYERS = list(range(4, 16))
 C_LAYERS = list(range(3))
 
 # Training: any mix of pair types, including preservation examples.
-# ALL_PAIRS = ["AT_only", "AP_only", "C_only", "AP_AT", "C_AP_AT"]
+ALL_PAIRS = ["AT_only", "AP_only", "C_only", "AP_AT", "C_AP_AT"]
 
-TRAIN_PAIR_TYPES = {"AT": ["AT_only"], "AP": ["AP_only"], "C": ["C_only"]}
+TRAIN_PAIR_TYPES = {"AT": ALL_PAIRS, "AP": ALL_PAIRS, "C": ALL_PAIRS}
 
 # Validation/test: all five pair types by default.
 # Set CHANGING_ONLY_CAL_TEST=True to keep only output-changing pairs.

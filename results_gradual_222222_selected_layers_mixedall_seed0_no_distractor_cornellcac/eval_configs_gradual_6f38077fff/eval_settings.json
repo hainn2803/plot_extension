@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "data_path": "/u/hnguyen23/plot_extension/randomized_copycolors_include_ap_at_no_distractor",
+  "data_stamp": "57ce3745d8c1dbc92699aa94c0b3447913af11885fab0846794fce7eaf61f670",
+  "pair_types": {
+    "AT": [
+      "AT_only",
+      "C_AP_AT"
+    ],
+    "AP": [
+      "AP_only",
+      "C_AP_AT"
+    ],
+    "C": [
+      "C_only",
+      "C_AP_AT"
+    ]
+  },
+  "changing_only": true,
+  "eval_size": 400,
+  "batch_size": 32,
+  "seed": 0,
+  "output_space": "full"
+}

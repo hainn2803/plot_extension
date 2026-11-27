@@ -2,8 +2,9 @@
 
 Pipeline:
   1. mcqa_train_all_layers_no_eval.py -> summary.csv + trained_handles/
-  2. Select AT/AP/C layers within 5 percentage points of each CAL IIA maximum.
-  3. Evaluate the valid C < AP < AT configurations; save each result immediately.
+  2. Recompute CAL IIA on validation using saved handles, or specify layers manually.
+  3. Select layers within threshold percentage points of each fresh CAL IIA maximum.
+  4. Evaluate the valid C < AP < AT configurations; save each result immediately.
 
 Evaluation pair selection and shuffling match mcqa_eval_completed_gradual.py.
 No training or optimization happens in this script.
@@ -28,6 +29,8 @@ from mcqa_train_grid_standard_das import (
     add_metric,
     balanced_counts,
     clean_readout_accuracy,
+    collect_states,
+    evaluate_standard_direct,
     color_targets,
     eval_ap,
     eval_at,
@@ -39,12 +42,14 @@ from mcqa_train_grid_standard_das import (
 
 # Use the same settings as mcqa_eval_completed_gradual.py.
 # To evaluate mixed pairs later, edit BOTH scripts to the same settings.
+
+ALL_PAIRS = ["AT_only", "AP_only", "C_only", "AP_AT", "C_AP_AT"]
 EVAL_PAIR_TYPES = {
-    "AT": ["AT_only"],
-    "AP": ["AP_only"],
-    "C": ["C_only"],
+    "AT": ALL_PAIRS,
+    "AP": ALL_PAIRS,
+    "C": ALL_PAIRS,
 }
-EVAL_CHANGING_ONLY = True
+EVAL_CHANGING_ONLY = False
 
 TARGET_BY_VARIABLE = {
     "AT": "Y_after_AT_intervene",
@@ -80,7 +85,7 @@ def eval_profile_name():
 
 
 def build_eval_bank(model, tokenizer, dataset_split, variable,
-                    pair_types, total_size, batch_size, seed):
+                    pair_types, total_size, batch_size, seed, split_name="test"):
     """Match GDAS eval's example-selection and bank-shuffle seeds."""
     counts = balanced_counts(total_size, pair_types)
     mixed = []
@@ -96,7 +101,7 @@ def build_eval_bank(model, tokenizer, dataset_split, variable,
             candidates = []
             for index in indices[start:start + 64]:
                 row = dataset_split[int(index)]
-                for pair in row_to_pairs(row, "test"):
+                for pair in row_to_pairs(row, split_name):
                     if pair["pair_type"] != pair_type:
                         continue
                     if EVAL_CHANGING_ONLY and pair[TARGET_BY_VARIABLE[variable]] == pair["base_Y"]:
@@ -117,28 +122,63 @@ def build_eval_bank(model, tokenizer, dataset_split, variable,
                 f"need {needed}."
             )
         mixed.extend(accepted[:needed])
-        print(f"[eval bank] {variable}/{pair_type}: {needed} examples", flush=True)
+        print(f"[{split_name} bank] {variable}/{pair_type}: {needed} examples", flush=True)
 
     # This matches GDAS evaluation exactly, including AT seed+100.
     shuffle_seed = seed + BANK_SHUFFLE_OFFSETS[variable]
     return create_bank(mixed, tokenizer, size=None, seed=shuffle_seed)
 
 
-def select_layers(summary_path, threshold_pct):
-    """Choose each variable's layers using CAL IIA >= max(CAL IIA) - threshold_pct/100."""
-    with summary_path.open(newline="") as file:
-        rows = list(csv.DictReader(file))
+def available_layers(root, variable):
+    layers = []
+    for folder in (root / "trained_handles").glob(f"{variable}_L*"):
+        suffix = folder.name.split("_L", 1)[1]
+        if not folder.is_dir() or not suffix.isdigit():
+            continue
+        layer = int(suffix)
+        checkpoint, _ = artifact_paths(root, variable, layer)
+        if checkpoint.is_file():
+            layers.append(layer)
+    if not layers:
+        raise ValueError(f"No saved {variable} handles in {root}")
+    return sorted(set(layers))
 
-    selected = {}
-    for variable in ("AT", "AP", "C"):
-        subset = [row for row in rows if row.get("variable") == variable]
-        if not subset:
-            raise ValueError(f"No {variable} rows in {summary_path}")
-        scored = [(int(row["layer"]), float(row["cal_iia"])) for row in subset]
-        highest = max(score for _, score in scored)
-        cutoff = highest - threshold_pct / 100.0
-        selected[variable] = sorted({layer for layer, score in scored if score >= cutoff - 1e-12})
-        print(f"{variable}: max cal={highest:.4f}, cutoff={cutoff:.4f}, layers={selected[variable]}")
+
+def recalibrate_variable(model, tokenizer, dataset, root, variable, args):
+    bank = build_eval_bank(
+        model, tokenizer, dataset["validation"], variable,
+        EVAL_PAIR_TYPES[variable], args.cal_size, args.batch_size,
+        args.seed, split_name="validation",
+    )
+    device = next(model.parameters()).device
+    scored = []
+    for layer in available_layers(root, variable):
+        checkpoint, _ = artifact_paths(root, variable, layer)
+        Q, saved_layer, position = load_ckpt(checkpoint, device)
+        if saved_layer != layer:
+            raise ValueError(f"Checkpoint layer mismatch: {checkpoint}")
+        source_states = collect_states(
+            model, bank["source_input_ids"], bank["source_attention_mask"],
+            bank["source_position_by_id"], layer, position, args.batch_size,
+        )
+        score = float(evaluate_standard_direct(
+            model, tokenizer, bank, source_states, Q, layer, position,
+            TARGET_BY_VARIABLE[variable], args.batch_size, args.output_space,
+        ))
+        scored.append((layer, score))
+        print(f"[CAL] {variable} L{layer}: IIA={score:.4f}", flush=True)
+        del Q, source_states
+    return scored
+
+
+def select_from_scores(variable, scored, threshold_pct):
+    highest = max(score for _, score in scored)
+    cutoff = highest - threshold_pct / 100.0
+    selected = []
+    for layer, score in scored:
+        if score >= cutoff - 1e-12:
+            selected.append(layer)
+    print(f"{variable}: max cal={highest:.4f}, cutoff={cutoff:.4f}, layers={selected}")
     return selected
 
 
@@ -210,16 +250,19 @@ def write_eval_report(output_dir, at_layer, ap_layer, c_layer, clean, variable_m
     (output_dir / "eval_faithfulness.txt").write_text("\n".join(lines).rstrip() + "\n")
 
 
-def rebuild_summary(root, eval_dir, args):
+def rebuild_summary(root, eval_dir, args, configs):
     """Maintain plot-compatible summaries from completed, valid config JSON files."""
     summary_rows = []
     detailed_rows = []
+    selected_configs = set(configs)
     for path in sorted(eval_dir.glob("AT_L*__AP_L*__C_L*/metrics.json")):
         with path.open() as file:
             result = json.load(file)
         at_layer = result["at_layer"]
         ap_layer = result["ap_layer"]
         c_layer = result["c_layer"]
+        if (at_layer, ap_layer, c_layer) not in selected_configs:
+            continue
         signature = config_signature(root, args, at_layer, ap_layer, c_layer)
         if result.get("signature") != signature:
             continue
@@ -267,6 +310,12 @@ def main():
     parser.add_argument("--data-path", default="randomized_copycolors_include_ap_at_no_distractor")
     parser.add_argument("--threshold-pct", type=float, default=5.0,
                         help="Within this many percentage points of best CAL IIA")
+    parser.add_argument("--at-layers", type=int, nargs="+", default=None)
+    parser.add_argument("--ap-layers", type=int, nargs="+", default=None)
+    parser.add_argument("--c-layers", type=int, nargs="+", default=None)
+    parser.add_argument("--cal-size", type=int, default=400)
+    parser.add_argument("--cal-only", action="store_true",
+                        help="Recompute calibration IIA and exit before test evaluation")
     parser.add_argument("--eval-size", type=int, default=400)
     parser.add_argument("--batch-size", type=int, default=32)
     parser.add_argument("--seed", type=int, default=0)
@@ -277,19 +326,66 @@ def main():
 
     if not 0 <= args.threshold_pct <= 100:
         raise ValueError("--threshold-pct must be in [0, 100]")
+    if args.cal_size <= 0 or args.eval_size <= 0 or args.batch_size <= 0:
+        parser.error("--cal-size, --eval-size and --batch-size must be positive")
     validate_eval_settings()
     print(f"Evaluation pairs: {EVAL_PAIR_TYPES}; changing_only={EVAL_CHANGING_ONLY}")
 
     root = Path(args.result_dir)
     eval_dir = root / eval_profile_name()
     eval_dir.mkdir(parents=True, exist_ok=True)
-    selected = select_layers(root / "summary.csv", args.threshold_pct)
+    manual = {"AT": args.at_layers, "AP": args.ap_layers, "C": args.c_layers}
+    if args.cal_only and any(layers is not None for layers in manual.values()):
+        parser.error("--cal-only recalibrates all saved layers; do not pass manual layer options")
+    selected = {}
+    cal_rows = []
+    model, tokenizer, dataset = None, None, None
+    for variable in ("AT", "AP", "C"):
+        if manual[variable] is not None:
+            selected[variable] = sorted(set(manual[variable]))
+            for layer in selected[variable]:
+                for path in artifact_paths(root, variable, layer):
+                    if layer < 0 or not path.is_file():
+                        raise ValueError(f"Invalid manual layer or missing artifact: {path}")
+            print(f"[manual] {variable}: {selected[variable]}")
+            continue
+        if model is None:
+            model, tokenizer = load_gemma_model()
+            model.eval()
+            dataset = load_generated_dataset(args.data_path)
+        scored = recalibrate_variable(model, tokenizer, dataset, root, variable, args)
+        selected[variable] = select_from_scores(variable, scored, args.threshold_pct)
+        for layer, score in scored:
+            cal_rows.append({"variable": variable, "layer": layer, "cal_iia": score})
+
+    # Never overwrite the training summary. Keep the latest selection separately.
+    cal_path = eval_dir / "recalibration.csv"
+    if cal_rows:
+        with cal_path.open("w", newline="") as file:
+            writer = csv.DictWriter(file, fieldnames=["variable", "layer", "cal_iia"])
+            writer.writeheader()
+            writer.writerows(cal_rows)
+    elif cal_path.exists():
+        cal_path.unlink()
+    save_json(eval_dir / "selected_layers.json", {
+        "layers": selected, "manual": manual, "threshold_pct": args.threshold_pct,
+        "data_path": args.data_path, "split": "validation", "cal_size": args.cal_size,
+        "seed": args.seed, "output_space": args.output_space,
+        "pair_types": EVAL_PAIR_TYPES, "changing_only": EVAL_CHANGING_ONLY,
+    })
+    if args.cal_only:
+        print(f"[cal-only] Calibration results: {cal_path}")
+        return
+
     configs = []
     for at_layer in selected["AT"]:
         for ap_layer in selected["AP"]:
             for c_layer in selected["C"]:
                 if c_layer < ap_layer < at_layer:
                     configs.append((at_layer, ap_layer, c_layer))
+
+    if not configs:
+        raise ValueError("No valid configurations satisfy C < AP < AT")
 
     pending = []
     for at_layer, ap_layer, c_layer in configs:
@@ -302,13 +398,15 @@ def main():
         pending.append((at_layer, ap_layer, c_layer, out_dir, signature))
 
     print(f"Selected {len(configs)} valid configs; {len(pending)} require evaluation")
-    rebuild_summary(root, eval_dir, args)
+    rebuild_summary(root, eval_dir, args, configs)
     if not pending:
         return
 
-    model, tokenizer = load_gemma_model()
+    if model is None:
+        model, tokenizer = load_gemma_model()
+        model.eval()
+        dataset = load_generated_dataset(args.data_path)
     device = next(model.parameters()).device
-    dataset = load_generated_dataset(args.data_path)
     test_split = dataset["test"]
     banks = {}
     for variable in ("AT", "AP", "C"):
@@ -414,7 +512,7 @@ def main():
             "signature": signature,
         }
         save_json(out_dir / "metrics.json", payload)
-        rebuild_summary(root, eval_dir, args)
+        rebuild_summary(root, eval_dir, args, configs)
         print(f"[saved] {out_dir / 'metrics.json'}")
 
     print(f"\nDone. Cumulative results: {eval_dir / 'config_summary.csv'}")
